@@ -137,10 +137,11 @@ export default function PrivacyPage() {
               la preferenza.
             </p>
             <p className="mt-4">
-              Se accetti dal banner, possiamo attivare statistiche di visita in
-              forma aggregata e anonima tramite Vercel Web Analytics (fornitore:
-              Vercel Inc.), per capire come viene usato il sito. Se scegli solo i
-              cookie necessari, tali statistiche non vengono attivate.
+              Per statistiche di visita in forma aggregata utilizziamo Vercel Web
+              Analytics (fornitore: Vercel Inc.), integrato nel sito secondo la
+              configurazione standard del servizio di hosting. Non si tratta di
+              profilazione pubblicitaria; i dati sono orientati a misure
+              tecniche e di utilizzo del sito.
             </p>
             <p className="mt-4">
               Non utilizziamo cookie di profilazione di terze parti salvo diversa

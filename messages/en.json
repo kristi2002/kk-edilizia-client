@@ -183,12 +183,12 @@
     "backContacts": "Contact"
   },
   "CookieBanner": {
-    "title": "Cookies & analytics",
-    "text": "We use strictly necessary cookies and, only if you accept, anonymous analytics (Vercel Analytics) to understand how the site is used. Details in our",
+    "title": "Cookies & transparency",
+    "text": "We use strictly necessary cookies; visits are measured in aggregate with Vercel Web Analytics. More information in our",
     "privacyLink": "privacy policy",
-    "hint": "You can decline analytics and keep only essential cookies.",
+    "hint": "You can record your choice below (stored locally).",
     "essentialOnly": "Essential only",
-    "acceptAll": "Accept all"
+    "acceptAll": "OK"
   },
   "FormErrors": {
     "rateLimited": "Too many requests. Please try again in about a minute."

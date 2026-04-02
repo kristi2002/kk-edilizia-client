@@ -1,7 +1,6 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { CookieBanner } from "./CookieBanner";
-import { ConsentAwareAnalytics } from "./ConsentAwareAnalytics";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { SkipLink } from "./SkipLink";
 import { ScrollToHash } from "./ScrollToHash";
@@ -21,7 +20,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </div>
       <Footer />
       <CookieBanner />
-      <ConsentAwareAnalytics />
       <WhatsAppButton />
     </>
   );

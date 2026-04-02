@@ -183,12 +183,12 @@
     "backContacts": "Contatti"
   },
   "CookieBanner": {
-    "title": "Cookie e statistiche",
-    "text": "Usiamo cookie tecnici necessari e, solo se accetti, statistiche anonime (Vercel Analytics) per capire come viene usato il sito. Dettagli nella",
+    "title": "Cookie e trasparenza",
+    "text": "Usiamo cookie tecnici necessari; le visite sono misurate in forma aggregata con Vercel Web Analytics. Maggiori informazioni nella",
     "privacyLink": "privacy policy",
-    "hint": "Puoi rifiutare le statistiche e tenere solo l’essenziale.",
+    "hint": "Puoi registrare la preferenza qui sotto (memorizzazione locale).",
     "essentialOnly": "Solo necessari",
-    "acceptAll": "Accetta tutto"
+    "acceptAll": "Ho capito"
   },
   "FormErrors": {
     "rateLimited": "Troppe richieste. Riprova tra circa un minuto."

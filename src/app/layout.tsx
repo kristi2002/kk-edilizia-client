@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-[#080808] font-sans">
         <LocalBusinessJsonLd />
         {children}
+        <Analytics />
       </body>
     </html>
   );
