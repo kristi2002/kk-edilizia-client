@@ -1,0 +1,201 @@
+{
+  "Metadata": {
+    "siteTitle": "K.K Edilizia | Renovations Modena",
+    "siteDescription": "Renovations and construction in Modena and province: clear quotes, organized sites, and quality finishes."
+  },
+  "Nav": {
+    "home": "Home",
+    "portfolio": "Projects",
+    "tour": "360° tour",
+    "about": "About",
+    "estimate": "Cost estimate",
+    "contacts": "Contact",
+    "quote": "Quote",
+    "booking": "Book a site visit",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "langIt": "IT",
+    "langEn": "EN",
+    "skipToContent": "Skip to content"
+  },
+  "Hero": {
+    "badge": "Modena & province",
+    "titleLine1": "We build spaces",
+    "titleHighlight": "that last",
+    "subtitle": "Turnkey renovations, construction, and finishes. One team for reliable timelines and attention to detail.",
+    "ctaQuote": "Request a quote",
+    "ctaWorks": "See our work",
+    "statYears": "years’ experience",
+    "statProjects": "projects",
+    "statCommitment": "commitment to deadlines"
+  },
+  "StatsStrip": {
+    "v1": "15+",
+    "v2": "50+",
+    "v3": "1",
+    "v4": "100%",
+    "years": "Years in the trade",
+    "projects": "Projects delivered",
+    "referent": "Single site contact",
+    "quotes": "Detailed quotes"
+  },
+  "Services": {
+    "label": "What we do",
+    "title": "Full service, one point of contact",
+    "intro": "From demolition to handover: we plan phases, manage suppliers, and keep you updated on progress and timing.",
+    "r1t": "Renovations",
+    "r1d": "Apartments and houses, systems and finishes with a single coordinator.",
+    "r2t": "Construction",
+    "r2d": "Restoration, façades, and structural work with proper certifications.",
+    "r3t": "Design & planning",
+    "r3d": "Layouts, materials, and site visits for a coherent result.",
+    "r4t": "Finishes",
+    "r4d": "Flooring, painting, and details that define the look."
+  },
+  "ProcessSteps": {
+    "label": "After the site visit",
+    "title": "How we work, step by step",
+    "intro": "Transparency on what happens after the first site visit, so you know what to expect before signing.",
+    "s1t": "Request & site visit",
+    "s1d": "Gathering requirements, inspecting the space, and initial technical checks.",
+    "s2t": "Proposal & quote",
+    "s2d": "A proposal with line items, indicative materials, and a schedule.",
+    "s3t": "Contract & kick-off",
+    "s3d": "Contract, site planning, and supplier orders.",
+    "s4t": "Build & handover",
+    "s4d": "Work with regular updates, testing, and documented handover.",
+    "cta": "Want to start here?",
+    "ctaLink": "Request an online quote"
+  },
+  "CostEstimator": {
+    "badge": "Tool",
+    "title": "Indicative cost estimate",
+    "intro": "Enter square metres and type of work: get a rough budget range to plan ahead. No data is sent to the server.",
+    "li1": "Useful to compare budget bands before a site visit.",
+    "li2": "A binding quote comes after an on-site assessment.",
+    "sqm": "Area (m²)",
+    "sqmPh": "e.g. 85",
+    "typeLabel": "Type of work",
+    "rangeLabel": "Indicative range (excl. VAT)",
+    "rangeEmpty": "Enter a valid area to see the estimate.",
+    "disclaimer": "Market averages only, not an offer. Access, condition, and finishes change the final quote.",
+    "cta": "Request a detailed quote"
+  },
+  "FeaturedProjects": {
+    "label": "Portfolio",
+    "title": "Recent projects",
+    "intro": "A selection of residential renovations, construction, and commercial spaces.",
+    "cta": "See all projects"
+  },
+  "Reviews": {
+    "label": "Reviews",
+    "title": "What clients say",
+    "intro": "Feedback from clients who chose K.K Edilizia for sites in Modena and province (demo text).",
+    "r1": "Clean site, deadlines met, and one contact—finally clarity.",
+    "a1": "Private client, Modena",
+    "r2": "Detailed quote and no mid-project surprises. Recommended.",
+    "a2": "Condominium administrator, Modena province",
+    "r3": "Great coordination between masons and MEP. Result beyond expectations.",
+    "a3": "Private client, Sassuolo"
+  },
+  "FaqSection": {
+    "label": "FAQ",
+    "title": "Common questions",
+    "intro": "Clarity on timing, process, and site organisation—before the final quote."
+  },
+  "CtaBanner": {
+    "title": "Ready to start?",
+    "subtitle": "Tell us about your project: we’ll reply with next steps and, if needed, schedule a site visit.",
+    "cta": "Request a quote",
+    "ctaSecondary": "Contact"
+  },
+  "Footer": {
+    "tagline": "Renovations and construction in {area}. Quality, clear timelines, and organised sites.",
+    "contacts": "Contact",
+    "quick": "Quick links",
+    "legalData": "Company details",
+    "shareCapital": "Share cap.",
+    "pec": "PEC",
+    "rights": "All rights reserved",
+    "privacyLink": "Privacy policy",
+    "legalLink": "Legal notice",
+    "howWeWork": "How we work"
+  },
+  "Booking": {
+    "metaTitle": "Book a site visit",
+    "metaDescription": "Request a site visit in Modena and province—we’ll contact you to agree a date and time.",
+    "label": "Appointments",
+    "title": "Book a site visit",
+    "intro": "Submit the form: you’ll get a confirmation email and we’ll contact you to schedule the visit. No paid third-party booking tool required.",
+    "formPrivacy": "Your data is processed as described in our",
+    "privacyLink": "privacy policy",
+    "fieldName": "Full name",
+    "fieldEmail": "Email",
+    "fieldPhone": "Phone",
+    "fieldAddress": "Job site address (optional)",
+    "fieldAddressHint": "Helps us plan travel in Modena and surrounding areas.",
+    "fieldPreferred": "When would you like the visit?",
+    "fieldPreferredPh": "e.g. weekday mornings, next week, after 3pm…",
+    "fieldNotes": "Additional notes (optional)",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "successTitle": "Request sent",
+    "successBody": "Check your email for a summary. We’ll get back to you soon.",
+    "sendAnother": "Send another request",
+    "errorGeneric": "Could not send. Please try again shortly.",
+    "errorNetwork": "Network error. Check your connection.",
+    "errorConfig": "Email is not configured on the server (Gmail or Resend).",
+    "errName": "Enter your name",
+    "errEmail": "Invalid email",
+    "errPhone": "Invalid phone number",
+    "errPreferred": "Tell us when you’d prefer the visit",
+    "fallbackCta": "Prefer to write to us?",
+    "fallbackLink": "Contact page"
+  },
+  "PortfolioPage": {
+    "label": "Our work",
+    "title": "Portfolio",
+    "intro": "A selection of completed sites. Every project gets the same care for detail and agreed timelines.",
+    "tourBannerTitle": "Demo immersive tour",
+    "tourBannerText": "Explore a sample 360° walkthrough between rooms (Pannellum, self-hosted).",
+    "tourBannerCta": "Open virtual tour",
+    "beforeAfter": "Before / after",
+    "beforeAfterHint": "Drag the slider to compare (demo photos from the web)."
+  },
+  "ProjectDetail": {
+    "back": "Back to portfolio",
+    "similar": "Need something similar? Tell us about your project.",
+    "cta": "Request a quote",
+    "before": "Before",
+    "after": "After"
+  },
+  "VirtualTour": {
+    "metaTitle": "360° virtual tour",
+    "metaDescription": "Explore an immersive tour between rooms: hotspots to move between scenes.",
+    "label": "Immersive",
+    "title": "Virtual tour",
+    "intro": "Street View–style navigation: drag to look around and click arrows to move between scenes (example: Living room ↔ Stairs). Pannellum is served from /public/virtual-tour/ with no paid third-party viewer.",
+    "howTitle": "Updating photos and hotspots",
+    "howLi1": "Replace images in public/virtual-tour/panoramas/ (filenames or paths in pannellum-config.ts).",
+    "howLi2": "Adjust pitch and yaw per hotspot: the config file includes notes for iPhone equirectangular (2:1) photos.",
+    "howLi3": "This route is the Next.js equivalent of GET /virtual-tour on Express: no separate Node server.",
+    "backPortfolio": "Back to projects",
+    "backContacts": "Contact"
+  },
+  "CookieBanner": {
+    "title": "Cookies & analytics",
+    "text": "We use strictly necessary cookies and, only if you accept, anonymous analytics (Vercel Analytics) to understand how the site is used. Details in our",
+    "privacyLink": "privacy policy",
+    "hint": "You can decline analytics and keep only essential cookies.",
+    "essentialOnly": "Essential only",
+    "acceptAll": "Accept all"
+  },
+  "FormErrors": {
+    "rateLimited": "Too many requests. Please try again in about a minute."
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "The page you’re looking for doesn’t exist or has been moved.",
+    "home": "Back to home"
+  }
+}

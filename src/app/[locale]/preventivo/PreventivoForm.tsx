@@ -1,0 +1,398 @@
+"use client";
+
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { HoneypotField } from "@/components/forms/HoneypotField";
+import {
+  preventivoRequestSchema,
+  step1Schema,
+  step2Schema,
+  type PreventivoRequest,
+} from "@/lib/validations/preventivo";
+import { useTranslations } from "next-intl";
+import { Loader2, CheckCircle2 } from "lucide-react";
+
+const workTypes = [
+  { value: "ristrutturazione", label: "Ristrutturazione completa" },
+  { value: "bagno-cucina", label: "Bagno / cucina" },
+  { value: "impianti", label: "Impianti" },
+  { value: "facciata", label: "Facciata / condominio" },
+  { value: "commerciale", label: "Commerciale / ufficio" },
+  { value: "altro", label: "Altro" },
+];
+
+const budgets = [
+  { value: "under-30", label: "Fino a 30.000 €" },
+  { value: "30-60", label: "30.000 – 60.000 €" },
+  { value: "60-100", label: "60.000 – 100.000 €" },
+  { value: "100+", label: "Oltre 100.000 €" },
+  { value: "da-definire", label: "Da definire in sede" },
+];
+
+const timelines = [
+  { value: "urgent", label: "Entro 3 mesi" },
+  { value: "semester", label: "3–6 mesi" },
+  { value: "year", label: "6–12 mesi" },
+  { value: "flex", label: "Flessibile" },
+];
+
+export function PreventivoForm() {
+  const tForm = useTranslations("FormErrors");
+  const [step, setStep] = useState(0);
+  const [done, setDone] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const { control, register, handleSubmit, formState, setError, getValues } =
+    useForm<PreventivoRequest>({
+      resolver: zodResolver(preventivoRequestSchema),
+      defaultValues: {
+        workType: "",
+        sqm: "",
+        budget: "",
+        timeline: "",
+        name: "",
+        email: "",
+        phone: "",
+        notes: "",
+        _gotcha: "",
+      },
+    });
+  const workType = useWatch({ control, name: "workType" });
+  const budget = useWatch({ control, name: "budget" });
+  const timeline = useWatch({ control, name: "timeline" });
+
+  const totalSteps = 3;
+
+  async function validateAndNext() {
+    setSubmitError(null);
+    const values = getValues();
+    const schema = step === 0 ? step1Schema : step === 1 ? step2Schema : null;
+    if (!schema) return;
+
+    const r = schema.safeParse(
+      step === 0
+        ? { workType: values.workType, sqm: values.sqm }
+        : { budget: values.budget, timeline: values.timeline }
+    );
+    if (!r.success) {
+      const fieldErrors = r.error.flatten().fieldErrors;
+      Object.entries(fieldErrors).forEach(([key, msgs]) => {
+        const first = Array.isArray(msgs) ? msgs[0] : undefined;
+        if (first)
+          setError(key as keyof PreventivoRequest, { message: first });
+      });
+      return;
+    }
+    setStep((s) => s + 1);
+  }
+
+  async function onSubmit(data: PreventivoRequest) {
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/preventivo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) {
+        if (json?.error === "email_not_configured") {
+          setSubmitError(
+            "Invio email non attivo: configura Gmail o Resend sul server.",
+          );
+          return;
+        }
+        if (json?.error === "rate_limited") {
+          setSubmitError(tForm("rateLimited"));
+          return;
+        }
+        setSubmitError("Invio non riuscito. Riprova tra poco.");
+        return;
+      }
+      setDone(true);
+    } catch {
+      setSubmitError("Errore di rete. Controlla la connessione.");
+    }
+  }
+
+  if (done) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-8 py-16 text-center"
+      >
+        <CheckCircle2 className="mx-auto h-14 w-14 text-[#c9a227]" />
+        <h2 className="mt-6 font-serif text-2xl text-white">
+          Richiesta inviata
+        </h2>
+        <p className="mt-3 text-zinc-400">
+          Ti contatteremo entro 1–2 giorni lavorativi con i prossimi passi.
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+      <div className="mb-10 flex gap-2">
+        {Array.from({ length: totalSteps }).map((_, i) => (
+          <div
+            key={i}
+            className="h-1 flex-1 overflow-hidden rounded-full bg-white/10"
+          >
+            <motion.div
+              className="h-full bg-[#c9a227]"
+              initial={false}
+              animate={{ width: i <= step ? "100%" : "0%" }}
+              transition={{ duration: 0.35 }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="relative">
+        <HoneypotField register={register} name="_gotcha" />
+        <AnimatePresence mode="wait">
+          {step === 0 && (
+            <motion.div
+              key="s0"
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+                Passo 1 di 3
+              </p>
+              <h2 className="font-serif text-2xl text-white">
+                Che tipo di intervento ti serve?
+              </h2>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {workTypes.map((w) => (
+                  <label
+                    key={w.value}
+                    className={`flex cursor-pointer items-center rounded-xl border px-4 py-3 text-sm transition ${
+                      workType === w.value
+                        ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
+                        : "border-white/15 text-zinc-400 hover:border-white/30"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      value={w.value}
+                      className="sr-only"
+                      {...register("workType")}
+                    />
+                    {w.label}
+                  </label>
+                ))}
+              </div>
+              {formState.errors.workType && (
+                <p className="text-sm text-red-400">
+                  {formState.errors.workType.message}
+                </p>
+              )}
+              <div>
+                <label className="text-sm text-zinc-500">
+                  Metri quadri (opzionale)
+                </label>
+                <input
+                  type="text"
+                  placeholder="es. 85"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                  {...register("sqm")}
+                />
+              </div>
+            </motion.div>
+          )}
+
+          {step === 1 && (
+            <motion.div
+              key="s1"
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+                Passo 2 di 3
+              </p>
+              <h2 className="font-serif text-2xl text-white">
+                Budget e tempistiche
+              </h2>
+              <div>
+                <p className="text-sm text-zinc-500">Fascia di investimento</p>
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  {budgets.map((b) => (
+                    <label
+                      key={b.value}
+                      className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
+                        budget === b.value
+                          ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
+                          : "border-white/15 text-zinc-400 hover:border-white/30"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        value={b.value}
+                        className="sr-only"
+                        {...register("budget")}
+                      />
+                      {b.label}
+                    </label>
+                  ))}
+                </div>
+                {formState.errors.budget && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {formState.errors.budget.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <p className="text-sm text-zinc-500">Quando vorresti iniziare?</p>
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  {timelines.map((t) => (
+                    <label
+                      key={t.value}
+                      className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
+                        timeline === t.value
+                          ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
+                          : "border-white/15 text-zinc-400 hover:border-white/30"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        value={t.value}
+                        className="sr-only"
+                        {...register("timeline")}
+                      />
+                      {t.label}
+                    </label>
+                  ))}
+                </div>
+                {formState.errors.timeline && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {formState.errors.timeline.message}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          )}
+
+          {step === 2 && (
+            <motion.div
+              key="s2"
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-5"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+                Passo 3 di 3
+              </p>
+              <h2 className="font-serif text-2xl text-white">I tuoi contatti</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="sm:col-span-2">
+                  <label className="text-sm text-zinc-500">Nome e cognome</label>
+                  <input
+                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    {...register("name")}
+                  />
+                  {formState.errors.name && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {formState.errors.name.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="text-sm text-zinc-500">Email</label>
+                  <input
+                    type="email"
+                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    {...register("email")}
+                  />
+                  {formState.errors.email && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {formState.errors.email.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="text-sm text-zinc-500">Telefono</label>
+                  <input
+                    type="tel"
+                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    {...register("phone")}
+                  />
+                  {formState.errors.phone && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {formState.errors.phone.message}
+                    </p>
+                  )}
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="text-sm text-zinc-500">
+                    Note aggiuntive (opzionale)
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    placeholder="Indirizzo cantiere, esigenze particolari…"
+                    {...register("notes")}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {submitError && (
+          <p className="mt-6 text-sm text-red-400">{submitError}</p>
+        )}
+
+        <div className="mt-10 flex flex-wrap justify-between gap-4">
+          {step > 0 ? (
+            <button
+              type="button"
+              onClick={() => {
+                setStep((s) => s - 1);
+                setSubmitError(null);
+              }}
+              className="rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-white hover:bg-white/10"
+            >
+              Indietro
+            </button>
+          ) : (
+            <span />
+          )}
+          {step < 2 ? (
+            <button
+              type="button"
+              onClick={validateAndNext}
+              className="ml-auto rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] hover:bg-[#ddb92e]"
+            >
+              Avanti
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={formState.isSubmitting}
+              className="ml-auto inline-flex items-center gap-2 rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] hover:bg-[#ddb92e] disabled:opacity-60"
+            >
+              {formState.isSubmitting && (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              )}
+              Invia richiesta
+            </button>
+          )}
+        </div>
+      </form>
+    </div>
+  );
+}

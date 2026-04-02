@@ -1,0 +1,148 @@
+import type { Metadata } from "next";
+import { Link } from "@/i18n/navigation";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { FadeIn } from "@/components/motion/FadeIn";
+import { ContactForm } from "@/components/contatti/ContactForm";
+import { formatLegalAddress, site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contatti",
+  description:
+    "Telefono, email, PEC e sede operativa di K.K Edilizia a Modena. Modulo messaggi e preventivo online.",
+};
+
+export default function ContattiPage() {
+  return (
+    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+      <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
+        <div>
+          <FadeIn>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+              Contatti
+            </p>
+            <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+              Parliamone
+            </h1>
+            <p className="mt-4 text-lg text-zinc-400">
+              Chiamaci o scrivici: fissiamo un sopralluogo e ti inviamo un
+              preventivo dettagliato.
+            </p>
+          </FadeIn>
+
+          <ul className="mt-12 space-y-6">
+            <FadeIn delay={0.05}>
+              <li className="flex gap-4">
+                <Phone className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                <div>
+                  <p className="text-sm text-zinc-500">Telefono</p>
+                  <a
+                    href={`tel:${site.phoneTel}`}
+                    className="text-lg font-medium text-white hover:text-[#c9a227]"
+                  >
+                    {site.phoneDisplay}
+                  </a>
+                </div>
+              </li>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <li className="flex gap-4">
+                <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                <div>
+                  <p className="text-sm text-zinc-500">Email</p>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="text-lg font-medium text-white hover:text-[#c9a227]"
+                  >
+                    {site.email}
+                  </a>
+                </div>
+              </li>
+            </FadeIn>
+            <FadeIn delay={0.12}>
+              <li className="flex gap-4">
+                <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                <div>
+                  <p className="text-sm text-zinc-500">PEC</p>
+                  <a
+                    href={`mailto:${site.pec}`}
+                    className="text-lg font-medium text-white hover:text-[#c9a227]"
+                  >
+                    {site.pec}
+                  </a>
+                </div>
+              </li>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <li className="flex gap-4">
+                <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                <div>
+                  <p className="text-sm text-zinc-500">Sede</p>
+                  <p className="text-lg text-white">{formatLegalAddress()}</p>
+                </div>
+              </li>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <li className="flex gap-4">
+                <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                <div>
+                  <p className="text-sm text-zinc-500">Orari</p>
+                  <p className="text-white">
+                    Lun–Ven 8:30–18:30 · Sab su appuntamento
+                  </p>
+                </div>
+              </li>
+            </FadeIn>
+          </ul>
+
+          {site.publicReviewUrl ? (
+            <FadeIn delay={0.22}>
+              <p className="mt-10 text-sm text-zinc-500">
+                Recensioni:{" "}
+                <a
+                  href={site.publicReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[#c9a227] hover:underline"
+                >
+                  scheda Google Business
+                </a>
+              </p>
+            </FadeIn>
+          ) : null}
+
+          <FadeIn delay={0.25}>
+            <Link
+              href="/preventivo"
+              className="mt-12 inline-flex rounded-full bg-[#c9a227] px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+            >
+              Richiedi preventivo online
+            </Link>
+          </FadeIn>
+        </div>
+
+        <div className="flex flex-col gap-8">
+          <FadeIn delay={0.08}>
+            <ContactForm />
+          </FadeIn>
+          <FadeIn delay={0.12}>
+            <div className="relative overflow-hidden rounded-3xl border border-white/10">
+              <div className="aspect-[4/3] bg-gradient-to-br from-zinc-800 to-zinc-950">
+                <iframe
+                  title="Mappa Modena"
+                  className="h-full w-full opacity-90 grayscale contrast-125"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.85%2C44.62%2C10.95%2C44.68&layer=mapnik"
+                />
+              </div>
+              <p className="border-t border-white/10 p-4 text-center text-xs text-zinc-500">
+                Mappa indicativa — sostituisci l&apos;embed con le coordinate
+                della sede reale.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+    </main>
+  );
+}

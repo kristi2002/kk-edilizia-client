@@ -1,0 +1,201 @@
+{
+  "Metadata": {
+    "siteTitle": "K.K Edilizia | Ristrutturazioni Modena",
+    "siteDescription": "Ristrutturazioni e lavori edili a Modena e provincia: preventivi chiari, cantieri organizzati e finiture di qualità."
+  },
+  "Nav": {
+    "home": "Home",
+    "portfolio": "Lavori",
+    "tour": "Tour 360°",
+    "about": "Chi siamo",
+    "estimate": "Stima costi",
+    "contacts": "Contatti",
+    "quote": "Preventivo",
+    "booking": "Prenota sopralluogo",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "langIt": "IT",
+    "langEn": "EN",
+    "skipToContent": "Salta al contenuto"
+  },
+  "Hero": {
+    "badge": "Modena & provincia",
+    "titleLine1": "Costruiamo spazi",
+    "titleHighlight": "che durano",
+    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e finiture. Un team unico per tempi certi e un risultato curato nei dettagli.",
+    "ctaQuote": "Richiedi preventivo",
+    "ctaWorks": "Vedi i lavori",
+    "statYears": "anni esperienza",
+    "statProjects": "interventi",
+    "statCommitment": "impegno sui tempi"
+  },
+  "StatsStrip": {
+    "v1": "15+",
+    "v2": "50+",
+    "v3": "1",
+    "v4": "100%",
+    "years": "Anni nel settore",
+    "projects": "Progetti consegnati",
+    "referent": "Referente unico di cantiere",
+    "quotes": "Preventivi dettagliati"
+  },
+  "Services": {
+    "label": "Cosa facciamo",
+    "title": "Servizi completi, un solo referente",
+    "intro": "Dalla demolizione alle consegne: pianifichiamo le fasi, gestiamo i fornitori e teniamo aggiornati i clienti su avanzamenti e tempi.",
+    "r1t": "Ristrutturazioni",
+    "r1d": "Appartamenti e ville, impianti e finiture con coordinamento unico.",
+    "r2t": "Edilizia",
+    "r2d": "Risanamenti, facciate e interventi strutturali con certificazioni.",
+    "r3t": "Design e progetto",
+    "r3d": "Layout, materiali e sopralluogo per un risultato coerente.",
+    "r4t": "Finiture",
+    "r4d": "Pavimenti, tinteggiature e dettagli che definiscono lo stile."
+  },
+  "ProcessSteps": {
+    "label": "Dopo il sopralluogo",
+    "title": "Come procediamo, passo dopo passo",
+    "intro": "Trasparenza sulle fasi successive alla prima visita in cantiere, così sai cosa aspettarti prima di firmare.",
+    "s1t": "Richiesta e sopralluogo",
+    "s1d": "Raccolta esigenze, ispezione dei locali e prime verifiche tecniche e normative.",
+    "s2t": "Proposta e preventivo",
+    "s2d": "Elaborazione di una proposta con voci, materiali indicativi e cronoprogramma.",
+    "s3t": "Contratto e avvio",
+    "s3d": "Definizione contrattuale, pianificazione del cantiere e ordini ai fornitori.",
+    "s4t": "Esecuzione e consegna",
+    "s4d": "Lavori con aggiornamenti periodici, collaudi e consegna documentata.",
+    "cta": "Vuoi iniziare da qui?",
+    "ctaLink": "Richiedi un preventivo online"
+  },
+  "CostEstimator": {
+    "badge": "Strumento",
+    "title": "Stima indicativa dei costi",
+    "intro": "Inserisci metri quadri e tipologia di intervento: ottieni una fascia di prezzo orientativa per pianificare il budget. Nessun dato viene inviato al server.",
+    "li1": "Utile per confrontare fasce di investimento prima del sopralluogo.",
+    "li2": "Il preventivo vincolante arriva dopo analisi in sede.",
+    "sqm": "Superficie (m²)",
+    "sqmPh": "es. 85",
+    "typeLabel": "Tipo di intervento",
+    "rangeLabel": "Fascia indicativa (IVA esclusa)",
+    "rangeEmpty": "Inserisci una superficie valida per vedere la stima.",
+    "disclaimer": "Valori medi di mercato, non costituiscono offerta. Accessi, stato dei luoghi e finiture scelte modificano il preventivo finale.",
+    "cta": "Richiedi preventivo dettagliato"
+  },
+  "FeaturedProjects": {
+    "label": "Portfolio",
+    "title": "Progetti recenti",
+    "intro": "Alcuni interventi tra ristrutturazioni residenziali, edilizia e spazi commerciali.",
+    "cta": "Vedi tutti i lavori"
+  },
+  "Reviews": {
+    "label": "Recensioni",
+    "title": "Cosa dicono i clienti",
+    "intro": "Feedback da chi ha scelto K.K Edilizia per cantieri a Modena e provincia (testi dimostrativi).",
+    "r1": "Cantiere pulito, tempi rispettati e un solo referente: finalmente chiarezza.",
+    "a1": "Cliente privato, Modena",
+    "r2": "Preventivo dettagliato e nessuna sorpresa in corso d’opera. Consigliati.",
+    "a2": "Amministratore condominio, provincia di Modena",
+    "r3": "Ottima coordinazione tra muratori e impiantisti. Risultato oltre le aspettative.",
+    "a3": "Cliente privato, Sassuolo"
+  },
+  "FaqSection": {
+    "label": "Domande frequenti",
+    "title": "Cosa chiedono più spesso i clienti",
+    "intro": "Trasparenza su tempi, modalità e organizzazione del cantiere, prima ancora del preventivo definitivo."
+  },
+  "CtaBanner": {
+    "title": "Pronto a iniziare?",
+    "subtitle": "Raccontaci il tuo progetto: ti rispondiamo con i prossimi passi e, se serve, fissiamo un sopralluogo.",
+    "cta": "Richiedi preventivo",
+    "ctaSecondary": "Contatti"
+  },
+  "Footer": {
+    "tagline": "Ristrutturazioni e lavori edili a {area}. Qualità, tempi chiari e cantieri organizzati.",
+    "contacts": "Contatti",
+    "quick": "Link rapidi",
+    "legalData": "Dati societari",
+    "shareCapital": "Cap. soc.",
+    "pec": "PEC",
+    "rights": "Tutti i diritti riservati",
+    "privacyLink": "Privacy policy",
+    "legalLink": "Note legali",
+    "howWeWork": "Come lavoriamo"
+  },
+  "Booking": {
+    "metaTitle": "Prenota sopralluogo",
+    "metaDescription": "Richiedi un sopralluogo a Modena e provincia: ti ricontattiamo per concordare data e ora.",
+    "label": "Appuntamenti",
+    "title": "Prenota un sopralluogo",
+    "intro": "Compila il modulo: riceverai una conferma via email e ti contatteremo per fissare data e ora. Nessun servizio di prenotazione esterno a pagamento.",
+    "formPrivacy": "I dati sono trattati come da",
+    "privacyLink": "privacy policy",
+    "fieldName": "Nome e cognome",
+    "fieldEmail": "Email",
+    "fieldPhone": "Telefono",
+    "fieldAddress": "Indirizzo del cantiere / intervento (opzionale)",
+    "fieldAddressHint": "Utile per organizzare lo spostamento in zona Modena e provincia.",
+    "fieldPreferred": "Quando preferisci il sopralluogo?",
+    "fieldPreferredPh": "Es. lun–ven mattina, prossima settimana, dopo le 15…",
+    "fieldNotes": "Note aggiuntive (opzionale)",
+    "submit": "Invia richiesta",
+    "sending": "Invio in corso…",
+    "successTitle": "Richiesta inviata",
+    "successBody": "Controlla la tua email per un riepilogo. Ti ricontatteremo presto.",
+    "sendAnother": "Invia un’altra richiesta",
+    "errorGeneric": "Invio non riuscito. Riprova tra poco.",
+    "errorNetwork": "Errore di rete. Controlla la connessione.",
+    "errorConfig": "Invio email non attivo: configura Gmail o Resend sul server.",
+    "errName": "Inserisci il nome",
+    "errEmail": "Email non valida",
+    "errPhone": "Telefono non valido",
+    "errPreferred": "Indica quando preferisci il sopralluogo",
+    "fallbackCta": "Preferisci scriverci?",
+    "fallbackLink": "Vai ai contatti"
+  },
+  "PortfolioPage": {
+    "label": "I nostri lavori",
+    "title": "Portfolio",
+    "intro": "Una selezione di cantieri completati. Ogni progetto è seguito con la stessa cura per i dettagli e il rispetto dei tempi concordati.",
+    "tourBannerTitle": "Tour immersivo dimostrativo",
+    "tourBannerText": "Esplora un esempio di navigazione 360° tra le stanze (Pannellum, self-hosted).",
+    "tourBannerCta": "Apri il tour virtuale",
+    "beforeAfter": "Prima / dopo",
+    "beforeAfterHint": "Trascina il cursore per confrontare (foto dimostrative da web)."
+  },
+  "ProjectDetail": {
+    "back": "Torna al portfolio",
+    "similar": "Ti serve qualcosa di simile? Raccontaci il tuo progetto.",
+    "cta": "Richiedi preventivo",
+    "before": "Prima",
+    "after": "Dopo"
+  },
+  "VirtualTour": {
+    "metaTitle": "Tour virtuale 360°",
+    "metaDescription": "Esplora un tour immersivo tra le stanze: hotspot per spostarti tra le scene.",
+    "label": "Immersivo",
+    "title": "Tour virtuale",
+    "intro": "Navigazione tipo Street View: trascina per guardarti intorno e clicca sulle frecce per passare tra le scene (esempio: Soggiorno ↔ Scale). Libreria Pannellum ospitata in /public/virtual-tour/, senza servizi esterni a pagamento.",
+    "howTitle": "Aggiornare foto e hotspot",
+    "howLi1": "Sostituisci le immagini in public/virtual-tour/panoramas/ (nome file o percorsi in pannellum-config.ts).",
+    "howLi2": "Regola pitch e yaw per ogni hotspot: il file di config è commentato con istruzioni per foto da iPhone (equirettangolare 2:1).",
+    "howLi3": "Questa route è l’equivalente Next.js di GET /virtual-tour su Express: niente server Node separato.",
+    "backPortfolio": "Torna ai lavori",
+    "backContacts": "Contatti"
+  },
+  "CookieBanner": {
+    "title": "Cookie e statistiche",
+    "text": "Usiamo cookie tecnici necessari e, solo se accetti, statistiche anonime (Vercel Analytics) per capire come viene usato il sito. Dettagli nella",
+    "privacyLink": "privacy policy",
+    "hint": "Puoi rifiutare le statistiche e tenere solo l’essenziale.",
+    "essentialOnly": "Solo necessari",
+    "acceptAll": "Accetta tutto"
+  },
+  "FormErrors": {
+    "rateLimited": "Troppe richieste. Riprova tra circa un minuto."
+  },
+  "NotFound": {
+    "title": "Pagina non trovata",
+    "text": "Il contenuto che cerchi non esiste o è stato spostato.",
+    "home": "Torna alla home"
+  }
+}
