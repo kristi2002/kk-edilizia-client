@@ -33,6 +33,7 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="it"
+      data-scroll-behavior="smooth"
       className={`${dmSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-[#080808] font-sans">

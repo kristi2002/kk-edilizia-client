@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -12,16 +12,25 @@ import {
 } from "@/lib/validations/prenota";
 import { Loader2 } from "lucide-react";
 import { firstServerFieldError } from "@/lib/form-api-response";
+import { BOOKING_TIME_SLOT_VALUES } from "@/lib/booking-time-slots";
+import { BookingTimeSelect } from "@/components/forms/BookingTimeSelect";
+import { BookingDatePicker } from "@/components/forms/BookingDatePicker";
+import {
+  FormAttachmentPicker,
+  type AttachmentItem,
+} from "@/components/forms/FormAttachmentPicker";
 
 export function PrenotaForm() {
   const t = useTranslations("Booking");
   const tForm = useTranslations("FormErrors");
   const locale = useLocale();
+  const [attachmentItems, setAttachmentItems] = useState<AttachmentItem[]>([]);
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
+    control,
     setValue,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -33,22 +42,51 @@ export function PrenotaForm() {
       email: "",
       phone: "",
       address: "",
-      preferredSlot: "",
+      preferredDate: "",
+      preferredTime: "",
       notes: "",
       _gotcha: "",
     },
   });
 
+  function mapAttachmentError(code: string | undefined): string | null {
+    switch (code) {
+      case "too_many":
+        return tForm("attachmentTooMany");
+      case "file_too_large":
+        return tForm("attachmentFileTooLarge");
+      case "invalid_type":
+        return tForm("attachmentInvalidType");
+      case "total_too_large":
+        return tForm("attachmentTotalTooLarge");
+      default:
+        return null;
+    }
+  }
+
   async function onSubmit(data: PrenotaRequest) {
     setSubmitError(null);
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 45_000);
     try {
+      const fd = new FormData();
+      fd.append("name", data.name);
+      fd.append("email", data.email);
+      fd.append("phone", data.phone);
+      if (data.address?.trim()) fd.append("address", data.address.trim());
+      fd.append("preferredDate", data.preferredDate);
+      fd.append("preferredTime", data.preferredTime);
+      if (data.notes?.trim()) fd.append("notes", data.notes.trim());
+      fd.append("_gotcha", data._gotcha ?? "");
+      fd.append("locale", locale === "en" ? "en" : "it");
+      for (const { file } of attachmentItems) {
+        fd.append("attachments", file);
+      }
+
       const res = await fetch("/api/prenota", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          locale: locale === "en" ? "en" : "it",
-        }),
+        body: fd,
+        signal: controller.signal,
       });
       const json = (await res.json()) as {
         ok?: boolean;
@@ -59,6 +97,14 @@ export function PrenotaForm() {
         const fieldMsg = firstServerFieldError(json.errors);
         if (fieldMsg) {
           setSubmitError(fieldMsg);
+          return;
+        }
+        const att = json?.error?.startsWith("attachment_")
+          ? json.error.slice("attachment_".length)
+          : undefined;
+        const attMsg = mapAttachmentError(att);
+        if (attMsg) {
+          setSubmitError(attMsg);
           return;
         }
         if (json?.error === "email_not_configured") {
@@ -77,9 +123,12 @@ export function PrenotaForm() {
         return;
       }
       reset();
+      setAttachmentItems([]);
       setDone(true);
     } catch {
       setSubmitError(t("errorNetwork"));
+    } finally {
+      window.clearTimeout(timeoutId);
     }
   }
 
@@ -155,18 +204,64 @@ export function PrenotaForm() {
           />
         </div>
         <div>
-          <label className="text-sm text-zinc-500">{t("fieldPreferred")}</label>
-          <textarea
-            rows={3}
-            className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
-            placeholder={t("fieldPreferredPh")}
-            {...register("preferredSlot")}
-          />
-          {errors.preferredSlot && (
-            <p className="mt-1 text-sm text-red-400">
-              {errors.preferredSlot.message}
-            </p>
-          )}
+          <p className="text-sm text-zinc-500">{t("fieldPreferred")}</p>
+          <p className="mt-1 text-xs text-zinc-600">{t("fieldPreferredHint")}</p>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="prenota-date"
+                className="text-xs font-medium text-zinc-500"
+              >
+                {t("fieldPreferredDate")}
+              </label>
+              <Controller
+                name="preferredDate"
+                control={control}
+                render={({ field }) => (
+                  <BookingDatePicker
+                    id="prenota-date"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    placeholder={t("fieldPreferredDatePlaceholder")}
+                    locale={locale}
+                  />
+                )}
+              />
+              {errors.preferredDate && (
+                <p className="mt-1 text-sm text-red-400">
+                  {errors.preferredDate.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="prenota-time"
+                className="text-xs font-medium text-zinc-500"
+              >
+                {t("fieldPreferredTime")}
+              </label>
+              <Controller
+                name="preferredTime"
+                control={control}
+                render={({ field }) => (
+                  <BookingTimeSelect
+                    id="prenota-time"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    slots={BOOKING_TIME_SLOT_VALUES}
+                    placeholder={t("fieldPreferredTimePlaceholder")}
+                  />
+                )}
+              />
+              {errors.preferredTime && (
+                <p className="mt-1 text-sm text-red-400">
+                  {errors.preferredTime.message}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <div>
           <label className="text-sm text-zinc-500">{t("fieldNotes")}</label>
@@ -178,6 +273,29 @@ export function PrenotaForm() {
           {errors.notes && (
             <p className="mt-1 text-sm text-red-400">{errors.notes.message}</p>
           )}
+        </div>
+        <div>
+          <label
+            htmlFor="prenota-attachments"
+            className="text-sm text-zinc-500"
+          >
+            {t("fieldAttachments")}
+          </label>
+          <p className="mt-1 text-xs text-zinc-600">{t("attachmentsHint")}</p>
+          <FormAttachmentPicker
+            items={attachmentItems}
+            onItemsChange={(next) => {
+              setAttachmentItems(next);
+              setSubmitError(null);
+            }}
+            chooseLabel={t("chooseFiles")}
+            onInvalid={(code) => {
+              const msg = mapAttachmentError(code);
+              if (msg) setSubmitError(msg);
+            }}
+            removeAriaLabel={(name) => t("removeAttachmentAria", { name })}
+            inputId="prenota-attachments"
+          />
         </div>
         {submitError && (
           <p className="text-sm text-red-400">{submitError}</p>

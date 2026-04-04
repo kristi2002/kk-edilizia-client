@@ -5,6 +5,8 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { ContactForm } from "@/components/contatti/ContactForm";
 import { formatLegalAddress } from "@/lib/site";
 import { getSite } from "@/lib/data/site-store";
+import { googleMapsDirectionsUrl } from "@/lib/maps";
+import { ContactMap } from "@/components/contatti/ContactMap";
 
 export const metadata: Metadata = {
   title: "Contatti",
@@ -14,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function ContattiPage() {
   const site = await getSite();
+  const mapsDirectionsUrl = googleMapsDirectionsUrl(site);
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
@@ -79,7 +82,17 @@ export default async function ContattiPage() {
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                 <div>
                   <p className="text-sm text-zinc-500">Sede</p>
-                  <p className="text-lg text-white">{formatLegalAddress(site)}</p>
+                  <a
+                    href={mapsDirectionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg font-medium text-white underline decoration-[#c9a227]/50 underline-offset-4 transition hover:text-[#c9a227] hover:decoration-[#c9a227]"
+                  >
+                    {formatLegalAddress(site)}
+                  </a>
+                  <p className="mt-1 text-xs text-zinc-600">
+                    Apri le indicazioni su Google Maps
+                  </p>
                 </div>
               </li>
             </FadeIn>
@@ -127,21 +140,7 @@ export default async function ContattiPage() {
             <ContactForm />
           </FadeIn>
           <FadeIn delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10">
-              <div className="aspect-[4/3] bg-gradient-to-br from-zinc-800 to-zinc-950">
-                <iframe
-                  title="Mappa Modena"
-                  className="h-full w-full opacity-90 grayscale contrast-125"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.85%2C44.62%2C10.95%2C44.68&layer=mapnik"
-                />
-              </div>
-              <p className="border-t border-white/10 p-4 text-center text-xs text-zinc-500">
-                Mappa indicativa — sostituisci l&apos;embed con le coordinate
-                della sede reale.
-              </p>
-            </div>
+            <ContactMap site={site} />
           </FadeIn>
         </div>
       </div>

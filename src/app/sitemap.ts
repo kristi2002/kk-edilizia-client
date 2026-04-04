@@ -3,18 +3,21 @@ import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { getSiteUrl } from "@/lib/data/site-store";
 import { getProjects } from "@/lib/data/projects-store";
+import { isCostEstimateEnabled } from "@/lib/features";
 
-const staticSegments = [
-  "",
-  "/portfolio",
-  "/stima-costi",
-  "/chi-siamo",
-  "/contatti",
-  "/preventivo",
-  "/privacy",
-  "/note-legali",
-  "/prenota",
-];
+function staticSegments(): string[] {
+  return [
+    "",
+    "/portfolio",
+    ...(isCostEstimateEnabled() ? ["/stima-costi"] : []),
+    "/chi-siamo",
+    "/contatti",
+    "/preventivo",
+    "/privacy",
+    "/note-legali",
+    "/prenota",
+  ];
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (await getSiteUrl()).replace(/\/$/, "");
@@ -24,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of routing.locales) {
-    for (const seg of staticSegments) {
+    for (const seg of staticSegments()) {
       const path = localizedPath(locale, seg === "" ? "/" : seg);
       const url = path === "/" ? `${base}/` : `${base}${path}`;
       entries.push({

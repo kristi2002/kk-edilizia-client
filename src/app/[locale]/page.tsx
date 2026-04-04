@@ -9,6 +9,7 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
+import { isCostEstimateEnabled } from "@/lib/features";
 
 export const revalidate = 60;
 
@@ -23,7 +24,7 @@ export default async function Home() {
       <StatsStrip />
       <Services />
       <ProcessSteps />
-      <HomeStimaTeaser />
+      {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
       <FeaturedProjects projects={projects} projectTypes={projectTypes} />
       <ReviewsStrip />
       <FaqSection />

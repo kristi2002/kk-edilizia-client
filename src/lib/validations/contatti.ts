@@ -12,6 +12,7 @@ export const contattiSchema = z.object({
     .refine((s) => httpUrlCount(s) <= 25, {
       message: "Troppi link nel messaggio",
     }),
+  locale: z.enum(["it", "en"]).optional(),
 });
 
 export type ContattiInput = z.infer<typeof contattiSchema>;

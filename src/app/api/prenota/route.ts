@@ -1,10 +1,28 @@
 import { NextResponse } from "next/server";
 import { sendPrenotaConfirmation } from "@/lib/email/prenota";
+import {
+  filesToEmailAttachments,
+  validateFormAttachmentFiles,
+} from "@/lib/form-attachments";
 import { assertRateLimit } from "@/lib/rate-limit";
 import { stripHoneypot } from "@/lib/strip-honeypot";
-import { prenotaRequestSchema } from "@/lib/validations/prenota";
+import {
+  prenotaRequestSchema,
+  toPrenotaEmailInput,
+} from "@/lib/validations/prenota";
 
 export const maxDuration = 60;
+
+function isMultipart(request: Request) {
+  const ct = request.headers.get("content-type") ?? "";
+  return ct.includes("multipart/form-data");
+}
+
+function collectAttachmentFiles(formData: FormData): File[] {
+  return formData
+    .getAll("attachments")
+    .filter((x): x is File => x instanceof File && x.size > 0);
+}
 
 export async function POST(request: Request) {
   try {
@@ -20,8 +38,37 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = await request.json();
-    const parsed = prenotaRequestSchema.safeParse(body);
+    let parsed: ReturnType<typeof prenotaRequestSchema.safeParse>;
+    let attachmentFiles: File[] = [];
+
+    if (isMultipart(request)) {
+      const formData = await request.formData();
+      attachmentFiles = collectAttachmentFiles(formData);
+      const v = validateFormAttachmentFiles(attachmentFiles);
+      if (!v.ok) {
+        return NextResponse.json(
+          { ok: false, error: `attachment_${v.error}` },
+          { status: 400 },
+        );
+      }
+      const addressRaw = String(formData.get("address") ?? "").trim();
+      const notesRaw = String(formData.get("notes") ?? "").trim();
+      parsed = prenotaRequestSchema.safeParse({
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        address: addressRaw || undefined,
+        preferredDate: String(formData.get("preferredDate") ?? ""),
+        preferredTime: String(formData.get("preferredTime") ?? ""),
+        notes: notesRaw || undefined,
+        locale: formData.get("locale") === "en" ? "en" : undefined,
+        _gotcha: String(formData.get("_gotcha") ?? ""),
+      });
+    } else {
+      const body = await request.json();
+      parsed = prenotaRequestSchema.safeParse(body);
+    }
+
     if (!parsed.success) {
       return NextResponse.json(
         { ok: false, errors: parsed.error.flatten().fieldErrors },
@@ -29,8 +76,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const attachments =
+      attachmentFiles.length > 0
+        ? await filesToEmailAttachments(attachmentFiles)
+        : [];
+
     try {
-      await sendPrenotaConfirmation(stripHoneypot(parsed.data));
+      await sendPrenotaConfirmation(
+        toPrenotaEmailInput(stripHoneypot(parsed.data)),
+        attachments,
+      );
     } catch (e) {
       const msg = e instanceof Error ? e.message : "";
       if (msg === "EMAIL_NOT_CONFIGURED") {

@@ -9,15 +9,21 @@ import {
   type ContattiRequest,
 } from "@/lib/validations/contatti";
 import { HoneypotField } from "@/components/forms/HoneypotField";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { firstServerFieldError } from "@/lib/form-api-response";
 import { Loader2, Send } from "lucide-react";
+import {
+  FormAttachmentPicker,
+  type AttachmentItem,
+} from "@/components/forms/FormAttachmentPicker";
 
 const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
 
 export function ContactForm() {
   const t = useTranslations("ContactForm");
   const tForm = useTranslations("FormErrors");
+  const locale = useLocale();
+  const [attachmentItems, setAttachmentItems] = useState<AttachmentItem[]>([]);
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -38,15 +44,40 @@ export function ContactForm() {
     },
   });
 
+  function mapAttachmentError(code: string | undefined): string | null {
+    switch (code) {
+      case "too_many":
+        return tForm("attachmentTooMany");
+      case "file_too_large":
+        return tForm("attachmentFileTooLarge");
+      case "invalid_type":
+        return tForm("attachmentInvalidType");
+      case "total_too_large":
+        return tForm("attachmentTotalTooLarge");
+      default:
+        return null;
+    }
+  }
+
   async function onSubmit(data: ContattiRequest) {
     setSubmitError(null);
     const controller = new AbortController();
     const timeoutId = window.setTimeout(() => controller.abort(), 45_000);
     try {
+      const fd = new FormData();
+      fd.append("name", data.name);
+      fd.append("email", data.email);
+      if (data.phone?.trim()) fd.append("phone", data.phone.trim());
+      fd.append("message", data.message);
+      fd.append("_gotcha", data._gotcha ?? "");
+      fd.append("locale", locale === "en" ? "en" : "it");
+      for (const { file } of attachmentItems) {
+        fd.append("attachments", file);
+      }
+
       const res = await fetch("/api/contatti", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: fd,
         signal: controller.signal,
       });
       const json = (await res.json()) as {
@@ -58,6 +89,14 @@ export function ContactForm() {
         const fieldMsg = firstServerFieldError(json.errors);
         if (fieldMsg) {
           setSubmitError(fieldMsg);
+          return;
+        }
+        const att = json?.error?.startsWith("attachment_")
+          ? json.error.slice("attachment_".length)
+          : undefined;
+        const attMsg = mapAttachmentError(att);
+        if (attMsg) {
+          setSubmitError(attMsg);
           return;
         }
         if (json?.error === "email_not_configured") {
@@ -76,6 +115,7 @@ export function ContactForm() {
         return;
       }
       reset();
+      setAttachmentItems([]);
       setDone(true);
     } catch {
       setSubmitError(t("networkError"));
@@ -200,6 +240,29 @@ export function ContactForm() {
               {errors.message.message}
             </p>
           )}
+        </div>
+        <div>
+          <label
+            htmlFor="contact-attachments"
+            className="text-sm text-zinc-500"
+          >
+            {t("attachmentsLabel")}
+          </label>
+          <p className="mt-1 text-xs text-zinc-600">{t("attachmentsHint")}</p>
+          <FormAttachmentPicker
+            items={attachmentItems}
+            onItemsChange={(next) => {
+              setAttachmentItems(next);
+              setSubmitError(null);
+            }}
+            chooseLabel={t("chooseFiles")}
+            onInvalid={(code) => {
+              const msg = mapAttachmentError(code);
+              if (msg) setSubmitError(msg);
+            }}
+            removeAriaLabel={(name) => t("removeAttachmentAria", { name })}
+            inputId="contact-attachments"
+          />
         </div>
         {errors._gotcha && (
           <p className="text-sm text-red-400" role="alert">

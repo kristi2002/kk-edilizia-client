@@ -1,0 +1,34 @@
+/* react-day-picker — dark + gold to match site (imported with BookingDatePicker) */
+.booking-date-popover .rdp-root {
+  --rdp-accent-color: #c9a227;
+  --rdp-accent-background-color: rgba(201, 162, 39, 0.18);
+  --rdp-disabled-opacity: 0.35;
+  --rdp-outside-opacity: 0.35;
+  --rdp-today-color: #ddb92e;
+  --rdp-day_button-border-radius: 10px;
+  --rdp-nav_button-color: #a1a1aa;
+  --rdp-weekday-color: #71717a;
+  --rdp-weekday-opacity: 1;
+  color: #e4e4e7;
+  margin: 0;
+}
+
+.booking-date-popover .rdp-month_caption {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #fafafa;
+}
+
+.booking-date-popover .rdp-button_next,
+.booking-date-popover .rdp-button_previous {
+  color: #a1a1aa;
+}
+
+.booking-date-popover .rdp-button_next:hover,
+.booking-date-popover .rdp-button_previous:hover {
+  color: #c9a227;
+}
+
+.booking-date-popover .rdp-day_button:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.06);
+}

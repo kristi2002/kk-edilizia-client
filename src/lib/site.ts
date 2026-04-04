@@ -43,8 +43,8 @@ export const staticSite: SiteData = {
   rea: "MO-0000000",
   shareCapital: "10.000 € i.v.",
   address: {
-    street: "Via Esempio 1",
-    postalCode: "41121",
+    street: "Via Galileo Galilei, 145",
+    postalCode: "41122",
     city: "Modena",
     province: "MO",
     country: "Italia",

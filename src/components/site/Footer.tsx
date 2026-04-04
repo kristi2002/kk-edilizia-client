@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { HomeSectionLink } from "@/components/site/HomeSectionLink";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { formatLegalAddress, type SiteData } from "@/lib/site";
+import { isCostEstimateEnabled } from "@/lib/features";
 
 type Props = { site: SiteData };
 
@@ -71,11 +72,13 @@ export function Footer({ site }: Props) {
                 {tNav("quote")}
               </Link>
             </li>
-            <li>
-              <Link href="/stima-costi" className="hover:text-white">
-                {tNav("estimate")}
-              </Link>
-            </li>
+            {isCostEstimateEnabled() ? (
+              <li>
+                <Link href="/stima-costi" className="hover:text-white">
+                  {tNav("estimate")}
+                </Link>
+              </li>
+            ) : null}
             <li>
               <HomeSectionLink sectionId="faq" className="hover:text-white">
                 FAQ

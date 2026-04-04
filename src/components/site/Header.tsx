@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { isCostEstimateEnabled } from "@/lib/features";
 
 export function Header() {
   const t = useTranslations("Nav");
@@ -15,7 +16,9 @@ export function Header() {
     { href: "/", labelKey: "home" as const },
     { href: "/portfolio", labelKey: "portfolio" as const },
     { href: "/chi-siamo", labelKey: "about" as const },
-    { href: "/stima-costi", labelKey: "estimate" as const },
+    ...(isCostEstimateEnabled()
+      ? [{ href: "/stima-costi", labelKey: "estimate" as const }]
+      : []),
     { href: "/contatti", labelKey: "contacts" as const },
     { href: "/prenota", labelKey: "booking" as const },
     { href: "/preventivo", labelKey: "quote" as const },
