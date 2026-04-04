@@ -14,12 +14,8 @@ export function Header() {
   const links = [
     { href: "/", labelKey: "home" as const },
     { href: "/portfolio", labelKey: "portfolio" as const },
-    { href: "/virtual-tour", labelKey: "tour" as const },
     { href: "/chi-siamo", labelKey: "about" as const },
-    {
-      href: { pathname: "/", hash: "stima-indicativa" },
-      labelKey: "estimate" as const,
-    },
+    { href: "/stima-costi", labelKey: "estimate" as const },
     { href: "/contatti", labelKey: "contacts" as const },
     { href: "/prenota", labelKey: "booking" as const },
     { href: "/preventivo", labelKey: "quote" as const },
@@ -39,10 +35,7 @@ export function Header() {
 
         <nav className="hidden flex-wrap items-center justify-end gap-1 lg:flex">
           {links.map((l) => {
-            const active =
-              typeof l.href === "object"
-                ? false
-                : !l.href.includes("#") && pathname === l.href;
+            const active = pathname === l.href;
             return (
               <Link
                 key={l.labelKey}
@@ -85,10 +78,7 @@ export function Header() {
           >
             <nav className="flex flex-col gap-1 px-4 py-4">
               {links.map((l) => {
-                const active =
-                  typeof l.href === "object"
-                    ? false
-                    : !l.href.includes("#") && pathname === l.href;
+                const active = pathname === l.href;
                 return (
                   <Link
                     key={l.labelKey}

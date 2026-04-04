@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getProjectLocalized, projects } from "@/lib/data/projects";
+import { getProjectLocalized } from "@/lib/data/projects";
+import { getProjects } from "@/lib/data/projects-store";
 import { FadeIn } from "@/components/motion/FadeIn";
+
+export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -10,6 +13,8 @@ export default async function PortfolioPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("PortfolioPage");
+  const projects = await getProjects();
+  const tourProject = projects.find((p) => p.virtualTour);
 
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
@@ -24,22 +29,26 @@ export default async function PortfolioPage({ params }: Props) {
           <p className="mt-4 max-w-2xl text-lg text-zinc-400">{t("intro")}</p>
         </FadeIn>
 
-        <FadeIn delay={0.06}>
-          <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/5 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm font-medium text-white">
-                {t("tourBannerTitle")}
-              </p>
-              <p className="mt-1 text-sm text-zinc-500">{t("tourBannerText")}</p>
+        {tourProject && (
+          <FadeIn delay={0.06}>
+            <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/5 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-sm font-medium text-white">
+                  {t("tourBannerTitle")}
+                </p>
+                <p className="mt-1 text-sm text-zinc-500">
+                  {t("tourBannerText")}
+                </p>
+              </div>
+              <Link
+                href={`/portfolio/${tourProject.slug}/virtual-tour`}
+                className="inline-flex shrink-0 justify-center rounded-full border border-[#c9a227]/50 bg-[#c9a227]/15 px-6 py-2.5 text-sm font-semibold text-[#c9a227] transition hover:bg-[#c9a227]/25"
+              >
+                {t("tourBannerCta")}
+              </Link>
             </div>
-            <Link
-              href="/virtual-tour"
-              className="inline-flex shrink-0 justify-center rounded-full border border-[#c9a227]/50 bg-[#c9a227]/15 px-6 py-2.5 text-sm font-semibold text-[#c9a227] transition hover:bg-[#c9a227]/25"
-            >
-              {t("tourBannerCta")}
-            </Link>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        )}
 
         <ul className="mt-16 grid gap-8 sm:grid-cols-2">
           {projects.map((p, i) => {

@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { HomeSectionLink } from "@/components/site/HomeSectionLink";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { formatLegalAddress, site } from "@/lib/site";
 
@@ -54,11 +55,6 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/virtual-tour" className="hover:text-white">
-                {tNav("tour")}
-              </Link>
-            </li>
-            <li>
               <Link href="/contatti" className="hover:text-white">
                 {tNav("contacts")}
               </Link>
@@ -74,25 +70,22 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link
-                href={{ pathname: "/", hash: "stima-indicativa" }}
-                className="hover:text-white"
-              >
+              <Link href="/stima-costi" className="hover:text-white">
                 {tNav("estimate")}
               </Link>
             </li>
             <li>
-              <Link href={{ pathname: "/", hash: "faq" }} className="hover:text-white">
+              <HomeSectionLink sectionId="faq" className="hover:text-white">
                 FAQ
-              </Link>
+              </HomeSectionLink>
             </li>
             <li>
-              <Link
-                href={{ pathname: "/", hash: "come-lavoriamo" }}
+              <HomeSectionLink
+                sectionId="come-lavoriamo"
                 className="hover:text-white"
               >
                 {t("howWeWork")}
-              </Link>
+              </HomeSectionLink>
             </li>
             <li>
               <Link href="/chi-siamo" className="hover:text-white">

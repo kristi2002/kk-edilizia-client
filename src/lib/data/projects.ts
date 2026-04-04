@@ -1,3 +1,5 @@
+import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
+
 export type Project = {
   slug: string;
   title: string;
@@ -15,6 +17,12 @@ export type Project = {
   gallery: string[];
   /** Demo before/after (Unsplash) for compare slider */
   beforeAfter?: { before: string; after: string };
+  /**
+   * Optional Pannellum multi-scene tour. Panoramas under
+   * `public/virtual-tour/projects/<slug>/` — swap files on deploy without code changes
+   * if paths stay the same.
+   */
+  virtualTour?: ProjectVirtualTour;
 };
 
 export function getProjectLocalized(
@@ -45,8 +53,8 @@ export function getProjectLocalized(
   };
 }
 
-/** Portfolio: edit this file or replace with a CMS (Sanity, Contentful) later. */
-export const projects: Project[] = [
+/** Portfolio default data. Runtime copy can live in Upstash (see `projects-store.ts`). */
+export const staticProjects: Project[] = [
   {
     slug: "ristrutturazione-appartamento-isola",
     title: "Ristrutturazione residenziale — centro storico",
@@ -77,6 +85,45 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80",
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
     ],
+    virtualTour: {
+      firstSceneId: "livingRoom",
+      scenes: [
+        {
+          id: "livingRoom",
+          title: "Soggiorno",
+          titleEn: "Living room",
+          panorama:
+            "/virtual-tour/projects/ristrutturazione-appartamento-isola/living-room.jpg",
+          hotSpots: [
+            {
+              pitch: -8,
+              yaw: 42,
+              type: "scene" as const,
+              text: "Vai alle scale",
+              textEn: "Go to stairs",
+              sceneId: "stairs",
+            },
+          ],
+        },
+        {
+          id: "stairs",
+          title: "Scale",
+          titleEn: "Stairs",
+          panorama:
+            "/virtual-tour/projects/ristrutturazione-appartamento-isola/stairs.jpg",
+          hotSpots: [
+            {
+              pitch: -5,
+              yaw: -135,
+              type: "scene" as const,
+              text: "Torna al soggiorno",
+              textEn: "Back to living room",
+              sceneId: "livingRoom",
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "facciata-condominio-bicocca",
@@ -158,6 +205,7 @@ export const projects: Project[] = [
   },
 ];
 
-export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+/** @deprecated use getProjectBySlug from `@/lib/data/projects-store` (async) */
+export function getProjectBySlugStatic(slug: string): Project | undefined {
+  return staticProjects.find((p) => p.slug === slug);
 }

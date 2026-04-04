@@ -81,6 +81,16 @@
     "disclaimer": "Valori medi di mercato, non costituiscono offerta. Accessi, stato dei luoghi e finiture scelte modificano il preventivo finale.",
     "cta": "Richiedi preventivo dettagliato"
   },
+  "HomeStimaTeaser": {
+    "badge": "Strumento",
+    "title": "Stima indicativa dei costi",
+    "body": "Ottieni una fascia di prezzo orientativa in base a metri quadri e tipologia di intervento, prima del sopralluogo.",
+    "cta": "Apri lo strumento"
+  },
+  "StimaCostiPage": {
+    "metaTitle": "Stima indicativa costi",
+    "metaDescription": "Calcola una fascia di prezzo orientativa per ristrutturazioni e lavori edili. Nessun dato inviato al server."
+  },
   "FeaturedProjects": {
     "label": "Portfolio",
     "title": "Progetti recenti",
@@ -156,9 +166,9 @@
     "label": "I nostri lavori",
     "title": "Portfolio",
     "intro": "Una selezione di cantieri completati. Ogni progetto è seguito con la stessa cura per i dettagli e il rispetto dei tempi concordati.",
-    "tourBannerTitle": "Tour immersivo dimostrativo",
-    "tourBannerText": "Esplora un esempio di navigazione 360° tra le stanze (Pannellum, self-hosted).",
-    "tourBannerCta": "Apri il tour virtuale",
+    "tourBannerTitle": "Tour 360° sui progetti",
+    "tourBannerText": "Dove disponibile, ogni scheda progetto include una vista immersiva. Puoi aprire un esempio qui sotto.",
+    "tourBannerCta": "Apri il tour 360°",
     "beforeAfter": "Prima / dopo",
     "beforeAfterHint": "Trascina il cursore per confrontare (foto dimostrative da web)."
   },
@@ -167,20 +177,20 @@
     "similar": "Ti serve qualcosa di simile? Raccontaci il tuo progetto.",
     "cta": "Richiedi preventivo",
     "before": "Prima",
-    "after": "Dopo"
+    "after": "Dopo",
+    "virtualTourCta": "Apri tour 360°",
+    "virtualTourLabel": "Tour immersivo",
+    "virtualTourCardHint": "Vista 360° dell’intervento (immagini in public/virtual-tour/projects/…).",
+    "virtualTourIntro": "Trascina per guardarti intorno e usa le frecce per spostarti tra le stanze. Le immagini equirettangolari sono nella cartella di questo progetto sotto public/.",
+    "virtualTourBack": "Torna al progetto",
+    "virtualTourBreadcrumbShort": "360°"
   },
   "VirtualTour": {
-    "metaTitle": "Tour virtuale 360°",
-    "metaDescription": "Esplora un tour immersivo tra le stanze: hotspot per spostarti tra le scene.",
-    "label": "Immersivo",
-    "title": "Tour virtuale",
-    "intro": "Navigazione tipo Street View: trascina per guardarti intorno e clicca sulle frecce per passare tra le scene (esempio: Soggiorno ↔ Scale). Libreria Pannellum ospitata in /public/virtual-tour/, senza servizi esterni a pagamento.",
-    "howTitle": "Aggiornare foto e hotspot",
-    "howLi1": "Sostituisci le immagini in public/virtual-tour/panoramas/ (nome file o percorsi in pannellum-config.ts).",
-    "howLi2": "Regola pitch e yaw per ogni hotspot: il file di config è commentato con istruzioni per foto da iPhone (equirettangolare 2:1).",
-    "howLi3": "Questa route è l’equivalente Next.js di GET /virtual-tour su Express: niente server Node separato.",
-    "backPortfolio": "Torna ai lavori",
-    "backContacts": "Contatti"
+    "viewerLoading": "Caricamento viewer 360°…",
+    "viewerError": "Il tour non si è avviato.",
+    "viewerErrorImages": "Immagini panoramiche non trovate o non leggibili. Verifica i file in public/virtual-tour/projects/… e i percorsi in projects.ts.",
+    "viewerErrorGeneric": "Errore durante l’avvio. Prova a ricaricare la pagina.",
+    "retry": "Riprova"
   },
   "CookieBanner": {
     "title": "Cookie e trasparenza",

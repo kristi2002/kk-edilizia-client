@@ -19,7 +19,7 @@ Segna le voci man mano che le completi. I riferimenti ai file sono relativi alla
 | `email` | `info@kkedilizia.it` |
 | `pec` | `kkedilizia@pec.example.it` |
 | `phoneDisplay` | `+39 02 0000 0000` |
-| `phoneTel` | `+390200000000` (deve corrispondere al numero reale) |
+| `phoneTel` | `+39 376 120 1188` (deve corrispondere al numero reale) |
 | `privacyContactName` | testo generico — eventualmente nome/cognome o ufficio |
 | `publicReviewUrl` | vuoto — incollare URL scheda Google Business se si vuole il link in Contatti |
 | `insurance` / `compliance` / `certifications` | testi tipo — adattare a SOA/realtà; verifica con consulente |

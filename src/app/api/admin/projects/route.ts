@@ -1,0 +1,39 @@
+import { NextResponse } from "next/server";
+import { requireAdminAuth } from "@/lib/admin-api-auth";
+import { getProjects, saveProjectsToRedis } from "@/lib/data/projects-store";
+import { parseProjectsPayload } from "@/lib/validate-projects-payload";
+
+export async function GET() {
+  const auth = await requireAdminAuth();
+  if (auth) return auth;
+  const projects = await getProjects();
+  return NextResponse.json(projects);
+}
+
+export async function PUT(request: Request) {
+  const auth = await requireAdminAuth();
+  if (auth) return auth;
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
+  }
+
+  let projects;
+  try {
+    projects = parseProjectsPayload(body);
+  } catch {
+    return NextResponse.json({ ok: false, error: "invalid_payload" }, { status: 400 });
+  }
+
+  try {
+    await saveProjectsToRedis(projects);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "save_failed";
+    return NextResponse.json({ ok: false, error: msg }, { status: 503 });
+  }
+
+  return NextResponse.json({ ok: true });
+}

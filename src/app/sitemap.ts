@@ -1,24 +1,25 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/lib/data/projects";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { getSiteUrl } from "@/lib/site";
+import { getProjects } from "@/lib/data/projects-store";
 
 const staticSegments = [
   "",
   "/portfolio",
+  "/stima-costi",
   "/chi-siamo",
   "/contatti",
   "/preventivo",
   "/privacy",
   "/note-legali",
-  "/virtual-tour",
   "/prenota",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl().replace(/\/$/, "");
   const lastModified = new Date();
+  const projects = await getProjects();
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -42,6 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "monthly",
         priority: 0.7,
       });
+      if (p.virtualTour) {
+        const vtPath = localizedPath(
+          locale,
+          `/portfolio/${p.slug}/virtual-tour`,
+        );
+        entries.push({
+          url: `${base}${vtPath}`,
+          lastModified,
+          changeFrequency: "monthly",
+          priority: 0.65,
+        });
+      }
     }
   }
 

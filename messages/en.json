@@ -81,6 +81,16 @@
     "disclaimer": "Market averages only, not an offer. Access, condition, and finishes change the final quote.",
     "cta": "Request a detailed quote"
   },
+  "HomeStimaTeaser": {
+    "badge": "Tool",
+    "title": "Indicative cost estimate",
+    "body": "Get a rough budget range from square metres and type of work—before a site visit.",
+    "cta": "Open the tool"
+  },
+  "StimaCostiPage": {
+    "metaTitle": "Indicative cost estimate",
+    "metaDescription": "Rough budget range for renovations and building work. No data sent to the server."
+  },
   "FeaturedProjects": {
     "label": "Portfolio",
     "title": "Recent projects",
@@ -156,9 +166,9 @@
     "label": "Our work",
     "title": "Portfolio",
     "intro": "A selection of completed sites. Every project gets the same care for detail and agreed timelines.",
-    "tourBannerTitle": "Demo immersive tour",
-    "tourBannerText": "Explore a sample 360° walkthrough between rooms (Pannellum, self-hosted).",
-    "tourBannerCta": "Open virtual tour",
+    "tourBannerTitle": "360° tours on projects",
+    "tourBannerText": "When available, each project page includes an immersive view—or open the sample below.",
+    "tourBannerCta": "Open 360° tour",
     "beforeAfter": "Before / after",
     "beforeAfterHint": "Drag the slider to compare (demo photos from the web)."
   },
@@ -167,20 +177,20 @@
     "similar": "Need something similar? Tell us about your project.",
     "cta": "Request a quote",
     "before": "Before",
-    "after": "After"
+    "after": "After",
+    "virtualTourCta": "Open 360° tour",
+    "virtualTourLabel": "Immersive tour",
+    "virtualTourCardHint": "360° view of this project (images live under public/virtual-tour/projects/…).",
+    "virtualTourIntro": "Drag to look around and use the arrows to move between rooms. Equirectangular images are stored in this project’s folder under public/.",
+    "virtualTourBack": "Back to project",
+    "virtualTourBreadcrumbShort": "360°"
   },
   "VirtualTour": {
-    "metaTitle": "360° virtual tour",
-    "metaDescription": "Explore an immersive tour between rooms: hotspots to move between scenes.",
-    "label": "Immersive",
-    "title": "Virtual tour",
-    "intro": "Street View–style navigation: drag to look around and click arrows to move between scenes (example: Living room ↔ Stairs). Pannellum is served from /public/virtual-tour/ with no paid third-party viewer.",
-    "howTitle": "Updating photos and hotspots",
-    "howLi1": "Replace images in public/virtual-tour/panoramas/ (filenames or paths in pannellum-config.ts).",
-    "howLi2": "Adjust pitch and yaw per hotspot: the config file includes notes for iPhone equirectangular (2:1) photos.",
-    "howLi3": "This route is the Next.js equivalent of GET /virtual-tour on Express: no separate Node server.",
-    "backPortfolio": "Back to projects",
-    "backContacts": "Contact"
+    "viewerLoading": "Loading 360° viewer…",
+    "viewerError": "The tour could not start.",
+    "viewerErrorImages": "Panorama images are missing or could not be loaded. Check files under public/virtual-tour/projects/… and paths in projects.ts.",
+    "viewerErrorGeneric": "Something went wrong while starting the viewer. Try reloading the page.",
+    "retry": "Try again"
   },
   "CookieBanner": {
     "title": "Cookies & transparency",

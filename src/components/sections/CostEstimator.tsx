@@ -43,10 +43,7 @@ export function CostEstimator() {
   }, [sqm, categoryId, categories]);
 
   return (
-    <section
-      id="stima-indicativa"
-      className="scroll-mt-24 border-y border-white/10 bg-[#0a0a0a] px-4 py-24 sm:px-6"
-    >
+    <section className="scroll-mt-24 border-y border-white/10 bg-[#0a0a0a] px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>

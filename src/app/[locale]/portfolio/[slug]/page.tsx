@@ -4,20 +4,20 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowLeft } from "lucide-react";
-import {
-  getProjectBySlug,
-  getProjectLocalized,
-  projects,
-} from "@/lib/data/projects";
+import { getProjectLocalized } from "@/lib/data/projects";
+import { getProjectBySlug, getProjects } from "@/lib/data/projects-store";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfterBlock";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 
+export const revalidate = 60;
+
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getProjects();
   return routing.locales.flatMap((locale) =>
     projects.map((p) => ({ locale, slug: p.slug })),
   );
@@ -25,7 +25,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: "Progetto" };
   const loc = getProjectLocalized(project, locale);
   return {
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
   const loc = getProjectLocalized(project, locale);
@@ -118,6 +118,27 @@ export default async function ProjectPage({ params }: Props) {
               {loc.description}
             </p>
           </FadeIn>
+
+          {project.virtualTour && (
+            <FadeIn>
+              <div className="mt-12 rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/5 px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {t("virtualTourLabel")}
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-500">
+                    {t("virtualTourCardHint")}
+                  </p>
+                </div>
+                <Link
+                  href={`/portfolio/${project.slug}/virtual-tour`}
+                  className="mt-4 inline-flex shrink-0 justify-center rounded-full border border-[#c9a227]/50 bg-[#c9a227]/15 px-6 py-2.5 text-sm font-semibold text-[#c9a227] transition hover:bg-[#c9a227]/25 sm:mt-0"
+                >
+                  {t("virtualTourCta")}
+                </Link>
+              </div>
+            </FadeIn>
+          )}
 
           <div className="mt-14 grid gap-4 sm:grid-cols-2">
             {project.gallery.map((src, i) => (

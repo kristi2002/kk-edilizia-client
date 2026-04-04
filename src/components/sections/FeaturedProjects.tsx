@@ -5,12 +5,14 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { getProjectLocalized, projects } from "@/lib/data/projects";
+import type { Project } from "@/lib/data/projects";
+import { getProjectLocalized } from "@/lib/data/projects";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-const featured = projects.slice(0, 3);
+type Props = { projects: Project[] };
 
-export function FeaturedProjects() {
+export function FeaturedProjects({ projects }: Props) {
+  const featured = projects.slice(0, 3);
   const t = useTranslations("FeaturedProjects");
   const locale = useLocale();
 
