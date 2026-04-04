@@ -4,6 +4,8 @@ import { assertRateLimit } from "@/lib/rate-limit";
 import { stripHoneypot } from "@/lib/strip-honeypot";
 import { prenotaRequestSchema } from "@/lib/validations/prenota";
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     await assertRateLimit("prenota", request);

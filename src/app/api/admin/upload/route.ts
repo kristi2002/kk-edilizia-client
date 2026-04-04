@@ -10,7 +10,24 @@ const ALLOWED = new Set([
   "image/webp",
   "image/gif",
   "image/avif",
+  "image/heic",
+  "image/heif",
 ]);
+
+function guessMimeFromFilename(name: string): string | null {
+  const ext = name.split(".").pop()?.toLowerCase();
+  const map: Record<string, string> = {
+    jpg: "image/jpeg",
+    jpeg: "image/jpeg",
+    png: "image/png",
+    webp: "image/webp",
+    gif: "image/gif",
+    avif: "image/avif",
+    heic: "image/heic",
+    heif: "image/heif",
+  };
+  return ext && map[ext] ? map[ext] : null;
+}
 
 export async function POST(request: Request) {
   const auth = await requireAdminAuth();
@@ -48,13 +65,35 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "file_too_large" }, { status: 413 });
   }
 
-  const type = file.type || "application/octet-stream";
+  let type = file.type || "";
   if (!ALLOWED.has(type)) {
-    return NextResponse.json({ ok: false, error: "unsupported_type" }, { status: 415 });
+    const guessed = guessMimeFromFilename(file.name);
+    if (guessed && ALLOWED.has(guessed)) {
+      type = guessed;
+    }
+  }
+  if (!type || !ALLOWED.has(type)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "unsupported_type",
+        hint: "Usa JPG, PNG, WEBP o HEIC. Da iPhone: impostazioni fotocamera → «Più compatibile» per JPEG.",
+      },
+      { status: 415 },
+    );
   }
 
+  const sceneIdRaw =
+    typeof formData.get("sceneId") === "string"
+      ? (formData.get("sceneId") as string).trim()
+      : "";
+  const sceneId = sceneIdRaw.replace(/[^a-zA-Z0-9_-]/g, "");
+
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_") || "upload.jpg";
-  const pathname = `portfolio/${projectSlug}/${safeName}`;
+  const pathname =
+    sceneId.length > 0
+      ? `portfolio/${projectSlug}/vt-${sceneId}/${safeName}`
+      : `portfolio/${projectSlug}/${safeName}`;
 
   try {
     const blob = await put(pathname, file, {

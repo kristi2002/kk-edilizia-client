@@ -4,16 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Calculator, Info } from "lucide-react";
-import { getEstimatorCategories } from "@/lib/data/cost-estimator";
+import type { EstimatorCategory } from "@/lib/data/cost-estimator";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-export function CostEstimator() {
+type Props = { categories: EstimatorCategory[] };
+
+export function CostEstimator({ categories }: Props) {
   const t = useTranslations("CostEstimator");
   const locale = useLocale();
-  const categories = useMemo(
-    () => getEstimatorCategories(locale),
-    [locale],
-  );
   const [sqm, setSqm] = useState("85");
   const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "completa");
 

@@ -8,11 +8,15 @@ import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getProjects } from "@/lib/data/projects-store";
+import { getProjectTypes } from "@/lib/data/project-types-store";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const projects = await getProjects();
+  const [projects, projectTypes] = await Promise.all([
+    getProjects(),
+    getProjectTypes(),
+  ]);
   return (
     <main className="flex flex-1 flex-col">
       <Hero />
@@ -20,7 +24,7 @@ export default async function Home() {
       <Services />
       <ProcessSteps />
       <HomeStimaTeaser />
-      <FeaturedProjects projects={projects} />
+      <FeaturedProjects projects={projects} projectTypes={projectTypes} />
       <ReviewsStrip />
       <FaqSection />
       <CtaBanner />

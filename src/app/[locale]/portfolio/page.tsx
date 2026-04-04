@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getProjectLocalized } from "@/lib/data/projects";
 import { getProjects } from "@/lib/data/projects-store";
+import { getProjectTypes } from "@/lib/data/project-types-store";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 export const revalidate = 60;
@@ -13,7 +14,10 @@ export default async function PortfolioPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("PortfolioPage");
-  const projects = await getProjects();
+  const [projects, projectTypes] = await Promise.all([
+    getProjects(),
+    getProjectTypes(),
+  ]);
   const tourProject = projects.find((p) => p.virtualTour);
 
   return (
@@ -52,7 +56,7 @@ export default async function PortfolioPage({ params }: Props) {
 
         <ul className="mt-16 grid gap-8 sm:grid-cols-2">
           {projects.map((p, i) => {
-            const loc = getProjectLocalized(p, locale);
+            const loc = getProjectLocalized(p, locale, projectTypes);
             return (
               <li key={p.slug}>
                 <FadeIn delay={i * 0.05}>

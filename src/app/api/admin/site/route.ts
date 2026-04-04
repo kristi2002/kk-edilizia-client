@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-api-auth";
-import { getProjects, saveProjectsToRedis } from "@/lib/data/projects-store";
-import { safeParseProjectsPayload } from "@/lib/validate-projects-payload";
+import { getSite, saveSiteToRedis } from "@/lib/data/site-store";
+import { parseSitePayload } from "@/lib/validate-site-payload";
 
 export async function GET() {
   const auth = await requireAdminAuth();
   if (auth) return auth;
-  const projects = await getProjects();
-  return NextResponse.json(projects);
+  const site = await getSite();
+  return NextResponse.json(site);
 }
 
 export async function PUT(request: Request) {
@@ -21,16 +21,15 @@ export async function PUT(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
 
-  const parsed = safeParseProjectsPayload(body);
-  if (!parsed.ok) {
-    return NextResponse.json(
-      { ok: false, error: "invalid_payload", message: parsed.message },
-      { status: 400 },
-    );
+  let site;
+  try {
+    site = parseSitePayload(body);
+  } catch {
+    return NextResponse.json({ ok: false, error: "invalid_payload" }, { status: 400 });
   }
 
   try {
-    await saveProjectsToRedis(parsed.data);
+    await saveSiteToRedis(site);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "save_failed";
     return NextResponse.json({ ok: false, error: msg }, { status: 503 });

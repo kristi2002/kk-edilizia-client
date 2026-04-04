@@ -1,11 +1,13 @@
 import { ImageResponse } from "next/og";
-import { site } from "@/lib/site";
+import { getSite } from "@/lib/data/site-store";
 
-export const alt = `${site.brand} — Ristrutturazioni Modena`;
+export const alt = "K.K Edilizia — Ristrutturazioni Modena";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const site = await getSite();
+
   return new ImageResponse(
     (
       <div
@@ -28,25 +30,14 @@ export default function OpengraphImage() {
         >
           <div
             style={{
-              fontSize: 72,
+              fontSize: 56,
               fontWeight: 700,
               color: "#c9a227",
               letterSpacing: "-0.02em",
               fontFamily: "Georgia, serif",
             }}
           >
-            K.K
-          </div>
-          <div
-            style={{
-              fontSize: 42,
-              fontWeight: 600,
-              color: "#f4f4f5",
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-            }}
-          >
-            Edilizia
+            {site.brand}
           </div>
           <div
             style={{
@@ -71,6 +62,6 @@ export default function OpengraphImage() {
         </div>
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

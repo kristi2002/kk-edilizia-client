@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { Shield, Users, Award, FileCheck } from "lucide-react";
-import { site } from "@/lib/site";
+import { getSite } from "@/lib/data/site-store";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -23,7 +23,31 @@ const workPhoto =
 const sitePhoto =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80";
 
-export default function ChiSiamoPage() {
+export default async function ChiSiamoPage() {
+  const site = await getSite();
+  const pillars = [
+    {
+      icon: Users,
+      title: "Team multidisciplinare",
+      text: "Muratura, impianti, finiture: figure interne e partner certificati per ogni fase del lavoro.",
+    },
+    {
+      icon: Shield,
+      title: "Sicurezza e conformità",
+      text: "Documentazione a norma, DPI per il personale e coordinamento in cantiere secondo le normative vigenti.",
+    },
+    {
+      icon: Award,
+      title: "Qualità percepita",
+      text: "Materiali selezionati e controlli in corso d’opera per un risultato che regge nel tempo.",
+    },
+    {
+      icon: FileCheck,
+      title: "Assicurazione e adempimenti",
+      text: site.insurance + " " + site.compliance,
+    },
+  ];
+
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <div className="mx-auto max-w-6xl">
@@ -44,28 +68,7 @@ export default function ChiSiamoPage() {
           </FadeIn>
 
           <ul className="mt-16 space-y-12">
-            {[
-              {
-                icon: Users,
-                title: "Team multidisciplinare",
-                text: "Muratura, impianti, finiture: figure interne e partner certificati per ogni fase del lavoro.",
-              },
-              {
-                icon: Shield,
-                title: "Sicurezza e conformità",
-                text: "Documentazione a norma, DPI per il personale e coordinamento in cantiere secondo le normative vigenti.",
-              },
-              {
-                icon: Award,
-                title: "Qualità percepita",
-                text: "Materiali selezionati e controlli in corso d’opera per un risultato che regge nel tempo.",
-              },
-              {
-                icon: FileCheck,
-                title: "Assicurazione e adempimenti",
-                text: site.insurance + " " + site.compliance,
-              },
-            ].map((item, i) => (
+            {pillars.map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.08}>
                 <li className="flex gap-5">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#c9a227]/15 text-[#c9a227]">

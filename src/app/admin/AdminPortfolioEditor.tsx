@@ -4,21 +4,53 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import type { Project } from "@/lib/data/projects";
+import { createEmptyProject, DEMO_PANORAMA_URL } from "@/lib/data/projects";
+import type { ProjectTypeDef } from "@/lib/data/project-types";
+import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
+import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+
+function describeUploadError(
+  status: number,
+  body: { error?: string; hint?: string },
+): string {
+  if (status === 401) {
+    return "Sessione non valida: vai su /admin/login e accedi di nuovo.";
+  }
+  if (status === 503 && body.error === "blob_not_configured") {
+    return "Manca BLOB_READ_WRITE_TOKEN in .env.local.";
+  }
+  if (status === 415) {
+    const base =
+      body.error === "unsupported_type"
+        ? "Formato file non accettato."
+        : (body.error ?? "Upload rifiutato");
+    return body.hint ? `${base} ${body.hint}` : base;
+  }
+  return body.error ?? `Upload fallito (${status})`;
+}
 
 type Props = {
   initialProjects: Project[];
+  initialProjectTypes: ProjectTypeDef[];
   redisOk: boolean;
   blobOk: boolean;
 };
 
+const field =
+  "mt-1 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white";
+
 export function AdminPortfolioEditor({
   initialProjects,
+  initialProjectTypes,
   redisOk,
   blobOk,
 }: Props) {
   const router = useRouter();
   const [projects, setProjects] = useState<Project[]>(() =>
     structuredClone(initialProjects),
+  );
+  const [projectTypes, setProjectTypes] = useState<ProjectTypeDef[]>(() =>
+    structuredClone(initialProjectTypes),
   );
   const [slug, setSlug] = useState(initialProjects[0]?.slug ?? "");
   const [busy, setBusy] = useState(false);
@@ -27,22 +59,33 @@ export function AdminPortfolioEditor({
 
   const selected = projects.find((p) => p.slug === slug) ?? projects[0];
 
-  const save = async () => {
+  const patchProject = (s: string, patch: Partial<Project>) => {
+    setProjects((prev) =>
+      prev.map((p) => (p.slug === s ? { ...p, ...patch } : p)),
+    );
+  };
+
+  const saveTypes = async () => {
     setBusy(true);
     setError(null);
     setMessage(null);
     try {
-      const res = await fetch("/api/admin/projects", {
+      const res = await fetch("/api/admin/project-types", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projects),
+        body: JSON.stringify(projectTypes),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        message?: string;
+      };
       if (!res.ok) {
-        setError(data.error ?? `Errore ${res.status}`);
+        setError(messageFromAdminPutFailure(res.status, data));
         return;
       }
-      setMessage("Salvato. Le modifiche compaiono sul sito entro circa un minuto.");
+      setMessage("Tipi di progetto salvati.");
       router.refresh();
     } catch {
       setError("Rete non disponibile.");
@@ -51,29 +94,51 @@ export function AdminPortfolioEditor({
     }
   };
 
-  const seed = async () => {
-    if (
-      !window.confirm(
-        "Sovrascrivere i dati su Redis con una copia identica al codice (projects.ts)?",
-      )
-    ) {
+  const seedTypes = async () => {
+    if (!window.confirm("Ripristinare i tipi progetto dal codice?")) return;
+    setBusy(true);
+    try {
+      const res = await fetch("/api/admin/project-types/seed", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (!res.ok) return;
+      const refreshed = await fetch("/api/admin/project-types", {
+        credentials: "include",
+      });
+      setProjectTypes((await refreshed.json()) as ProjectTypeDef[]);
+      router.refresh();
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveProjects = async () => {
+    const slugs = new Set(projects.map((p) => p.slug));
+    if (slugs.size !== projects.length) {
+      setError("Ogni progetto deve avere uno slug univoco.");
       return;
     }
     setBusy(true);
     setError(null);
     setMessage(null);
     try {
-      const res = await fetch("/api/admin/projects/seed", { method: "POST" });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      const res = await fetch("/api/admin/projects", {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projects),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        message?: string;
+      };
       if (!res.ok) {
-        setError(data.error ?? `Errore ${res.status}`);
+        setError(messageFromAdminPutFailure(res.status, data));
         return;
       }
-      const refreshed = await fetch("/api/admin/projects");
-      const next = (await refreshed.json()) as Project[];
-      setProjects(next);
-      setSlug(next[0]?.slug ?? "");
-      setMessage("Dati sincronizzati dal codice.");
+      setMessage("Portfolio salvato.");
       router.refresh();
     } catch {
       setError("Rete non disponibile.");
@@ -82,134 +147,323 @@ export function AdminPortfolioEditor({
     }
   };
 
-  const uploadFiles = useCallback(
-    async (files: FileList | File[]) => {
-      const list = Array.from(files);
-      if (!selected || list.length === 0) return;
-      if (!blobOk) {
-        setError("Upload non configurato (BLOB_READ_WRITE_TOKEN).");
+  const seedProjects = async () => {
+    if (
+      !window.confirm(
+        "Sovrascrivere i progetti su Redis con una copia dal codice (projects.ts)?",
+      )
+    ) {
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/projects/seed", { method: "POST", credentials: "include" });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        message?: string;
+      };
+      if (!res.ok) {
+        setError(messageFromAdminPutFailure(res.status, data));
         return;
       }
-      setBusy(true);
-      setError(null);
-      try {
-        for (const file of list) {
-          const fd = new FormData();
-          fd.set("file", file);
-          fd.set("projectSlug", selected.slug);
-          const res = await fetch("/api/admin/upload", {
-            method: "POST",
-            body: fd,
-          });
-          const data = (await res.json().catch(() => ({}))) as {
-            ok?: boolean;
-            url?: string;
-            error?: string;
-          };
-          if (!res.ok) {
-            setError(data.error ?? `Upload fallito (${res.status})`);
-            return;
-          }
-          if (data.url) {
-            setProjects((prev) =>
-              prev.map((p) =>
-                p.slug === selected.slug
-                  ? { ...p, gallery: [...p.gallery, data.url!] }
-                  : p,
-              ),
-            );
-          }
-        }
-        setMessage("Immagini caricate. Clicca «Salva sul sito» per pubblicarle.");
-      } catch {
-        setError("Rete non disponibile.");
-      } finally {
-        setBusy(false);
-      }
-    },
-    [blobOk, selected],
-  );
-
-  const onDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    void uploadFiles(e.dataTransfer.files);
+      const refreshed = await fetch("/api/admin/projects", { credentials: "include" });
+      const next = (await refreshed.json()) as Project[];
+      setProjects(next);
+      setSlug(next[0]?.slug ?? "");
+      router.refresh();
+    } catch {
+      setError("Rete non disponibile.");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  const removeGalleryUrl = (url: string) => {
+  const uploadToProject = useCallback(
+    async (file: File, projectSlug: string, sceneId?: string) => {
+      if (!blobOk) return null;
+      const fd = new FormData();
+      fd.set("file", file);
+      fd.set("projectSlug", projectSlug);
+      if (sceneId) fd.set("sceneId", sceneId);
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        credentials: "include",
+        body: fd,
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        url?: string;
+        error?: string;
+        hint?: string;
+      };
+      if (!res.ok) {
+        setError(describeUploadError(res.status, data));
+        return null;
+      }
+      return data.url ?? null;
+    },
+    [blobOk],
+  );
+
+  const uploadGallery = async (files: FileList | File[]) => {
     if (!selected) return;
+    const ps = selected.slug;
+    setBusy(true);
+    setError(null);
+    try {
+      for (const file of Array.from(files)) {
+        const url = await uploadToProject(file, ps);
+        if (url) {
+          setProjects((prev) =>
+            prev.map((p) =>
+              p.slug === ps ? { ...p, gallery: [...p.gallery, url!] } : p,
+            ),
+          );
+        }
+      }
+      setMessage("Immagini aggiunte. Salva il portfolio per pubblicare.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const applyCategoryId = (typeId: string) => {
+    if (!selected) return;
+    const pt = projectTypes.find((t) => t.id === typeId);
     setProjects((prev) =>
       prev.map((p) => {
         if (p.slug !== selected.slug) return p;
-        const nextGallery = p.gallery.filter((u) => u !== url);
-        let nextCover = p.coverImage;
-        if (p.coverImage === url) {
-          nextCover = nextGallery[0] ?? p.coverImage;
-        }
-        return { ...p, gallery: nextGallery, coverImage: nextCover };
+        return {
+          ...p,
+          categoryId: typeId || undefined,
+          category: pt?.labelIt ?? p.category,
+          categoryEn: pt?.labelEn ?? p.categoryEn,
+        };
       }),
     );
   };
 
-  const setCover = (url: string) => {
+  const addProjectType = () => {
+    const id = window.prompt("Id tipo (es. attico):", "nuovo-tipo");
+    if (!id?.trim()) return;
+    setProjectTypes((t) => [
+      ...t,
+      { id: id.trim().replace(/\s+/g, "-"), labelIt: "Nuovo tipo", labelEn: "New type" },
+    ]);
+  };
+
+  const removeProjectType = (id: string) => {
+    setProjectTypes((t) => t.filter((x) => x.id !== id));
+  };
+
+  const newProject = () => {
+    const raw = window.prompt(
+      "Slug URL del nuovo progetto (solo lettere, numeri, trattini):",
+      "nuovo-progetto",
+    );
+    if (!raw?.trim()) return;
+    const np = createEmptyProject(raw.trim());
+    if (projects.some((p) => p.slug === np.slug)) {
+      setError("Slug già in uso.");
+      return;
+    }
+    setProjects((p) => [...p, np]);
+    setSlug(np.slug);
+  };
+
+  const deleteProject = () => {
+    if (!selected || projects.length <= 1) {
+      setError("Serve almeno un progetto.");
+      return;
+    }
+    if (!window.confirm(`Eliminare il progetto «${selected.title}»?`)) return;
+    const removed = selected.slug;
+    const next = projects.filter((x) => x.slug !== removed);
+    setProjects(next);
+    if (slug === removed) setSlug(next[0]?.slug ?? "");
+  };
+
+  const addScene = () => {
     if (!selected) return;
+    const id = window.prompt("Id scena (es. cucina):", `scena-${selected.virtualTour.scenes.length + 1}`);
+    if (!id?.trim()) return;
+    const sid = id.trim().replace(/[^a-zA-Z0-9_-]/g, "") || "scena";
+    const vt: ProjectVirtualTour = {
+      ...selected.virtualTour,
+      scenes: [
+        ...selected.virtualTour.scenes,
+        {
+          id: sid,
+          title: "Nuova scena",
+          titleEn: "New scene",
+          panorama: DEMO_PANORAMA_URL,
+        },
+      ],
+      firstSceneId: selected.virtualTour.firstSceneId ?? sid,
+    };
+    patchProject(selected.slug, { virtualTour: vt });
     setProjects((prev) =>
-      prev.map((p) => (p.slug === selected.slug ? { ...p, coverImage: url } : p)),
+      prev.map((p) => (p.slug === selected.slug ? { ...p, virtualTour: vt } : p)),
+    );
+  };
+
+  const removeScene = (sceneId: string) => {
+    if (!selected || selected.virtualTour.scenes.length <= 1) {
+      setError("Serve almeno una scena 360°.");
+      return;
+    }
+    const scenes = selected.virtualTour.scenes.filter((s) => s.id !== sceneId);
+    let first = selected.virtualTour.firstSceneId;
+    if (first === sceneId) first = scenes[0]?.id;
+    const vt: ProjectVirtualTour = { ...selected.virtualTour, scenes, firstSceneId: first };
+    patchProject(selected.slug, { virtualTour: vt });
+    setProjects((prev) =>
+      prev.map((p) => (p.slug === selected.slug ? { ...p, virtualTour: vt } : p)),
     );
   };
 
   if (!selected) {
-    return (
-      <p className="text-sm text-zinc-500">Nessun progetto nel portfolio.</p>
-    );
+    return <p className="text-sm text-zinc-500">Nessun progetto.</p>;
   }
 
   return (
-    <div className="space-y-6">
-      {!redisOk && (
-        <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-          Redis non configurato: il sito usa solo i dati nel codice. Per salvare da
-          qui serve Upstash (UPSTASH_REDIS_REST_URL / TOKEN) su Vercel.
+    <div className="space-y-10">
+      <section className="rounded-lg border border-white/10 bg-black/20 p-4">
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
+          Tipi di progetto (categorie)
+        </h3>
+        <p className="mt-1 text-xs text-zinc-500">
+          Usati nel menu a tendina per ogni progetto. Modifica IT/EN e salva.
         </p>
-      )}
-      {!blobOk && (
-        <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-          Vercel Blob non configurato: puoi comunque salvare testi in Redis, ma non
-          caricare file finché non aggiungi BLOB_READ_WRITE_TOKEN.
-        </p>
-      )}
+        <div className="mt-3 space-y-2">
+          {projectTypes.map((t) => (
+            <div
+              key={t.id}
+              className="flex flex-wrap items-end gap-2 border-b border-white/5 pb-2"
+            >
+              <label className="text-xs text-zinc-500">
+                id
+                <input
+                  className={field}
+                  value={t.id}
+                  onChange={(e) =>
+                    setProjectTypes((pt) =>
+                      pt.map((x) =>
+                        x.id === t.id ? { ...x, id: e.target.value } : x,
+                      ),
+                    )
+                  }
+                />
+              </label>
+              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
+                IT
+                <input
+                  className={field}
+                  value={t.labelIt}
+                  onChange={(e) =>
+                    setProjectTypes((pt) =>
+                      pt.map((x) =>
+                        x.id === t.id ? { ...x, labelIt: e.target.value } : x,
+                      ),
+                    )
+                  }
+                />
+              </label>
+              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
+                EN
+                <input
+                  className={field}
+                  value={t.labelEn}
+                  onChange={(e) =>
+                    setProjectTypes((pt) =>
+                      pt.map((x) =>
+                        x.id === t.id ? { ...x, labelEn: e.target.value } : x,
+                      ),
+                    )
+                  }
+                />
+              </label>
+              <button
+                type="button"
+                onClick={() => removeProjectType(t.id)}
+                className="text-xs text-red-400"
+              >
+                Rimuovi
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={addProjectType}
+            className="rounded border border-white/15 px-3 py-1 text-xs"
+          >
+            Aggiungi tipo
+          </button>
+          <button
+            type="button"
+            onClick={() => void seedTypes()}
+            disabled={busy || !redisOk}
+            className="rounded border border-white/15 px-3 py-1 text-xs disabled:opacity-40"
+          >
+            Tipi da codice
+          </button>
+          <button
+            type="button"
+            onClick={() => void saveTypes()}
+            disabled={busy || !redisOk}
+            className="rounded bg-[#c9a227]/90 px-3 py-1 text-xs font-semibold text-black disabled:opacity-40"
+          >
+            Salva tipi
+          </button>
+        </div>
+      </section>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => void seed()}
+          onClick={() => void seedProjects()}
           disabled={busy || !redisOk}
-          className="rounded-lg border border-white/15 px-4 py-2 text-sm text-zinc-200 transition hover:bg-white/5 disabled:opacity-40"
+          className="rounded-lg border border-white/15 px-4 py-2 text-sm disabled:opacity-40"
         >
-          Sincronizza da codice
+          Sincronizza progetti da codice
         </button>
         <button
           type="button"
-          onClick={() => void save()}
+          onClick={() => void saveProjects()}
           disabled={busy || !redisOk}
-          className="rounded-lg bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e] disabled:opacity-40"
+          className="rounded-lg bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] disabled:opacity-40"
         >
-          {busy ? "Attendere…" : "Salva sul sito"}
+          {busy ? "…" : "Salva portfolio"}
+        </button>
+        <button
+          type="button"
+          onClick={newProject}
+          className="rounded-lg border border-emerald-500/40 px-4 py-2 text-sm text-emerald-300"
+        >
+          Nuovo progetto
+        </button>
+        <button
+          type="button"
+          onClick={deleteProject}
+          className="rounded-lg border border-red-500/30 px-4 py-2 text-sm text-red-400"
+        >
+          Elimina progetto
         </button>
       </div>
 
-      {message && (
-        <p className="text-sm text-emerald-400/90">{message}</p>
-      )}
+      {message && <p className="text-sm text-emerald-400/90">{message}</p>}
       {error && <p className="text-sm text-red-400">{error}</p>}
 
       <div>
-        <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-          Progetto
-        </label>
+        <label className="text-xs font-semibold uppercase text-zinc-500">Progetto</label>
         <select
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className="mt-2 w-full max-w-md rounded-lg border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white"
+          className={`${field} mt-1 max-w-xl`}
         >
           {projects.map((p) => (
             <option key={p.slug} value={p.slug}>
@@ -219,76 +473,392 @@ export function AdminPortfolioEditor({
         </select>
       </div>
 
-      <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={onDrop}
-        className="rounded-xl border border-dashed border-white/20 bg-white/[0.02] px-6 py-10 text-center"
-      >
-        <p className="text-sm text-zinc-300">
-          Trascina qui le foto oppure scegli dal computer
-        </p>
-        <label className="mt-4 inline-block cursor-pointer rounded-full border border-[#c9a227]/50 bg-[#c9a227]/15 px-5 py-2 text-sm font-semibold text-[#c9a227] transition hover:bg-[#c9a227]/25">
-          Scegli file
+      <div className="grid gap-4 md:grid-cols-2">
+        <label className="text-xs text-zinc-500">
+          Tipo (da elenco)
+          <select
+            className={field}
+            value={selected.categoryId ?? ""}
+            onChange={(e) => applyCategoryId(e.target.value)}
+          >
+            <option value="">— manuale sotto —</option>
+            {projectTypes.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.labelIt} / {t.labelEn}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="text-xs text-zinc-500">
+          Slug (URL)
           <input
-            type="file"
-            accept="image/*"
-            multiple
-            className="sr-only"
-            disabled={busy || !blobOk}
+            className={field}
+            value={selected.slug}
             onChange={(e) => {
-              if (e.target.files) void uploadFiles(e.target.files);
-              e.target.value = "";
+              const ns = e.target.value;
+              setProjects((prev) =>
+                prev.map((p) => (p.slug === selected.slug ? { ...p, slug: ns } : p)),
+              );
+              setSlug(ns);
             }}
           />
         </label>
       </div>
 
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-          Copertina (anteprima liste e intestazione progetto)
-        </p>
-        <div className="mt-3 flex flex-wrap gap-3">
-          {Array.from(new Set([selected.coverImage, ...selected.gallery])).map((url) => (
-              <button
-                key={url}
-                type="button"
-                onClick={() => setCover(url)}
-                className={`relative h-20 w-28 overflow-hidden rounded-lg border-2 ${
-                  selected.coverImage === url
-                    ? "border-[#c9a227]"
-                    : "border-transparent"
-                }`}
-              >
-                <Image src={url} alt="" fill className="object-cover" sizes="120px" />
-              </button>
-          ))}
-        </div>
-        <p className="mt-2 text-xs text-zinc-600">
-          Clicca un&apos;immagine per usarla come copertina.
-        </p>
+      <div className="grid gap-4 md:grid-cols-2">
+        <label className="text-xs text-zinc-500">
+          Titolo IT
+          <input
+            className={field}
+            value={selected.title}
+            onChange={(e) => patchProject(selected.slug, { title: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Titolo EN
+          <input
+            className={field}
+            value={selected.titleEn}
+            onChange={(e) => patchProject(selected.slug, { titleEn: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Categoria IT (testo)
+          <input
+            className={field}
+            value={selected.category}
+            onChange={(e) => patchProject(selected.slug, { category: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Categoria EN (testo)
+          <input
+            className={field}
+            value={selected.categoryEn}
+            onChange={(e) => patchProject(selected.slug, { categoryEn: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Luogo IT
+          <input
+            className={field}
+            value={selected.location}
+            onChange={(e) => patchProject(selected.slug, { location: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Luogo EN
+          <input
+            className={field}
+            value={selected.locationEn}
+            onChange={(e) => patchProject(selected.slug, { locationEn: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Anno
+          <input
+            className={field}
+            value={selected.year}
+            onChange={(e) => patchProject(selected.slug, { year: e.target.value })}
+          />
+        </label>
+        <label className="text-xs text-zinc-500">
+          Copertina (URL)
+          <input
+            className={field}
+            value={selected.coverImage}
+            onChange={(e) => patchProject(selected.slug, { coverImage: e.target.value })}
+          />
+        </label>
       </div>
 
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-          Galleria ({selected.gallery.length})
-        </p>
-        <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {selected.gallery.map((url) => (
-            <li
-              key={url}
-              className="relative aspect-[4/3] overflow-hidden rounded-lg border border-white/10"
-            >
-              <Image src={url} alt="" fill className="object-cover" sizes="200px" />
+      <label className="block text-xs text-zinc-500">
+        Estratto IT
+        <textarea
+          className={`${field} min-h-[72px]`}
+          value={selected.excerpt}
+          onChange={(e) => patchProject(selected.slug, { excerpt: e.target.value })}
+        />
+      </label>
+      <label className="block text-xs text-zinc-500">
+        Estratto EN
+        <textarea
+          className={`${field} min-h-[72px]`}
+          value={selected.excerptEn}
+          onChange={(e) => patchProject(selected.slug, { excerptEn: e.target.value })}
+        />
+      </label>
+      <label className="block text-xs text-zinc-500">
+        Descrizione IT
+        <textarea
+          className={`${field} min-h-[100px]`}
+          value={selected.description}
+          onChange={(e) => patchProject(selected.slug, { description: e.target.value })}
+        />
+      </label>
+      <label className="block text-xs text-zinc-500">
+        Descrizione EN
+        <textarea
+          className={`${field} min-h-[100px]`}
+          value={selected.descriptionEn}
+          onChange={(e) => patchProject(selected.slug, { descriptionEn: e.target.value })}
+        />
+      </label>
+
+      <section>
+        <h3 className="text-xs font-semibold uppercase text-[#c9a227]">Prima / dopo</h3>
+        <div className="mt-2 grid gap-3 md:grid-cols-2">
+          <label className="text-xs text-zinc-500">
+            URL prima
+            <input
+              className={field}
+              value={selected.beforeAfter.before}
+              onChange={(e) =>
+                patchProject(selected.slug, {
+                  beforeAfter: { ...selected.beforeAfter, before: e.target.value },
+                })
+              }
+            />
+          </label>
+          <label className="text-xs text-zinc-500">
+            URL dopo
+            <input
+              className={field}
+              value={selected.beforeAfter.after}
+              onChange={(e) =>
+                patchProject(selected.slug, {
+                  beforeAfter: { ...selected.beforeAfter, after: e.target.value },
+                })
+              }
+            />
+          </label>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <label className="cursor-pointer rounded border border-[#c9a227]/40 px-3 py-1 text-xs text-[#c9a227]">
+            Carica prima
+            <input
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              disabled={busy || !blobOk}
+              onChange={async (e) => {
+                const f = e.target.files?.[0];
+                e.target.value = "";
+                if (!f) return;
+                setBusy(true);
+                const url = await uploadToProject(f, selected.slug);
+                if (url)
+                  patchProject(selected.slug, {
+                    beforeAfter: { ...selected.beforeAfter, before: url },
+                  });
+                setBusy(false);
+              }}
+            />
+          </label>
+          <label className="cursor-pointer rounded border border-[#c9a227]/40 px-3 py-1 text-xs text-[#c9a227]">
+            Carica dopo
+            <input
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              disabled={busy || !blobOk}
+              onChange={async (e) => {
+                const f = e.target.files?.[0];
+                e.target.value = "";
+                if (!f) return;
+                setBusy(true);
+                const url = await uploadToProject(f, selected.slug);
+                if (url)
+                  patchProject(selected.slug, {
+                    beforeAfter: { ...selected.beforeAfter, after: url },
+                  });
+                setBusy(false);
+              }}
+            />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-xs font-semibold uppercase text-[#c9a227]">Galleria</h3>
+        <div
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            void uploadGallery(e.dataTransfer.files);
+          }}
+          className="mt-2 rounded border border-dashed border-white/20 p-4 text-center text-sm text-zinc-400"
+        >
+          Trascina immagini o{" "}
+          <label className="cursor-pointer text-[#c9a227]">
+            scegli file
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              disabled={busy || !blobOk}
+              onChange={(e) => {
+                if (e.target.files) void uploadGallery(e.target.files);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </div>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-3">
+          {selected.gallery.map((u) => (
+            <li key={u} className="relative aspect-[4/3] overflow-hidden rounded border border-white/10">
+              <Image src={u} alt="" fill className="object-cover" sizes="200px" />
               <button
                 type="button"
-                onClick={() => removeGalleryUrl(url)}
-                className="absolute right-2 top-2 rounded bg-black/70 px-2 py-1 text-xs text-white"
+                onClick={() =>
+                  patchProject(selected.slug, {
+                    gallery: selected.gallery.filter((x) => x !== u),
+                  })
+                }
+                className="absolute right-1 top-1 rounded bg-black/70 px-1 text-[10px] text-white"
               >
-                Rimuovi
+                ×
               </button>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section>
+        <h3 className="text-xs font-semibold uppercase text-[#c9a227]">
+          Tour 360° — panorami equirettangolari (2:1 consigliato)
+        </h3>
+        <p className="mt-1 text-xs text-zinc-500">
+          Per ogni scena: id univoco nel progetto, titoli, URL panoramica (carica o incolla). Aggiungi
+          scene per ambienti diversi; collega le foto al progetto selezionato sopra o crea un progetto
+          nuovo prima di caricare.
+        </p>
+        <label className="mt-2 block text-xs text-zinc-500">
+          Scena iniziale
+          <select
+            className={field}
+            value={selected.virtualTour.firstSceneId ?? selected.virtualTour.scenes[0]?.id ?? ""}
+            onChange={(e) =>
+              patchProject(selected.slug, {
+                virtualTour: {
+                  ...selected.virtualTour,
+                  firstSceneId: e.target.value,
+                },
+              })
+            }
+          >
+            {selected.virtualTour.scenes.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.id}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className="mt-3 space-y-4">
+          {selected.virtualTour.scenes.map((sc) => (
+            <div
+              key={sc.id}
+              className="rounded border border-white/10 bg-white/[0.02] p-3"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-medium text-zinc-300">Scena: {sc.id}</span>
+                <button
+                  type="button"
+                  onClick={() => removeScene(sc.id)}
+                  className="text-xs text-red-400"
+                >
+                  Rimuovi scena
+                </button>
+              </div>
+              <div className="mt-2 grid gap-2 md:grid-cols-2">
+                <p className="text-xs text-zinc-600 md:col-span-2">
+                  Id scena: <code className="text-zinc-400">{sc.id}</code> (fisso — aggiungi una nuova scena per un nuovo id)
+                </p>
+                <input
+                  className={field}
+                  placeholder="Titolo IT"
+                  value={sc.title}
+                  onChange={(e) => {
+                    const scenes = selected.virtualTour.scenes.map((x) =>
+                      x.id === sc.id ? { ...x, title: e.target.value } : x,
+                    );
+                    patchProject(selected.slug, { virtualTour: { ...selected.virtualTour, scenes } });
+                  }}
+                />
+                <input
+                  className={field}
+                  placeholder="Titolo EN"
+                  value={sc.titleEn}
+                  onChange={(e) => {
+                    const scenes = selected.virtualTour.scenes.map((x) =>
+                      x.id === sc.id ? { ...x, titleEn: e.target.value } : x,
+                    );
+                    patchProject(selected.slug, { virtualTour: { ...selected.virtualTour, scenes } });
+                  }}
+                />
+                <input
+                  className={`${field} md:col-span-2`}
+                  placeholder="URL panoramica"
+                  value={sc.panorama}
+                  onChange={(e) => {
+                    const scenes = selected.virtualTour.scenes.map((x) =>
+                      x.id === sc.id ? { ...x, panorama: e.target.value } : x,
+                    );
+                    patchProject(selected.slug, { virtualTour: { ...selected.virtualTour, scenes } });
+                  }}
+                />
+              </div>
+              <label className="mt-2 inline-block cursor-pointer rounded border border-[#c9a227]/40 px-2 py-1 text-xs text-[#c9a227]">
+                Carica panoramica (360)
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="sr-only"
+                  disabled={busy || !blobOk}
+                  onChange={async (e) => {
+                    const f = e.target.files?.[0];
+                    e.target.value = "";
+                    if (!f) return;
+                    setBusy(true);
+                    const url = await uploadToProject(f, selected.slug, sc.id);
+                    if (url) {
+                      const scenes = selected.virtualTour.scenes.map((x) =>
+                        x.id === sc.id ? { ...x, panorama: url } : x,
+                      );
+                      patchProject(selected.slug, {
+                        virtualTour: { ...selected.virtualTour, scenes },
+                      });
+                    }
+                    setBusy(false);
+                  }}
+                />
+              </label>
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={addScene}
+          className="mt-3 rounded border border-white/15 px-3 py-1 text-xs"
+        >
+          Aggiungi scena 360°
+        </button>
+      </section>
+
+      <div className="rounded-xl border border-[#c9a227]/35 bg-[#c9a227]/10 px-4 py-4">
+        <p className="text-sm text-zinc-200">
+          Salva prima i <strong>tipi</strong> se li hai modificati, poi <strong>Salva portfolio</strong>{" "}
+          per pubblicare progetti, gallerie e tour.
+        </p>
+        <button
+          type="button"
+          onClick={() => void saveProjects()}
+          disabled={busy || !redisOk}
+          className="mt-3 rounded-lg bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] disabled:opacity-40"
+        >
+          Salva portfolio
+        </button>
       </div>
     </div>
   );

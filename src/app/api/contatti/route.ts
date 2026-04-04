@@ -4,6 +4,9 @@ import { assertRateLimit } from "@/lib/rate-limit";
 import { stripHoneypot } from "@/lib/strip-honeypot";
 import { contattiRequestSchema } from "@/lib/validations/contatti";
 
+/** Invio email + retry interni possono superare il default serverless breve. */
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     await assertRateLimit("contatti", request);

@@ -1,7 +1,13 @@
 import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
+import type { ProjectTypeDef } from "@/lib/data/project-types";
+
+/** Panorama equirettangolare di esempio (Pannellum demo) — sostituire da admin. */
+export const DEMO_PANORAMA_URL = "https://pannellum.org/images/alma.jpg";
 
 export type Project = {
   slug: string;
+  /** Opzionale: id da `ProjectTypeDef` (admin). */
+  categoryId?: string;
   title: string;
   titleEn: string;
   category: string;
@@ -15,19 +21,14 @@ export type Project = {
   descriptionEn: string;
   coverImage: string;
   gallery: string[];
-  /** Demo before/after (Unsplash) for compare slider */
-  beforeAfter?: { before: string; after: string };
-  /**
-   * Optional Pannellum multi-scene tour. Panoramas under
-   * `public/virtual-tour/projects/<slug>/` — swap files on deploy without code changes
-   * if paths stay the same.
-   */
-  virtualTour?: ProjectVirtualTour;
+  beforeAfter: { before: string; after: string };
+  virtualTour: ProjectVirtualTour;
 };
 
 export function getProjectLocalized(
   project: Project,
   locale: string,
+  projectTypes?: ProjectTypeDef[],
 ): {
   title: string;
   category: string;
@@ -35,10 +36,18 @@ export function getProjectLocalized(
   excerpt: string;
   description: string;
 } {
-  if (locale === "en") {
+  const en = locale === "en";
+  let category = en ? project.categoryEn : project.category;
+  if (project.categoryId && projectTypes?.length) {
+    const pt = projectTypes.find((t) => t.id === project.categoryId);
+    if (pt) {
+      category = en ? pt.labelEn : pt.labelIt;
+    }
+  }
+  if (en) {
     return {
       title: project.titleEn,
-      category: project.categoryEn,
+      category,
       location: project.locationEn,
       excerpt: project.excerptEn,
       description: project.descriptionEn,
@@ -46,10 +55,43 @@ export function getProjectLocalized(
   }
   return {
     title: project.title,
-    category: project.category,
+    category,
     location: project.location,
     excerpt: project.excerpt,
     description: project.description,
+  };
+}
+
+export function createEmptyProject(slug: string): Project {
+  const s = slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+  return {
+    slug: s || "nuovo-progetto",
+    categoryId: "ristrutturazioni",
+    title: "Nuovo progetto",
+    titleEn: "New project",
+    category: "Ristrutturazioni",
+    categoryEn: "Renovations",
+    location: "Modena",
+    locationEn: "Modena",
+    year: String(new Date().getFullYear()),
+    excerpt: "Breve descrizione del progetto.",
+    excerptEn: "Short project description.",
+    description: "Descrizione estesa: testi, materiali, tempi.",
+    descriptionEn: "Extended description: materials, timeline.",
+    coverImage: DEMO_PANORAMA_URL,
+    gallery: [],
+    beforeAfter: { before: DEMO_PANORAMA_URL, after: DEMO_PANORAMA_URL },
+    virtualTour: {
+      firstSceneId: "main",
+      scenes: [
+        {
+          id: "main",
+          title: "Vista principale",
+          titleEn: "Main view",
+          panorama: DEMO_PANORAMA_URL,
+        },
+      ],
+    },
   };
 }
 
@@ -57,6 +99,7 @@ export function getProjectLocalized(
 export const staticProjects: Project[] = [
   {
     slug: "ristrutturazione-appartamento-isola",
+    categoryId: "ristrutturazioni",
     title: "Ristrutturazione residenziale — centro storico",
     titleEn: "Residential renovation — historic centre",
     category: "Ristrutturazioni",
@@ -127,6 +170,7 @@ export const staticProjects: Project[] = [
   },
   {
     slug: "facciata-condominio-bicocca",
+    categoryId: "edilizia",
     title: "Risanamento facciata condominiale",
     titleEn: "Condominium façade restoration",
     category: "Edilizia",
@@ -154,9 +198,27 @@ export const staticProjects: Project[] = [
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80",
       "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80",
     ],
+    virtualTour: {
+      firstSceneId: "esterno",
+      scenes: [
+        {
+          id: "esterno",
+          title: "Vista esterna",
+          titleEn: "Exterior view",
+          panorama: DEMO_PANORAMA_URL,
+        },
+        {
+          id: "dettaglio",
+          title: "Dettaglio lavorazione",
+          titleEn: "Work detail",
+          panorama: DEMO_PANORAMA_URL,
+        },
+      ],
+    },
   },
   {
     slug: "bagno-e-sauna-privata",
+    categoryId: "interni",
     title: "Bagno wellness con sauna",
     titleEn: "Wellness bathroom with sauna",
     category: "Interni",
@@ -174,13 +236,31 @@ export const staticProjects: Project[] = [
       "Bespoke design with reinforced waterproofing, underfloor heating, and stone-effect porcelain. Sauna installation with humidity control and dedicated mechanical ventilation.",
     coverImage:
       "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1600&q=80",
+    beforeAfter: {
+      before:
+        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
+      after:
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+    },
     gallery: [
       "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
-      "https://images.unsplash.com/photo-1604709177225-fa5c4c8c8b0e?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
     ],
+    virtualTour: {
+      firstSceneId: "bagno",
+      scenes: [
+        {
+          id: "bagno",
+          title: "Bagno",
+          titleEn: "Bathroom",
+          panorama: DEMO_PANORAMA_URL,
+        },
+      ],
+    },
   },
   {
     slug: "open-space-ufficio",
+    categoryId: "commerciale",
     title: "Open space commerciale",
     titleEn: "Commercial open plan",
     category: "Commerciale",
@@ -198,10 +278,27 @@ export const staticProjects: Project[] = [
       "220 m² refit with movable partitions, structured cabling, and DALI lighting. Phased handover for business continuity.",
     coverImage:
       "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+    beforeAfter: {
+      before:
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
+      after:
+        "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80",
+    },
     gallery: [
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
       "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80",
     ],
+    virtualTour: {
+      firstSceneId: "open",
+      scenes: [
+        {
+          id: "open",
+          title: "Open space",
+          titleEn: "Open space",
+          panorama: DEMO_PANORAMA_URL,
+        },
+      ],
+    },
   },
 ];
 

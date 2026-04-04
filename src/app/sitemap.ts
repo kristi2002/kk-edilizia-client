@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl } from "@/lib/data/site-store";
 import { getProjects } from "@/lib/data/projects-store";
 
 const staticSegments = [
@@ -17,7 +17,7 @@ const staticSegments = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = getSiteUrl().replace(/\/$/, "");
+  const base = (await getSiteUrl()).replace(/\/$/, "");
   const lastModified = new Date();
   const projects = await getProjects();
 

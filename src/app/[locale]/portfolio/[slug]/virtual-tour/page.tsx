@@ -8,6 +8,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getProjectLocalized } from "@/lib/data/projects";
 import { getProjectBySlug, getProjects } from "@/lib/data/projects-store";
+import { getProjectTypes } from "@/lib/data/project-types-store";
 import { buildPannellumConfigFromProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
@@ -19,17 +20,16 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 export async function generateStaticParams() {
   const projects = await getProjects();
   return routing.locales.flatMap((locale) =>
-    projects
-      .filter((p) => p.virtualTour)
-      .map((p) => ({ locale, slug: p.slug })),
+    projects.map((p) => ({ locale, slug: p.slug })),
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const project = await getProjectBySlug(slug);
-  if (!project?.virtualTour) return { title: "360°" };
-  const loc = getProjectLocalized(project, locale);
+  if (!project) return { title: "360°" };
+  const projectTypes = await getProjectTypes();
+  const loc = getProjectLocalized(project, locale, projectTypes);
   return {
     title: `${loc.title} — 360°`,
     description: loc.excerpt,
@@ -41,9 +41,10 @@ export default async function ProjectVirtualTourPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const project = await getProjectBySlug(slug);
-  if (!project?.virtualTour) notFound();
+  if (!project) notFound();
 
-  const loc = getProjectLocalized(project, locale);
+  const projectTypes = await getProjectTypes();
+  const loc = getProjectLocalized(project, locale, projectTypes);
   const t = await getTranslations("ProjectDetail");
   const tNav = await getTranslations("Nav");
   const breadcrumb360 = t("virtualTourBreadcrumbShort");

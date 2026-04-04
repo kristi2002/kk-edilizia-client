@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import type { ContattiInput } from "@/lib/validations/contatti";
+import { withRetry } from "@/lib/with-retry";
 import { hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 
@@ -111,7 +112,10 @@ async function sendViaResend(data: ContattiInput) {
 export async function sendContattiConfirmation(data: ContattiInput) {
   if (hasGmailEnv()) {
     try {
-      await sendViaGmail(data);
+      await withRetry(() => sendViaGmail(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
     } catch (e) {
       console.error("[contatti] Gmail SMTP:", e);
       throw new Error("EMAIL_SEND_FAILED");
@@ -120,7 +124,15 @@ export async function sendContattiConfirmation(data: ContattiInput) {
   }
 
   if (hasResendEnv()) {
-    await sendViaResend(data);
+    try {
+      await withRetry(() => sendViaResend(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
+    } catch (e) {
+      console.error("[contatti] Resend:", e);
+      throw new Error("EMAIL_SEND_FAILED");
+    }
     return;
   }
 

@@ -1,33 +1,44 @@
-import { Redis } from "@upstash/redis";
 import type { Project } from "@/lib/data/projects";
 import { staticProjects } from "@/lib/data/projects";
+import { getUpstashRedis } from "@/lib/upstash-redis";
+import { withRetry } from "@/lib/with-retry";
 
 const REDIS_KEY = "portfolio:projects_v1";
-
-function getRedis(): Redis | null {
-  const url = process.env.UPSTASH_REDIS_REST_URL?.trim();
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
-  if (!url || !token) return null;
-  try {
-    return new Redis({ url, token });
-  } catch {
-    return null;
-  }
-}
 
 /**
  * Portfolio list: Upstash copy when present and valid, otherwise static `staticProjects`.
  * Enable Redis + “Sincronizza da codice” in admin to let non-devs edit via admin UI.
  */
+function projectsFromRedisValue(raw: unknown): Project[] | null {
+  if (raw == null) return null;
+  // @upstash/redis deserializes JSON automatically — GET often returns an array, not a string.
+  if (Array.isArray(raw) && raw.length > 0) {
+    return raw as Project[];
+  }
+  if (typeof raw === "string") {
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed as Project[];
+      }
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
 export async function getProjects(): Promise<Project[]> {
-  const redis = getRedis();
+  const redis = getUpstashRedis();
   if (!redis) return staticProjects;
   try {
-    const raw = await redis.get<string>(REDIS_KEY);
-    if (!raw || typeof raw !== "string") return staticProjects;
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed) || parsed.length === 0) return staticProjects;
-    return parsed as Project[];
+    const raw = await withRetry(() => redis.get<unknown>(REDIS_KEY), {
+      maxAttempts: 3,
+      baseDelayMs: 250,
+    });
+    const fromRedis = projectsFromRedisValue(raw);
+    if (fromRedis) return fromRedis;
+    return staticProjects;
   } catch {
     return staticProjects;
   }
@@ -39,7 +50,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | undefine
 }
 
 export async function saveProjectsToRedis(projects: Project[]): Promise<void> {
-  const redis = getRedis();
+  const redis = getUpstashRedis();
   if (!redis) {
     throw new Error("UPSTASH_REDIS_REST_URL / TOKEN mancanti");
   }
@@ -47,5 +58,22 @@ export async function saveProjectsToRedis(projects: Project[]): Promise<void> {
 }
 
 export function isProjectsRedisAvailable(): boolean {
-  return getRedis() !== null;
+  return getUpstashRedis() !== null;
+}
+
+/** True se esiste una copia portfolio valida in Redis (non il solo fallback da codice). */
+export async function getPortfolioDataSource(): Promise<"redis" | "static"> {
+  const redis = getUpstashRedis();
+  if (!redis) return "static";
+  try {
+    const raw = await withRetry(() => redis.get<unknown>(REDIS_KEY), {
+      maxAttempts: 3,
+      baseDelayMs: 250,
+    });
+    const fromRedis = projectsFromRedisValue(raw);
+    if (fromRedis) return "redis";
+    return "static";
+  } catch {
+    return "static";
+  }
 }

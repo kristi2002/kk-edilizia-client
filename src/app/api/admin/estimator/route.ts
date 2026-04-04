@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import { requireAdminAuth } from "@/lib/admin-api-auth";
-import { getProjects, saveProjectsToRedis } from "@/lib/data/projects-store";
-import { safeParseProjectsPayload } from "@/lib/validate-projects-payload";
+import {
+  getEstimatorRows,
+  saveEstimatorRowsToRedis,
+} from "@/lib/data/estimator-store";
+import { safeParseEstimatorRowsPayload } from "@/lib/validate-estimator-payload";
 
 export async function GET() {
   const auth = await requireAdminAuth();
   if (auth) return auth;
-  const projects = await getProjects();
-  return NextResponse.json(projects);
+  const rows = await getEstimatorRows();
+  return NextResponse.json(rows);
 }
 
 export async function PUT(request: Request) {
@@ -21,7 +24,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
 
-  const parsed = safeParseProjectsPayload(body);
+  const parsed = safeParseEstimatorRowsPayload(body);
   if (!parsed.ok) {
     return NextResponse.json(
       { ok: false, error: "invalid_payload", message: parsed.message },
@@ -30,7 +33,7 @@ export async function PUT(request: Request) {
   }
 
   try {
-    await saveProjectsToRedis(parsed.data);
+    await saveEstimatorRowsToRedis(parsed.data);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "save_failed";
     return NextResponse.json({ ok: false, error: msg }, { status: 503 });

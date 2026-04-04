@@ -3,7 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ContactForm } from "@/components/contatti/ContactForm";
-import { formatLegalAddress, site } from "@/lib/site";
+import { formatLegalAddress } from "@/lib/site";
+import { getSite } from "@/lib/data/site-store";
 
 export const metadata: Metadata = {
   title: "Contatti",
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
     "Telefono, email, PEC e sede operativa di K.K Edilizia a Modena. Modulo messaggi e preventivo online.",
 };
 
-export default function ContattiPage() {
+export default async function ContattiPage() {
+  const site = await getSite();
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
@@ -77,7 +79,7 @@ export default function ContattiPage() {
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                 <div>
                   <p className="text-sm text-zinc-500">Sede</p>
-                  <p className="text-lg text-white">{formatLegalAddress()}</p>
+                  <p className="text-lg text-white">{formatLegalAddress(site)}</p>
                 </div>
               </li>
             </FadeIn>

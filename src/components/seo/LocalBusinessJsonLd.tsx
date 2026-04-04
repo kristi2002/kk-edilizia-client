@@ -1,6 +1,7 @@
-import { getSiteUrl, site } from "@/lib/site";
+import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
-export function LocalBusinessJsonLd() {
+export async function LocalBusinessJsonLd() {
+  const [site, baseUrl] = await Promise.all([getSite(), getSiteUrl()]);
   const data = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
@@ -9,7 +10,7 @@ export function LocalBusinessJsonLd() {
     taxID: site.vatId,
     description:
       "Ristrutturazioni e lavori edili a Modena e provincia: preventivi chiari, cantieri organizzati e finiture di qualità.",
-    url: getSiteUrl(),
+    url: baseUrl,
     telephone: site.phoneTel,
     email: site.email,
     address: {

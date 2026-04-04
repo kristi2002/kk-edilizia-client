@@ -7,11 +7,12 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/data/projects";
 import { getProjectLocalized } from "@/lib/data/projects";
+import type { ProjectTypeDef } from "@/lib/data/project-types";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-type Props = { projects: Project[] };
+type Props = { projects: Project[]; projectTypes?: ProjectTypeDef[] };
 
-export function FeaturedProjects({ projects }: Props) {
+export function FeaturedProjects({ projects, projectTypes }: Props) {
   const featured = projects.slice(0, 3);
   const t = useTranslations("FeaturedProjects");
   const locale = useLocale();
@@ -42,7 +43,7 @@ export function FeaturedProjects({ projects }: Props) {
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {featured.map((p, i) => {
-            const loc = getProjectLocalized(p, locale);
+            const loc = getProjectLocalized(p, locale, projectTypes);
             return (
               <motion.article
                 key={p.slug}

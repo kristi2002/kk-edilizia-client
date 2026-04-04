@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { CostEstimator } from "@/components/sections/CostEstimator";
+import { toEstimatorCategory } from "@/lib/data/cost-estimator";
+import { getEstimatorRows } from "@/lib/data/estimator-store";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -19,10 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function StimaCostiPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const rows = await getEstimatorRows();
+  const categories = rows.map((r) => toEstimatorCategory(locale, r));
 
   return (
     <main className="flex flex-1 flex-col bg-[#080808]">
-      <CostEstimator />
+      <CostEstimator categories={categories} />
     </main>
   );
 }

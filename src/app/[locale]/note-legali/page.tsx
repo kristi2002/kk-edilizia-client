@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { site } from "@/lib/site";
+import { getSite } from "@/lib/data/site-store";
 
 export const metadata: Metadata = {
   title: "Note legali",
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     "Informazioni legali, copyright e limitazioni di responsabilità — K.K Edilizia.",
 };
 
-export default function NoteLegaliPage() {
+export default async function NoteLegaliPage() {
+  const site = await getSite();
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <article className="mx-auto max-w-3xl">

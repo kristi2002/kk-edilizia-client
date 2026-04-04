@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl } from "@/lib/data/site-store";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -17,9 +17,12 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(getSiteUrl()),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const url = await getSiteUrl();
+  return {
+    metadataBase: new URL(url),
+  };
+}
 
 export default function RootLayout({
   children,

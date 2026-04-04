@@ -4,8 +4,10 @@ import { CookieBanner } from "./CookieBanner";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { SkipLink } from "./SkipLink";
 import { ScrollToHash } from "./ScrollToHash";
+import { getSite } from "@/lib/data/site-store";
 
-export function Shell({ children }: { children: React.ReactNode }) {
+export async function Shell({ children }: { children: React.ReactNode }) {
+  const site = await getSite();
   return (
     <>
       <ScrollToHash />
@@ -18,7 +20,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       >
         {children}
       </div>
-      <Footer />
+      <Footer site={site} />
       <CookieBanner />
       <WhatsAppButton />
     </>

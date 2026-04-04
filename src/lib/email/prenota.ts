@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import type { PrenotaInput } from "@/lib/validations/prenota";
+import { withRetry } from "@/lib/with-retry";
 import { hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 
@@ -164,7 +165,10 @@ async function sendViaResend(data: PrenotaInput) {
 export async function sendPrenotaConfirmation(data: PrenotaInput) {
   if (hasGmailEnv()) {
     try {
-      await sendViaGmail(data);
+      await withRetry(() => sendViaGmail(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
     } catch (e) {
       console.error("[prenota] Gmail SMTP:", e);
       throw new Error("EMAIL_SEND_FAILED");
@@ -173,7 +177,15 @@ export async function sendPrenotaConfirmation(data: PrenotaInput) {
   }
 
   if (hasResendEnv()) {
-    await sendViaResend(data);
+    try {
+      await withRetry(() => sendViaResend(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
+    } catch (e) {
+      console.error("[prenota] Resend:", e);
+      throw new Error("EMAIL_SEND_FAILED");
+    }
     return;
   }
 

@@ -7,12 +7,24 @@ export type EstimatorCategory = {
   maxPerSqm: number;
 };
 
-const baseCategories: Omit<EstimatorCategory, "label" | "description">[] = [
-  { id: "completa", minPerSqm: 750, maxPerSqm: 1250 },
-  { id: "parziale", minPerSqm: 900, maxPerSqm: 1600 },
-  { id: "impianti", minPerSqm: 120, maxPerSqm: 320 },
-  { id: "facciata", minPerSqm: 140, maxPerSqm: 280 },
-];
+/** Riga completa in Redis (IT + EN). */
+export type EstimatorCategoryRow = {
+  id: string;
+  minPerSqm: number;
+  maxPerSqm: number;
+  labelIt: string;
+  descriptionIt: string;
+  labelEn: string;
+  descriptionEn: string;
+};
+
+const baseCategories: Omit<EstimatorCategoryRow, "labelIt" | "descriptionIt" | "labelEn" | "descriptionEn">[] =
+  [
+    { id: "completa", minPerSqm: 750, maxPerSqm: 1250 },
+    { id: "parziale", minPerSqm: 900, maxPerSqm: 1600 },
+    { id: "impianti", minPerSqm: 120, maxPerSqm: 320 },
+    { id: "facciata", minPerSqm: 140, maxPerSqm: 280 },
+  ];
 
 const labelsIt: Record<string, { label: string; description: string }> = {
   completa: {
@@ -52,13 +64,39 @@ const labelsEn: Record<string, { label: string; description: string }> = {
   },
 };
 
-export function getEstimatorCategories(locale: string): EstimatorCategory[] {
-  const map = locale === "en" ? labelsEn : labelsIt;
-  return baseCategories.map((b) => ({
-    ...b,
-    ...map[b.id],
-  }));
+export function toEstimatorCategory(
+  locale: string,
+  row: EstimatorCategoryRow,
+): EstimatorCategory {
+  const en = locale === "en";
+  return {
+    id: row.id,
+    minPerSqm: row.minPerSqm,
+    maxPerSqm: row.maxPerSqm,
+    label: en ? row.labelEn : row.labelIt,
+    description: en ? row.descriptionEn : row.descriptionIt,
+  };
 }
 
-/** @deprecated use getEstimatorCategories */
-export const estimatorCategories: EstimatorCategory[] = getEstimatorCategories("it");
+/** Dati di default dal codice (seed Redis / fallback). */
+export function getStaticEstimatorRows(): EstimatorCategoryRow[] {
+  return baseCategories.map((b) => {
+    const it = labelsIt[b.id]!;
+    const en = labelsEn[b.id]!;
+    return {
+      ...b,
+      labelIt: it.label,
+      descriptionIt: it.description,
+      labelEn: en.label,
+      descriptionEn: en.description,
+    };
+  });
+}
+
+export function getEstimatorCategoriesSync(locale: string): EstimatorCategory[] {
+  return getStaticEstimatorRows().map((r) => toEstimatorCategory(locale, r));
+}
+
+/** @deprecated use getEstimatorCategories da estimator-store */
+export const estimatorCategories: EstimatorCategory[] =
+  getEstimatorCategoriesSync("it");

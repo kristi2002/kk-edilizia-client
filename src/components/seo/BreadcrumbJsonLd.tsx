@@ -1,13 +1,14 @@
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl } from "@/lib/data/site-store";
 
 type Crumb = { name: string; path: string };
 
-function crumbUrl(path: string) {
-  const base = getSiteUrl().replace(/\/$/, "");
-  return path === "/" ? `${base}/` : `${base}${path.startsWith("/") ? path : `/${path}`}`;
+function crumbUrl(base: string, path: string) {
+  const normalized = base.replace(/\/$/, "");
+  return path === "/" ? `${normalized}/` : `${normalized}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
+export async function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
+  const base = (await getSiteUrl()).replace(/\/$/, "");
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -15,7 +16,7 @@ export function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: it.name,
-      item: crumbUrl(it.path),
+      item: crumbUrl(base, it.path),
     })),
   };
 

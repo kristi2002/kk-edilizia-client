@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import type { PreventivoInput } from "@/lib/validations/preventivo";
+import { withRetry } from "@/lib/with-retry";
 import { hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 
@@ -146,7 +147,10 @@ async function sendViaResend(data: PreventivoInput) {
 export async function sendPreventivoConfirmation(data: PreventivoInput) {
   if (hasGmailEnv()) {
     try {
-      await sendViaGmail(data);
+      await withRetry(() => sendViaGmail(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
     } catch (e) {
       console.error("[preventivo] Gmail SMTP:", e);
       throw new Error("EMAIL_SEND_FAILED");
@@ -155,7 +159,15 @@ export async function sendPreventivoConfirmation(data: PreventivoInput) {
   }
 
   if (hasResendEnv()) {
-    await sendViaResend(data);
+    try {
+      await withRetry(() => sendViaResend(data), {
+        maxAttempts: 3,
+        baseDelayMs: 400,
+      });
+    } catch (e) {
+      console.error("[preventivo] Resend:", e);
+      throw new Error("EMAIL_SEND_FAILED");
+    }
     return;
   }
 

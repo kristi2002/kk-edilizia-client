@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { getSiteUrl, site } from "@/lib/site";
+import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "Informativa sul trattamento dei dati personali e cookie — K.K Edilizia.",
 };
 
-export default function PrivacyPage() {
-  const url = getSiteUrl();
+export default async function PrivacyPage() {
+  const [url, site] = await Promise.all([getSiteUrl(), getSite()]);
 
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">

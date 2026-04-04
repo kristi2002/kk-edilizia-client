@@ -4,9 +4,11 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HomeSectionLink } from "@/components/site/HomeSectionLink";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { formatLegalAddress, site } from "@/lib/site";
+import { formatLegalAddress, type SiteData } from "@/lib/site";
 
-export function Footer() {
+type Props = { site: SiteData };
+
+export function Footer({ site }: Props) {
   const t = useTranslations("Footer");
   const tNav = useTranslations("Nav");
   const locale = useLocale();
@@ -41,7 +43,7 @@ export function Footer() {
           </a>
           <p className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" />
-            {formatLegalAddress()}
+            {formatLegalAddress(site)}
           </p>
         </div>
         <div>
