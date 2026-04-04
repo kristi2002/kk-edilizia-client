@@ -4,14 +4,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { EstimatorCategoryRow } from "@/lib/data/cost-estimator";
 import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+import {
+  adminAlertWarn,
+  adminBtnPrimary,
+  adminBtnSecondary,
+  adminField,
+} from "./admin-ui";
 
 type Props = {
   initialRows: EstimatorCategoryRow[];
   redisOk: boolean;
 };
-
-const inp =
-  "mt-1 w-full rounded border border-white/10 bg-[#0a0a0a] px-2 py-1.5 text-xs text-white";
 
 export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
   const router = useRouter();
@@ -105,124 +108,133 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {!redisOk && (
-        <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-          Redis non configurato: impossibile salvare le fasce da qui.
-        </p>
+        <div className={adminAlertWarn} role="alert">
+          Salvataggio disattivato: manca la memoria Redis sul server. Contatta chi gestisce
+          il sito.
+        </div>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <button
           type="button"
-          onClick={() => void seed()}
+          onClick={() => void save()}
           disabled={busy || !redisOk}
-          className="rounded-lg border border-white/15 px-3 py-1.5 text-xs text-zinc-200 disabled:opacity-40"
+          className={adminBtnPrimary}
         >
-          Ripristina da codice
+          {busy ? "Salvataggio…" : "Salva stima costi"}
         </button>
         <button
           type="button"
           onClick={addRow}
           disabled={busy}
-          className="rounded-lg border border-white/15 px-3 py-1.5 text-xs text-zinc-200 disabled:opacity-40"
+          className={adminBtnSecondary}
         >
           Aggiungi fascia
         </button>
         <button
           type="button"
-          onClick={() => void save()}
+          onClick={() => void seed()}
           disabled={busy || !redisOk}
-          className="rounded-lg bg-[#c9a227] px-3 py-1.5 text-xs font-semibold text-[#0a0a0a] disabled:opacity-40"
+          className={adminBtnSecondary}
         >
-          {busy ? "…" : "Salva stima costi"}
+          Ripristina valori originali
         </button>
       </div>
 
-      {message && <p className="text-sm text-emerald-400/90">{message}</p>}
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {message && (
+        <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-base text-emerald-100">
+          {message}
+        </p>
+      )}
+      {error && (
+        <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-base text-red-100">
+          {error}
+        </p>
+      )}
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[720px] border-collapse text-left text-xs">
+      <div className="overflow-x-auto rounded-xl border border-white/10">
+        <table className="w-full min-w-[720px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-white/10 text-zinc-500">
-              <th className="py-2 pr-2">id</th>
-              <th className="py-2 pr-2">min €/m²</th>
-              <th className="py-2 pr-2">max €/m²</th>
-              <th className="py-2 pr-2">Label IT</th>
-              <th className="py-2 pr-2">Descr. IT</th>
-              <th className="py-2 pr-2">Label EN</th>
-              <th className="py-2 pr-2">Descr. EN</th>
-              <th className="py-2" />
+            <tr className="border-b border-white/10 bg-white/[0.03] text-zinc-400">
+              <th className="px-3 py-3 pr-2 font-semibold">Codice</th>
+              <th className="py-3 pr-2 font-semibold">Min €/m²</th>
+              <th className="py-3 pr-2 font-semibold">Max €/m²</th>
+              <th className="py-3 pr-2 font-semibold">Titolo IT</th>
+              <th className="py-3 pr-2 font-semibold">Testo IT</th>
+              <th className="py-3 pr-2 font-semibold">Titolo EN</th>
+              <th className="py-3 pr-2 font-semibold">Testo EN</th>
+              <th className="py-3" />
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
               <tr key={row.id} className="border-b border-white/5 align-top">
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <input
-                    className={inp}
+                    className={adminField}
                     value={row.id}
                     onChange={(e) => setRow(row.id, { id: e.target.value })}
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <input
                     type="number"
-                    className={inp}
+                    className={adminField}
                     value={row.minPerSqm}
                     onChange={(e) =>
                       setRow(row.id, { minPerSqm: Number(e.target.value) || 0 })
                     }
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <input
                     type="number"
-                    className={inp}
+                    className={adminField}
                     value={row.maxPerSqm}
                     onChange={(e) =>
                       setRow(row.id, { maxPerSqm: Number(e.target.value) || 0 })
                     }
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <input
-                    className={inp}
+                    className={adminField}
                     value={row.labelIt}
                     onChange={(e) => setRow(row.id, { labelIt: e.target.value })}
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <textarea
-                    className={`${inp} min-h-[52px]`}
+                    className={`${adminField} min-h-[52px]`}
                     value={row.descriptionIt}
                     onChange={(e) =>
                       setRow(row.id, { descriptionIt: e.target.value })
                     }
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <input
-                    className={inp}
+                    className={adminField}
                     value={row.labelEn}
                     onChange={(e) => setRow(row.id, { labelEn: e.target.value })}
                   />
                 </td>
-                <td className="py-2 pr-2">
+                <td className="p-2 pr-2">
                   <textarea
-                    className={`${inp} min-h-[52px]`}
+                    className={`${adminField} min-h-[52px]`}
                     value={row.descriptionEn}
                     onChange={(e) =>
                       setRow(row.id, { descriptionEn: e.target.value })
                     }
                   />
                 </td>
-                <td className="py-2">
+                <td className="p-2">
                   <button
                     type="button"
                     onClick={() => removeRow(row.id)}
-                    className="text-red-400 hover:underline"
+                    className="rounded-lg px-2 py-1 text-sm font-medium text-red-300 hover:bg-red-500/15 hover:underline"
                   >
                     Rimuovi
                   </button>

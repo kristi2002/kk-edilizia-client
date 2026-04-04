@@ -65,11 +65,35 @@ export const staticSite: SiteData = {
     "Qualificazione SOA e classifiche possono essere indicate qui se attive (categorie e importi aggiornati).",
 };
 
+/** Fallback in codice quando mancano env e canonical (admin: sostituito con origine richiesta se possibile). */
+export const PLACEHOLDER_PUBLIC_SITE_URL = "https://kk-edilizia.example.com";
+
+/**
+ * Garantisce protocollo assoluto per `href` (evita link relativi tipo `www...` che non aprono nulla).
+ * Localhost / 127.0.0.1 → `http://`
+ */
+export function normalizePublicSiteUrl(url: string): string {
+  const t = url.trim();
+  if (!t) return PLACEHOLDER_PUBLIC_SITE_URL;
+  if (/^https?:\/\//i.test(t)) {
+    return t.replace(/\/$/, "");
+  }
+  const lower = t.toLowerCase();
+  if (
+    lower.startsWith("localhost") ||
+    lower.startsWith("127.0.0.1") ||
+    lower.startsWith("[::1]")
+  ) {
+    return `http://${t.replace(/\/$/, "")}`;
+  }
+  return `https://${t.replace(/\/$/, "")}`;
+}
+
 /** URL di default se né Redis né env definiscono il dominio (solo fallback). */
 export function getFallbackSiteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL;
-  if (raw?.trim()) return raw.replace(/\/$/, "");
-  return "https://kk-edilizia.example.com";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) return normalizePublicSiteUrl(raw);
+  return PLACEHOLDER_PUBLIC_SITE_URL;
 }
 
 export function formatLegalAddress(site: SiteData): string {

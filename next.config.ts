@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "pannellum.org",
+        pathname: "/images/**",
+      },
+      {
+        protocol: "https",
         hostname: "**.public.blob.vercel-storage.com",
         pathname: "/**",
       },

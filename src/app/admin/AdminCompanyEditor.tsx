@@ -3,15 +3,25 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { SiteData } from "@/lib/site";
+import { siteValidationMessageItalian } from "@/lib/admin-site-validation";
+import { siteSchema } from "@/lib/validate-site-payload";
+import {
+  adminAlertErr,
+  adminAlertOk,
+  adminAlertWarn,
+  adminBtnPrimary,
+  adminBtnSecondary,
+  adminHint,
+  adminInput,
+  adminLabel,
+  adminSubCard,
+  adminTextarea,
+} from "./admin-ui";
 
 type Props = {
   initialSite: SiteData;
   redisOk: boolean;
 };
-
-const inputClass =
-  "mt-1 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white placeholder:text-zinc-600";
-const labelClass = "block text-xs font-semibold uppercase tracking-wider text-zinc-500";
 
 export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
   const router = useRouter();
@@ -41,25 +51,39 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
     setBusy(true);
     setError(null);
     setMessage(null);
+    const parsed = siteSchema.safeParse(site);
+    if (!parsed.success) {
+      setError(siteValidationMessageItalian(parsed.error));
+      setBusy(false);
+      return;
+    }
     try {
       const res = await fetch("/api/admin/site", {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(site),
+        body: JSON.stringify(parsed.data),
       });
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
         error?: string;
       };
       if (!res.ok) {
-        setError(data.error ?? `Errore ${res.status}`);
+        if (data.error === "invalid_payload") {
+          setError(
+            "Il server non ha accettato i dati. Controlla email e campi obbligatori.",
+          );
+        } else {
+          setError(data.error ?? `Errore ${res.status}. Riprova tra poco.`);
+        }
         return;
       }
-      setMessage("Salvato. Il sito userà questi dati entro circa un minuto.");
+      setMessage(
+        "Salvato correttamente. Le modifiche sono già visibili sul sito (a volte serve aggiornare la pagina).",
+      );
       router.refresh();
     } catch {
-      setError("Rete non disponibile.");
+      setError("Connessione assente o server non raggiungibile. Riprova.");
     } finally {
       setBusy(false);
     }
@@ -68,7 +92,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
   const seed = async () => {
     if (
       !window.confirm(
-        "Ripristinare i dati azienda dal codice (site.ts)? Le modifiche non salvate altrove andranno perse.",
+        "Vuoi davvero ANNULLARE le modifiche e ripristinare i dati originali salvati nel codice?\n\nQuesta azione non si può annullare qui: dovrai reinserire a mano ciò che avevi cambiato.",
       )
     ) {
       return;
@@ -92,259 +116,329 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
       const refreshed = await fetch("/api/admin/site", { credentials: "include" });
       const next = (await refreshed.json()) as SiteData;
       setSite(next);
-      setMessage("Dati ripristinati dal codice.");
+      setMessage("Dati ripristinati ai valori di partenza.");
       router.refresh();
     } catch {
-      setError("Rete non disponibile.");
+      setError("Connessione assente. Riprova.");
     } finally {
       setBusy(false);
     }
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {!redisOk && (
-        <p className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-          Redis non configurato: non puoi salvare da qui. Aggiungi Upstash in{" "}
-          <code className="text-amber-100">.env.local</code> e riavvia il server.
-        </p>
+        <div className={adminAlertWarn} role="alert">
+          <strong className="text-amber-50">Salvataggio disattivato.</strong> Manca la
+          connessione al database (Redis). Solo lo sviluppatore può configurare il file{" "}
+          <code className="rounded bg-black/30 px-1">.env.local</code> e riavviare il
+          server.
+        </div>
       )}
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+        <button
+          type="button"
+          onClick={() => void save()}
+          disabled={busy || !redisOk}
+          className={adminBtnPrimary}
+        >
+          {busy ? "Salvataggio in corso…" : "Salva tutti i dati azienda"}
+        </button>
         <button
           type="button"
           onClick={() => void seed()}
           disabled={busy || !redisOk}
-          className="rounded-lg border border-white/15 px-4 py-2 text-sm text-zinc-200 transition hover:bg-white/5 disabled:opacity-40"
+          className={adminBtnSecondary}
         >
-          Ripristina da codice
-        </button>
-        <button
-          type="button"
-          onClick={() => void save()}
-          disabled={busy || !redisOk}
-          className="rounded-lg bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e] disabled:opacity-40"
-        >
-          {busy ? "Attendere…" : "Salva dati azienda"}
+          Ripristina valori originali
         </button>
       </div>
+      <p className="text-sm text-zinc-500">
+        Dopo ogni modifica premi <strong className="text-zinc-300">Salva</strong>. Il
+        pulsante «Ripristina» serve solo in emergenza.
+      </p>
 
       {message && (
-        <p className="text-sm text-emerald-400/90">{message}</p>
+        <div className={adminAlertOk} role="status">
+          {message}
+        </div>
       )}
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && (
+        <div className={adminAlertErr} role="alert">
+          {error}
+        </div>
+      )}
 
-      <div>
-        <label className={labelClass}>URL del sito (canonico)</label>
-        <input
-          className={inputClass}
-          value={site.canonicalUrl}
-          onChange={set("canonicalUrl")}
-          placeholder="https://www.tuodominio.it (vuoto = usa NEXT_PUBLIC_SITE_URL)"
-        />
-        <p className="mt-1 text-xs text-zinc-600">
-          Senza slash finale. Se lasci vuoto, vale la variabile{" "}
-          <code className="text-zinc-500">NEXT_PUBLIC_SITE_URL</code>.
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Sito web e nome</h3>
+        <p className="mt-1 text-sm text-zinc-500">
+          Indirizzo del sito (con https://) e come vi chiamate sul sito.
         </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass}>Nome commerciale (brand)</label>
-          <input className={inputClass} value={site.brand} onChange={set("brand")} />
-        </div>
-        <div>
-          <label className={labelClass}>Ragione sociale</label>
-          <input
-            className={inputClass}
-            value={site.legalName}
-            onChange={set("legalName")}
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <label className={labelClass}>P.IVA</label>
-          <input className={inputClass} value={site.vatId} onChange={set("vatId")} />
-        </div>
-        <div>
-          <label className={labelClass}>Codice fiscale</label>
-          <input
-            className={inputClass}
-            value={site.fiscalCode}
-            onChange={set("fiscalCode")}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>REA</label>
-          <input className={inputClass} value={site.rea} onChange={set("rea")} />
-        </div>
-        <div>
-          <label className={labelClass}>Capitale sociale</label>
-          <input
-            className={inputClass}
-            value={site.shareCapital}
-            onChange={set("shareCapital")}
-          />
+        <div className="mt-4 space-y-4">
+          <div>
+            <label className={adminLabel}>Indirizzo del sito (URL)</label>
+            <input
+              className={adminInput}
+              value={site.canonicalUrl}
+              onChange={set("canonicalUrl")}
+              placeholder="https://www.tuodominio.it"
+              autoComplete="off"
+            />
+            <p className={adminHint}>
+              Se lo lasci vuoto, può essere usato l&apos;indirizzo impostato nelle
+              impostazioni del server. Senza slash finale.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className={adminLabel}>Nome commerciale (sul sito)</label>
+              <input
+                className={adminInput}
+                value={site.brand}
+                onChange={set("brand")}
+                required
+              />
+            </div>
+            <div>
+              <label className={adminLabel}>Ragione sociale completa</label>
+              <input
+                className={adminInput}
+                value={site.legalName}
+                onChange={set("legalName")}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div>
-        <p className={labelClass}>Sede legale / operativa</p>
-        <div className="mt-2 grid gap-3 sm:grid-cols-2">
-          <input
-            className={inputClass}
-            value={site.address.street}
-            onChange={setAddr("street")}
-            placeholder="Via e numero"
-          />
-          <input
-            className={inputClass}
-            value={site.address.postalCode}
-            onChange={setAddr("postalCode")}
-            placeholder="CAP"
-          />
-          <input
-            className={inputClass}
-            value={site.address.city}
-            onChange={setAddr("city")}
-            placeholder="Città"
-          />
-          <input
-            className={inputClass}
-            value={site.address.province}
-            onChange={setAddr("province")}
-            placeholder="Provincia (es. MO)"
-          />
-          <input
-            className={`${inputClass} sm:col-span-2`}
-            value={site.address.country}
-            onChange={setAddr("country")}
-            placeholder="Paese"
-          />
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Dati fiscali e societari</h3>
+        <p className="mt-1 text-sm text-zinc-500">
+          Partita IVA, codice fiscale, REA e capitale (come in visura).
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <label className={adminLabel}>Partita IVA</label>
+            <input className={adminInput} value={site.vatId} onChange={set("vatId")} />
+          </div>
+          <div>
+            <label className={adminLabel}>Codice fiscale</label>
+            <input
+              className={adminInput}
+              value={site.fiscalCode}
+              onChange={set("fiscalCode")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>REA</label>
+            <input className={adminInput} value={site.rea} onChange={set("rea")} />
+          </div>
+          <div>
+            <label className={adminLabel}>Capitale sociale</label>
+            <input
+              className={adminInput}
+              value={site.shareCapital}
+              onChange={set("shareCapital")}
+            />
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass}>Area operativa (IT)</label>
-          <input
-            className={inputClass}
-            value={site.serviceArea}
-            onChange={set("serviceArea")}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Area operativa (EN)</label>
-          <input
-            className={inputClass}
-            value={site.serviceAreaEn}
-            onChange={set("serviceAreaEn")}
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass}>Email</label>
-          <input
-            type="email"
-            className={inputClass}
-            value={site.email}
-            onChange={set("email")}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>PEC</label>
-          <input
-            type="email"
-            className={inputClass}
-            value={site.pec}
-            onChange={set("pec")}
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass}>Telefono (testo mostrato)</label>
-          <input
-            className={inputClass}
-            value={site.phoneDisplay}
-            onChange={set("phoneDisplay")}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Telefono (link tel:, +39…)</label>
-          <input
-            className={inputClass}
-            value={site.phoneTel}
-            onChange={set("phoneTel")}
-            placeholder="+390200000000"
-          />
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Sede (via, CAP, città)</h3>
+        <p className="mt-1 text-sm text-zinc-500">
+          Compare su contatti, footer e mappa. Controlla che sia esatta.
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">
+            <label className={adminLabel}>Via e numero civico</label>
+            <input
+              className={adminInput}
+              value={site.address.street}
+              onChange={setAddr("street")}
+              placeholder="Via …, n."
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>CAP</label>
+            <input
+              className={adminInput}
+              value={site.address.postalCode}
+              onChange={setAddr("postalCode")}
+              inputMode="numeric"
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Città</label>
+            <input
+              className={adminInput}
+              value={site.address.city}
+              onChange={setAddr("city")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Provincia (sigla)</label>
+            <input
+              className={adminInput}
+              value={site.address.province}
+              onChange={setAddr("province")}
+              placeholder="es. MO"
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Paese</label>
+            <input
+              className={adminInput}
+              value={site.address.country}
+              onChange={setAddr("country")}
+            />
+          </div>
         </div>
       </div>
 
-      <div>
-        <label className={labelClass}>Nome responsabile privacy (testo legale)</label>
-        <input
-          className={inputClass}
-          value={site.privacyContactName}
-          onChange={set("privacyContactName")}
-        />
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Zona di lavoro</h3>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className={adminLabel}>Testo in italiano</label>
+            <input
+              className={adminInput}
+              value={site.serviceArea}
+              onChange={set("serviceArea")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Testo in inglese</label>
+            <input
+              className={adminInput}
+              value={site.serviceAreaEn}
+              onChange={set("serviceAreaEn")}
+            />
+          </div>
+        </div>
       </div>
 
-      <div>
-        <label className={labelClass}>Link recensioni Google (opzionale)</label>
-        <input
-          className={inputClass}
-          value={site.publicReviewUrl}
-          onChange={set("publicReviewUrl")}
-          placeholder="https://"
-        />
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Email e telefono</h3>
+        <p className="mt-1 text-sm text-zinc-500">
+          Email: quella che i clienti vedono. Per il telefono: una riga con spazi (come
+          si legge) e una con prefisso per il tasto «chiama».
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className={adminLabel}>Email</label>
+            <input
+              type="email"
+              className={adminInput}
+              value={site.email}
+              onChange={set("email")}
+              autoComplete="email"
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>PEC</label>
+            <input
+              type="email"
+              className={adminInput}
+              value={site.pec}
+              onChange={set("pec")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Telefono (come lo leggono)</label>
+            <input
+              className={adminInput}
+              value={site.phoneDisplay}
+              onChange={set("phoneDisplay")}
+              inputMode="tel"
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Telefono per link (solo numeri +39…)</label>
+            <input
+              className={adminInput}
+              value={site.phoneTel}
+              onChange={set("phoneTel")}
+              placeholder="+39…"
+              inputMode="tel"
+            />
+          </div>
+        </div>
       </div>
 
-      <div>
-        <label className={labelClass}>Assicurazione / RC (testo)</label>
-        <textarea
-          className={`${inputClass} min-h-[100px]`}
-          rows={4}
-          value={site.insurance}
-          onChange={set("insurance")}
-        />
-      </div>
-      <div>
-        <label className={labelClass}>Conformità / sicurezza (testo)</label>
-        <textarea
-          className={`${inputClass} min-h-[100px]`}
-          rows={4}
-          value={site.compliance}
-          onChange={set("compliance")}
-        />
-      </div>
-      <div>
-        <label className={labelClass}>Certificazioni / SOA (testo)</label>
-        <textarea
-          className={`${inputClass} min-h-[100px]`}
-          rows={4}
-          value={site.certifications}
-          onChange={set("certifications")}
-        />
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Privacy e recensioni</h3>
+        <div className="mt-4 space-y-4">
+          <div>
+            <label className={adminLabel}>Nome responsabile privacy (testo legale)</label>
+            <input
+              className={adminInput}
+              value={site.privacyContactName}
+              onChange={set("privacyContactName")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Link pagina Google (opzionale)</label>
+            <input
+              className={adminInput}
+              value={site.publicReviewUrl}
+              onChange={set("publicReviewUrl")}
+              placeholder="https://"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="rounded-xl border border-[#c9a227]/35 bg-[#c9a227]/10 px-4 py-4">
-        <p className="text-sm text-zinc-200">
-          Dopo le modifiche, clicca <strong>Salva dati azienda</strong> per
-          memorizzarle su Redis.
+      <div className={adminSubCard}>
+        <h3 className="text-lg font-semibold text-white">Testi lunghi (pagine legali)</h3>
+        <p className="mt-1 text-sm text-zinc-500">
+          Assicurazione, sicurezza in cantiere, certificazioni. Puoi incollare testi già
+          approvati dal commercialista.
+        </p>
+        <div className="mt-4 space-y-5">
+          <div>
+            <label className={adminLabel}>Assicurazione / responsabilità civile</label>
+            <textarea
+              className={adminTextarea}
+              rows={5}
+              value={site.insurance}
+              onChange={set("insurance")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Conformità e sicurezza</label>
+            <textarea
+              className={adminTextarea}
+              rows={5}
+              value={site.compliance}
+              onChange={set("compliance")}
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Certificazioni / SOA</label>
+            <textarea
+              className={adminTextarea}
+              rows={5}
+              value={site.certifications}
+              onChange={set("certifications")}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border-2 border-[#c9a227]/40 bg-[#c9a227]/15 p-6 sm:p-8">
+        <p className="text-base leading-relaxed text-[#1a1508]">
+          <strong>Hai finito le modifiche?</strong> Ricorda di premere il pulsante qui
+          sotto per salvare tutto sul sito.
         </p>
         <button
           type="button"
           onClick={() => void save()}
           disabled={busy || !redisOk}
-          className="mt-3 rounded-lg bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e] disabled:opacity-40"
+          className={`${adminBtnPrimary} mt-5 w-full sm:w-auto`}
         >
-          {busy ? "Attendere…" : "Salva dati azienda"}
+          {busy ? "Salvataggio in corso…" : "Salva tutti i dati azienda"}
         </button>
       </div>
     </div>

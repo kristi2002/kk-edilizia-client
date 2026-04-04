@@ -8,6 +8,7 @@ import { createEmptyProject, DEMO_PANORAMA_URL } from "@/lib/data/projects";
 import type { ProjectTypeDef } from "@/lib/data/project-types";
 import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
 import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+import { adminField } from "./admin-ui";
 
 function describeUploadError(
   status: number,
@@ -31,26 +32,21 @@ function describeUploadError(
 
 type Props = {
   initialProjects: Project[];
-  initialProjectTypes: ProjectTypeDef[];
+  /** Tipi salvati altrove (pagina «Tipi di progetto»); usati per il menu categoria. */
+  projectTypes: ProjectTypeDef[];
   redisOk: boolean;
   blobOk: boolean;
 };
 
-const field =
-  "mt-1 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white";
-
 export function AdminPortfolioEditor({
   initialProjects,
-  initialProjectTypes,
+  projectTypes,
   redisOk,
   blobOk,
 }: Props) {
   const router = useRouter();
   const [projects, setProjects] = useState<Project[]>(() =>
     structuredClone(initialProjects),
-  );
-  const [projectTypes, setProjectTypes] = useState<ProjectTypeDef[]>(() =>
-    structuredClone(initialProjectTypes),
   );
   const [slug, setSlug] = useState(initialProjects[0]?.slug ?? "");
   const [busy, setBusy] = useState(false);
@@ -63,54 +59,6 @@ export function AdminPortfolioEditor({
     setProjects((prev) =>
       prev.map((p) => (p.slug === s ? { ...p, ...patch } : p)),
     );
-  };
-
-  const saveTypes = async () => {
-    setBusy(true);
-    setError(null);
-    setMessage(null);
-    try {
-      const res = await fetch("/api/admin/project-types", {
-        method: "PUT",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projectTypes),
-      });
-      const data = (await res.json().catch(() => ({}))) as {
-        ok?: boolean;
-        error?: string;
-        message?: string;
-      };
-      if (!res.ok) {
-        setError(messageFromAdminPutFailure(res.status, data));
-        return;
-      }
-      setMessage("Tipi di progetto salvati.");
-      router.refresh();
-    } catch {
-      setError("Rete non disponibile.");
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const seedTypes = async () => {
-    if (!window.confirm("Ripristinare i tipi progetto dal codice?")) return;
-    setBusy(true);
-    try {
-      const res = await fetch("/api/admin/project-types/seed", {
-        method: "POST",
-        credentials: "include",
-      });
-      if (!res.ok) return;
-      const refreshed = await fetch("/api/admin/project-types", {
-        credentials: "include",
-      });
-      setProjectTypes((await refreshed.json()) as ProjectTypeDef[]);
-      router.refresh();
-    } finally {
-      setBusy(false);
-    }
   };
 
   const saveProjects = async () => {
@@ -245,19 +193,6 @@ export function AdminPortfolioEditor({
     );
   };
 
-  const addProjectType = () => {
-    const id = window.prompt("Id tipo (es. attico):", "nuovo-tipo");
-    if (!id?.trim()) return;
-    setProjectTypes((t) => [
-      ...t,
-      { id: id.trim().replace(/\s+/g, "-"), labelIt: "Nuovo tipo", labelEn: "New type" },
-    ]);
-  };
-
-  const removeProjectType = (id: string) => {
-    setProjectTypes((t) => t.filter((x) => x.id !== id));
-  };
-
   const newProject = () => {
     const raw = window.prompt(
       "Slug URL del nuovo progetto (solo lettere, numeri, trattini):",
@@ -330,97 +265,11 @@ export function AdminPortfolioEditor({
 
   return (
     <div className="space-y-10">
-      <section className="rounded-lg border border-white/10 bg-black/20 p-4">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
-          Tipi di progetto (categorie)
-        </h3>
-        <p className="mt-1 text-xs text-zinc-500">
-          Usati nel menu a tendina per ogni progetto. Modifica IT/EN e salva.
-        </p>
-        <div className="mt-3 space-y-2">
-          {projectTypes.map((t) => (
-            <div
-              key={t.id}
-              className="flex flex-wrap items-end gap-2 border-b border-white/5 pb-2"
-            >
-              <label className="text-xs text-zinc-500">
-                id
-                <input
-                  className={field}
-                  value={t.id}
-                  onChange={(e) =>
-                    setProjectTypes((pt) =>
-                      pt.map((x) =>
-                        x.id === t.id ? { ...x, id: e.target.value } : x,
-                      ),
-                    )
-                  }
-                />
-              </label>
-              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
-                IT
-                <input
-                  className={field}
-                  value={t.labelIt}
-                  onChange={(e) =>
-                    setProjectTypes((pt) =>
-                      pt.map((x) =>
-                        x.id === t.id ? { ...x, labelIt: e.target.value } : x,
-                      ),
-                    )
-                  }
-                />
-              </label>
-              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
-                EN
-                <input
-                  className={field}
-                  value={t.labelEn}
-                  onChange={(e) =>
-                    setProjectTypes((pt) =>
-                      pt.map((x) =>
-                        x.id === t.id ? { ...x, labelEn: e.target.value } : x,
-                      ),
-                    )
-                  }
-                />
-              </label>
-              <button
-                type="button"
-                onClick={() => removeProjectType(t.id)}
-                className="text-xs text-red-400"
-              >
-                Rimuovi
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={addProjectType}
-            className="rounded border border-white/15 px-3 py-1 text-xs"
-          >
-            Aggiungi tipo
-          </button>
-          <button
-            type="button"
-            onClick={() => void seedTypes()}
-            disabled={busy || !redisOk}
-            className="rounded border border-white/15 px-3 py-1 text-xs disabled:opacity-40"
-          >
-            Tipi da codice
-          </button>
-          <button
-            type="button"
-            onClick={() => void saveTypes()}
-            disabled={busy || !redisOk}
-            className="rounded bg-[#c9a227]/90 px-3 py-1 text-xs font-semibold text-black disabled:opacity-40"
-          >
-            Salva tipi
-          </button>
-        </div>
-      </section>
+      <p className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-400">
+        Le <strong className="text-zinc-200">categorie / tipi</strong> si modificano nella sezione
+        dedicata del menu: <strong className="text-zinc-200">Tipi di progetto</strong>. Qui assegni
+        solo il tipo a ogni lavoro.
+      </p>
 
       <div className="flex flex-wrap gap-2">
         <button
@@ -463,7 +312,7 @@ export function AdminPortfolioEditor({
         <select
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className={`${field} mt-1 max-w-xl`}
+          className={`${adminField} mt-1 max-w-xl`}
         >
           {projects.map((p) => (
             <option key={p.slug} value={p.slug}>
@@ -477,7 +326,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Tipo (da elenco)
           <select
-            className={field}
+            className={adminField}
             value={selected.categoryId ?? ""}
             onChange={(e) => applyCategoryId(e.target.value)}
           >
@@ -492,7 +341,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Slug (URL)
           <input
-            className={field}
+            className={adminField}
             value={selected.slug}
             onChange={(e) => {
               const ns = e.target.value;
@@ -509,7 +358,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Titolo IT
           <input
-            className={field}
+            className={adminField}
             value={selected.title}
             onChange={(e) => patchProject(selected.slug, { title: e.target.value })}
           />
@@ -517,7 +366,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Titolo EN
           <input
-            className={field}
+            className={adminField}
             value={selected.titleEn}
             onChange={(e) => patchProject(selected.slug, { titleEn: e.target.value })}
           />
@@ -525,7 +374,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Categoria IT (testo)
           <input
-            className={field}
+            className={adminField}
             value={selected.category}
             onChange={(e) => patchProject(selected.slug, { category: e.target.value })}
           />
@@ -533,7 +382,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Categoria EN (testo)
           <input
-            className={field}
+            className={adminField}
             value={selected.categoryEn}
             onChange={(e) => patchProject(selected.slug, { categoryEn: e.target.value })}
           />
@@ -541,7 +390,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Luogo IT
           <input
-            className={field}
+            className={adminField}
             value={selected.location}
             onChange={(e) => patchProject(selected.slug, { location: e.target.value })}
           />
@@ -549,7 +398,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Luogo EN
           <input
-            className={field}
+            className={adminField}
             value={selected.locationEn}
             onChange={(e) => patchProject(selected.slug, { locationEn: e.target.value })}
           />
@@ -557,7 +406,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Anno
           <input
-            className={field}
+            className={adminField}
             value={selected.year}
             onChange={(e) => patchProject(selected.slug, { year: e.target.value })}
           />
@@ -565,7 +414,7 @@ export function AdminPortfolioEditor({
         <label className="text-xs text-zinc-500">
           Copertina (URL)
           <input
-            className={field}
+            className={adminField}
             value={selected.coverImage}
             onChange={(e) => patchProject(selected.slug, { coverImage: e.target.value })}
           />
@@ -575,7 +424,7 @@ export function AdminPortfolioEditor({
       <label className="block text-xs text-zinc-500">
         Estratto IT
         <textarea
-          className={`${field} min-h-[72px]`}
+          className={`${adminField} min-h-[72px]`}
           value={selected.excerpt}
           onChange={(e) => patchProject(selected.slug, { excerpt: e.target.value })}
         />
@@ -583,7 +432,7 @@ export function AdminPortfolioEditor({
       <label className="block text-xs text-zinc-500">
         Estratto EN
         <textarea
-          className={`${field} min-h-[72px]`}
+          className={`${adminField} min-h-[72px]`}
           value={selected.excerptEn}
           onChange={(e) => patchProject(selected.slug, { excerptEn: e.target.value })}
         />
@@ -591,7 +440,7 @@ export function AdminPortfolioEditor({
       <label className="block text-xs text-zinc-500">
         Descrizione IT
         <textarea
-          className={`${field} min-h-[100px]`}
+          className={`${adminField} min-h-[100px]`}
           value={selected.description}
           onChange={(e) => patchProject(selected.slug, { description: e.target.value })}
         />
@@ -599,7 +448,7 @@ export function AdminPortfolioEditor({
       <label className="block text-xs text-zinc-500">
         Descrizione EN
         <textarea
-          className={`${field} min-h-[100px]`}
+          className={`${adminField} min-h-[100px]`}
           value={selected.descriptionEn}
           onChange={(e) => patchProject(selected.slug, { descriptionEn: e.target.value })}
         />
@@ -611,7 +460,7 @@ export function AdminPortfolioEditor({
           <label className="text-xs text-zinc-500">
             URL prima
             <input
-              className={field}
+              className={adminField}
               value={selected.beforeAfter.before}
               onChange={(e) =>
                 patchProject(selected.slug, {
@@ -623,7 +472,7 @@ export function AdminPortfolioEditor({
           <label className="text-xs text-zinc-500">
             URL dopo
             <input
-              className={field}
+              className={adminField}
               value={selected.beforeAfter.after}
               onChange={(e) =>
                 patchProject(selected.slug, {
@@ -737,7 +586,7 @@ export function AdminPortfolioEditor({
         <label className="mt-2 block text-xs text-zinc-500">
           Scena iniziale
           <select
-            className={field}
+            className={adminField}
             value={selected.virtualTour.firstSceneId ?? selected.virtualTour.scenes[0]?.id ?? ""}
             onChange={(e) =>
               patchProject(selected.slug, {
@@ -776,7 +625,7 @@ export function AdminPortfolioEditor({
                   Id scena: <code className="text-zinc-400">{sc.id}</code> (fisso — aggiungi una nuova scena per un nuovo id)
                 </p>
                 <input
-                  className={field}
+                  className={adminField}
                   placeholder="Titolo IT"
                   value={sc.title}
                   onChange={(e) => {
@@ -787,7 +636,7 @@ export function AdminPortfolioEditor({
                   }}
                 />
                 <input
-                  className={field}
+                  className={adminField}
                   placeholder="Titolo EN"
                   value={sc.titleEn}
                   onChange={(e) => {
@@ -798,7 +647,7 @@ export function AdminPortfolioEditor({
                   }}
                 />
                 <input
-                  className={`${field} md:col-span-2`}
+                  className={`${adminField} md:col-span-2`}
                   placeholder="URL panoramica"
                   value={sc.panorama}
                   onChange={(e) => {
@@ -848,8 +697,7 @@ export function AdminPortfolioEditor({
 
       <div className="rounded-xl border border-[#c9a227]/35 bg-[#c9a227]/10 px-4 py-4">
         <p className="text-sm text-zinc-200">
-          Salva prima i <strong>tipi</strong> se li hai modificati, poi <strong>Salva portfolio</strong>{" "}
-          per pubblicare progetti, gallerie e tour.
+          <strong>Salva portfolio</strong> per pubblicare progetti, gallerie e tour sul sito.
         </p>
         <button
           type="button"

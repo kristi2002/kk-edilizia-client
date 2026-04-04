@@ -1,6 +1,11 @@
 import { getUpstashRedis } from "@/lib/upstash-redis";
 import { withRetry } from "@/lib/with-retry";
-import { getFallbackSiteUrl, staticSite, type SiteData } from "@/lib/site";
+import {
+  getFallbackSiteUrl,
+  normalizePublicSiteUrl,
+  staticSite,
+  type SiteData,
+} from "@/lib/site";
 import { tryParseStoredSite } from "@/lib/validate-site-payload";
 
 const REDIS_KEY = "site:settings_v1";
@@ -41,7 +46,7 @@ export async function getSite(): Promise<SiteData> {
 export async function getSiteUrl(): Promise<string> {
   const s = await getSite();
   const c = s.canonicalUrl?.trim();
-  if (c) return c.replace(/\/$/, "");
+  if (c) return normalizePublicSiteUrl(c);
   return getFallbackSiteUrl();
 }
 
