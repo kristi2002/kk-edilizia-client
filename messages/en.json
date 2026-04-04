@@ -200,8 +200,18 @@
     "essentialOnly": "Essential only",
     "acceptAll": "OK"
   },
+  "ContactForm": {
+    "successTitle": "Message sent",
+    "successBody": "Check your inbox: we’ve sent a confirmation to the address you provided. The office receives a copy with your details.",
+    "successWhatsappIntro": "Prefer WhatsApp?",
+    "successWhatsappCta": "Open WhatsApp",
+    "networkError": "Network error. Check your connection."
+  },
   "FormErrors": {
-    "rateLimited": "Too many requests. Please try again in about a minute."
+    "rateLimited": "Too many requests. Please try again in about a minute.",
+    "emailSendFailed": "Could not send the email. If using Gmail: use a 16-character app password (no spaces), enable 2-Step Verification, and restart the server after saving .env.local. Check the server terminal for the SMTP error.",
+    "emailNotConfigured": "Email sending is not configured on the server: set up Gmail or Resend (see .env.example).",
+    "genericSubmit": "Something went wrong. Please try again shortly."
   },
   "NotFound": {
     "title": "Page not found",

@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import type { PreventivoInput } from "@/lib/validations/preventivo";
 import { withRetry } from "@/lib/with-retry";
-import { hasGmailEnv, hasResendEnv } from "./env";
+import { getGmailCredentials, hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 
 const SUBJECT = "Richiesta di preventivo ricevuta – K.K Edilizia";
@@ -100,13 +100,16 @@ export function buildPreventivoEmailText(data: PreventivoInput): string {
 }
 
 async function sendViaGmail(data: PreventivoInput) {
-  const user = process.env.GMAIL_USER!.trim();
-  const pass = process.env.GMAIL_APP_PASSWORD!.trim();
+  const creds = getGmailCredentials();
+  if (!creds) throw new Error("EMAIL_NOT_CONFIGURED");
+  const { user, pass } = creds;
   const fromName = process.env.GMAIL_FROM_NAME?.trim() || "K.K Edilizia";
   const notify = process.env.PREVENTIVO_NOTIFY_EMAIL?.trim();
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: { user, pass },
   });
 

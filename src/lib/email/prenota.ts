@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import type { PrenotaInput } from "@/lib/validations/prenota";
 import { withRetry } from "@/lib/with-retry";
-import { hasGmailEnv, hasResendEnv } from "./env";
+import { getGmailCredentials, hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 
 function escapeHtml(s: string) {
@@ -113,8 +113,9 @@ const SUBJECT_IT = "Richiesta sopralluogo ricevuta – K.K Edilizia";
 const SUBJECT_EN = "Site visit request received – K.K Edilizia";
 
 async function sendViaGmail(data: PrenotaInput) {
-  const user = process.env.GMAIL_USER!.trim();
-  const pass = process.env.GMAIL_APP_PASSWORD!.trim();
+  const creds = getGmailCredentials();
+  if (!creds) throw new Error("EMAIL_NOT_CONFIGURED");
+  const { user, pass } = creds;
   const fromName = process.env.GMAIL_FROM_NAME?.trim() || "K.K Edilizia";
   const notify =
     process.env.PRENOTA_NOTIFY_EMAIL?.trim() ||
@@ -122,7 +123,9 @@ async function sendViaGmail(data: PrenotaInput) {
 
   const en = data.locale === "en";
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: { user, pass },
   });
 

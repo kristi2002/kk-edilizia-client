@@ -12,6 +12,7 @@ import {
   type PreventivoRequest,
 } from "@/lib/validations/preventivo";
 import { useTranslations } from "next-intl";
+import { firstServerFieldError } from "@/lib/form-api-response";
 import { Loader2, CheckCircle2 } from "lucide-react";
 
 const workTypes = [
@@ -44,8 +45,15 @@ export function PreventivoForm() {
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const { control, register, handleSubmit, formState, setError, getValues } =
-    useForm<PreventivoRequest>({
+  const {
+    control,
+    register,
+    setValue,
+    handleSubmit,
+    formState,
+    setError,
+    getValues,
+  } = useForm<PreventivoRequest>({
       resolver: zodResolver(preventivoRequestSchema),
       defaultValues: {
         workType: "",
@@ -96,19 +104,30 @@ export function PreventivoForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      const json = await res.json();
+      const json = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        errors?: Record<string, string[] | undefined>;
+      };
       if (!res.ok || !json.ok) {
+        const fieldMsg = firstServerFieldError(json.errors);
+        if (fieldMsg) {
+          setSubmitError(fieldMsg);
+          return;
+        }
         if (json?.error === "email_not_configured") {
-          setSubmitError(
-            "Invio email non attivo: configura Gmail o Resend sul server.",
-          );
+          setSubmitError(tForm("emailNotConfigured"));
           return;
         }
         if (json?.error === "rate_limited") {
           setSubmitError(tForm("rateLimited"));
           return;
         }
-        setSubmitError("Invio non riuscito. Riprova tra poco.");
+        if (json?.error === "email_send_failed") {
+          setSubmitError(tForm("emailSendFailed"));
+          return;
+        }
+        setSubmitError(tForm("genericSubmit"));
         return;
       }
       setDone(true);
@@ -154,7 +173,7 @@ export function PreventivoForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="relative">
-        <HoneypotField register={register} name="_gotcha" />
+        <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <AnimatePresence mode="wait">
           {step === 0 && (
             <motion.div
@@ -299,10 +318,14 @@ export function PreventivoForm() {
               <h2 className="font-serif text-2xl text-white">I tuoi contatti</h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
-                  <label className="text-sm text-zinc-500">Nome e cognome</label>
+                  <label htmlFor="preventivo-name" className="text-sm text-zinc-500">
+                    Nome e cognome
+                  </label>
                   <input
+                    id="preventivo-name"
                     className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                     {...register("name")}
+                    autoComplete="name"
                   />
                   {formState.errors.name && (
                     <p className="mt-1 text-sm text-red-400">
@@ -311,11 +334,17 @@ export function PreventivoForm() {
                   )}
                 </div>
                 <div>
-                  <label className="text-sm text-zinc-500">Email</label>
+                  <label htmlFor="preventivo-email" className="text-sm text-zinc-500">
+                    Email
+                  </label>
                   <input
+                    id="preventivo-email"
                     type="email"
+                    inputMode="email"
+                    autoCapitalize="none"
                     className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                     {...register("email")}
+                    autoComplete="email"
                   />
                   {formState.errors.email && (
                     <p className="mt-1 text-sm text-red-400">
@@ -324,11 +353,16 @@ export function PreventivoForm() {
                   )}
                 </div>
                 <div>
-                  <label className="text-sm text-zinc-500">Telefono</label>
+                  <label htmlFor="preventivo-phone" className="text-sm text-zinc-500">
+                    Telefono
+                  </label>
                   <input
+                    id="preventivo-phone"
                     type="tel"
+                    inputMode="tel"
                     className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                     {...register("phone")}
+                    autoComplete="tel"
                   />
                   {formState.errors.phone && (
                     <p className="mt-1 text-sm text-red-400">
@@ -337,14 +371,16 @@ export function PreventivoForm() {
                   )}
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="text-sm text-zinc-500">
+                  <label htmlFor="preventivo-notes" className="text-sm text-zinc-500">
                     Note aggiuntive (opzionale)
                   </label>
                   <textarea
+                    id="preventivo-notes"
                     rows={4}
                     className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                     placeholder="Indirizzo cantiere, esigenze particolari…"
                     {...register("notes")}
+                    autoComplete="off"
                   />
                 </div>
               </div>

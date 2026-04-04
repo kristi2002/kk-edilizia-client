@@ -200,8 +200,18 @@
     "essentialOnly": "Solo necessari",
     "acceptAll": "Ho capito"
   },
+  "ContactForm": {
+    "successTitle": "Messaggio inviato",
+    "successBody": "Controlla la posta: ti abbiamo inviato una conferma all’indirizzo indicato. L’ufficio riceve una copia con i tuoi dati.",
+    "successWhatsappIntro": "Preferisci WhatsApp?",
+    "successWhatsappCta": "Apri una chat",
+    "networkError": "Errore di rete. Controlla la connessione."
+  },
   "FormErrors": {
-    "rateLimited": "Troppe richieste. Riprova tra circa un minuto."
+    "rateLimited": "Troppe richieste. Riprova tra circa un minuto.",
+    "emailSendFailed": "Invio non riuscito (email). Se usi Gmail: verifica la password per le app (16 caratteri, senza spazi), che l’account abbia la verifica in due passaggi attiva, e riavvia il server dopo aver salvato .env.local. Controlla anche il terminale del server per l’errore SMTP.",
+    "emailNotConfigured": "Invio email non attivo sul server: configura Gmail o Resend (vedi .env.example).",
+    "genericSubmit": "Invio non riuscito. Riprova tra poco."
   },
   "NotFound": {
     "title": "Pagina non trovata",

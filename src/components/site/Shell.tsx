@@ -8,6 +8,9 @@ import { getSite } from "@/lib/data/site-store";
 
 export async function Shell({ children }: { children: React.ReactNode }) {
   const site = await getSite();
+  const hasWhatsAppFab = Boolean(
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim(),
+  );
   return (
     <>
       <ScrollToHash />
@@ -16,7 +19,11 @@ export async function Shell({ children }: { children: React.ReactNode }) {
       <div
         id="main-content"
         tabIndex={-1}
-        className="flex flex-1 flex-col pt-16 outline-none"
+        className={
+          hasWhatsAppFab
+            ? "flex flex-1 flex-col pt-16 pb-28 outline-none sm:pb-24"
+            : "flex flex-1 flex-col pt-16 outline-none"
+        }
       >
         {children}
       </div>

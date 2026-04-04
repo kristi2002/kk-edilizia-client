@@ -11,6 +11,7 @@ import {
   type PrenotaRequest,
 } from "@/lib/validations/prenota";
 import { Loader2 } from "lucide-react";
+import { firstServerFieldError } from "@/lib/form-api-response";
 
 export function PrenotaForm() {
   const t = useTranslations("Booking");
@@ -21,6 +22,7 @@ export function PrenotaForm() {
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
@@ -48,17 +50,30 @@ export function PrenotaForm() {
           locale: locale === "en" ? "en" : "it",
         }),
       });
-      const json = await res.json();
+      const json = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        errors?: Record<string, string[] | undefined>;
+      };
       if (!res.ok || !json.ok) {
+        const fieldMsg = firstServerFieldError(json.errors);
+        if (fieldMsg) {
+          setSubmitError(fieldMsg);
+          return;
+        }
         if (json?.error === "email_not_configured") {
-          setSubmitError(t("errorConfig"));
+          setSubmitError(tForm("emailNotConfigured"));
           return;
         }
         if (json?.error === "rate_limited") {
           setSubmitError(tForm("rateLimited"));
           return;
         }
-        setSubmitError(t("errorGeneric"));
+        if (json?.error === "email_send_failed") {
+          setSubmitError(tForm("emailSendFailed"));
+          return;
+        }
+        setSubmitError(tForm("genericSubmit"));
         return;
       }
       reset();
@@ -94,7 +109,7 @@ export function PrenotaForm() {
         .
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="relative mt-6 space-y-4">
-        <HoneypotField register={register} name="_gotcha" />
+        <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <div>
           <label className="text-sm text-zinc-500">{t("fieldName")}</label>
           <input
