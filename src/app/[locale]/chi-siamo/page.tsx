@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { Shield, Users, Award, FileCheck } from "lucide-react";
 import { getSite } from "@/lib/data/site-store";
@@ -10,11 +11,10 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const meta =
-    locale === "en" ? enMessages.Metadata : itMessages.Metadata;
+  const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
   return {
-    title: locale === "en" ? "About us" : "Chi siamo",
-    description: meta.siteDescription,
+    title: meta.aboutTitle,
+    description: meta.aboutDescription,
   };
 }
 
@@ -23,28 +23,34 @@ const workPhoto =
 const sitePhoto =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80";
 
-export default async function ChiSiamoPage() {
+export default async function ChiSiamoPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("AboutPage");
   const site = await getSite();
   const pillars = [
     {
       icon: Users,
-      title: "Team multidisciplinare",
-      text: "Muratura, impianti, finiture: figure interne e partner certificati per ogni fase del lavoro.",
+      title: t("p1t"),
+      text: t("p1d"),
     },
     {
       icon: Shield,
-      title: "Sicurezza e conformità",
-      text: "Documentazione a norma, DPI per il personale e coordinamento in cantiere secondo le normative vigenti.",
+      title: t("p2t"),
+      text: t("p2d"),
     },
     {
       icon: Award,
-      title: "Qualità percepita",
-      text: "Materiali selezionati e controlli in corso d’opera per un risultato che regge nel tempo.",
+      title: t("p3t"),
+      text: t("p3d"),
     },
     {
       icon: FileCheck,
-      title: "Assicurazione e adempimenti",
-      text: site.insurance + " " + site.compliance,
+      title: t("p4t"),
+      text: t("p4d", {
+        insurance: site.insurance,
+        compliance: site.compliance,
+      }),
     },
   ];
 
@@ -54,16 +60,13 @@ export default async function ChiSiamoPage() {
         <div className="mx-auto max-w-3xl">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
-              Azienda
+              {t("eyebrow")}
             </p>
             <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
-              Chi siamo
+              {t("title")}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-zinc-400">
-              {site.brand} nasce dall&apos;incontro tra artigiani specializzati e
-              project management: un unico referente per pianificare il cantiere,
-              coordinare i fornitori e rispettare le tempistiche che promettiamo
-              ai nostri clienti.
+              {t("intro", { brand: site.brand })}
             </p>
           </FadeIn>
 
@@ -76,7 +79,9 @@ export default async function ChiSiamoPage() {
                       <item.icon className="h-6 w-6" />
                     </div>
                     <div>
-                      <h2 className="font-serif text-xl text-white">{item.title}</h2>
+                      <h2 className="font-serif text-xl text-white">
+                        {item.title}
+                      </h2>
                       <p className="mt-2 text-zinc-500">{item.text}</p>
                     </div>
                   </div>
@@ -88,11 +93,10 @@ export default async function ChiSiamoPage() {
           <FadeIn delay={0.35}>
             <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
               <h2 className="font-serif text-lg text-white">
-                Certificazioni e qualificazioni
+                {t("certificationsTitle")}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-zinc-500">
-                {site.certifications} Aggiorna questo testo con categorie SOA,
-                classifiche e scadenze reali quando disponibili.
+                {t("certificationsHint", { base: site.certifications })}
               </p>
             </div>
           </FadeIn>
@@ -101,50 +105,47 @@ export default async function ChiSiamoPage() {
         <FadeIn delay={0.1}>
           <div className="mt-20">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
-              Cantieri e lavori
+              {t("galleryEyebrow")}
             </p>
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
-              Immagini di esempio
+              {t("galleryTitle")}
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-zinc-500">
-              Sostituisci queste foto stock con scatti dei vostri cantieri (prima
-              / dopo, dettagli) caricando file in{" "}
-              <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-zinc-300">
-                public/images/
-              </code>{" "}
-              e aggiornando i percorsi in{" "}
-              <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-zinc-300">
-                chi-siamo/page.tsx
-              </code>
-              .
+              {t.rich("galleryIntro", {
+                code: (chunks) => (
+                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-zinc-300">
+                    {chunks}
+                  </code>
+                ),
+              })}
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               <figure className="overflow-hidden rounded-2xl border border-white/10">
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={workPhoto}
-                    alt="Cantiere edile — sostituire con foto propria"
+                    alt={t("fig1Alt")}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
                 <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500">
-                  Esempio: ristrutturazione in corso
+                  {t("fig1Caption")}
                 </figcaption>
               </figure>
               <figure className="overflow-hidden rounded-2xl border border-white/10">
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={sitePhoto}
-                    alt="Interno ristrutturato — sostituire con foto propria"
+                    alt={t("fig2Alt")}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
                 <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500">
-                  Esempio: finiture e spazi abitativi
+                  {t("fig2Caption")}
                 </figcaption>
               </figure>
             </div>

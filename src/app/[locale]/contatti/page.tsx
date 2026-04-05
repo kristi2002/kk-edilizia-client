@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -23,7 +24,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function ContattiPage() {
+export default async function ContattiPage({ params }: PageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("ContactsPage");
   const site = await getSite();
   const mapsDirectionsUrl = googleMapsDirectionsUrl(site);
   return (
@@ -32,15 +36,12 @@ export default async function ContattiPage() {
         <div>
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
-              Contatti
+              {t("eyebrow")}
             </p>
             <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
-              Parliamone
+              {t("title")}
             </h1>
-            <p className="mt-4 text-lg text-zinc-400">
-              Chiamaci o scrivici: fissiamo un sopralluogo e ti inviamo un
-              preventivo dettagliato.
-            </p>
+            <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
           </FadeIn>
 
           <ul className="mt-12 space-y-6">
@@ -49,7 +50,7 @@ export default async function ContattiPage() {
                 <div className="flex gap-4">
                   <Phone className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">Telefono</p>
+                    <p className="text-sm text-zinc-500">{t("phone")}</p>
                     <a
                       href={`tel:${site.phoneTel}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -65,7 +66,7 @@ export default async function ContattiPage() {
                 <div className="flex gap-4">
                   <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">Email</p>
+                    <p className="text-sm text-zinc-500">{t("email")}</p>
                     <a
                       href={`mailto:${site.email}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -81,7 +82,7 @@ export default async function ContattiPage() {
                 <div className="flex gap-4">
                   <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">PEC</p>
+                    <p className="text-sm text-zinc-500">{t("pec")}</p>
                     <a
                       href={`mailto:${site.pec}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -97,7 +98,7 @@ export default async function ContattiPage() {
                 <div className="flex gap-4">
                   <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">Sede</p>
+                    <p className="text-sm text-zinc-500">{t("address")}</p>
                     <a
                       href={mapsDirectionsUrl}
                       target="_blank"
@@ -107,7 +108,7 @@ export default async function ContattiPage() {
                       {formatLegalAddress(site)}
                     </a>
                     <p className="mt-1 text-xs text-zinc-600">
-                      Apri le indicazioni su Google Maps
+                      {t("directionsHint")}
                     </p>
                   </div>
                 </div>
@@ -118,10 +119,8 @@ export default async function ContattiPage() {
                 <div className="flex gap-4">
                   <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">Orari</p>
-                    <p className="text-white">
-                      Lun–Ven 8:30–18:30 · Sab su appuntamento
-                    </p>
+                    <p className="text-sm text-zinc-500">{t("hours")}</p>
+                    <p className="text-white">{t("hoursValue")}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -131,14 +130,14 @@ export default async function ContattiPage() {
           {site.publicReviewUrl ? (
             <FadeIn delay={0.22}>
               <p className="mt-10 text-sm text-zinc-500">
-                Recensioni:{" "}
+                {t("reviewsPrefix")}{" "}
                 <a
                   href={site.publicReviewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-[#c9a227] hover:underline"
                 >
-                  scheda Google Business
+                  {t("reviewsLink")}
                 </a>
               </p>
             </FadeIn>
@@ -149,7 +148,7 @@ export default async function ContattiPage() {
               href="/preventivo"
               className="mt-12 inline-flex rounded-full bg-[#c9a227] px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
             >
-              Richiedi preventivo online
+              {t("ctaQuote")}
             </Link>
           </FadeIn>
         </div>

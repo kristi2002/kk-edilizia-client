@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  contattiRequestSchema,
+  createContattiRequestSchema,
   type ContattiRequest,
 } from "@/lib/validations/contatti";
 import { HoneypotField } from "@/components/forms/HoneypotField";
@@ -23,6 +23,10 @@ export function ContactForm() {
   const t = useTranslations("ContactForm");
   const tForm = useTranslations("FormErrors");
   const locale = useLocale();
+  const contattiSchema = useMemo(
+    () => createContattiRequestSchema(locale === "en" ? "en" : "it"),
+    [locale],
+  );
   const [attachmentItems, setAttachmentItems] = useState<AttachmentItem[]>([]);
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -34,7 +38,7 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContattiRequest>({
-    resolver: zodResolver(contattiRequestSchema),
+    resolver: zodResolver(contattiSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -128,7 +132,7 @@ export function ContactForm() {
     const waHref =
       waNumber &&
       `https://wa.me/${waNumber}?text=${encodeURIComponent(
-        "Buongiorno, ho appena inviato un messaggio dal modulo contatti sul sito.",
+        t("whatsappPrefill"),
       )}`;
     return (
       <div className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-6 py-10 text-center">
@@ -152,7 +156,7 @@ export function ContactForm() {
           onClick={() => setDone(false)}
           className="mt-6 text-sm font-medium text-[#c9a227] hover:underline"
         >
-          Invia un altro messaggio
+          {t("sendAnother")}
         </button>
       </div>
     );
@@ -160,11 +164,11 @@ export function ContactForm() {
 
   return (
     <div className="relative z-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-      <h2 className="font-serif text-xl text-white">Scrivici</h2>
+      <h2 className="font-serif text-xl text-white">{t("formTitle")}</h2>
       <p className="mt-2 text-sm text-zinc-500">
-        Compila il modulo: i dati sono trattati come da{" "}
+        {t("formPrivacyBefore")}{" "}
         <Link href="/privacy" className="text-[#c9a227] hover:underline">
-          privacy policy
+          {t("formPrivacyLink")}
         </Link>
         .
       </p>
@@ -177,7 +181,7 @@ export function ContactForm() {
         <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <div>
           <label htmlFor="contact-name" className="text-sm text-zinc-500">
-            Nome e cognome
+            {t("fieldName")}
           </label>
           <input
             id="contact-name"
@@ -192,7 +196,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-email" className="text-sm text-zinc-500">
-            Email
+            {t("fieldEmail")}
           </label>
           <input
             id="contact-email"
@@ -210,7 +214,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-phone" className="text-sm text-zinc-500">
-            Telefono (opzionale)
+            {t("fieldPhone")}
           </label>
           <input
             id="contact-phone"
@@ -224,13 +228,13 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-message" className="text-sm text-zinc-500">
-            Messaggio
+            {t("fieldMessage")}
           </label>
           <textarea
             id="contact-message"
             rows={5}
             className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
-            placeholder="Descrivi la tua richiesta…"
+            placeholder={t("messagePlaceholder")}
             suppressHydrationWarning
             {...register("message")}
             autoComplete="off"
@@ -283,7 +287,7 @@ export function ContactForm() {
           ) : (
             <Send className="h-4 w-4" />
           )}
-          Invia messaggio
+          {t("submit")}
         </button>
       </form>
     </div>

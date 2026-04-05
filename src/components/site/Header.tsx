@@ -106,14 +106,18 @@ export function Header() {
 function LocaleSwitcher() {
   const pathname = usePathname();
   const locale = useLocale();
+  const t = useTranslations("Nav");
   const other = locale === "it" ? "en" : "it";
   return (
     <Link
       href={pathname}
       locale={other}
+      aria-label={
+        other === "en" ? t("switchToEnglish") : t("switchToItalian")
+      }
       className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-400 transition hover:border-[#c9a227]/50 hover:text-white"
     >
-      {other === "en" ? "EN" : "IT"}
+      {other === "en" ? t("langEn") : t("langIt")}
     </Link>
   );
 }

@@ -3,7 +3,9 @@
     "siteTitle": "K.K Edilizia | Renovations and Construction in Modena",
     "siteDescription": "Looking for a building contractor in Modena? K.K Edilizia specializes in turnkey renovations, drywall and painting in Modena and province. Contact us for a quote.",
     "contactsTitle": "Contact",
-    "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote."
+    "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote.",
+    "aboutTitle": "About us",
+    "aboutDescription": "Building contractor in Modena: team, quality, and organised sites. Renovations and construction across the province."
   },
   "Nav": {
     "home": "Home",
@@ -18,7 +20,9 @@
     "closeMenu": "Close menu",
     "langIt": "IT",
     "langEn": "EN",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "switchToEnglish": "Switch to English",
+    "switchToItalian": "Switch to Italian"
   },
   "Hero": {
     "badge": "Modena & province",
@@ -207,7 +211,68 @@
     "essentialOnly": "Essential only",
     "acceptAll": "OK"
   },
+  "ContactsPage": {
+    "eyebrow": "Contact",
+    "title": "Let’s talk",
+    "intro": "Call or write to us: we’ll schedule a site visit and send a detailed quote.",
+    "phone": "Phone",
+    "email": "Email",
+    "pec": "PEC",
+    "address": "Office",
+    "directionsHint": "Open directions in Google Maps",
+    "hours": "Hours",
+    "hoursValue": "Mon–Fri 8:30–18:30 · Sat by appointment",
+    "reviewsPrefix": "Reviews:",
+    "reviewsLink": "Google Business profile",
+    "ctaQuote": "Request an online quote"
+  },
+  "ContactMap": {
+    "iframeTitle": "Map — {city}",
+    "directionsAria": "Open Google Maps with directions to our office",
+    "directionsCta": "Directions",
+    "footerHint": "Click the map to open Google Maps with directions."
+  },
+  "PreventivoPage": {
+    "metaTitle": "Quote request",
+    "metaDescription": "Request a quote for renovations and building work. A short guided form.",
+    "eyebrow": "Quote",
+    "title": "Tell us about your project",
+    "intro": "Answer a few questions: we’ll follow up to go into detail and schedule a site visit."
+  },
+  "AboutPage": {
+    "eyebrow": "Company",
+    "title": "About us",
+    "intro": "{brand} brings together skilled tradespeople and project management: a single point of contact to plan the site, coordinate suppliers, and meet the timelines we promise our clients.",
+    "p1t": "Multidisciplinary team",
+    "p1d": "Masonry, systems, finishes: in-house roles and certified partners for every phase.",
+    "p2t": "Safety and compliance",
+    "p2d": "Proper documentation, PPE on site, and coordination aligned with current regulations.",
+    "p3t": "Perceived quality",
+    "p3d": "Selected materials and on-site checks for a result that lasts.",
+    "p4t": "Insurance and compliance",
+    "p4d": "{insurance} {compliance}",
+    "certificationsTitle": "Certifications and qualifications",
+    "certificationsHint": "{base} Update this text with real SOA categories, classifications, and expiry dates when available.",
+    "galleryEyebrow": "Sites and projects",
+    "galleryTitle": "Sample images",
+    "galleryIntro": "Replace these stock photos with your own site shots (before/after, details) by uploading files to <code>public/images/</code> and updating paths in <code>chi-siamo/page.tsx</code>",
+    "fig1Alt": "Construction site — replace with your own photo",
+    "fig2Alt": "Renovated interior — replace with your own photo",
+    "fig1Caption": "Example: renovation in progress",
+    "fig2Caption": "Example: finishes and living spaces"
+  },
   "ContactForm": {
+    "formTitle": "Write to us",
+    "formPrivacyBefore": "Fill in the form: your data is processed as described in our",
+    "formPrivacyLink": "privacy policy",
+    "fieldName": "Full name",
+    "fieldEmail": "Email",
+    "fieldPhone": "Phone (optional)",
+    "fieldMessage": "Message",
+    "messagePlaceholder": "Describe your request…",
+    "submit": "Send message",
+    "sendAnother": "Send another message",
+    "whatsappPrefill": "Hello, I’ve just sent a message via the website contact form.",
     "successTitle": "Message sent",
     "successBody": "We’ve sent a short confirmation to your inbox. The office receives your message and any attachments.",
     "attachmentsLabel": "Photos or PDFs (optional)",

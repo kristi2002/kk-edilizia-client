@@ -3,7 +3,9 @@
     "siteTitle": "K.K Edilizia | Ristrutturazioni e Costruzioni a Modena",
     "siteDescription": "Cerchi un'impresa edile a Modena? K.K Edilizia è specializzata in ristrutturazioni chiavi in mano, cartongesso e pitture a Modena e provincia. Contattaci per un preventivo.",
     "contactsTitle": "Contatti",
-    "contactsDescription": "Telefono, email, PEC e sede a Modena. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi e preventivo online."
+    "contactsDescription": "Telefono, email, PEC e sede a Modena. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi e preventivo online.",
+    "aboutTitle": "Chi siamo",
+    "aboutDescription": "Impresa edile a Modena: team, qualità e cantieri organizzati. Ristrutturazioni e costruzioni in provincia."
   },
   "Nav": {
     "home": "Home",
@@ -18,7 +20,9 @@
     "closeMenu": "Chiudi menu",
     "langIt": "IT",
     "langEn": "EN",
-    "skipToContent": "Salta al contenuto"
+    "skipToContent": "Salta al contenuto",
+    "switchToEnglish": "Passa alla versione in inglese",
+    "switchToItalian": "Passa alla versione in italiano"
   },
   "Hero": {
     "badge": "Modena & provincia",
@@ -207,7 +211,68 @@
     "essentialOnly": "Solo necessari",
     "acceptAll": "Ho capito"
   },
+  "ContactsPage": {
+    "eyebrow": "Contatti",
+    "title": "Parliamone",
+    "intro": "Chiamaci o scrivici: fissiamo un sopralluogo e ti inviamo un preventivo dettagliato.",
+    "phone": "Telefono",
+    "email": "Email",
+    "pec": "PEC",
+    "address": "Sede",
+    "directionsHint": "Apri le indicazioni su Google Maps",
+    "hours": "Orari",
+    "hoursValue": "Lun–Ven 8:30–18:30 · Sab su appuntamento",
+    "reviewsPrefix": "Recensioni:",
+    "reviewsLink": "scheda Google Business",
+    "ctaQuote": "Richiedi preventivo online"
+  },
+  "ContactMap": {
+    "iframeTitle": "Mappa — {city}",
+    "directionsAria": "Apri Google Maps con indicazioni stradali verso la sede",
+    "directionsCta": "Indicazioni stradali",
+    "footerHint": "Clicca sulla mappa per aprire Google Maps con le indicazioni."
+  },
+  "PreventivoPage": {
+    "metaTitle": "Preventivo",
+    "metaDescription": "Richiedi un preventivo per ristrutturazioni e lavori edili. Modulo guidato in pochi passaggi.",
+    "eyebrow": "Preventivo",
+    "title": "Raccontaci il tuo progetto",
+    "intro": "Rispondi a poche domande: ti ricontatteremo per approfondire e fissare un sopralluogo."
+  },
+  "AboutPage": {
+    "eyebrow": "Azienda",
+    "title": "Chi siamo",
+    "intro": "{brand} nasce dall’incontro tra artigiani specializzati e project management: un unico referente per pianificare il cantiere, coordinare i fornitori e rispettare le tempistiche che promettiamo ai nostri clienti.",
+    "p1t": "Team multidisciplinare",
+    "p1d": "Muratura, impianti, finiture: figure interne e partner certificati per ogni fase del lavoro.",
+    "p2t": "Sicurezza e conformità",
+    "p2d": "Documentazione a norma, DPI per il personale e coordinamento in cantiere secondo le normative vigenti.",
+    "p3t": "Qualità percepita",
+    "p3d": "Materiali selezionati e controlli in corso d’opera per un risultato che regge nel tempo.",
+    "p4t": "Assicurazione e adempimenti",
+    "p4d": "{insurance} {compliance}",
+    "certificationsTitle": "Certificazioni e qualificazioni",
+    "certificationsHint": "{base} Aggiorna questo testo con categorie SOA, classifiche e scadenze reali quando disponibili.",
+    "galleryEyebrow": "Cantieri e lavori",
+    "galleryTitle": "Immagini di esempio",
+    "galleryIntro": "Sostituisci queste foto stock con scatti dei vostri cantieri (prima / dopo, dettagli) caricando file in <code>public/images/</code> e aggiornando i percorsi in <code>chi-siamo/page.tsx</code>",
+    "fig1Alt": "Cantiere edile — sostituire con foto propria",
+    "fig2Alt": "Interno ristrutturato — sostituire con foto propria",
+    "fig1Caption": "Esempio: ristrutturazione in corso",
+    "fig2Caption": "Esempio: finiture e spazi abitativi"
+  },
   "ContactForm": {
+    "formTitle": "Scrivici",
+    "formPrivacyBefore": "Compila il modulo: i dati sono trattati come da",
+    "formPrivacyLink": "privacy policy",
+    "fieldName": "Nome e cognome",
+    "fieldEmail": "Email",
+    "fieldPhone": "Telefono (opzionale)",
+    "fieldMessage": "Messaggio",
+    "messagePlaceholder": "Descrivi la tua richiesta…",
+    "submit": "Invia messaggio",
+    "sendAnother": "Invia un altro messaggio",
+    "whatsappPrefill": "Buongiorno, ho appena inviato un messaggio dal modulo contatti sul sito.",
     "successTitle": "Messaggio inviato",
     "successBody": "Ti abbiamo inviato una breve conferma via email. L’ufficio riceve il messaggio e gli allegati.",
     "attachmentsLabel": "Foto o PDF (opzionale)",

@@ -6,7 +6,10 @@ import {
 } from "@/lib/form-attachments";
 import { assertRateLimit } from "@/lib/rate-limit";
 import { stripHoneypot } from "@/lib/strip-honeypot";
-import { contattiRequestSchema } from "@/lib/validations/contatti";
+import {
+  createContattiRequestSchema,
+  type ContattiLocale,
+} from "@/lib/validations/contatti";
 
 /** Invio email + retry interni possono superare il default serverless breve. */
 export const maxDuration = 60;
@@ -36,7 +39,9 @@ export async function POST(request: Request) {
   }
 
   try {
-    let parsed: ReturnType<typeof contattiRequestSchema.safeParse>;
+    let parsed: ReturnType<
+      ReturnType<typeof createContattiRequestSchema>["safeParse"]
+    >;
     let attachmentFiles: File[] = [];
 
     if (isMultipart(request)) {
@@ -50,7 +55,9 @@ export async function POST(request: Request) {
         );
       }
       const phoneRaw = String(formData.get("phone") ?? "").trim();
-      parsed = contattiRequestSchema.safeParse({
+      const loc: ContattiLocale =
+        formData.get("locale") === "en" ? "en" : "it";
+      parsed = createContattiRequestSchema(loc).safeParse({
         name: String(formData.get("name") ?? ""),
         email: String(formData.get("email") ?? ""),
         phone: phoneRaw || undefined,
@@ -59,8 +66,9 @@ export async function POST(request: Request) {
         _gotcha: String(formData.get("_gotcha") ?? ""),
       });
     } else {
-      const body = await request.json();
-      parsed = contattiRequestSchema.safeParse(body);
+      const body = (await request.json()) as Record<string, unknown>;
+      const loc: ContattiLocale = body?.locale === "en" ? "en" : "it";
+      parsed = createContattiRequestSchema(loc).safeParse(body);
     }
 
     if (!parsed.success) {

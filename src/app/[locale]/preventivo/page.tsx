@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPreventivoFormOptions } from "@/lib/data/preventivo-options-store";
 import { PreventivoForm } from "./PreventivoForm";
 import { FadeIn } from "@/components/motion/FadeIn";
+import enMessages from "../../../../messages/en.json";
+import itMessages from "../../../../messages/it.json";
 
-export const metadata: Metadata = {
-  title: "Preventivo",
-  description:
-    "Richiedi un preventivo per ristrutturazioni e lavori edili. Modulo guidato in pochi passaggi.",
-};
+type PageProps = { params: Promise<{ locale: string }> };
 
-export default async function PreventivoPage() {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const meta =
+    locale === "en"
+      ? enMessages.PreventivoPage
+      : itMessages.PreventivoPage;
+  return {
+    title: meta.metaTitle,
+    description: meta.metaDescription,
+  };
+}
+
+export default async function PreventivoPage({ params }: PageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("PreventivoPage");
   const preventivoOptions = await getPreventivoFormOptions();
 
   return (
@@ -17,15 +33,12 @@ export default async function PreventivoPage() {
       <div className="mx-auto w-full max-w-2xl">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
-            Preventivo
+            {t("eyebrow")}
           </p>
           <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
-            Raccontaci il tuo progetto
+            {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-zinc-400">
-            Rispondi a poche domande: ti ricontatteremo per approfondire e
-            fissare un sopralluogo.
-          </p>
+          <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
         </FadeIn>
 
         <div className="mt-12">
