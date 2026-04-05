@@ -1,32 +1,51 @@
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
+const DESCRIPTION_IT =
+  "Cerchi un'impresa edile a Modena? K.K Edilizia è specializzata in ristrutturazioni chiavi in mano, cartongesso e pitture a Modena e provincia. Contattaci per un preventivo.";
+
+/** LocalBusiness / HomeAndConstructionBusiness per risultati locali e Knowledge Graph. */
 export async function LocalBusinessJsonLd() {
   const [site, baseUrl] = await Promise.all([getSite(), getSiteUrl()]);
-  const data = {
+  const a = site.address;
+
+  const sameAs = site.publicReviewUrl?.trim()
+    ? [site.publicReviewUrl.trim()]
+    : undefined;
+
+  const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     name: site.brand,
     legalName: site.legalName,
     taxID: site.vatId,
-    description:
-      "Ristrutturazioni e lavori edili a Modena e provincia: preventivi chiari, cantieri organizzati e finiture di qualità.",
+    description: DESCRIPTION_IT,
     url: baseUrl,
     telephone: site.phoneTel,
     email: site.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.street,
-      postalCode: site.address.postalCode,
-      addressLocality: site.address.city,
-      addressRegion: site.address.province,
+      streetAddress: a.street,
+      postalCode: a.postalCode,
+      addressLocality: a.city,
+      addressRegion: a.province,
       addressCountry: "IT",
     },
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: site.serviceArea,
-    },
+    areaServed: [
+      { "@type": "City", name: "Modena" },
+      { "@type": "City", name: "Sassuolo" },
+      { "@type": "City", name: "Carpi" },
+      { "@type": "City", name: "Formigine" },
+      {
+        "@type": "AdministrativeArea",
+        name: "Provincia di Modena",
+      },
+    ],
     priceRange: "€€",
   };
+
+  if (sameAs) {
+    data.sameAs = sameAs;
+  }
 
   return (
     <script

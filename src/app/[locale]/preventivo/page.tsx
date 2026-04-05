@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPreventivoFormOptions } from "@/lib/data/preventivo-options-store";
 import { PreventivoForm } from "./PreventivoForm";
 import { FadeIn } from "@/components/motion/FadeIn";
 
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
     "Richiedi un preventivo per ristrutturazioni e lavori edili. Modulo guidato in pochi passaggi.",
 };
 
-export default function PreventivoPage() {
+export default async function PreventivoPage() {
+  const preventivoOptions = await getPreventivoFormOptions();
+
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <div className="mx-auto w-full max-w-2xl">
@@ -26,7 +29,7 @@ export default function PreventivoPage() {
         </FadeIn>
 
         <div className="mt-12">
-          <PreventivoForm />
+          <PreventivoForm initialOptions={preventivoOptions} />
         </div>
       </div>
     </main>

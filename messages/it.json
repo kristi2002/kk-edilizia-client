@@ -1,7 +1,9 @@
 {
   "Metadata": {
-    "siteTitle": "K.K Edilizia | Ristrutturazioni Modena",
-    "siteDescription": "Ristrutturazioni e lavori edili a Modena e provincia: preventivi chiari, cantieri organizzati e finiture di qualità."
+    "siteTitle": "K.K Edilizia | Ristrutturazioni e Costruzioni a Modena",
+    "siteDescription": "Cerchi un'impresa edile a Modena? K.K Edilizia è specializzata in ristrutturazioni chiavi in mano, cartongesso e pitture a Modena e provincia. Contattaci per un preventivo.",
+    "contactsTitle": "Contatti",
+    "contactsDescription": "Telefono, email, PEC e sede a Modena. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi e preventivo online."
   },
   "Nav": {
     "home": "Home",
@@ -22,7 +24,7 @@
     "badge": "Modena & provincia",
     "titleLine1": "Costruiamo spazi",
     "titleHighlight": "che durano",
-    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e finiture. Un team unico per tempi certi e un risultato curato nei dettagli.",
+    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e finiture a Modena e provincia — anche Sassuolo, Carpi e Formigine. Un team unico per tempi certi e un risultato curato nei dettagli.",
     "ctaQuote": "Richiedi preventivo",
     "ctaWorks": "Vedi i lavori",
     "statYears": "anni esperienza",
@@ -121,6 +123,7 @@
   },
   "Footer": {
     "tagline": "Ristrutturazioni e lavori edili a {area}. Qualità, tempi chiari e cantieri organizzati.",
+    "napAreas": "Interventi a Modena e in provincia: Sassuolo, Carpi, Formigine e comuni limitrofi.",
     "contacts": "Contatti",
     "quick": "Link rapidi",
     "legalData": "Dati societari",

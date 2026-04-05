@@ -11,35 +11,23 @@ import {
   step2Schema,
   type PreventivoRequest,
 } from "@/lib/validations/preventivo";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { firstServerFieldError } from "@/lib/form-api-response";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import type { PreventivoFormOptions } from "@/lib/data/preventivo-form-options";
 
-const workTypes = [
-  { value: "ristrutturazione", label: "Ristrutturazione completa" },
-  { value: "bagno-cucina", label: "Bagno / cucina" },
-  { value: "impianti", label: "Impianti" },
-  { value: "facciata", label: "Facciata / condominio" },
-  { value: "commerciale", label: "Commerciale / ufficio" },
-  { value: "altro", label: "Altro" },
-];
+type Props = {
+  initialOptions: PreventivoFormOptions;
+};
 
-const budgets = [
-  { value: "under-30", label: "Fino a 30.000 €" },
-  { value: "30-60", label: "30.000 – 60.000 €" },
-  { value: "60-100", label: "60.000 – 100.000 €" },
-  { value: "100+", label: "Oltre 100.000 €" },
-  { value: "da-definire", label: "Da definire in sede" },
-];
+export function PreventivoForm({ initialOptions }: Props) {
+  const locale = useLocale();
+  const workTypes = initialOptions.workTypes;
+  const budgets = initialOptions.budgets;
+  const timelines = initialOptions.timelines;
 
-const timelines = [
-  { value: "urgent", label: "Entro 3 mesi" },
-  { value: "semester", label: "3–6 mesi" },
-  { value: "year", label: "6–12 mesi" },
-  { value: "flex", label: "Flessibile" },
-];
-
-export function PreventivoForm() {
+  const optLabel = (o: { labelIt: string; labelEn: string }) =>
+    locale === "en" ? o.labelEn : o.labelIt;
   const tForm = useTranslations("FormErrors");
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
@@ -102,7 +90,10 @@ export function PreventivoForm() {
       const res = await fetch("/api/preventivo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          locale: locale === "en" ? "en" : "it",
+        }),
       });
       const json = (await res.json()) as {
         ok?: boolean;
@@ -206,7 +197,7 @@ export function PreventivoForm() {
                       className="sr-only"
                       {...register("workType")}
                     />
-                    {w.label}
+                    {optLabel(w)}
                   </label>
                 ))}
               </div>
@@ -262,7 +253,7 @@ export function PreventivoForm() {
                         className="sr-only"
                         {...register("budget")}
                       />
-                      {b.label}
+                      {optLabel(b)}
                     </label>
                   ))}
                 </div>
@@ -290,7 +281,7 @@ export function PreventivoForm() {
                         className="sr-only"
                         {...register("timeline")}
                       />
-                      {t.label}
+                      {optLabel(t)}
                     </label>
                   ))}
                 </div>

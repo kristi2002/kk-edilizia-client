@@ -1,7 +1,9 @@
 {
   "Metadata": {
-    "siteTitle": "K.K Edilizia | Renovations Modena",
-    "siteDescription": "Renovations and construction in Modena and province: clear quotes, organized sites, and quality finishes."
+    "siteTitle": "K.K Edilizia | Renovations and Construction in Modena",
+    "siteDescription": "Looking for a construction company in Modena? K.K Edilizia specializes in turnkey renovations, drywall and painting in Modena and province. Contact us for a quote.",
+    "contactsTitle": "Contact",
+    "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote."
   },
   "Nav": {
     "home": "Home",
@@ -22,7 +24,7 @@
     "badge": "Modena & province",
     "titleLine1": "We build spaces",
     "titleHighlight": "that last",
-    "subtitle": "Turnkey renovations, construction, and finishes. One team for reliable timelines and attention to detail.",
+    "subtitle": "Turnkey renovations, construction, and finishes in Modena and province — including Sassuolo, Carpi, and Formigine. One team for reliable timelines and attention to detail.",
     "ctaQuote": "Request a quote",
     "ctaWorks": "See our work",
     "statYears": "years’ experience",
@@ -121,6 +123,7 @@
   },
   "Footer": {
     "tagline": "Renovations and construction in {area}. Quality, clear timelines, and organised sites.",
+    "napAreas": "We work in Modena and province: Sassuolo, Carpi, Formigine, and surrounding towns.",
     "contacts": "Contact",
     "quick": "Quick links",
     "legalData": "Company details",

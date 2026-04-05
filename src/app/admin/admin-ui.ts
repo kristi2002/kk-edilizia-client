@@ -30,3 +30,7 @@ export const adminAlertErr =
 
 /** Campi portfolio / estimator (stesso stile). */
 export const adminField = adminInput;
+
+/** Testi lunghi nella tabella stima costi (colonne Testo IT / EN). */
+export const adminEstimatorTextarea =
+  "w-full min-w-[14rem] max-w-none rounded-xl border-2 border-white/15 bg-[#0c0c0c] px-4 py-3.5 text-base leading-relaxed text-white placeholder:text-zinc-500 focus:border-[#c9a227] focus:outline-none focus:ring-2 focus:ring-[#c9a227]/25 min-h-[168px] resize-y sm:min-w-[18rem]";

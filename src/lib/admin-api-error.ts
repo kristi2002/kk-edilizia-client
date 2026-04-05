@@ -1,3 +1,14 @@
+/**
+ * Lanciare dopo `setError(...)` nelle azioni admin confermate da `AdminConfirmDialog`,
+ * così il modale non si chiude e l’utente vede il messaggio di errore.
+ */
+export class AdminActionFailedError extends Error {
+  constructor() {
+    super("ADMIN_ACTION_FAILED");
+    this.name = "AdminActionFailedError";
+  }
+}
+
 /** Messaggio leggibile per risposte PUT fallite dalle route /api/admin/*. */
 export function messageFromAdminPutFailure(
   status: number,

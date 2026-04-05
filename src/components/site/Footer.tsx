@@ -44,7 +44,12 @@ export function Footer({ site }: Props) {
           </a>
           <p className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" />
-            {formatLegalAddress(site)}
+            <span>
+              <span className="block text-zinc-300">{formatLegalAddress(site)}</span>
+              <span className="mt-2 block text-xs leading-relaxed text-zinc-500">
+                {t("napAreas")}
+              </span>
+            </span>
           </p>
         </div>
         <div>

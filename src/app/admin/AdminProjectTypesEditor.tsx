@@ -3,7 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { ProjectTypeDef } from "@/lib/data/project-types";
-import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+import {
+  AdminActionFailedError,
+  messageFromAdminPutFailure,
+} from "@/lib/admin-api-error";
+import { AdminConfirmDialog } from "./AdminConfirmDialog";
 import { adminField } from "./admin-ui";
 
 type Props = {
@@ -22,6 +26,7 @@ export function AdminProjectTypesEditor({
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [seedDialogOpen, setSeedDialogOpen] = useState(false);
 
   const saveTypes = async () => {
     setBusy(true);
@@ -52,20 +57,32 @@ export function AdminProjectTypesEditor({
     }
   };
 
-  const seedTypes = async () => {
-    if (!window.confirm("Ripristinare i tipi progetto dal codice?")) return;
+  const performSeedTypes = async () => {
     setBusy(true);
+    setError(null);
     try {
       const res = await fetch("/api/admin/project-types/seed", {
         method: "POST",
         credentials: "include",
       });
-      if (!res.ok) return;
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as {
+          error?: string;
+          message?: string;
+        };
+        setError(messageFromAdminPutFailure(res.status, data));
+        throw new AdminActionFailedError();
+      }
       const refreshed = await fetch("/api/admin/project-types", {
         credentials: "include",
       });
       setProjectTypes((await refreshed.json()) as ProjectTypeDef[]);
+      setMessage("Tipi ripristinati dal codice.");
       router.refresh();
+    } catch (e) {
+      if (e instanceof AdminActionFailedError) throw e;
+      setError("Rete non disponibile.");
+      throw new AdminActionFailedError();
     } finally {
       setBusy(false);
     }
@@ -86,6 +103,14 @@ export function AdminProjectTypesEditor({
 
   return (
     <div className="space-y-6">
+      <AdminConfirmDialog
+        open={seedDialogOpen}
+        onOpenChange={setSeedDialogOpen}
+        title="Ripristinare i tipi di progetto?"
+        description="I tipi salvati su Redis saranno sostituiti con l’elenco definito nel codice (staticProjectTypes). Eventuali modifiche non salvate in questa pagina andranno perse."
+        confirmLabel="Sì, ripristina"
+        onConfirm={performSeedTypes}
+      />
       <section className="rounded-lg border border-white/10 bg-black/20 p-4 sm:p-6">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[#c9a227]">
           Elenco tipi
@@ -162,7 +187,7 @@ export function AdminProjectTypesEditor({
           </button>
           <button
             type="button"
-            onClick={() => void seedTypes()}
+            onClick={() => setSeedDialogOpen(true)}
             disabled={busy || !redisOk}
             className="rounded border border-white/15 px-3 py-1.5 text-sm disabled:opacity-40"
           >

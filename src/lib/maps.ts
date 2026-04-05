@@ -17,8 +17,11 @@ export function googleMapsDirectionsUrl(site: SiteData): string {
 
 /**
  * Embed senza API key (anteprima statica). L’interazione avviene tramite overlay link alle indicazioni.
+ * Opzionale: incolla l’URL «Embed a map» da Google Maps in NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL.
  */
 export function googleMapsEmbedUrl(site: SiteData): string {
+  const custom = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL?.trim();
+  if (custom) return custom;
   const q = encodeURIComponent(formatAddressForMaps(site));
   return `https://maps.google.com/maps?q=${q}&z=16&hl=it&output=embed`;
 }

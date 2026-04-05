@@ -24,7 +24,7 @@ export default async function AdminEstimatorPage() {
       </div>
 
       <AdminSection
-        step={4}
+        step={5}
         accent="sky"
         title="Fasce e testi"
         intro="Modifica le righe e salva quando hai finito."

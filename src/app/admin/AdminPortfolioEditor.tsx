@@ -7,7 +7,11 @@ import type { Project } from "@/lib/data/projects";
 import { createEmptyProject, DEMO_PANORAMA_URL } from "@/lib/data/projects";
 import type { ProjectTypeDef } from "@/lib/data/project-types";
 import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
-import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+import {
+  AdminActionFailedError,
+  messageFromAdminPutFailure,
+} from "@/lib/admin-api-error";
+import { AdminConfirmDialog } from "./AdminConfirmDialog";
 import { adminField } from "./admin-ui";
 
 function describeUploadError(
@@ -52,6 +56,8 @@ export function AdminPortfolioEditor({
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [seedDialogOpen, setSeedDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const selected = projects.find((p) => p.slug === slug) ?? projects[0];
 
@@ -95,14 +101,7 @@ export function AdminPortfolioEditor({
     }
   };
 
-  const seedProjects = async () => {
-    if (
-      !window.confirm(
-        "Sovrascrivere i progetti su Redis con una copia dal codice (projects.ts)?",
-      )
-    ) {
-      return;
-    }
+  const performSeedProjects = async () => {
     setBusy(true);
     setError(null);
     try {
@@ -114,15 +113,17 @@ export function AdminPortfolioEditor({
       };
       if (!res.ok) {
         setError(messageFromAdminPutFailure(res.status, data));
-        return;
+        throw new AdminActionFailedError();
       }
       const refreshed = await fetch("/api/admin/projects", { credentials: "include" });
       const next = (await refreshed.json()) as Project[];
       setProjects(next);
       setSlug(next[0]?.slug ?? "");
       router.refresh();
-    } catch {
+    } catch (e) {
+      if (e instanceof AdminActionFailedError) throw e;
       setError("Rete non disponibile.");
+      throw new AdminActionFailedError();
     } finally {
       setBusy(false);
     }
@@ -208,12 +209,11 @@ export function AdminPortfolioEditor({
     setSlug(np.slug);
   };
 
-  const deleteProject = () => {
+  const performDeleteProject = () => {
     if (!selected || projects.length <= 1) {
       setError("Serve almeno un progetto.");
-      return;
+      throw new AdminActionFailedError();
     }
-    if (!window.confirm(`Eliminare il progetto «${selected.title}»?`)) return;
     const removed = selected.slug;
     const next = projects.filter((x) => x.slug !== removed);
     setProjects(next);
@@ -265,6 +265,26 @@ export function AdminPortfolioEditor({
 
   return (
     <div className="space-y-10">
+      <AdminConfirmDialog
+        open={seedDialogOpen}
+        onOpenChange={setSeedDialogOpen}
+        title="Sincronizzare i progetti dal codice?"
+        description="Tutti i progetti salvati su Redis saranno sostituiti con la copia definita in projects.ts. Le modifiche attuali andranno perse se non le hai esportate altrove. Procedere?"
+        confirmLabel="Sì, sincronizza"
+        onConfirm={performSeedProjects}
+      />
+      <AdminConfirmDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        title="Eliminare questo progetto?"
+        description={
+          selected
+            ? `Il progetto «${selected.title}» (${selected.slug}) verrà rimosso dall’elenco in questa schermata. Ricorda di salvare il portfolio per pubblicare la modifica.`
+            : ""
+        }
+        confirmLabel="Sì, elimina"
+        onConfirm={performDeleteProject}
+      />
       <p className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-400">
         Le <strong className="text-zinc-200">categorie / tipi</strong> si modificano nella sezione
         dedicata del menu: <strong className="text-zinc-200">Tipi di progetto</strong>. Qui assegni
@@ -274,7 +294,7 @@ export function AdminPortfolioEditor({
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => void seedProjects()}
+          onClick={() => setSeedDialogOpen(true)}
           disabled={busy || !redisOk}
           className="rounded-lg border border-white/15 px-4 py-2 text-sm disabled:opacity-40"
         >
@@ -297,7 +317,13 @@ export function AdminPortfolioEditor({
         </button>
         <button
           type="button"
-          onClick={deleteProject}
+          onClick={() => {
+            if (!selected || projects.length <= 1) {
+              setError("Serve almeno un progetto.");
+              return;
+            }
+            setDeleteDialogOpen(true);
+          }}
           className="rounded-lg border border-red-500/30 px-4 py-2 text-sm text-red-400"
         >
           Elimina progetto

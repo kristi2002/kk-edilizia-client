@@ -7,12 +7,21 @@ import { formatLegalAddress } from "@/lib/site";
 import { getSite } from "@/lib/data/site-store";
 import { googleMapsDirectionsUrl } from "@/lib/maps";
 import { ContactMap } from "@/components/contatti/ContactMap";
+import enMessages from "../../../../messages/en.json";
+import itMessages from "../../../../messages/it.json";
 
-export const metadata: Metadata = {
-  title: "Contatti",
-  description:
-    "Telefono, email, PEC e sede operativa di K.K Edilizia a Modena. Modulo messaggi e preventivo online.",
-};
+type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
+  return {
+    title: meta.contactsTitle,
+    description: meta.contactsDescription,
+  };
+}
 
 export default async function ContattiPage() {
   const site = await getSite();

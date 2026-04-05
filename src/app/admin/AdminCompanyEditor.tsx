@@ -4,7 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { SiteData } from "@/lib/site";
 import { siteValidationMessageItalian } from "@/lib/admin-site-validation";
+import { AdminActionFailedError } from "@/lib/admin-api-error";
 import { siteSchema } from "@/lib/validate-site-payload";
+import { AdminConfirmDialog } from "./AdminConfirmDialog";
 import {
   adminAlertErr,
   adminAlertOk,
@@ -29,6 +31,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [seedDialogOpen, setSeedDialogOpen] = useState(false);
 
   const set =
     (key: keyof SiteData) =>
@@ -89,14 +92,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
     }
   };
 
-  const seed = async () => {
-    if (
-      !window.confirm(
-        "Vuoi davvero ANNULLARE le modifiche e ripristinare i dati originali salvati nel codice?\n\nQuesta azione non si può annullare qui: dovrai reinserire a mano ciò che avevi cambiato.",
-      )
-    ) {
-      return;
-    }
+  const performSeed = async () => {
     setBusy(true);
     setError(null);
     setMessage(null);
@@ -111,15 +107,17 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
       };
       if (!res.ok) {
         setError(data.error ?? `Errore ${res.status}`);
-        return;
+        throw new AdminActionFailedError();
       }
       const refreshed = await fetch("/api/admin/site", { credentials: "include" });
       const next = (await refreshed.json()) as SiteData;
       setSite(next);
       setMessage("Dati ripristinati ai valori di partenza.");
       router.refresh();
-    } catch {
+    } catch (e) {
+      if (e instanceof AdminActionFailedError) throw e;
       setError("Connessione assente. Riprova.");
+      throw new AdminActionFailedError();
     } finally {
       setBusy(false);
     }
@@ -147,13 +145,21 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
         </button>
         <button
           type="button"
-          onClick={() => void seed()}
+          onClick={() => setSeedDialogOpen(true)}
           disabled={busy || !redisOk}
           className={adminBtnSecondary}
         >
           Ripristina valori originali
         </button>
       </div>
+      <AdminConfirmDialog
+        open={seedDialogOpen}
+        onOpenChange={setSeedDialogOpen}
+        title="Ripristinare i dati azienda?"
+        description="Verranno annullate le modifiche non salvate in questa schermata e sostituiti i dati su Redis con i valori originali dal codice del sito. Dovrai reinserire a mano ciò che avevi personalizzato. Procedere?"
+        confirmLabel="Sì, ripristina"
+        onConfirm={performSeed}
+      />
       <p className="text-sm text-zinc-500">
         Dopo ogni modifica premi <strong className="text-zinc-300">Salva</strong>. Il
         pulsante «Ripristina» serve solo in emergenza.

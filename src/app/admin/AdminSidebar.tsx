@@ -6,6 +6,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   Building2,
   Calculator,
+  ClipboardList,
   Images,
   Info,
   LayoutDashboard,
@@ -22,6 +23,7 @@ const items: {
   { href: "/admin/company", label: "Dati azienda", icon: Building2 },
   { href: "/admin/project-types", label: "Tipi di progetto", icon: Layers },
   { href: "/admin/portfolio", label: "Portfolio", icon: Images },
+  { href: "/admin/preventivo", label: "Modulo preventivo", icon: ClipboardList },
   { href: "/admin/estimator", label: "Stima costi", icon: Calculator },
   { href: "/admin/info", label: "Info & FAQ", icon: Info },
 ];

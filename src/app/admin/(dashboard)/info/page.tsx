@@ -16,7 +16,7 @@ export default function AdminInfoPage() {
       </div>
 
       <AdminSection
-        step={5}
+        step={6}
         title="Domande frequenti (FAQ)"
         intro="Le domande e risposte della pagina FAQ sono nel codice del progetto."
       >
@@ -35,7 +35,7 @@ export default function AdminInfoPage() {
       </AdminSection>
 
       <AdminSection
-        step={6}
+        step={7}
         title="Testi del sito (lingue)"
         intro="Pulsanti, titoli e footer sono nei file di traduzione."
       >

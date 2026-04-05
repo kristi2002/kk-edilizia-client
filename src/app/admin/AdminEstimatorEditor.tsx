@@ -3,11 +3,16 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { EstimatorCategoryRow } from "@/lib/data/cost-estimator";
-import { messageFromAdminPutFailure } from "@/lib/admin-api-error";
+import {
+  AdminActionFailedError,
+  messageFromAdminPutFailure,
+} from "@/lib/admin-api-error";
+import { AdminConfirmDialog } from "./AdminConfirmDialog";
 import {
   adminAlertWarn,
   adminBtnPrimary,
   adminBtnSecondary,
+  adminEstimatorTextarea,
   adminField,
 } from "./admin-ui";
 
@@ -24,6 +29,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [seedDialogOpen, setSeedDialogOpen] = useState(false);
 
   const save = async () => {
     setBusy(true);
@@ -54,8 +60,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
     }
   };
 
-  const seed = async () => {
-    if (!window.confirm("Ripristinare le fasce dal codice (cost-estimator)?")) return;
+  const performSeed = async () => {
     setBusy(true);
     setError(null);
     try {
@@ -69,7 +74,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
           message?: string;
         };
         setError(messageFromAdminPutFailure(res.status, data));
-        return;
+        throw new AdminActionFailedError();
       }
       const refreshed = await fetch("/api/admin/estimator", {
         credentials: "include",
@@ -77,8 +82,10 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
       setRows((await refreshed.json()) as EstimatorCategoryRow[]);
       setMessage("Ripristinato dal codice.");
       router.refresh();
-    } catch {
+    } catch (e) {
+      if (e instanceof AdminActionFailedError) throw e;
       setError("Rete non disponibile.");
+      throw new AdminActionFailedError();
     } finally {
       setBusy(false);
     }
@@ -135,13 +142,22 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
         </button>
         <button
           type="button"
-          onClick={() => void seed()}
+          onClick={() => setSeedDialogOpen(true)}
           disabled={busy || !redisOk}
           className={adminBtnSecondary}
         >
           Ripristina valori originali
         </button>
       </div>
+
+      <AdminConfirmDialog
+        open={seedDialogOpen}
+        onOpenChange={setSeedDialogOpen}
+        title="Ripristinare le fasce di prezzo?"
+        description="Le fasce salvate su Redis saranno sostituite con i valori definiti nel codice (cost-estimator). Le modifiche attuali andranno perse finché non le salvi di nuovo dopo un eventuale modifica manuale."
+        confirmLabel="Sì, ripristina"
+        onConfirm={performSeed}
+      />
 
       {message && (
         <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-base text-emerald-100">
@@ -155,7 +171,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
       )}
 
       <div className="overflow-x-auto rounded-xl border border-white/10">
-        <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+        <table className="w-full min-w-[960px] border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-white/10 bg-white/[0.03] text-zinc-400">
               <th className="px-3 py-3 pr-2 font-semibold">Codice</th>
@@ -207,7 +223,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
                 </td>
                 <td className="p-2 pr-2">
                   <textarea
-                    className={`${adminField} min-h-[52px]`}
+                    className={adminEstimatorTextarea}
                     value={row.descriptionIt}
                     onChange={(e) =>
                       setRow(row.id, { descriptionIt: e.target.value })
@@ -223,7 +239,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
                 </td>
                 <td className="p-2 pr-2">
                   <textarea
-                    className={`${adminField} min-h-[52px]`}
+                    className={adminEstimatorTextarea}
                     value={row.descriptionEn}
                     onChange={(e) =>
                       setRow(row.id, { descriptionEn: e.target.value })

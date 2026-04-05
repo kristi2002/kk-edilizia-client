@@ -10,6 +10,7 @@ export const preventivoSchema = z.object({
   email: z.string().email("Email non valida").max(254),
   phone: z.string().min(6, "Telefono non valido").max(40),
   notes: z.string().max(4000).optional(),
+  locale: z.enum(["it", "en"]).optional(),
 });
 
 export type PreventivoInput = z.infer<typeof preventivoSchema>;
