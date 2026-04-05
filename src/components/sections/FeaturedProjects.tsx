@@ -59,8 +59,9 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
                       src={p.coverImage}
                       alt={loc.title}
                       fill
+                      quality={72}
                       className="object-cover transition duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 767px) 100vw, 400px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition group-hover:opacity-100" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">

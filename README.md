@@ -33,8 +33,8 @@ Apri [http://localhost:3000](http://localhost:3000). Il dev server usa Webpack (
 Copia `.env.example` in `.env.local` nella **radice** del repo (accanto a `package.json`). Riepilogo:
 
 - **`NEXT_PUBLIC_SITE_URL`** — URL canonico (sitemap, Open Graph, metadata).
-- **`NEXT_PUBLIC_GA_MEASUREMENT_ID`** — Google Analytics 4 (gtag); opzionale, vedi `.env.example`.
-- **`NEXT_PUBLIC_GTM_ID`** — Google Tag Manager (snippet head + noscript body); opzionale.
+- **`NEXT_PUBLIC_GTM_ID`** — Google Tag Manager; con GTM attivo il gtag GA4 diretto non viene caricato (configura GA4 nel container).
+- **`NEXT_PUBLIC_GA_MEASUREMENT_ID`** — GA4 solo senza GTM, vedi `.env.example`.
 - **Email** — invio moduli (Gmail con password app **oppure** Resend): vedi commenti in `.env.example`.
 - **Redis (Upstash)** — rate limiting sulle API dei form; opzionale in dev.
 - **Admin** (`ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`) — area `/admin` (contenuti Redis, portfolio, blob); senza queste variabili l’admin non è esposta.

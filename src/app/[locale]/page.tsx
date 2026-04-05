@@ -1,16 +1,36 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { StatsStrip } from "@/components/sections/StatsStrip";
-import { Services } from "@/components/sections/Services";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
-import { FaqSection } from "@/components/sections/FaqSection";
-import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
 import { isCostEstimateEnabled } from "@/lib/features";
+
+const Services = dynamic(() =>
+  import("@/components/sections/Services").then((m) => ({ default: m.Services })),
+);
+const FeaturedProjects = dynamic(() =>
+  import("@/components/sections/FeaturedProjects").then((m) => ({
+    default: m.FeaturedProjects,
+  })),
+);
+const ReviewsStrip = dynamic(() =>
+  import("@/components/sections/ReviewsStrip").then((m) => ({
+    default: m.ReviewsStrip,
+  })),
+);
+const FaqSection = dynamic(() =>
+  import("@/components/sections/FaqSection").then((m) => ({
+    default: m.FaqSection,
+  })),
+);
+const CtaBanner = dynamic(() =>
+  import("@/components/sections/CtaBanner").then((m) => ({
+    default: m.CtaBanner,
+  })),
+);
 
 export const revalidate = 60;
 

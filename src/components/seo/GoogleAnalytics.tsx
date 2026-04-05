@@ -1,9 +1,10 @@
 import Script from "next/script";
 
-const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 
 export function GoogleAnalytics() {
-  if (!gaId) return null;
+  if (!gaId || gtmId) return null;
 
   return (
     <>

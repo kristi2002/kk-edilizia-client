@@ -17,10 +17,18 @@ export function Footer({ site }: Props) {
 
   return (
     <footer className="border-t border-white/10 bg-[#050505]">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-1">
-          <p className="font-serif text-2xl text-white">{site.brand}</p>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-zinc-500">
+          <p className="text-2xl font-semibold tracking-tight text-white">
+            {site.brand}
+          </p>
+          <p
+            className={
+              locale === "en"
+                ? "mt-3 max-w-xs min-h-[6.5rem] text-sm leading-relaxed text-zinc-500 sm:min-h-[5.5rem]"
+                : "mt-3 max-w-xs text-sm leading-relaxed text-zinc-500"
+            }
+          >
             {t("tagline", { area })}
           </p>
         </div>

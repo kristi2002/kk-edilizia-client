@@ -71,6 +71,8 @@ export default async function ProjectPage({ params }: Props) {
             alt=""
             fill
             priority
+            fetchPriority="high"
+            quality={72}
             className="object-cover"
             sizes="100vw"
           />
@@ -147,8 +149,9 @@ export default async function ProjectPage({ params }: Props) {
                     src={src}
                     alt=""
                     fill
+                    quality={72}
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 384px"
                   />
                 </div>
               </FadeIn>

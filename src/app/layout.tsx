@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
@@ -7,6 +6,7 @@ import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
 } from "@/components/seo/GoogleTagManager";
+import { DeferredVercelAnalytics } from "@/components/seo/DeferredVercelAnalytics";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { getSiteUrl } from "@/lib/data/site-store";
 
@@ -14,12 +14,16 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  adjustFontFallback: true,
+  preload: true,
 });
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
   weight: ["400"],
+  adjustFontFallback: true,
+  preload: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -41,13 +45,21 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${dmSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="preconnect"
+          href="https://images.unsplash.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className="flex min-h-full flex-col bg-[#080808] font-sans">
         <GoogleTagManagerBody />
         <GoogleTagManagerHead />
         <GoogleAnalytics />
         <LocalBusinessJsonLd />
         {children}
-        <Analytics />
+        <DeferredVercelAnalytics />
       </body>
     </html>
   );

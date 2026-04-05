@@ -47,8 +47,9 @@ export default async function PortfolioPage({ params }: Props) {
                         src={p.coverImage}
                         alt=""
                         fill
+                        quality={72}
                         className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, 50vw"
+                        sizes="(max-width: 639px) 100vw, 560px"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80" />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
