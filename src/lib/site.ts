@@ -19,7 +19,8 @@ export type SiteData = {
   vatId: string;
   fiscalCode: string;
   rea: string;
-  shareCapital: string;
+  /** Forma giuridica (es. impresa individuale); non capitale sociale. */
+  legalForm: string;
   address: SiteAddress;
   serviceArea: string;
   serviceAreaEn: string;
@@ -41,7 +42,7 @@ export const staticSite: SiteData = {
   vatId: "04117840365",
   fiscalCode: "KMNKLO93E12Z100X",
   rea: "MO-444353",
-  shareCapital: "Impresa individuale",
+  legalForm: "Impresa individuale",
   address: {
     street: "Via Galileo Galilei, 145",
     postalCode: "41126",
@@ -53,8 +54,8 @@ export const staticSite: SiteData = {
   serviceAreaEn: "Modena and province (neighbouring municipalities on request)",
   email: "kkedilizia@gmail.com",
   pec: "kk.edilizia@legalmail.it",
-  phoneDisplay: "+39 02 0000 0000",
-  phoneTel: "+390200000000",
+  phoneDisplay: "+39 376 120 1188",
+  phoneTel: "+393761201188",
   privacyContactName: "Titolare del trattamento — KK Edilizia di Komini Koli",
   publicReviewUrl: "",
   insurance:

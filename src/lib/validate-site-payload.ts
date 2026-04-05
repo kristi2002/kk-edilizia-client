@@ -16,7 +16,7 @@ export const siteSchema = z.object({
   vatId: z.string(),
   fiscalCode: z.string(),
   rea: z.string(),
-  shareCapital: z.string(),
+  legalForm: z.string(),
   address: addressSchema,
   serviceArea: z.string(),
   serviceAreaEn: z.string(),
@@ -31,12 +31,25 @@ export const siteSchema = z.object({
   certifications: z.string(),
 });
 
+/** Migrazione: vecchi salvataggi Redis usavano `shareCapital` (capitale / S.r.l.). */
+function normalizeSitePayload(body: unknown): unknown {
+  if (typeof body !== "object" || body === null || Array.isArray(body)) {
+    return body;
+  }
+  const o = { ...(body as Record<string, unknown>) };
+  if (typeof o.shareCapital === "string" && o.legalForm === undefined) {
+    o.legalForm = o.shareCapital;
+    delete o.shareCapital;
+  }
+  return o;
+}
+
 export function parseSitePayload(body: unknown): SiteData {
-  return siteSchema.parse(body) as SiteData;
+  return siteSchema.parse(normalizeSitePayload(body)) as SiteData;
 }
 
 /** Lettura da Redis: accetta solo oggetti che rispettano lo schema. */
 export function tryParseStoredSite(body: unknown): SiteData | null {
-  const r = siteSchema.safeParse(body);
+  const r = siteSchema.safeParse(normalizeSitePayload(body));
   return r.success ? (r.data as SiteData) : null;
 }

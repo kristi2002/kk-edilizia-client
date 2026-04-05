@@ -125,7 +125,7 @@ export function Footer({ site }: Props) {
           <p>C.F. {site.fiscalCode}</p>
           <p>REA {site.rea}</p>
           <p className="mt-2">
-            {t("shareCapital")} {site.shareCapital}
+            {t("legalForm")} {site.legalForm}
           </p>
           <p className="mt-2">
             {t("pec")}:{" "}

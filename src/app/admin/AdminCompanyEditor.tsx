@@ -207,7 +207,9 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
               />
             </div>
             <div>
-              <label className={adminLabel}>Ragione sociale completa</label>
+              <label className={adminLabel}>
+                Denominazione / intestazione completa
+              </label>
               <input
                 className={adminInput}
                 value={site.legalName}
@@ -219,9 +221,9 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
       </div>
 
       <div className={adminSubCard}>
-        <h3 className="text-lg font-semibold text-white">Dati fiscali e societari</h3>
+        <h3 className="text-lg font-semibold text-white">Dati fiscali</h3>
         <p className="mt-1 text-sm text-zinc-500">
-          Partita IVA, codice fiscale, REA e capitale (come in visura).
+          Partita IVA, codice fiscale, REA e forma giuridica (come in visura).
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -241,11 +243,12 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
             <input className={adminInput} value={site.rea} onChange={set("rea")} />
           </div>
           <div>
-            <label className={adminLabel}>Capitale sociale</label>
+            <label className={adminLabel}>Forma giuridica</label>
             <input
               className={adminInput}
-              value={site.shareCapital}
-              onChange={set("shareCapital")}
+              value={site.legalForm}
+              onChange={set("legalForm")}
+              placeholder="es. Impresa individuale"
             />
           </div>
         </div>

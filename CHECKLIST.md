@@ -9,17 +9,16 @@ Segna le voci man mano che le completi. I riferimenti ai file sono relativi alla
 | Campo | Valore attuale / nota |
 |--------|------------------------|
 | Fallback URL (`getSiteUrl` senza env) | `https://kk-edilizia.example.com` → imposta **`NEXT_PUBLIC_SITE_URL`** (vedi sezione 2) |
-| `legalName` | `K.K Edilizia S.r.l.` — verificare con visura |
-| `vatId` | `IT00000000000` |
-| `fiscalCode` | `00000000000` |
-| `rea` | `MI-0000000` |
-| `shareCapital` | `10.000 € i.v.` |
+| `legalName` | `KK Edilizia di Komini Koli` — verificare con visura |
+| `vatId` | `04117840365` |
+| `fiscalCode` | `KMNKLO93E12Z100X` |
+| `rea` | `MO-444353` |
+| `legalForm` | `Impresa individuale` (non società di capitali) |
 | `address.street` | `Via Esempio 1` |
 | `address.postalCode` / `city` / `province` | `20100`, `Milano`, `MI` — allineare alla sede reale |
 | `email` | `info@kkedilizia.it` |
-| `pec` | `kkedilizia@pec.example.it` |
-| `phoneDisplay` | `+39 02 0000 0000` |
-| `phoneTel` | `+39 376 120 1188` (deve corrispondere al numero reale) |
+| `pec` | `kk.edilizia@legalmail.it` |
+| `phoneDisplay` / `phoneTel` | `+39 376 120 1188` / `+393761201188` |
 | `privacyContactName` | testo generico — eventualmente nome/cognome o ufficio |
 | `publicReviewUrl` | vuoto — incollare URL scheda Google Business se si vuole il link in Contatti |
 | `insurance` / `compliance` / `certifications` | testi tipo — adattare a SOA/realtà; verifica con consulente |
