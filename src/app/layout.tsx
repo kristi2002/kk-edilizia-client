@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { getSiteUrl } from "@/lib/data/site-store";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-[#080808] font-sans">
+        <GoogleAnalytics />
         <LocalBusinessJsonLd />
         {children}
         <Analytics />

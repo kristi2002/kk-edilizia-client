@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { Services } from "@/components/sections/Services";
@@ -12,6 +13,12 @@ import { getProjectTypes } from "@/lib/data/project-types-store";
 import { isCostEstimateEnabled } from "@/lib/features";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  verification: {
+    google: "KdPU4_43HtR4glC64es63YrJvtPMXdz6xrq06E2iRkc",
+  },
+};
 
 export default async function Home() {
   const [projects, projectTypes] = await Promise.all([
