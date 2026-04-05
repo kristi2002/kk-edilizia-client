@@ -21,6 +21,10 @@ export type SiteData = {
   rea: string;
   /** Forma giuridica (es. impresa individuale); non capitale sociale. */
   legalForm: string;
+  /** Partita IVA intracomunitaria (es. IT04117840365) per dati strutturati e fatturazione cross-border. */
+  vatEu: string;
+  /** Valore numerico per schema.org (es. 1). */
+  numberOfEmployees: number;
   address: SiteAddress;
   serviceArea: string;
   serviceAreaEn: string;
@@ -38,11 +42,13 @@ export type SiteData = {
 export const staticSite: SiteData = {
   canonicalUrl: "",
   brand: "K.K Edilizia",
-  legalName: "KK Edilizia di Komini Koli",
+  legalName: "KK EDILIZIA DI KOMINI KOLI",
   vatId: "04117840365",
   fiscalCode: "KMNKLO93E12Z100X",
-  rea: "MO-444353",
+  rea: "444353",
   legalForm: "Impresa individuale",
+  vatEu: "IT04117840365",
+  numberOfEmployees: 1,
   address: {
     street: "Via Galileo Galilei, 145",
     postalCode: "41126",
@@ -56,7 +62,7 @@ export const staticSite: SiteData = {
   pec: "kk.edilizia@legalmail.it",
   phoneDisplay: "+39 376 120 1188",
   phoneTel: "+393761201188",
-  privacyContactName: "Titolare del trattamento — KK Edilizia di Komini Koli",
+  privacyContactName: "Titolare del trattamento — KK EDILIZIA DI KOMINI KOLI",
   publicReviewUrl: "",
   insurance:
     "Copertura assicurativa RC professionale per attività esercitata, in linea con quanto previsto da contratto e normativa di settore.",
@@ -67,7 +73,7 @@ export const staticSite: SiteData = {
 };
 
 /** Fallback in codice quando mancano env e canonical (admin: sostituito con origine richiesta se possibile). */
-export const PLACEHOLDER_PUBLIC_SITE_URL = "https://kk-edilizia.example.com";
+export const PLACEHOLDER_PUBLIC_SITE_URL = "https://kkedilizia.it";
 
 /**
  * Garantisce protocollo assoluto per `href` (evita link relativi tipo `www...` che non aprono nulla).

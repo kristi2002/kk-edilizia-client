@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HomeSectionLink } from "@/components/site/HomeSectionLink";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, HardHat } from "lucide-react";
 import { formatLegalAddress, type SiteData } from "@/lib/site";
 import { isCostEstimateEnabled } from "@/lib/features";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
@@ -143,6 +143,11 @@ export function Footer({ site }: Props) {
           <p className="mt-2">P.IVA {site.vatId}</p>
           <p>C.F. {site.fiscalCode}</p>
           <p>REA {site.rea}</p>
+          {site.vatEu.trim() ? (
+            <p className="mt-2">
+              {t("vatEu")} {site.vatEu}
+            </p>
+          ) : null}
           <p className="mt-2">
             {t("legalForm")} {site.legalForm}
           </p>
@@ -157,8 +162,25 @@ export function Footer({ site }: Props) {
           </p>
         </div>
       </div>
-      <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-400">
-        © {new Date().getFullYear()} {site.legalName} — {t("rights")}
+      <div className="border-t border-white/5 py-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-3 px-4 text-center sm:flex-row sm:gap-6 sm:px-6">
+          <div className="flex items-center gap-2 text-xs text-zinc-400">
+            <HardHat
+              className="h-4 w-4 shrink-0 text-[#c9a227]"
+              aria-hidden
+            />
+            <span>
+              © {new Date().getFullYear()} {site.legalName} — {t("rights")}
+            </span>
+          </div>
+          <span
+            className="hidden h-4 w-px bg-white/10 sm:block"
+            aria-hidden
+          />
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-500">
+            {t("craftMark")}
+          </p>
+        </div>
       </div>
     </footer>
   );

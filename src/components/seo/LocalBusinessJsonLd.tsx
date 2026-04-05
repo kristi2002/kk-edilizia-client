@@ -18,6 +18,8 @@ export async function LocalBusinessJsonLd() {
     name: site.brand,
     legalName: site.legalName,
     taxID: site.vatId,
+    vatID: site.vatEu.trim() || `IT${site.vatId}`,
+    numberOfEmployees: site.numberOfEmployees,
     description: DESCRIPTION_IT,
     url: baseUrl,
     telephone: site.phoneTel,

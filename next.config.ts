@@ -15,6 +15,12 @@ const nextBundledPolyfillModule = require.resolve(
 );
 
 const nextConfig: NextConfig = {
+  /** Browsers request /favicon.ico by default; serve the real logo instead of any framework default. */
+  async rewrites() {
+    return [
+      { source: "/favicon.ico", destination: "/logo.png" },
+    ];
+  },
   experimental: {
     optimizePackageImports: ["framer-motion"],
   },

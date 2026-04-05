@@ -252,6 +252,35 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
             />
           </div>
         </div>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className={adminLabel}>P.IVA intracomunitaria (opzionale)</label>
+            <input
+              className={adminInput}
+              value={site.vatEu}
+              onChange={set("vatEu")}
+              placeholder="IT04117840365"
+              autoComplete="off"
+            />
+          </div>
+          <div>
+            <label className={adminLabel}>Numero dipendenti (dati strutturati)</label>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              className={adminInput}
+              value={site.numberOfEmployees}
+              onChange={(e) => {
+                const n = Number.parseInt(e.target.value, 10);
+                setSite((s) => ({
+                  ...s,
+                  numberOfEmployees: Number.isFinite(n) ? Math.max(0, n) : 0,
+                }));
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       <div className={adminSubCard}>

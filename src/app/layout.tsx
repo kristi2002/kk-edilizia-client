@@ -6,7 +6,6 @@ import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
 } from "@/components/seo/GoogleTagManager";
-import { DeferredVercelAnalytics } from "@/components/seo/DeferredVercelAnalytics";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { getSiteUrl } from "@/lib/data/site-store";
 
@@ -30,6 +29,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = await getSiteUrl();
   return {
     metadataBase: new URL(url),
+    icons: {
+      icon: [{ url: "/logo.png", type: "image/png", sizes: "any" }],
+      apple: [{ url: "/logo.png", type: "image/png" }],
+      shortcut: "/logo.png",
+    },
   };
 }
 
@@ -46,6 +50,8 @@ export default function RootLayout({
       className={`${dmSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <head>
+        <link rel="icon" href="/logo.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/logo.png" type="image/png" />
         <link
           rel="preconnect"
           href="https://images.unsplash.com"
@@ -59,7 +65,6 @@ export default function RootLayout({
         <GoogleAnalytics />
         <LocalBusinessJsonLd />
         {children}
-        <DeferredVercelAnalytics />
       </body>
     </html>
   );

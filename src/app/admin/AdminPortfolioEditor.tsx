@@ -385,6 +385,7 @@ export function AdminPortfolioEditor({
           Titolo IT
           <input
             className={adminField}
+            placeholder="es. Ristrutturazione appartamento storico — Centro Modena"
             value={selected.title}
             onChange={(e) => patchProject(selected.slug, { title: e.target.value })}
           />
@@ -393,6 +394,7 @@ export function AdminPortfolioEditor({
           Titolo EN
           <input
             className={adminField}
+            placeholder="e.g. Historic apartment renovation — Modena city centre"
             value={selected.titleEn}
             onChange={(e) => patchProject(selected.slug, { titleEn: e.target.value })}
           />

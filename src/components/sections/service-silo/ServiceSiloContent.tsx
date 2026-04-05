@@ -36,9 +36,11 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
 
         <FadeIn delay={0.1}>
           <div className="mt-10 space-y-5 text-base leading-relaxed text-zinc-400">
-            <p>{t(`${siloKey}.body1`)}</p>
-            <p>{t(`${siloKey}.body2`)}</p>
-            <p>{t(`${siloKey}.body3`)}</p>
+            {(["body1", "body2", "body3", "body4", "body5", "body6"] as const).map(
+              (key) => (
+                <p key={key}>{t(`${siloKey}.${key}`)}</p>
+              ),
+            )}
           </div>
         </FadeIn>
 
