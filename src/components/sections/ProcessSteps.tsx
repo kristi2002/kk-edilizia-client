@@ -38,17 +38,33 @@ export async function ProcessSteps() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
             {t("label")}
           </p>
-          <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
+          <h2
+            id="process-steps-heading"
+            className="mt-3 font-serif text-3xl text-white sm:text-4xl md:text-5xl"
+          >
             {t("title")}
           </h2>
           <p className="mt-4 max-w-2xl text-lg text-zinc-400">{t("intro")}</p>
         </FadeIn>
 
-        <ol className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div
+          role="list"
+          aria-labelledby="process-steps-heading"
+          className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+        >
           {steps.map((s, i) => (
-            <FadeIn key={s.title} delay={i * 0.06}>
-              <li className="relative">
-                <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c9a227]/40 bg-[#c9a227]/10 font-serif text-lg text-[#c9a227]">
+            <div
+              key={s.title}
+              role="listitem"
+              aria-posinset={i + 1}
+              aria-setsize={steps.length}
+              className="relative"
+            >
+              <FadeIn delay={i * 0.06}>
+                <span
+                  aria-hidden="true"
+                  className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c9a227]/40 bg-[#c9a227]/10 font-serif text-lg text-[#c9a227]"
+                >
                   {i + 1}
                 </span>
                 <div className="mb-3 inline-flex rounded-xl bg-white/[0.04] p-3 text-[#c9a227]">
@@ -58,10 +74,10 @@ export async function ProcessSteps() {
                 <p className="mt-2 text-sm leading-relaxed text-zinc-500">
                   {s.text}
                 </p>
-              </li>
-            </FadeIn>
+              </FadeIn>
+            </div>
           ))}
-        </ol>
+        </div>
 
         <FadeIn delay={0.2}>
           <p className="mt-14 text-center text-sm text-zinc-500">

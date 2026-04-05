@@ -44,78 +44,88 @@ export default async function ContattiPage() {
           </FadeIn>
 
           <ul className="mt-12 space-y-6">
-            <FadeIn delay={0.05}>
-              <li className="flex gap-4">
-                <Phone className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                <div>
-                  <p className="text-sm text-zinc-500">Telefono</p>
-                  <a
-                    href={`tel:${site.phoneTel}`}
-                    className="text-lg font-medium text-white hover:text-[#c9a227]"
-                  >
-                    {site.phoneDisplay}
-                  </a>
+            <li>
+              <FadeIn delay={0.05}>
+                <div className="flex gap-4">
+                  <Phone className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Telefono</p>
+                    <a
+                      href={`tel:${site.phoneTel}`}
+                      className="text-lg font-medium text-white hover:text-[#c9a227]"
+                    >
+                      {site.phoneDisplay}
+                    </a>
+                  </div>
                 </div>
-              </li>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <li className="flex gap-4">
-                <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                <div>
-                  <p className="text-sm text-zinc-500">Email</p>
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="text-lg font-medium text-white hover:text-[#c9a227]"
-                  >
-                    {site.email}
-                  </a>
+              </FadeIn>
+            </li>
+            <li>
+              <FadeIn delay={0.1}>
+                <div className="flex gap-4">
+                  <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Email</p>
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="text-lg font-medium text-white hover:text-[#c9a227]"
+                    >
+                      {site.email}
+                    </a>
+                  </div>
                 </div>
-              </li>
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <li className="flex gap-4">
-                <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                <div>
-                  <p className="text-sm text-zinc-500">PEC</p>
-                  <a
-                    href={`mailto:${site.pec}`}
-                    className="text-lg font-medium text-white hover:text-[#c9a227]"
-                  >
-                    {site.pec}
-                  </a>
+              </FadeIn>
+            </li>
+            <li>
+              <FadeIn delay={0.12}>
+                <div className="flex gap-4">
+                  <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                  <div>
+                    <p className="text-sm text-zinc-500">PEC</p>
+                    <a
+                      href={`mailto:${site.pec}`}
+                      className="text-lg font-medium text-white hover:text-[#c9a227]"
+                    >
+                      {site.pec}
+                    </a>
+                  </div>
                 </div>
-              </li>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <li className="flex gap-4">
-                <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                <div>
-                  <p className="text-sm text-zinc-500">Sede</p>
-                  <a
-                    href={mapsDirectionsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-medium text-white underline decoration-[#c9a227]/50 underline-offset-4 transition hover:text-[#c9a227] hover:decoration-[#c9a227]"
-                  >
-                    {formatLegalAddress(site)}
-                  </a>
-                  <p className="mt-1 text-xs text-zinc-600">
-                    Apri le indicazioni su Google Maps
-                  </p>
+              </FadeIn>
+            </li>
+            <li>
+              <FadeIn delay={0.15}>
+                <div className="flex gap-4">
+                  <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Sede</p>
+                    <a
+                      href={mapsDirectionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-medium text-white underline decoration-[#c9a227]/50 underline-offset-4 transition hover:text-[#c9a227] hover:decoration-[#c9a227]"
+                    >
+                      {formatLegalAddress(site)}
+                    </a>
+                    <p className="mt-1 text-xs text-zinc-600">
+                      Apri le indicazioni su Google Maps
+                    </p>
+                  </div>
                 </div>
-              </li>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <li className="flex gap-4">
-                <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                <div>
-                  <p className="text-sm text-zinc-500">Orari</p>
-                  <p className="text-white">
-                    Lun–Ven 8:30–18:30 · Sab su appuntamento
-                  </p>
+              </FadeIn>
+            </li>
+            <li>
+              <FadeIn delay={0.2}>
+                <div className="flex gap-4">
+                  <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Orari</p>
+                    <p className="text-white">
+                      Lun–Ven 8:30–18:30 · Sab su appuntamento
+                    </p>
+                  </div>
                 </div>
-              </li>
-            </FadeIn>
+              </FadeIn>
+            </li>
           </ul>
 
           {site.publicReviewUrl ? (

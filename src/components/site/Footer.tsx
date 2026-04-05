@@ -25,8 +25,8 @@ export function Footer({ site }: Props) {
           <p
             className={
               locale === "en"
-                ? "mt-3 max-w-xs min-h-[6.5rem] text-sm leading-relaxed text-zinc-500 sm:min-h-[5.5rem]"
-                : "mt-3 max-w-xs text-sm leading-relaxed text-zinc-500"
+                ? "mt-3 max-w-xs min-h-[6.5rem] text-sm leading-relaxed text-zinc-400 sm:min-h-[5.5rem]"
+                : "mt-3 max-w-xs text-sm leading-relaxed text-zinc-400"
             }
           >
             {t("tagline", { area })}
@@ -54,7 +54,7 @@ export function Footer({ site }: Props) {
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" />
             <span>
               <span className="block text-zinc-300">{formatLegalAddress(site)}</span>
-              <span className="mt-2 block text-xs leading-relaxed text-zinc-500">
+              <span className="mt-2 block text-xs leading-relaxed text-zinc-400">
                 {t("napAreas")}
               </span>
             </span>
@@ -122,7 +122,7 @@ export function Footer({ site }: Props) {
             </li>
           </ul>
         </div>
-        <div className="text-xs leading-relaxed text-zinc-500">
+        <div className="text-xs leading-relaxed text-zinc-400">
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
             {t("legalData")}
           </p>
@@ -144,7 +144,7 @@ export function Footer({ site }: Props) {
           </p>
         </div>
       </div>
-      <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-600">
+      <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-400">
         © {new Date().getFullYear()} {site.legalName} — {t("rights")}
       </div>
     </footer>

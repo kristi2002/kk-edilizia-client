@@ -69,17 +69,19 @@ export default async function ChiSiamoPage() {
 
           <ul className="mt-16 space-y-12">
             {pillars.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.08}>
-                <li className="flex gap-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#c9a227]/15 text-[#c9a227]">
-                    <item.icon className="h-6 w-6" />
+              <li key={item.title}>
+                <FadeIn delay={i * 0.08}>
+                  <div className="flex gap-5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#c9a227]/15 text-[#c9a227]">
+                      <item.icon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h2 className="font-serif text-xl text-white">{item.title}</h2>
+                      <p className="mt-2 text-zinc-500">{item.text}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="font-serif text-xl text-white">{item.title}</h2>
-                    <p className="mt-2 text-zinc-500">{item.text}</p>
-                  </div>
-                </li>
-              </FadeIn>
+                </FadeIn>
+              </li>
             ))}
           </ul>
 
