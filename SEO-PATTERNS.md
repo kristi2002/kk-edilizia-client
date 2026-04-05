@@ -2,11 +2,13 @@
 
 This document summarizes **search-oriented patterns** implemented in the codebase so the project stays understandable when you extend content or deploy to production. It is **not** a guarantee of rankings; search engines decide what to show.
 
+**See also:** [Guida introduttiva SEO (Google, contesto generale, IT)](docs/seo-guida-introduttiva-google-it.md) — general principles from Google Search Central; **this document** describes **this codebase** only.
+
 ---
 
 ## 1. Technical foundation (Next.js App Router)
 
-- **Per-route metadata** — Pages export `generateMetadata` (or `metadata`) so each URL has its own **title**, **description**, and where relevant **keywords** and **Open Graph** fields (`opengraph-image.tsx`, layout metadata, service silo helper `buildServiceSiloMetadata`).
+- **Per-route metadata** — Pages export `generateMetadata` (or `metadata`) so each URL has its own **title**, **description**, and **Open Graph** fields (`opengraph-image.tsx`, layout metadata, service silo helper `buildServiceSiloMetadata`). **Canonical URL + `hreflang` alternates** (`it` / `en` / `x-default`) are applied via `withLocaleAlternates` in `src/lib/seo-metadata.ts` so each localized URL has a single canonical and clear language variants (aligns with Google guidance on duplicate content across locales). The HTML **meta keywords** tag is **not** emitted: Google Search ignores it; keyword lists for silos remain in `messages` only as editorial reference if needed.
 - **Canonical base URL** — `getSiteUrl()` (Redis `canonicalUrl` → `NEXT_PUBLIC_SITE_URL` → fallback) drives **sitemap**, **robots**, **JSON-LD `url`**, and consistent absolute links. On **Vercel**, set `NEXT_PUBLIC_SITE_URL` to the **live custom domain** (e.g. `https://kkedilizia.it`), not only the default `*.vercel.app` URL, or canonicals and schema can disagree with Search Console.
 - **`robots.ts`** — Allows crawlers on public routes, blocks `/admin` and `/api/admin`, and points to **`/sitemap.xml`**.
 - **`sitemap.ts`** — Generates URLs for **both locales** (`it`, `en`), static segments, **service silo** routes, portfolio slugs, and virtual-tour URLs when present. Uses **`lastModified`**, **`changeFrequency`**, and **`priority`** hints.
@@ -56,7 +58,7 @@ These help eligible **local** and **knowledge-panel-style** treatments; eligibil
 ## 5. On-page content patterns
 
 - **FAQ (homepage)** — Questions and answers live in **`src/lib/data/faq.ts`** (`faqByLocale.it` / `.en`), not in `messages/*.json`. The UI uses `FaqSection` intro strings from **`messages` → `FaqSection`**. Include **informational** and **AEO-style** queries (permits, timelines, CILA, costs, area served, **Bonus Ristrutturazione / tax relief** with a disclaimer to verify current law with a commercialista). Answers avoid fake precision and point to **survey / quote** where appropriate.
-- **Portfolio** — Project pages with titles, descriptions, and images support **long-tail** and **location** relevance. In **admin**, use descriptive titles (e.g. *Ristrutturazione appartamento storico — Centro Modena*) rather than generic labels; placeholders on the portfolio editor suggest this pattern.
+- **Portfolio** — Project pages with titles, descriptions, and images support **long-tail** and **location** relevance. Cover, gallery, and before/after images use **descriptive `alt`** (project title and gallery index) per Google image guidance. In **admin**, use descriptive titles (e.g. *Ristrutturazione appartamento storico — Centro Modena*) rather than generic labels; placeholders on the portfolio editor suggest this pattern.
 
 ---
 
@@ -98,6 +100,7 @@ These help eligible **local** and **knowledge-panel-style** treatments; eligibil
 | Service silo SEO + long copy | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; rendering `src/components/sections/service-silo/ServiceSiloContent.tsx` |
 | FAQ Q&A text | **`src/lib/data/faq.ts`**; section titles `messages/*.json` → `FaqSection` |
 | Silo routes | `src/lib/service-silos.ts`, `src/app/[locale]/*/page.tsx` |
+| Canonical + hreflang | `src/lib/seo-metadata.ts` (`withLocaleAlternates`) |
 | Sitemap entries | `src/app/sitemap.ts` |
 | Local business schema | `src/components/seo/LocalBusinessJsonLd.tsx` |
 | Robots | `src/app/robots.ts` |
@@ -107,4 +110,4 @@ These help eligible **local** and **knowledge-panel-style** treatments; eligibil
 
 ---
 
-*Last updated: April 2026 — aligned with service silo long copy, FAQ in `faq.ts`, favicon/logo handling, and manifest icons.*
+*Last updated: April 2026 — canonical/hreflang via `seo-metadata.ts`, portfolio meta + image `alt`, no meta keywords in HTML, service silo long copy, FAQ in `faq.ts`, favicon/logo, manifest icons.*

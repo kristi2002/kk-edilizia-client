@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPreventivoFormOptions } from "@/lib/data/preventivo-options-store";
 import { PreventivoForm } from "./PreventivoForm";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -16,10 +17,10 @@ export async function generateMetadata({
     locale === "en"
       ? enMessages.PreventivoPage
       : itMessages.PreventivoPage;
-  return {
+  return withLocaleAlternates(locale, "/preventivo", {
     title: meta.metaTitle,
     description: meta.metaDescription,
-  };
+  });
 }
 
 export default async function PreventivoPage({ params }: PageProps) {

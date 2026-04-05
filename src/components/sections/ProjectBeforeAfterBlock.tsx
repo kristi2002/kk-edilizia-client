@@ -15,6 +15,8 @@ type Props = {
   afterSrc: string;
   beforeLabel: string;
   afterLabel: string;
+  beforeAlt?: string;
+  afterAlt?: string;
 };
 
 export function ProjectBeforeAfterBlock(props: Props) {

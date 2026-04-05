@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
+import enMessages from "../../../../messages/en.json";
+import itMessages from "../../../../messages/it.json";
 
-export const metadata: Metadata = {
-  title: "Privacy policy",
-  description:
-    "Informativa sul trattamento dei dati personali e cookie — K.K Edilizia.",
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function PrivacyPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
+  return withLocaleAlternates(locale, "/privacy", {
+    title: meta.privacyTitle,
+    description: meta.privacyDescription,
+  });
+}
+
+export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const [url, site] = await Promise.all([getSiteUrl(), getSite()]);
 
   return (

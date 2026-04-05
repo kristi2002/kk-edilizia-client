@@ -12,6 +12,7 @@ import { getProjectTypes } from "@/lib/data/project-types-store";
 import { buildPannellumConfigFromProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 
 export const revalidate = 60;
 
@@ -30,11 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return { title: "360°" };
   const projectTypes = await getProjectTypes();
   const loc = getProjectLocalized(project, locale, projectTypes);
-  return {
+  const path = `/portfolio/${project.slug}/virtual-tour`;
+  return withLocaleAlternates(locale, path, {
     title: `${loc.title} — 360°`,
     description: loc.excerpt,
     openGraph: { images: [{ url: project.coverImage }] },
-  };
+  });
 }
 
 export default async function ProjectVirtualTourPage({ params }: Props) {

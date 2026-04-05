@@ -7,6 +7,7 @@ import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
 import { isCostEstimateEnabled } from "@/lib/features";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 
 const Services = dynamic(() =>
   import("@/components/sections/Services").then((m) => ({ default: m.Services })),
@@ -39,11 +40,18 @@ const CtaBanner = dynamic(() =>
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  verification: {
-    google: "KdPU4_43HtR4glC64es63YrJvtPMXdz6xrq06E2iRkc",
-  },
-};
+type HomeParams = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({
+  params,
+}: HomeParams): Promise<Metadata> {
+  const { locale } = await params;
+  return withLocaleAlternates(locale, "/", {
+    verification: {
+      google: "KdPU4_43HtR4glC64es63YrJvtPMXdz6xrq06E2iRkc",
+    },
+  });
+}
 
 export default async function Home() {
   const [projects, projectTypes] = await Promise.all([

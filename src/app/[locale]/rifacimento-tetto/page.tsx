@@ -7,7 +7,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildServiceSiloMetadata(locale, "tetto");
+  return await buildServiceSiloMetadata(locale, "tetto");
 }
 
 export default async function RifacimentoTettoPage({ params }: Props) {

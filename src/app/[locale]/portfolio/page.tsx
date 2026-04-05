@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
+import enMessages from "../../../../messages/en.json";
+import itMessages from "../../../../messages/it.json";
 import { getProjectLocalized } from "@/lib/data/projects";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
@@ -9,6 +13,15 @@ import { FadeIn } from "@/components/motion/FadeIn";
 export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const bundle = locale === "en" ? enMessages : itMessages;
+  return withLocaleAlternates(locale, "/portfolio", {
+    title: bundle.PortfolioPage.metaTitle,
+    description: bundle.PortfolioPage.metaDescription,
+  });
+}
 
 export default async function PortfolioPage({ params }: Props) {
   const { locale } = await params;
@@ -45,7 +58,7 @@ export default async function PortfolioPage({ params }: Props) {
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
                         src={p.coverImage}
-                        alt=""
+                        alt={loc.title}
                         fill
                         quality={72}
                         className="object-cover transition duration-700 group-hover:scale-[1.03]"

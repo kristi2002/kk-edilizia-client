@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { Shield, Users, Award, FileCheck } from "lucide-react";
 import { getSite } from "@/lib/data/site-store";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -12,10 +13,10 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
-  return {
+  return withLocaleAlternates(locale, "/chi-siamo", {
     title: meta.aboutTitle,
     description: meta.aboutDescription,
-  };
+  });
 }
 
 const workPhoto =

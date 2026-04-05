@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import itMessages from "../../messages/it.json";
 import enMessages from "../../messages/en.json";
-import type { ServiceSiloKey } from "./service-silos";
+import { serviceSiloPathForKey, type ServiceSiloKey } from "./service-silos";
+import { withLocaleAlternates } from "./seo-metadata";
 
 type SiloMeta = {
   metaTitle: string;
@@ -15,18 +16,18 @@ function getSilo(locale: string, key: ServiceSiloKey): SiloMeta {
   return silo as SiloMeta;
 }
 
-export function buildServiceSiloMetadata(
+export async function buildServiceSiloMetadata(
   locale: string,
   siloKey: ServiceSiloKey,
-): Metadata {
+): Promise<Metadata> {
   const silo = getSilo(locale, siloKey);
-  return {
+  const path = serviceSiloPathForKey(siloKey);
+  return withLocaleAlternates(locale, path, {
     title: silo.metaTitle,
     description: silo.metaDescription,
-    keywords: silo.metaKeywords,
     openGraph: {
       title: silo.metaTitle,
       description: silo.metaDescription,
     },
-  };
+  });
 }

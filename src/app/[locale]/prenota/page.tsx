@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { PrenotaForm } from "./PrenotaForm";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -12,10 +13,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const booking =
     locale === "en" ? enMessages.Booking : itMessages.Booking;
-  return {
+  return withLocaleAlternates(locale, "/prenota", {
     title: booking.metaTitle,
     description: booking.metaDescription,
-  };
+  });
 }
 
 export default async function PrenotaPage({ params }: Props) {

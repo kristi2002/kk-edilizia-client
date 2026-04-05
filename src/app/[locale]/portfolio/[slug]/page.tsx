@@ -12,6 +12,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfterBlock";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 
 export const revalidate = 60;
 
@@ -30,11 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return { title: "Progetto" };
   const projectTypes = await getProjectTypes();
   const loc = getProjectLocalized(project, locale, projectTypes);
-  return {
+  const path = `/portfolio/${project.slug}`;
+  return withLocaleAlternates(locale, path, {
     title: loc.title,
     description: loc.excerpt,
     openGraph: { images: [{ url: project.coverImage }] },
-  };
+  });
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -68,7 +70,7 @@ export default async function ProjectPage({ params }: Props) {
         <div className="relative h-[min(55vh,520px)] w-full">
           <Image
             src={project.coverImage}
-            alt=""
+            alt={loc.title}
             fill
             priority
             fetchPriority="high"
@@ -111,6 +113,8 @@ export default async function ProjectPage({ params }: Props) {
                   afterSrc={project.beforeAfter.after}
                   beforeLabel={t("before")}
                   afterLabel={t("after")}
+                  beforeAlt={`${loc.title} — ${t("before")}`}
+                  afterAlt={`${loc.title} — ${t("after")}`}
                 />
               </div>
             </div>
@@ -147,7 +151,10 @@ export default async function ProjectPage({ params }: Props) {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                   <Image
                     src={src}
-                    alt=""
+                    alt={t("galleryAlt", {
+                      index: i + 1,
+                      title: loc.title,
+                    })}
                     fill
                     quality={72}
                     className="object-cover"

@@ -8,6 +8,7 @@ import { formatLegalAddress } from "@/lib/site";
 import { getSite } from "@/lib/data/site-store";
 import { googleMapsDirectionsUrl } from "@/lib/maps";
 import { ContactMap } from "@/components/contatti/ContactMap";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -18,10 +19,10 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
-  return {
+  return withLocaleAlternates(locale, "/contatti", {
     title: meta.contactsTitle,
     description: meta.contactsDescription,
-  };
+  });
 }
 
 export default async function ContattiPage({ params }: PageProps) {

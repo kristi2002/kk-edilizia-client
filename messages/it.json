@@ -5,7 +5,11 @@
     "contactsTitle": "Contatti",
     "contactsDescription": "Telefono, email, PEC e sede a Modena. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi e preventivo online.",
     "aboutTitle": "Chi siamo",
-    "aboutDescription": "Impresa edile a Modena: team, qualità e cantieri organizzati. Ristrutturazioni e costruzioni in provincia."
+    "aboutDescription": "Impresa edile a Modena: team, qualità e cantieri organizzati. Ristrutturazioni e costruzioni in provincia.",
+    "noteLegaliTitle": "Note legali",
+    "noteLegaliDescription": "Informazioni legali, copyright e limitazioni di responsabilità — K.K Edilizia.",
+    "privacyTitle": "Privacy policy",
+    "privacyDescription": "Informativa sul trattamento dei dati personali e cookie — K.K Edilizia."
   },
   "Nav": {
     "home": "Home",
@@ -263,6 +267,8 @@
   "PortfolioPage": {
     "label": "I nostri lavori",
     "title": "Portfolio",
+    "metaTitle": "Portfolio cantieri e ristrutturazioni — K.K Edilizia Modena",
+    "metaDescription": "Progetti completati a Modena e provincia: ristrutturazioni, cartongesso, tetti e interni. Guarda i lavori e richiedi un preventivo.",
     "intro": "Una selezione di cantieri completati. Ogni progetto è seguito con la stessa cura per i dettagli e il rispetto dei tempi concordati.",
     "beforeAfter": "Prima / dopo",
     "beforeAfterHint": "Trascina il cursore per confrontare (foto dimostrative da web)."
@@ -278,7 +284,8 @@
     "virtualTourCardHint": "Vista 360° dell’intervento (immagini in public/virtual-tour/projects/…).",
     "virtualTourIntro": "Trascina per guardarti intorno e usa le frecce per spostarti tra le stanze. Le immagini equirettangolari sono nella cartella di questo progetto sotto public/.",
     "virtualTourBack": "Torna al progetto",
-    "virtualTourBreadcrumbShort": "360°"
+    "virtualTourBreadcrumbShort": "360°",
+    "galleryAlt": "Foto {index} del progetto: {title}"
   },
   "VirtualTour": {
     "viewerLoading": "Caricamento viewer 360°…",

@@ -10,6 +10,9 @@ type Props = {
   afterSrc: string;
   beforeLabel: string;
   afterLabel: string;
+  /** Descriptive alt text for SEO and accessibility (see Google image guidelines). */
+  beforeAlt?: string;
+  afterAlt?: string;
 };
 
 export function BeforeAfterSlider({
@@ -17,6 +20,8 @@ export function BeforeAfterSlider({
   afterSrc,
   beforeLabel,
   afterLabel,
+  beforeAlt,
+  afterAlt,
 }: Props) {
   return (
     <div className="space-y-3">
@@ -25,14 +30,14 @@ export function BeforeAfterSlider({
           itemOne={
             <ReactCompareSliderImage
               src={beforeSrc}
-              alt=""
+              alt={beforeAlt ?? beforeLabel}
               style={{ objectFit: "cover" }}
             />
           }
           itemTwo={
             <ReactCompareSliderImage
               src={afterSrc}
-              alt=""
+              alt={afterAlt ?? afterLabel}
               style={{ objectFit: "cover" }}
             />
           }

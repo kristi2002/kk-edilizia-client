@@ -5,7 +5,11 @@
     "contactsTitle": "Contact",
     "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote.",
     "aboutTitle": "About us",
-    "aboutDescription": "Building contractor in Modena: team, quality, and organised sites. Renovations and construction across the province."
+    "aboutDescription": "Building contractor in Modena: team, quality, and organised sites. Renovations and construction across the province.",
+    "noteLegaliTitle": "Legal notice",
+    "noteLegaliDescription": "Legal information, copyright, and limitations of liability — K.K Edilizia.",
+    "privacyTitle": "Privacy policy",
+    "privacyDescription": "Personal data processing and cookies — K.K Edilizia."
   },
   "Nav": {
     "home": "Home",
@@ -263,6 +267,8 @@
   "PortfolioPage": {
     "label": "Our work",
     "title": "Portfolio",
+    "metaTitle": "Project portfolio — renovations & construction | K.K Edilizia Modena",
+    "metaDescription": "Completed projects in Modena and area: renovations, drywall, roofing, interiors. Browse our work and request a quote.",
     "intro": "A selection of completed sites. Every project gets the same care for detail and agreed timelines.",
     "beforeAfter": "Before / after",
     "beforeAfterHint": "Drag the slider to compare (demo photos from the web)."
@@ -278,7 +284,8 @@
     "virtualTourCardHint": "360° view of this project (images live under public/virtual-tour/projects/…).",
     "virtualTourIntro": "Drag to look around and use the arrows to move between rooms. Equirectangular images are stored in this project’s folder under public/.",
     "virtualTourBack": "Back to project",
-    "virtualTourBreadcrumbShort": "360°"
+    "virtualTourBreadcrumbShort": "360°",
+    "galleryAlt": "Project photo {index}: {title}"
   },
   "VirtualTour": {
     "viewerLoading": "Loading 360° viewer…",

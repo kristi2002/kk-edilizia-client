@@ -7,7 +7,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildServiceSiloMetadata(locale, "cartongesso");
+  return await buildServiceSiloMetadata(locale, "cartongesso");
 }
 
 export default async function CartongessoModenaPage({ params }: Props) {

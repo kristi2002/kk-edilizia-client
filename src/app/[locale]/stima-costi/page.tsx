@@ -5,6 +5,7 @@ import { CostEstimator } from "@/components/sections/CostEstimator";
 import { toEstimatorCategory } from "@/lib/data/cost-estimator";
 import { getEstimatorRows } from "@/lib/data/estimator-store";
 import { isCostEstimateEnabled } from "@/lib/features";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -15,10 +16,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const meta =
     locale === "en" ? enMessages.StimaCostiPage : itMessages.StimaCostiPage;
-  return {
+  return withLocaleAlternates(locale, "/stima-costi", {
     title: meta.metaTitle,
     description: meta.metaDescription,
-  };
+  });
 }
 
 export default async function StimaCostiPage({ params }: Props) {

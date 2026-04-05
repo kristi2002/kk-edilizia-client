@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSite } from "@/lib/data/site-store";
+import { withLocaleAlternates } from "@/lib/seo-metadata";
+import enMessages from "../../../../messages/en.json";
+import itMessages from "../../../../messages/it.json";
 
-export const metadata: Metadata = {
-  title: "Note legali",
-  description:
-    "Informazioni legali, copyright e limitazioni di responsabilità — K.K Edilizia.",
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function NoteLegaliPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
+  return withLocaleAlternates(locale, "/note-legali", {
+    title: meta.noteLegaliTitle,
+    description: meta.noteLegaliDescription,
+  });
+}
+
+export default async function NoteLegaliPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const site = await getSite();
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
