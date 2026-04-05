@@ -11,6 +11,11 @@ import { isCostEstimateEnabled } from "@/lib/features";
 const Services = dynamic(() =>
   import("@/components/sections/Services").then((m) => ({ default: m.Services })),
 );
+const HomeServiceSilos = dynamic(() =>
+  import("@/components/sections/HomeServiceSilos").then((m) => ({
+    default: m.HomeServiceSilos,
+  })),
+);
 const FeaturedProjects = dynamic(() =>
   import("@/components/sections/FeaturedProjects").then((m) => ({
     default: m.FeaturedProjects,
@@ -50,6 +55,7 @@ export default async function Home() {
       <Hero />
       <StatsStrip />
       <Services />
+      <HomeServiceSilos />
       <ProcessSteps />
       {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
       <FeaturedProjects projects={projects} projectTypes={projectTypes} />

@@ -97,6 +97,75 @@
     "metaTitle": "Stima indicativa costi",
     "metaDescription": "Calcola una fascia di prezzo orientativa per ristrutturazioni e lavori edili. Nessun dato inviato al server."
   },
+  "HomeServiceSilos": {
+    "label": "Servizi",
+    "title": "Specializzazioni a Modena e provincia",
+    "intro": "Approfondimenti sui servizi più cercati: contenuti dedicati ai motori di ricerca e a chi vuole un referente locale.",
+    "readMore": "Scopri di più",
+    "bagnoTitle": "Ristrutturazione bagno",
+    "bagnoDesc": "Rifacimenti chiavi in mano, piastrelle, impianti e illuminazione.",
+    "cartongessoTitle": "Cartongesso",
+    "cartongessoDesc": "Pareti, controsoffitti e velette con finiture pronte per la pittura.",
+    "tettoTitle": "Rifacimento tetto",
+    "tettoDesc": "Diagnosi, smaltimento e nuova copertura con garanzie su materiali e posa."
+  },
+  "ServiceSilos": {
+    "modenaArea": "Operiamo in tutto il centro di Modena, ma anche a Sassuolo, Carpi e Formigine.",
+    "bagno": {
+      "metaTitle": "Ristrutturazione Bagno Modena | K.K Edilizia",
+      "metaDescription": "Ristrutturazione bagno a Modena e provincia: soluzioni chiavi in mano, piastrelle, impianti idraulici ed elettrici. Preventivo dopo sopralluogo.",
+      "metaKeywords": [
+        "ristrutturazione bagno modena",
+        "rifacimento bagno",
+        "impresa edile modena",
+        "ristrutturazioni chiavi in mano"
+      ],
+      "eyebrow": "Ristrutturazioni",
+      "h1": "Ristrutturazione bagno professionale a Modena",
+      "lead": "Trasformiamo bagni datati in ambienti funzionali ed efficienti, con un unico referente che coordina demolizioni, impianti e finiture.",
+      "body1": "Pianifichiamo il cantiere per ridurre i disagi: tempistiche chiare, materiali scelti insieme al cliente e controlli su impermeabilizzazione e scarichi.",
+      "body2": "Lavoriamo su appartamenti in centro storico, quartieri residenziali e ville in provincia, adattando soluzioni a norme condominiali e vincoli dove presenti.",
+      "body3": "Dopo il sopralluogo ricevi un preventivo dettagliato con voci separate per demolizioni, impianti, rivestimenti e accessori.",
+      "ctaPrimary": "Richiedi preventivo",
+      "ctaSecondary": "Parla con noi"
+    },
+    "cartongesso": {
+      "metaTitle": "Cartongesso Modena | Pareti e controsoffitti | K.K Edilizia",
+      "metaDescription": "Lavori in cartongesso a Modena: pareti divisorie, controsoffitti, velette e nicchie. Posatura professionale e finiture pronte per pittura.",
+      "metaKeywords": [
+        "cartongesso modena",
+        "controsoffitto cartongesso",
+        "pareti cartongesso",
+        "impresa edile modena"
+      ],
+      "eyebrow": "Sistemi a secco",
+      "h1": "Cartongesso e sistemi a secco a Modena",
+      "lead": "Realizziamo pareti, controsoffitti e velette con struttura metallica e lastre, per rinnovare spazi senza tempi di essiccazione lunghi come l’intonaco tradizionale.",
+      "body1": "Definiamo insieme altezze, luci integrate e isolamento acustico dove serve, con soluzioni adatte a soggiorni, camere e locali commerciali.",
+      "body2": "Operiamo in tutto il centro di Modena e nei comuni limitrofi, coordinando tracce impianti e fasi successive (rasatura, rete e pittura).",
+      "body3": "Ogni intervento è dimensionato in fase di preventivo: metri lineari, tipologia di lastra e finiture concordate con il cliente.",
+      "ctaPrimary": "Richiedi preventivo",
+      "ctaSecondary": "Contatti"
+    },
+    "tetto": {
+      "metaTitle": "Rifacimento Tetto Modena | Coperture e riparazioni | K.K Edilizia",
+      "metaDescription": "Rifacimento tetti e coperture a Modena e provincia: diagnosi, smaltimento vecchia copertura e nuova stratificazione impermeabile.",
+      "metaKeywords": [
+        "rifacimento tetto modena",
+        "impermeabilizzazione tetto",
+        "coperture edili",
+        "riparazione tetto"
+      ],
+      "eyebrow": "Coperture",
+      "h1": "Rifacimento tetto e coperture a Modena",
+      "lead": "Affrontiamo infiltrazioni, usura delle tegole e ponti termici con interventi strutturati: analisi in copertura, proposta di lavori e cronoprogramma condiviso.",
+      "body1": "Gestiamo la messa in sicurezza del cantiere, lo smaltimento dei materiali esistenti e la posa di membrane, isolamento e finiture secondo normativa.",
+      "body2": "Seguiamo cantieri su villette, fabbricati residenziali e piccole attività in provincia, con attenzione a dettagli come grondaie e camini.",
+      "body3": "Il preventivo indica tipologia di copertura, tempi stimati e garanzie sui materiali forniti da partner qualificati.",
+      "ctaPrimary": "Richiedi preventivo",
+      "ctaSecondary": "Contatti"
+    }
+  },
   "FeaturedProjects": {
     "label": "Portfolio",
     "title": "Progetti recenti",
@@ -130,6 +199,10 @@
     "napAreas": "Interventi a Modena e in provincia: Sassuolo, Carpi, Formigine e comuni limitrofi.",
     "contacts": "Contatti",
     "quick": "Link rapidi",
+    "serviceLinks": "Servizi",
+    "linkBagno": "Ristrutturazione bagno",
+    "linkCartongesso": "Cartongesso",
+    "linkTetto": "Rifacimento tetto",
     "legalData": "Dati fiscali",
     "legalForm": "Forma giuridica",
     "pec": "PEC",

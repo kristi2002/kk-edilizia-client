@@ -4,10 +4,12 @@ import { localizedPath } from "@/lib/i18n-path";
 import { getSiteUrl } from "@/lib/data/site-store";
 import { getProjects } from "@/lib/data/projects-store";
 import { isCostEstimateEnabled } from "@/lib/features";
+import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 
 function staticSegments(): string[] {
   return [
     "",
+    ...SERVICE_SILO_ROUTES.map((r) => r.path),
     "/portfolio",
     ...(isCostEstimateEnabled() ? ["/stima-costi"] : []),
     "/chi-siamo",

@@ -97,6 +97,75 @@
     "metaTitle": "Indicative cost estimate",
     "metaDescription": "Rough budget range for renovations and building work. No data sent to the server."
   },
+  "HomeServiceSilos": {
+    "label": "Services",
+    "title": "Specialisations in Modena and province",
+    "intro": "Dedicated pages for high-intent searches: clear, local expertise for homeowners and businesses.",
+    "readMore": "Learn more",
+    "bagnoTitle": "Bathroom renovation",
+    "bagnoDesc": "Turnkey refits, tiling, plumbing and lighting.",
+    "cartongessoTitle": "Drywall / plasterboard",
+    "cartongessoDesc": "Partitions, dropped ceilings and bulkheads ready to paint.",
+    "tettoTitle": "Roof replacement",
+    "tettoDesc": "Assessment, strip-off and new build-up with material warranties."
+  },
+  "ServiceSilos": {
+    "modenaArea": "We work across central Modena as well as Sassuolo, Carpi, and Formigine.",
+    "bagno": {
+      "metaTitle": "Bathroom Renovation Modena | K.K Edilizia",
+      "metaDescription": "Bathroom renovations in Modena and province: turnkey solutions, tiling, plumbing and electrics. Detailed quote after a site visit.",
+      "metaKeywords": [
+        "bathroom renovation modena",
+        "bathroom refurbishment",
+        "building contractor modena",
+        "turnkey renovations"
+      ],
+      "eyebrow": "Renovations",
+      "h1": "Professional bathroom renovation in Modena",
+      "lead": "We turn dated bathrooms into efficient, comfortable spaces with one point of contact coordinating strip-out, systems and finishes.",
+      "body1": "We plan the site to limit disruption: clear timelines, materials chosen with you, and checks on waterproofing and drainage.",
+      "body2": "We work in the city centre, residential districts and villas across the province, adapting to condominium rules and constraints where they apply.",
+      "body3": "After the survey you receive an itemised quote separating demolition, systems, tiling and fittings.",
+      "ctaPrimary": "Request a quote",
+      "ctaSecondary": "Talk to us"
+    },
+    "cartongesso": {
+      "metaTitle": "Drywall Modena | Partitions & Ceilings | K.K Edilizia",
+      "metaDescription": "Drywall in Modena: partitions, suspended ceilings, bulkheads and niches. Professional boarding ready for paint.",
+      "metaKeywords": [
+        "drywall modena",
+        "suspended ceiling",
+        "plasterboard walls",
+        "building contractor modena"
+      ],
+      "eyebrow": "Dry lining",
+      "h1": "Drywall and dry lining in Modena",
+      "lead": "We build partitions, ceilings and bulkheads on metal framing—fast cycles without the long drying times of traditional wet plaster.",
+      "body1": "Together we define heights, integrated lighting and acoustic needs for homes, bedrooms and small commercial units.",
+      "body2": "We cover central Modena and surrounding towns, coordinating chases for services and the next stages (skim, mesh, paint).",
+      "body3": "Every job is scoped in the quote: linear metres, board types and agreed finishes.",
+      "ctaPrimary": "Request a quote",
+      "ctaSecondary": "Contact"
+    },
+    "tetto": {
+      "metaTitle": "Roof Replacement Modena | Coverings & Repairs | K.K Edilizia",
+      "metaDescription": "Roof replacement and coverings in Modena and province: survey, strip-off of the old roof and new waterproof build-up.",
+      "metaKeywords": [
+        "roof replacement modena",
+        "roof waterproofing",
+        "roofing contractor",
+        "roof repair modena"
+      ],
+      "eyebrow": "Roofing",
+      "h1": "Roof replacement and coverings in Modena",
+      "lead": "We tackle leaks, worn tiles and thermal bridges with structured work: roof inspection, scope of works and an agreed programme.",
+      "body1": "We handle site safety, removal of existing materials and installation of membranes, insulation and finishes to code.",
+      "body2": "We work on houses, residential buildings and small businesses in the province, including gutters and chimney details.",
+      "body3": "The quote states roof system, estimated duration and manufacturer warranties on supplied materials.",
+      "ctaPrimary": "Request a quote",
+      "ctaSecondary": "Contact"
+    }
+  },
   "FeaturedProjects": {
     "label": "Portfolio",
     "title": "Recent projects",
@@ -130,6 +199,10 @@
     "napAreas": "We work in Modena and province: Sassuolo, Carpi, Formigine, and surrounding towns.",
     "contacts": "Contact",
     "quick": "Quick links",
+    "serviceLinks": "Services",
+    "linkBagno": "Bathroom renovation",
+    "linkCartongesso": "Drywall",
+    "linkTetto": "Roof replacement",
     "legalData": "Legal details",
     "legalForm": "Legal form",
     "pec": "PEC",

@@ -6,6 +6,7 @@ import { HomeSectionLink } from "@/components/site/HomeSectionLink";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { formatLegalAddress, type SiteData } from "@/lib/site";
 import { isCostEstimateEnabled } from "@/lib/features";
+import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 
 type Props = { site: SiteData };
 
@@ -64,6 +65,24 @@ export function Footer({ site }: Props) {
                 {tNav("portfolio")}
               </Link>
             </li>
+            <li className="pt-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              {t("serviceLinks")}
+            </li>
+            {SERVICE_SILO_ROUTES.map((route) => {
+              const linkLabel =
+                route.key === "bagno"
+                  ? t("linkBagno")
+                  : route.key === "cartongesso"
+                    ? t("linkCartongesso")
+                    : t("linkTetto");
+              return (
+                <li key={route.path}>
+                  <Link href={route.path} className="hover:text-white">
+                    {linkLabel}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <Link href="/contatti" className="hover:text-white">
                 {tNav("contacts")}

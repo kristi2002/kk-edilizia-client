@@ -3,6 +3,10 @@ export type FaqItem = { q: string; a: string };
 export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
   it: [
     {
+      q: "Quanto costa ristrutturare un appartamento a Modena nel 2026?",
+      a: "Non esiste una cifra unica: dipende da metratura, stato dei locali, impianti e finiture. Come ordine di grandezza, molte ristrutturazioni complete si collocano in fasce di investimento per metro quadro che variano con il livello di finitura; il dato utile è un preventivo dopo sopralluogo, con voci separate e cronoprogramma.",
+    },
+    {
       q: "Quanto tempo serve per un preventivo dopo il sopralluogo?",
       a: "Di solito entro 3–5 giorni lavorativi dall’ispezione, con voci chiare su lavorazioni, materiali e tempi di cantiere indicativi.",
     },
@@ -24,6 +28,10 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     },
   ],
   en: [
+    {
+      q: "How much does it cost to renovate an apartment in Modena in 2026?",
+      a: "There is no single number: it depends on size, existing conditions, systems and finishes. As a rule of thumb, full renovations often fall into broad price bands per square metre that shift with specification; what matters is an itemised quote after a site visit, with a clear schedule.",
+    },
     {
       q: "How long until a quote after the site visit?",
       a: "Usually within 3–5 business days after inspection, with clear line items, materials, and indicative site duration.",
