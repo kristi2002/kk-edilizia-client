@@ -64,7 +64,7 @@ These help eligible **local** and **knowledge-panel-style** treatments; eligibil
 
 ## 6. Brand, crawl, and sharing assets
 
-- **Favicon / tab icon** — Root layout **`metadata.icons`** and `<head>` links point to **`/logo.png`**. **`next.config.ts`** rewrites **`/favicon.ico`** → **`/logo.png`** so default browser requests resolve to the real logo. No generated `app/icon.tsx`; avoid leftover template SVGs in `public/`.
+- **Favicon / tab icon** — Configured only via the **Next.js Metadata API** in **`src/app/layout.tsx`** (`metadata.icons` → **`/logo.png`**). Do **not** duplicate `<link rel="icon">` in `<head>` unless you have a reason; avoid pointing **`metadata.icons`** at **`/favicon.ico`** until that file exists. **`next.config.ts`** rewrites **`/favicon.ico`** → **`/logo.png`** so bare `/favicon.ico` requests still get an image. **Recommended (Vercel / Next checklist):** export a **16×16 or 32×32** brand mark → save as **`public/favicon.ico`** (or **`src/app/favicon.ico`** in the App Router), then add it to **`metadata.icons`** (first in the `icon` array) and **remove the rewrite** so the static file is served. The current full-size **`logo.png`** is large; a small `.ico` improves tab clarity and load.
 - **`opengraph-image.tsx`** — Default social preview image for shares.
 - **`manifest.ts`** — Web app manifest includes **`icons`** referencing **`/logo.png`** for install/home-screen surfaces.
 
@@ -104,7 +104,7 @@ These help eligible **local** and **knowledge-panel-style** treatments; eligibil
 | Sitemap entries | `src/app/sitemap.ts` |
 | Local business schema | `src/components/seo/LocalBusinessJsonLd.tsx` |
 | Robots | `src/app/robots.ts` |
-| Favicon / manifest icons | `src/app/layout.tsx`, `src/app/manifest.ts`, `next.config.ts` rewrites, `public/logo.png` |
+| Favicon / manifest icons | `src/app/layout.tsx` (`metadata.icons` only), `src/app/manifest.ts`, `next.config.ts` rewrite → `public/logo.png`; optional `public/favicon.ico` |
 | Locale routing | `src/i18n/routing.ts` |
 | Site data validation / Redis read | `src/lib/validate-site-payload.ts`, `src/lib/data/site-store.ts` |
 
