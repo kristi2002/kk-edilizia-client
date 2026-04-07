@@ -122,7 +122,8 @@
     "tettoDesc": "Diagnosi, smaltimento e nuova copertura con garanzie su materiali e posa."
   },
   "ServiceSilos": {
-    "modenaArea": "Modena centro, Sassuolo, Carpi, Formigine, Castelfranco Emilia e tutta la provincia.",
+    "modenaArea": "Modena centro (Via Emilia, Viale Amendola, Quartiere Musicisti, zona Piazza Roma), Sassuolo, Carpi, Formigine, Castelfranco Emilia, Spilamberto, Maranello, Vignola, Castelnuovo Rangone, San Prospero, Nonantola, Mirandola e altri comuni della provincia.",
+    "complianceModena": "Gli interventi sono progettati nel rispetto del Regolamento urbanistico-edilizio (RUE) vigente del Comune di Modena e delle norme nazionali (D.P.R. 380/2001). Titoli, comunicazioni e asseverazioni spettano al tecnico abilitato del committente; in cantiere eseguiamo quanto approvato, con rilievi utili a sopralluoghi e collaudi.",
     "bagno": {
       "metaTitle": "Ristrutturazione Bagno Modena | K.K Edilizia",
       "metaDescription": "Ristrutturazione bagno Modena: processo sopralluogo e CILA, materiali Mapei e Kerakoll, zone Viale Amendola, Via Emilia, Quartiere Musicisti. Preventivo dopo sopralluogo.",
@@ -137,7 +138,7 @@
       "lead": "Trasformiamo bagni datati in ambienti funzionali ed efficienti, con un unico referente che coordina demolizioni, impianti e finiture — dalla prima visita in cantiere alla consegna.",
       "body1": "Il nostro modo di lavorare su un bagno a Modena segue un percorso chiaro: prima il sopralluogo (misure, stato degli impianti, aspirazioni estetiche e di budget), poi un preventivo scritto con voci separate. Se l’intervento non è solo cosmetico, il vostro geometra o architetto verifica se servono CILA, SCIA o altre comunicazioni al Comune di Modena, in base al Regolamento edilizio e al D.P.R. 380/2001. Solo con titolo o comunicazione coerente si apre il cantiere: demolizioni controllate, nuovi scarichi e alimentazioni, impermeabilizzazione e rivestimenti, con un unico referente K.K Edilizia che tiene insieme tempi, fornitori e qualità di posa.",
       "body2": "Sui materiali puntiamo su sistemi professionali che i motori di ricerca associano a qualità edile consolidata: malte, impermeabilizzazioni, adesivi e stucchi di marchi come Mapei e Kerakoll (o equivalenti certificati), con schede tecniche allineate a barriere vapore e norme UNI. Prepariamo i supporti con livelli, controllo planarità e, dove serve, rete e trattamenti anti-crack prima della posa di piastrelle grandi o tradizionali, così il risultato regge a umidità e calpestio quotidiano.",
-      "body3": "Lavoriamo in modo ricorrente lungo Viale Amendola, sul tracciato di Via Emilia e nei quartieri centrali, incluso il Quartiere Musicisti, oltre a Buon Pastore e Crocetta — zone dove traffico, parcheggi e accessi condominiali influenzano logistica e orari di scarico materiali. Conosciamo anche edifici tra centro storico e tangenziale, case in provincia (Sassuolo, Carpi, Formigine, Castelfranco Emilia): adattiamo protezioni, rumore e movimentazione in ascensore al contesto, così il vicinato e il regolamento condominiale restano rispettati.",
+      "body3": "Lavoriamo in modo ricorrente lungo Viale Amendola, sul tracciato di Via Emilia, tra Piazza Roma e il cuore pedonale, nei quartieri centrali e nel Quartiere Musicisti, oltre a Buon Pastore e Crocetta — zone dove traffico, parcheggi e accessi condominiali influenzano logistica e orari di scarico materiali. Conosciamo anche edifici tra centro storico e tangenziale, case in provincia (Sassuolo, Carpi, Formigine, Spilamberto, Maranello, Castelfranco Emilia): adattiamo protezioni, rumore e movimentazione in ascensore al contesto, così il vicinato e il regolamento condominiale restano rispettati.",
       "body4": "Nei condomini concordiamo calendario, accessi e fasce orarie con amministratore e vicini; proteggiamo corridoi e ascensori e isoliamo polvere dove possibile. Se servono modifiche a tramezzi o allacci agli scarichi verticali, il tecnico valuta compatibilità strutturale; noi forniamo rilievi e sopralluoghi fotografici utili al progetto esecutivo. L’obiettivo resta un bagno efficiente nei consumi, igienico e conforme agli impianti secondo norma.",
       "body5": "Permessi e pratiche: non sostituiamo il professionista abilitato, ma vi aiutiamo a orientarvi — cosa è tipico per un rifacimento bagno a Modena (comunicazioni al Comune, eventuali autorizzazioni in area vincolata) e cosa serve in fattura e documentazione per chi segue le detrazioni o i bonus vigenti. Eseguiamo i lavori nel rispetto di quanto dichiarato in CILA/SCIA, così sopralluogo comunale e collaudi non trovano discrepanze tra progetto e cantiere.",
       "body6": "Dopo l’accettazione del preventivo, il cronoprogramma indica demolizioni, impianti, massetti, impermeabilizzazione e finiture: i tempi di un bagno completo sono spesso di diverse settimane, variabili con forniture, stagione e coordinamento condominiale. Restate aggiornati su avanzamento e snodi critici; alla consegna raccogliamo esiti utili a garanzie e documentazione. Un solo interlocutore K.K Edilizia dalla prima visita alla posa finale.",
@@ -191,7 +192,8 @@
     "label": "Portfolio",
     "title": "Progetti recenti",
     "intro": "Alcuni interventi tra ristrutturazioni residenziali, edilizia e spazi commerciali.",
-    "cta": "Vedi tutti i lavori"
+    "cta": "Vedi tutti i lavori",
+    "coverAlt": "{category}: {title} — cantiere a {location}"
   },
   "Reviews": {
     "label": "Recensioni",
@@ -217,10 +219,11 @@
   },
   "Footer": {
     "tagline": "Ristrutturazioni e lavori edili a {area}. Qualità, tempi chiari e cantieri organizzati.",
-    "napAreas": "Interventi a Modena e in provincia: Sassuolo, Carpi, Formigine e comuni limitrofi.",
+    "napAreas": "Interventi a Modena, Sassuolo, Carpi, Formigine, Spilamberto, Maranello, Vignola e altri comuni della provincia.",
     "contacts": "Contatti",
+    "zonesTitle": "Zone servite",
+    "zonesIntro": "Servizi edili con pagine dedicate (Modena e provincia):",
     "quick": "Link rapidi",
-    "serviceLinks": "Servizi",
     "linkBagno": "Ristrutturazione bagno",
     "linkCartongesso": "Cartongesso",
     "linkTetto": "Rifacimento tetto",
@@ -287,13 +290,21 @@
     "cta": "Richiedi preventivo",
     "before": "Prima",
     "after": "Dopo",
+    "coverAlt": "{category}: {title} — cantiere a {location}",
+    "crossSellSiloIntro": "Stesso tipo di intervento in provincia:",
+    "crossSellModena": "Cerchi lo stesso servizio a Modena centro? Vedi le nostre",
+    "crossSellBagno": "ristrutturazioni bagno",
+    "crossSellCartongesso": "cartongesso e controsoffitti",
+    "crossSellTetto": "rifacimento tetti",
+    "photoAltBefore": "{category} — {title}, {location}: stato prima dei lavori",
+    "photoAltAfter": "{category} — {title}, {location}: risultato dopo i lavori",
     "virtualTourCta": "Apri tour 360°",
     "virtualTourLabel": "Tour immersivo",
     "virtualTourCardHint": "Vista 360° dell’intervento (immagini in public/virtual-tour/projects/…).",
     "virtualTourIntro": "Trascina per guardarti intorno e usa le frecce per spostarti tra le stanze. Le immagini equirettangolari sono nella cartella di questo progetto sotto public/.",
     "virtualTourBack": "Torna al progetto",
     "virtualTourBreadcrumbShort": "360°",
-    "galleryAlt": "Foto {index} del progetto: {title}"
+    "galleryAlt": "{category} — foto {index}: {title} a {location}"
   },
   "VirtualTour": {
     "viewerLoading": "Caricamento viewer 360°…",

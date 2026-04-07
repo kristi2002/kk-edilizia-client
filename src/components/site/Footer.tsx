@@ -57,17 +57,12 @@ export function Footer({ site }: Props) {
         </div>
         <div>
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
-            {t("quick")}
+            {t("zonesTitle")}
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-zinc-500">
+            {t("zonesIntro")}
           </p>
           <ul className="mt-3 space-y-2 text-sm text-zinc-400">
-            <li>
-              <Link href="/portfolio" className="hover:text-white">
-                {tNav("portfolio")}
-              </Link>
-            </li>
-            <li className="pt-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-              {t("serviceLinks")}
-            </li>
             {SERVICE_SILO_ROUTES.map((route) => {
               const linkLabel =
                 route.key === "bagno"
@@ -83,6 +78,16 @@ export function Footer({ site }: Props) {
                 </li>
               );
             })}
+          </ul>
+          <p className="mt-6 font-medium uppercase tracking-wider text-[#c9a227]">
+            {t("quick")}
+          </p>
+          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+            <li>
+              <Link href="/portfolio" className="hover:text-white">
+                {tNav("portfolio")}
+              </Link>
+            </li>
             <li>
               <Link href="/contatti" className="hover:text-white">
                 {tNav("contacts")}

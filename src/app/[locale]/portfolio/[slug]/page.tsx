@@ -13,8 +13,17 @@ import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfte
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 
 export const revalidate = 60;
+
+/** Province towns (not Modena city): surface internal links toward Modena service silos. */
+const PROVINCE_TOWN_FOR_MODENA_CROSS_LINK =
+  /\b(Sassuolo|Carpi|Formigine|Spilamberto|Maranello|Vignola|Castelfranco\s+Emilia|Castelnuovo\s+Rangone|San\s+Prospero|Nonantola|Mirandola|Pavullo|Fiorano\s+Modenese|Soliera|Campogalliano)\b/i;
+
+function shouldOfferModenaServiceLinks(location: string): boolean {
+  return PROVINCE_TOWN_FOR_MODENA_CROSS_LINK.test(location);
+}
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -70,7 +79,11 @@ export default async function ProjectPage({ params }: Props) {
         <div className="relative h-[min(55vh,520px)] w-full">
           <Image
             src={project.coverImage}
-            alt={loc.title}
+            alt={t("coverAlt", {
+              category: loc.category,
+              title: loc.title,
+              location: loc.location,
+            })}
             fill
             priority
             fetchPriority="high"
@@ -113,8 +126,16 @@ export default async function ProjectPage({ params }: Props) {
                   afterSrc={project.beforeAfter.after}
                   beforeLabel={t("before")}
                   afterLabel={t("after")}
-                  beforeAlt={`${loc.title} — ${t("before")}`}
-                  afterAlt={`${loc.title} — ${t("after")}`}
+                  beforeAlt={t("photoAltBefore", {
+                    category: loc.category,
+                    title: loc.title,
+                    location: loc.location,
+                  })}
+                  afterAlt={t("photoAltAfter", {
+                    category: loc.category,
+                    title: loc.title,
+                    location: loc.location,
+                  })}
                 />
               </div>
             </div>
@@ -124,6 +145,45 @@ export default async function ProjectPage({ params }: Props) {
             <p className="text-lg leading-relaxed text-zinc-300">
               {loc.description}
             </p>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="mt-10 text-sm leading-relaxed text-zinc-400">
+              <p>{t("crossSellSiloIntro")}</p>
+              <p className="mt-2">
+                {SERVICE_SILO_ROUTES.map((route, i) => {
+                  const label =
+                    route.key === "bagno"
+                      ? t("crossSellBagno")
+                      : route.key === "cartongesso"
+                        ? t("crossSellCartongesso")
+                        : t("crossSellTetto");
+                  return (
+                    <span key={route.path}>
+                      {i > 0 ? " · " : null}
+                      <Link
+                        href={route.path}
+                        className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                      >
+                        {label}
+                      </Link>
+                    </span>
+                  );
+                })}
+              </p>
+              {shouldOfferModenaServiceLinks(loc.location) ? (
+                <p className="mt-4 text-zinc-500">
+                  {t("crossSellModena")}{" "}
+                  <Link
+                    href="/ristrutturazioni-bagno"
+                    className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                  >
+                    {t("crossSellBagno")}
+                  </Link>
+                  .
+                </p>
+              ) : null}
+            </div>
           </FadeIn>
 
           <FadeIn>
@@ -154,6 +214,8 @@ export default async function ProjectPage({ params }: Props) {
                     alt={t("galleryAlt", {
                       index: i + 1,
                       title: loc.title,
+                      category: loc.category,
+                      location: loc.location,
                     })}
                     fill
                     quality={72}

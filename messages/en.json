@@ -122,7 +122,8 @@
     "tettoDesc": "Assessment, strip-off and new build-up with material warranties."
   },
   "ServiceSilos": {
-    "modenaArea": "Central Modena, Sassuolo, Carpi, Formigine, Castelfranco Emilia, and the whole province.",
+    "modenaArea": "Central Modena (Via Emilia, Viale Amendola, Quartiere Musicisti, Piazza Roma area), Sassuolo, Carpi, Formigine, Castelfranco Emilia, Spilamberto, Maranello, Vignola, Castelnuovo Rangone, San Prospero, Nonantola, Mirandola, and other municipalities in the province.",
+    "complianceModena": "Work is planned to comply with the current municipal building code (RUE) of the Comune di Modena and national rules (D.P.R. 380/2001). Permits and filings remain with your qualified surveyor or architect; on site we execute what is approved, with surveys that support inspections and handover.",
     "bagno": {
       "metaTitle": "Bathroom Renovation Modena | K.K Edilizia",
       "metaDescription": "Bathroom renovation Modena: survey-to-site process and CILA, Mapei and Kerakoll, Viale Amendola, Via Emilia, Quartiere Musicisti. Quote after survey.",
@@ -137,7 +138,7 @@
       "lead": "We turn dated bathrooms into efficient, comfortable spaces with one point of contact coordinating strip-out, plumbing, electrics and finishes — from the first site visit to handover.",
       "body1": "Our bathroom workflow in Modena starts with a site survey (dimensions, systems, budget and style), then a written quote with separate line items. If the job is more than cosmetic, your surveyor or architect checks whether CILA, SCIA or other filings apply under Modena municipal rules and national building codes. With a consistent title or filing, we open the site: controlled demolition, new supplies and wastes, tanking and tiling, with one K.K Edilizia lead coordinating timing, suppliers and quality.",
       "body2": "We use professional materials that signal quality construction: mortars, waterproofing, adhesives and skims from lines such as Mapei and Kerakoll (or equivalent certified systems), with technical data aligned to vapour control and UNI standards. We prepare substrates flat and true, with mesh and anti-crack treatments where needed, before large-format or traditional tiles in humid daily-use conditions.",
-      "body3": "We work repeatedly along Viale Amendola, the Via Emilia corridor and the Quartiere Musicisti, plus Buon Pastore and Crocetta — areas where traffic, parking and condominium access shape logistics and delivery slots. We also know historic centre vs ring-road housing and province-wide jobs (Sassuolo, Carpi, Formigine, Castelfranco Emilia), adapting protection, noise and lift moves to neighbours and building rules.",
+      "body3": "We work repeatedly along Viale Amendola, the Via Emilia corridor, between Piazza Roma and the pedestrian core, in the Quartiere Musicisti, plus Buon Pastore and Crocetta — areas where traffic, parking and condominium access shape logistics and delivery slots. We also know historic centre vs ring-road housing and province-wide jobs (Sassuolo, Carpi, Formigine, Spilamberto, Maranello, Castelfranco Emilia), adapting protection, noise and lift moves to neighbours and building rules.",
       "body4": "In condominiums we agree calendars, access and noisy windows with administrators and neighbours; we protect corridors and lifts and limit dust where possible. If partitions or risers need changes, the engineer checks structure; we supply surveys and photos for the executive design. The goal remains an efficient, hygienic bathroom compliant with regulations.",
       "body5": "Permits: we do not replace your qualified technician, but we help you understand what is typical for a Modena bathroom (municipal filings, historic constraints) and what invoices and records your accountant needs for active tax relief. We execute work matching the CILA/SCIA so inspections find no gap between filing and site.",
       "body6": "After you accept the quote, the programme covers demolition, systems, screeds, tanking and finishes — usually several weeks, depending on supplies, season and condominium coordination. You get progress updates and a documented handover. One K.K Edilizia contact from first visit to final installation.",
@@ -191,7 +192,8 @@
     "label": "Portfolio",
     "title": "Recent projects",
     "intro": "A selection of residential renovations, construction, and commercial spaces.",
-    "cta": "See all projects"
+    "cta": "See all projects",
+    "coverAlt": "{category}: {title} — job site in {location}"
   },
   "Reviews": {
     "label": "Reviews",
@@ -217,10 +219,11 @@
   },
   "Footer": {
     "tagline": "Renovations and construction in {area}. Quality, clear timelines, and organised sites.",
-    "napAreas": "We work in Modena and province: Sassuolo, Carpi, Formigine, and surrounding towns.",
+    "napAreas": "We work in Modena, Sassuolo, Carpi, Formigine, Spilamberto, Maranello, Vignola, and other municipalities in the province.",
     "contacts": "Contact",
+    "zonesTitle": "Areas served",
+    "zonesIntro": "Dedicated service pages (Modena and province):",
     "quick": "Quick links",
-    "serviceLinks": "Services",
     "linkBagno": "Bathroom renovation",
     "linkCartongesso": "Drywall",
     "linkTetto": "Roof replacement",
@@ -287,13 +290,21 @@
     "cta": "Request a quote",
     "before": "Before",
     "after": "After",
+    "coverAlt": "{category}: {title} — job site in {location}",
+    "crossSellSiloIntro": "The same type of work across the province:",
+    "crossSellModena": "Looking for the same work in central Modena? See our",
+    "crossSellBagno": "bathroom renovations",
+    "crossSellCartongesso": "drywall & ceilings",
+    "crossSellTetto": "roof replacement",
+    "photoAltBefore": "{category} — {title}, {location}: before the works",
+    "photoAltAfter": "{category} — {title}, {location}: after the works",
     "virtualTourCta": "Open 360° tour",
     "virtualTourLabel": "Immersive tour",
     "virtualTourCardHint": "360° view of this project (images live under public/virtual-tour/projects/…).",
     "virtualTourIntro": "Drag to look around and use the arrows to move between rooms. Equirectangular images are stored in this project’s folder under public/.",
     "virtualTourBack": "Back to project",
     "virtualTourBreadcrumbShort": "360°",
-    "galleryAlt": "Project photo {index}: {title}"
+    "galleryAlt": "{category} — photo {index}: {title} in {location}"
   },
   "VirtualTour": {
     "viewerLoading": "Loading 360° viewer…",

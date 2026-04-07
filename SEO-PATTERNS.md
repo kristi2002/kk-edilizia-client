@@ -48,15 +48,16 @@ Keyword-aligned **dedicated URLs** (not everything on the homepage):
 | `/rifacimento-tetto` | Roof work |
 
 - **Metadata** — Unique **`metaTitle`** / **`metaDescription`** per silo via **`buildServiceSiloMetadata`** + **`withLocaleAlternates`** (path from **`src/lib/service-silos.ts`**).
-- **Body** — Long copy in **`messages` → `ServiceSilos.<key>`** (`body1`–`body6`), rendered by **`ServiceSiloContent.tsx`**. Mentions **Mapei**, **Kerakoll**, Modena-area zones (e.g. Via Emilia, Viale Amendola), high-level **CILA/SCIA** context (professional responsibility stays with client’s technician).
-- **Area string** — **`ServiceSilos.modenaArea`** (IT/EN).
-- **Internal links** — **`HomeServiceSilos`**, footer, CTAs to **preventivo** / **contatti**.
+- **Body** — Long copy in **`messages` → `ServiceSilos.<key>`** (`body1`–`body6`), rendered by **`ServiceSiloContent.tsx`**. Mentions **Mapei**, **Kerakoll**, Modena-area zones (e.g. Via Emilia, **Viale Amendola**, **Piazza Roma**, Quartiere Musicisti), province towns (e.g. **Spilamberto**, **Maranello**), high-level **CILA/SCIA** context (professional responsibility stays with client’s technician).
+- **Area string** — **`ServiceSilos.modenaArea`** (IT/EN): hyper-local Modena references plus a broad list of municipalities; keep both when you extend copy.
+- **Compliance block** — **`ServiceSilos.complianceModena`** (IT/EN): **RUE** (regolamento urbanistico-edilizio) **Comune di Modena**, D.P.R. 380/2001, split of responsibility (technician vs execution on site). Rendered in **`ServiceSiloContent.tsx`** below **`modenaArea`**.
+- **Internal links** — **`HomeServiceSilos`**, footer **“Zone servite”** (see below), CTAs to **preventivo** / **contatti**.
 
 ---
 
 ## 4. Structured data (JSON-LD)
 
-- **`LocalBusinessJsonLd`** (`src/components/seo/LocalBusinessJsonLd.tsx`) — **`@type`: `HomeAndConstructionBusiness`**: brand, legalName, tax/vat, employees, **description** (IT, aligned with services), **`url`** from `getSiteUrl()`, phone, email, **PostalAddress**, **`areaServed`** (cities + Provincia di Modena), **`geo`** (approximate **GeoCoordinates** for Modena area), **`knowsAbout`** (topics including services, **Mapei/Kerakoll**, **Knauf**, **Comune di Modena** building rules mention), **`priceRange`**, optional **`sameAs`** if **`publicReviewUrl`** is set in site data (Google Business Profile).
+- **`LocalBusinessJsonLd`** (`src/components/seo/LocalBusinessJsonLd.tsx`) — **`@type`: `HomeAndConstructionBusiness`**: brand, legalName, tax/vat, employees, **description** (IT, aligned with services), **`url`** from `getSiteUrl()`, phone, email, **PostalAddress**, **`areaServed`** — **many explicit `City` entries** (Modena, Sassuolo, Carpi, Formigine, Castelfranco Emilia, Spilamberto, Maranello, Vignola, Castelnuovo Rangone, San Prospero, Nonantola, Mirandola, Pavullo nel Frignano, Fiorano Modenese, Soliera, Campogalliano, Concordia sulla Secchia, Finale Emilia, …) plus **`AdministrativeArea` “Provincia di Modena”**. Expand this list in code when you routinely serve additional comuni. **`geo`** (approximate **GeoCoordinates** for Modena area), **`knowsAbout`** (topics including services, **Mapei/Kerakoll**, **Knauf**, **Comune di Modena** building rules mention), **`priceRange`**, optional **`sameAs`** if **`publicReviewUrl`** is set in site data (Google Business Profile).
 - **`BreadcrumbJsonLd`** — Portfolio and virtual-tour pages where implemented.
 
 Eligibility for rich/local features remains at Google’s discretion.
@@ -84,7 +85,18 @@ Eligibility for rich/local features remains at Google’s discretion.
 ### Portfolio
 
 - **Metadata** — Per-project titles/descriptions; **`withLocaleAlternates`** on detail and virtual-tour routes.
-- **Images** — **`alt`** on cover, gallery (**`ProjectDetail.galleryAlt`** with index), before/after (**`ProjectBeforeAfterBlock`** alt props). Listing page has **`PortfolioPage.metaTitle` / `metaDescription`**.
+- **Images (descriptive `alt`, include location)** — Prefer **service + title + place**, not generic words (“bagno” alone).
+  - **Detail page** (`src/app/[locale]/portfolio/[slug]/page.tsx`) — Cover: **`ProjectDetail.coverAlt`** (`category`, `title`, **`location`**). Gallery: **`ProjectDetail.galleryAlt`** (`category`, `index`, `title`, **`location`**). Before/after: **`photoAltBefore`** / **`photoAltAfter`**.
+  - **Listing** — Same pattern via **`FeaturedProjects.coverAlt`** in **`src/app/[locale]/portfolio/page.tsx`**.
+  - **Home featured strip** — **`FeaturedProjects.coverAlt`** in **`FeaturedProjects.tsx`**.
+- **Internal linking from projects** — After the project description, a block links to all three **service silos** (`SERVICE_SILO_ROUTES`). If **`location`** matches a **provincial town** (regex in the page: e.g. Sassuolo, Carpi, Formigine, Spilamberto, …), an extra line points to **bathroom silo** as the “same work in central Modena” path (**`ProjectDetail.crossSellModena`** + **`crossSellBagno`**). Adjust the regex or copy when expanding towns.
+- **Sitemap freshness** — Portfolio URLs use **`Project.updatedAt`** when set (see §1 + checklist). Adding or updating projects with **`updatedAt`** helps reflect an active service area in **`lastModified`**.
+
+Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
+
+### Footer — “Zone servite”
+
+- **`src/components/site/Footer.tsx`** — First nav block under the quick-links column: **`Footer.zonesTitle`** (“Zone servite” / “Areas served”), **`Footer.zonesIntro`**, then the three silo links from **`SERVICE_SILO_ROUTES`** (`linkBagno`, `linkCartongesso`, `linkTetto`). Below that, **`Footer.quick`** groups portfolio, contacts, booking, etc. **`Footer.napAreas`** (NAP-adjacent line) lists representative towns for consistency with copy/schema.
 
 ### Other
 
@@ -117,7 +129,7 @@ Eligibility for rich/local features remains at Google’s discretion.
 1. **Env** — **`NEXT_PUBLIC_SITE_URL=https://kkedilizia.it`** in production; align **`canonicalUrl`** in admin if used. After **static marketing** content updates, bump **`NEXT_PUBLIC_SITEMAP_STATIC_LASTMOD`** (YYYY-MM-DD). Portfolio pages: set **`updatedAt`** on projects when editing in admin/API (optional field).
 2. **Search Console** — Submit **`https://kkedilizia.it/sitemap.xml`**; use **URL Inspection** after changes.
 3. **Google Business Profile** — Critical for **“near me”** and Maps; fill **`publicReviewUrl`** for **`sameAs`** in JSON-LD.
-4. **Content** — Keep silo and homepage copy truthful (materials, areas); extend **`faq.ts`** as new questions repeat.
+4. **Content** — Keep silo and homepage copy truthful (materials, areas); extend **`faq.ts`** as new questions repeat. When you **routinely** add work in new comuni, update **`LocalBusinessJsonLd` `areaServed`**, and align **`Footer.napAreas`** / **`ServiceSilos.modenaArea`** (and the **province-town regex** on the portfolio detail page if those towns should trigger the Modena cross-link).
 5. **Ads** — Campaign config lives outside the repo.
 
 ---
@@ -130,7 +142,9 @@ Eligibility for rich/local features remains at Google’s discretion.
 | Home: verification + alternates for `/` | `src/app/[locale]/page.tsx` |
 | Home local SEO block (`p1`–`p4`) | `src/components/sections/HomeLocalIntro.tsx`, `messages/*.json` → `HomeLocalIntro` |
 | Global site title/description | `messages/*.json` → `Metadata` |
-| Service silo copy + meta | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; `src/lib/service-silo-metadata.ts`; `ServiceSiloContent.tsx` |
+| Service silo copy + meta (incl. `modenaArea`, `complianceModena`) | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; `src/lib/service-silo-metadata.ts`; `src/components/sections/service-silo/ServiceSiloContent.tsx` |
+| Footer silos + “Zone servite” | `src/components/site/Footer.tsx`; `messages/*.json` → `Footer` |
+| Portfolio detail: alt + silo cross-links | `src/app/[locale]/portfolio/[slug]/page.tsx`; `messages/*.json` → `ProjectDetail`, `FeaturedProjects` |
 | FAQ Q&A | `src/lib/data/faq.ts`; intro `messages` → `FaqSection` |
 | Silo route table | `src/lib/service-silos.ts`; pages under `src/app/[locale]/` |
 | Canonical + hreflang helper | `src/lib/seo-metadata.ts` |
@@ -146,4 +160,4 @@ Eligibility for rich/local features remains at Google’s discretion.
 
 ---
 
-*Last updated: April 2026 — sitemap lastmod from env + projects; `favicon.ico` in `public`; OG exports `width`/`height`/`contentType`; plus HomeLocalIntro, FAQ, LocalBusiness, canonical/hreflang, no meta keywords in HTML.*
+*Last updated: April 2026 — silo RUE/compliance + hyper-local copy; expanded `LocalBusinessJsonLd` `areaServed`; portfolio/featured `alt` with category + location; footer “Zone servite”; project-page internal links to silos + optional Modena cross-link; sitemap lastmod from env + projects; `favicon.ico` in `public`; OG exports `width`/`height`/`contentType`; HomeLocalIntro, FAQ, canonical/hreflang, no meta keywords in HTML.*

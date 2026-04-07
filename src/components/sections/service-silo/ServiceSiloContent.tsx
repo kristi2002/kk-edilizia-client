@@ -34,6 +34,12 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
           </p>
         </FadeIn>
 
+        <FadeIn delay={0.07}>
+          <p className="mt-6 border-l-2 border-[#c9a227]/40 pl-4 text-sm leading-relaxed text-zinc-400">
+            {t("complianceModena")}
+          </p>
+        </FadeIn>
+
         <FadeIn delay={0.1}>
           <div className="mt-10 space-y-5 text-base leading-relaxed text-zinc-400">
             {(["body1", "body2", "body3", "body4", "body5", "body6"] as const).map(

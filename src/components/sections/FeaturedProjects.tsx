@@ -57,7 +57,11 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={p.coverImage}
-                      alt={loc.title}
+                      alt={t("coverAlt", {
+                        category: loc.category,
+                        title: loc.title,
+                        location: loc.location,
+                      })}
                       fill
                       quality={72}
                       className="object-cover transition duration-700 group-hover:scale-105"

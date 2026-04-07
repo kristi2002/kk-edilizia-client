@@ -27,6 +27,7 @@ export default async function PortfolioPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("PortfolioPage");
+  const tFeat = await getTranslations("FeaturedProjects");
   const [projects, projectTypes] = await Promise.all([
     getProjects(),
     getProjectTypes(),
@@ -58,7 +59,11 @@ export default async function PortfolioPage({ params }: Props) {
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
                         src={p.coverImage}
-                        alt={loc.title}
+                        alt={tFeat("coverAlt", {
+                          category: loc.category,
+                          title: loc.title,
+                          location: loc.location,
+                        })}
                         fill
                         quality={72}
                         className="object-cover transition duration-700 group-hover:scale-[1.03]"
