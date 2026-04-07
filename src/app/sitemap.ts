@@ -1,3 +1,8 @@
+/**
+ * Programmatic sitemap (`/sitemap.xml`). Next.js serializes this with
+ * `<?xml version="1.0" encoding="UTF-8"?>` first, then `<urlset xmlns="…">` (see
+ * `next/dist/build/webpack/loaders/metadata/resolve-route-data.js`).
+ */
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
@@ -23,7 +28,8 @@ function staticSegments(): string[] {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (await getSiteUrl()).replace(/\/$/, "");
-  const lastModified = new Date();
+  /** YYYY-MM-DD (UTC); Next.js emits `<lastmod>` as-is for strings. */
+  const lastModified = new Date().toISOString().slice(0, 10);
   const projects = await getProjects();
 
   const entries: MetadataRoute.Sitemap = [];

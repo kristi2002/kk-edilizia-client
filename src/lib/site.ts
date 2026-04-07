@@ -75,25 +75,43 @@ export const staticSite: SiteData = {
 /** Fallback in codice quando mancano env e canonical (admin: sostituito con origine richiesta se possibile). */
 export const PLACEHOLDER_PUBLIC_SITE_URL = "https://kkedilizia.it";
 
+function rewriteLegacyCanonicalHost(url: string): string {
+  const canonicalBase = PLACEHOLDER_PUBLIC_SITE_URL.replace(/\/$/, "");
+  if (/localhost|127\.0\.0\.1|\[::1\]/i.test(url)) {
+    return url;
+  }
+  let out = url.replace(
+    /^https?:\/\/(?:www\.)?kk-edilizia\.it/i,
+    canonicalBase,
+  );
+  out = out.replace(/^https?:\/\/www\.kkedilizia\.it/i, canonicalBase);
+  return out;
+}
+
 /**
  * Garantisce protocollo assoluto per `href` (evita link relativi tipo `www...` che non aprono nulla).
  * Localhost / 127.0.0.1 → `http://`
+ * Riscrive il dominio legacy `kk-edilizia.it` → `kkedilizia.it` (env / Redis / bookmark).
  */
 export function normalizePublicSiteUrl(url: string): string {
   const t = url.trim();
   if (!t) return PLACEHOLDER_PUBLIC_SITE_URL;
+  let out: string;
   if (/^https?:\/\//i.test(t)) {
-    return t.replace(/\/$/, "");
+    out = t.replace(/\/$/, "");
+  } else {
+    const lower = t.toLowerCase();
+    if (
+      lower.startsWith("localhost") ||
+      lower.startsWith("127.0.0.1") ||
+      lower.startsWith("[::1]")
+    ) {
+      out = `http://${t.replace(/\/$/, "")}`;
+    } else {
+      out = `https://${t.replace(/\/$/, "")}`;
+    }
   }
-  const lower = t.toLowerCase();
-  if (
-    lower.startsWith("localhost") ||
-    lower.startsWith("127.0.0.1") ||
-    lower.startsWith("[::1]")
-  ) {
-    return `http://${t.replace(/\/$/, "")}`;
-  }
-  return `https://${t.replace(/\/$/, "")}`;
+  return rewriteLegacyCanonicalHost(out);
 }
 
 /** URL di default se né Redis né env definiscono il dominio (solo fallback). */
