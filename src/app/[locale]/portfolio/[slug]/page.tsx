@@ -13,17 +13,10 @@ import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfte
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { shouldOfferModenaServiceLinks } from "@/lib/constants/towns";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 
 export const revalidate = 60;
-
-/** Province towns (not Modena city): surface internal links toward Modena service silos. */
-const PROVINCE_TOWN_FOR_MODENA_CROSS_LINK =
-  /\b(Sassuolo|Carpi|Formigine|Spilamberto|Maranello|Vignola|Castelfranco\s+Emilia|Castelnuovo\s+Rangone|San\s+Prospero|Nonantola|Mirandola|Pavullo|Fiorano\s+Modenese|Soliera|Campogalliano)\b/i;
-
-function shouldOfferModenaServiceLinks(location: string): boolean {
-  return PROVINCE_TOWN_FOR_MODENA_CROSS_LINK.test(location);
-}
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
