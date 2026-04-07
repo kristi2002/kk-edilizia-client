@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
+import { HomeLocalIntro } from "@/components/sections/HomeLocalIntro";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
@@ -62,6 +63,7 @@ export default async function Home() {
     <main className="flex flex-1 flex-col">
       <Hero />
       <StatsStrip />
+      <HomeLocalIntro />
       <Services />
       <HomeServiceSilos />
       <ProcessSteps />

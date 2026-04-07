@@ -1,7 +1,7 @@
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
 const DESCRIPTION_IT =
-  "Cerchi un'impresa edile a Modena? K.K Edilizia è specializzata in ristrutturazioni chiavi in mano, cartongesso e pitture a Modena e provincia. Contattaci per un preventivo.";
+  "Impresa edile a Modena: ristrutturazioni chiavi in mano, cartongesso, rifacimento tetti e servizi edili in provincia (Sassuolo, Carpi, Formigine). Preventivo dopo sopralluogo.";
 
 /** LocalBusiness / HomeAndConstructionBusiness per risultati locali e Knowledge Graph. */
 export async function LocalBusinessJsonLd() {
@@ -41,6 +41,18 @@ export async function LocalBusinessJsonLd() {
         "@type": "AdministrativeArea",
         name: "Provincia di Modena",
       },
+    ],
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 44.6471,
+      longitude: 10.9252,
+    },
+    knowsAbout: [
+      "Ristrutturazioni edilizie",
+      "Cartongesso e controsoffitti",
+      "Rifacimento tetti",
+      "Servizi edili Modena",
+      "Impresa edile provincia di Modena",
     ],
     priceRange: "€€",
   };

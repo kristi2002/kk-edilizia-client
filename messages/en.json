@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "siteTitle": "K.K Edilizia | Renovations and Construction in Modena",
-    "siteDescription": "Looking for a building contractor in Modena? K.K Edilizia specializes in turnkey renovations, drywall and painting in Modena and province. Contact us for a quote.",
+    "siteTitle": "K.K Edilizia Modena | Building contractor & construction services",
+    "siteDescription": "Building contractor in Modena: turnkey renovations, drywall, roofing and construction services across the province (Sassuolo, Carpi, Formigine). Quote after site survey.",
     "contactsTitle": "Contact",
     "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote.",
     "aboutTitle": "About us",
@@ -32,12 +32,18 @@
     "badge": "Modena & province",
     "titleLine1": "We build spaces",
     "titleHighlight": "that last",
-    "subtitle": "Turnkey renovations, construction, and finishes in Modena and province — including Sassuolo, Carpi, and Formigine. One team for reliable timelines and attention to detail.",
+    "subtitle": "Turnkey renovations, construction and building services in Modena and province — including Sassuolo, Carpi, and Formigine. A local contractor with one point of contact: clear timelines and quality finishes.",
     "ctaQuote": "Request a quote",
     "ctaWorks": "See our work",
     "statYears": "years’ experience",
     "statProjects": "projects",
     "statCommitment": "commitment to deadlines"
+  },
+  "HomeLocalIntro": {
+    "label": "Construction in Modena",
+    "title": "Local contractor serving Modena and the province",
+    "p1": "K.K Edilizia is a Modena-based building contractor: we handle renovations, drywall, roof work and turnkey projects in the city and surrounding areas. If you need reliable construction services with a quote after a site visit, you will find our specialisations, portfolio and contacts here.",
+    "p2": "Local search (including “near me” on maps and phones) combines distance, reviews and website content—that is why we publish service areas, FAQs and dedicated pages per trade. Keeping your Google Business Profile complete and aligned with this site helps consistency."
   },
   "StatsStrip": {
     "v1": "15+",
@@ -52,7 +58,7 @@
   "Services": {
     "label": "What we do",
     "title": "Full service, one point of contact",
-    "intro": "From demolition to handover: we plan phases, manage suppliers, and keep you updated on progress and timing.",
+    "intro": "From demolition to handover: we plan phases, manage suppliers, and keep you updated on progress and timing. Full construction services for homeowners and businesses across the Modena area.",
     "r1t": "Renovations",
     "r1d": "Apartments and houses, systems and finishes with a single coordinator.",
     "r2t": "Construction",
@@ -199,7 +205,7 @@
   "FaqSection": {
     "label": "FAQ",
     "title": "Common questions",
-    "intro": "Clarity on timing, process, and site organisation—before the final quote."
+    "intro": "Timing, process, site organisation, and common questions about building work in Modena and local search."
   },
   "CtaBanner": {
     "title": "Ready to start?",

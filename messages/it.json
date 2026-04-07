@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "siteTitle": "K.K Edilizia | Ristrutturazioni e Costruzioni a Modena",
-    "siteDescription": "Cerchi un'impresa edile a Modena? K.K Edilizia è specializzata in ristrutturazioni chiavi in mano, cartongesso e pitture a Modena e provincia. Contattaci per un preventivo.",
+    "siteTitle": "K.K Edilizia Modena | Impresa edile e servizi edili in provincia",
+    "siteDescription": "Impresa edile a Modena: ristrutturazioni chiavi in mano, cartongesso, tetti e servizi edili in provincia (Sassuolo, Carpi, Formigine). Preventivo dopo sopralluogo.",
     "contactsTitle": "Contatti",
     "contactsDescription": "Telefono, email, PEC e sede a Modena. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi e preventivo online.",
     "aboutTitle": "Chi siamo",
@@ -32,12 +32,18 @@
     "badge": "Modena & provincia",
     "titleLine1": "Costruiamo spazi",
     "titleHighlight": "che durano",
-    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e finiture a Modena e provincia — anche Sassuolo, Carpi e Formigine. Un team unico per tempi certi e un risultato curato nei dettagli.",
+    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e servizi edili a Modena e provincia — anche Sassuolo, Carpi e Formigine. Un’impresa edile locale con un solo referente: tempi chiari e finiture curate.",
     "ctaQuote": "Richiedi preventivo",
     "ctaWorks": "Vedi i lavori",
     "statYears": "anni esperienza",
     "statProjects": "interventi",
     "statCommitment": "impegno sui tempi"
+  },
+  "HomeLocalIntro": {
+    "label": "Edilizia a Modena",
+    "title": "Impresa edile e servizi edili in provincia",
+    "p1": "K.K Edilizia è un’impresa edile con sede a Modena: seguiamo ristrutturazioni, cartongesso, rifacimento tetti e lavori chiavi in mano in città e in provincia. Se cercate servizi edili affidabili con preventivo dopo sopralluogo, trovate qui le specializzazioni, il portfolio e i contatti per fissare un appuntamento.",
+    "p2": "Le ricerche locali (inclusa la ricerca per attività vicine su mappe e assistenti vocali) combinano distanza, recensioni e contenuti del sito: per questo pubblichiamo zone coperte, FAQ e pagine dedicate ai singoli interventi. Completare la scheda Google Business e allineare indirizzo e orari aiuta la coerenza con il sito."
   },
   "StatsStrip": {
     "v1": "15+",
@@ -52,7 +58,7 @@
   "Services": {
     "label": "Cosa facciamo",
     "title": "Servizi completi, un solo referente",
-    "intro": "Dalla demolizione alle consegne: pianifichiamo le fasi, gestiamo i fornitori e teniamo aggiornati i clienti su avanzamenti e tempi.",
+    "intro": "Dalla demolizione alle consegne: pianifichiamo le fasi, gestiamo i fornitori e teniamo aggiornati i clienti su avanzamenti e tempi. Servizi edili completi per chi cerca qualità in zona Modena.",
     "r1t": "Ristrutturazioni",
     "r1d": "Appartamenti e ville, impianti e finiture con coordinamento unico.",
     "r2t": "Edilizia",
@@ -199,7 +205,7 @@
   "FaqSection": {
     "label": "Domande frequenti",
     "title": "Cosa chiedono più spesso i clienti",
-    "intro": "Trasparenza su tempi, modalità e organizzazione del cantiere, prima ancora del preventivo definitivo."
+    "intro": "Trasparenza su tempi, modalità e organizzazione del cantiere, più domande su servizi edili a Modena e ricerche locali."
   },
   "CtaBanner": {
     "title": "Pronto a iniziare?",

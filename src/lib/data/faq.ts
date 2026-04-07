@@ -43,6 +43,18 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
       a: "Operiamo a Modena centro, Sassuolo, Carpi, Formigine, Castelfranco Emilia e in tutta la provincia; per progetti più lontani valutiamo caso per caso in base a tipologia e tempistiche.",
     },
     {
+      q: "Cercate «edilizia Modena» o «servizi edili»: cosa offre questo sito?",
+      a: "Qui trovate informazioni su ristrutturazioni, cartongesso, rifacimento tetti e lavori chiavi in mano, con sede a Modena e interventi in provincia. Le pagine dedicate ai servizi approfondiscono materiali, fasi di cantiere e zone coperte; il portfolio mostra esempi reali. Il preventivo dettagliato arriva dopo sopralluogo, con voci e tempi chiari.",
+    },
+    {
+      q: "Cosa significa «edilizia vicino a me» nei risultati di ricerca?",
+      a: "Le ricerche locali e le mappe combinano distanza dalla vostra posizione, segnali della scheda Google Business (orari, recensioni, categoria), coerenza di indirizzo e contenuti del sito. Un sito chiaro sulle zone servite e sui servizi edili aiuta, ma il posizionamento locale dipende da molti fattori: non esiste una posizione garantita per tutti.",
+    },
+    {
+      q: "Quali servizi edili svolgete a Modena e in provincia?",
+      a: "Ristrutturazioni interne ed esterne, bagni, cartongesso e controsoffitti, rifacimento coperture, finiture e coordinamento fornitori con un referente unico. Su richiesta supportiamo anche la documentazione utile al tecnico per pratiche edilizie; i titoli spettano sempre al professionista incaricato dal cliente.",
+    },
+    {
       q: "Potete fornire documentazione per le detrazioni fiscali?",
       a: "Sì: fatture, cronologia lavori e documentazione di cantiere utili al commercialista per la rendicontazione, in linea con le regole dell’anno d’imposta in cui ricadono i pagamenti. Per percentuali, massimali e requisiti specifici (incluso l’eventuale regime bonus per il 2026) rivolgetevi sempre a un professionista fiscalmente abilitato e alle fonti ufficiali aggiornate.",
     },
@@ -87,6 +99,18 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     {
       q: "Which area do you cover?",
       a: "We work in central Modena, Sassuolo, Carpi, Formigine, Castelfranco Emilia and across the province; for farther projects we assess case by case depending on scope and timing.",
+    },
+    {
+      q: "What will I find here if I search for building work or contractors in Modena?",
+      a: "Renovations, drywall, roof replacement and turnkey projects, based in Modena with work across the province. Dedicated pages explain materials, site phases and areas covered; the portfolio shows real jobs. A detailed quote follows a site visit with clear line items and timing.",
+    },
+    {
+      q: "What does “construction near me” mean in search results?",
+      a: "Local search and maps combine distance, Google Business Profile signals (hours, reviews, category), address consistency and website content. A clear site helps, but local ranking depends on many factors—no position is guaranteed for everyone.",
+    },
+    {
+      q: "What construction services do you provide in Modena and the province?",
+      a: "Interior and exterior renovations, bathrooms, drywall and ceilings, roof replacement, finishes and supplier coordination with one contact. Where needed we support documentation for building filings; permits remain with your appointed professional.",
     },
     {
       q: "Can you provide documentation for tax deductions?",
