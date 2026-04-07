@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "siteTitle": "K.K Edilizia Modena | Building contractor & construction services",
-    "siteDescription": "Building contractor in Modena: turnkey renovations, drywall, roofing and construction services across the province (Sassuolo, Carpi, Formigine). Quote after site survey.",
+    "siteDescription": "Building contractor in Modena: renovations, drywall and roofing for private clients and businesses. Professional materials (Mapei, Kerakoll and certified equivalents). Province: Sassuolo, Carpi, Formigine. Quote after site survey.",
     "contactsTitle": "Contact",
     "contactsDescription": "Phone, email, PEC and Modena office. Construction and renovations across the province (Sassuolo, Carpi, Formigine). Message form and online quote.",
     "aboutTitle": "About us",
@@ -42,8 +42,10 @@
   "HomeLocalIntro": {
     "label": "Construction in Modena",
     "title": "Local contractor serving Modena and the province",
-    "p1": "K.K Edilizia is a Modena-based building contractor: we handle renovations, drywall, roof work and turnkey projects in the city and surrounding areas. If you need reliable construction services with a quote after a site visit, you will find our specialisations, portfolio and contacts here.",
-    "p2": "Local search (including “near me” on maps and phones) combines distance, reviews and website content—that is why we publish service areas, FAQs and dedicated pages per trade. Keeping your Google Business Profile complete and aligned with this site helps consistency."
+    "p1": "K.K Edilizia is a building contractor based in Modena: we work in residential construction and renovations for private clients, families and small businesses investing in property across the city and province. We provide full construction services—from drywall to roof replacement—with a detailed quote after a survey and a single site contact.",
+    "p2": "We follow applicable rules: where building permits are required, the Modena municipal building code, national construction law and filings (CILA, SCIA or other) prepared by your surveyor or architect apply. We carry out work in line with the approved design and keep you and your technician updated on progress so homeowners and businesses can plan timing and budget realistically.",
+    "p3": "Projects on flats, houses and commercial units across Modena’s most requested areas—from the historic centre to outer districts linked to Sassuolo, Carpi and Formigine. Whether you need a full renovation or targeted work (bathroom, roof, drywall partitions), we focus on site organisation, coordinated suppliers and materials chosen for durability.",
+    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards."
   },
   "StatsStrip": {
     "v1": "15+",

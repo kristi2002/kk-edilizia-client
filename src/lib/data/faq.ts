@@ -55,6 +55,10 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
       a: "Ristrutturazioni interne ed esterne, bagni, cartongesso e controsoffitti, rifacimento coperture, finiture e coordinamento fornitori con un referente unico. Su richiesta supportiamo anche la documentazione utile al tecnico per pratiche edilizie; i titoli spettano sempre al professionista incaricato dal cliente.",
     },
     {
+      q: "Usate marchi come Mapei o Kerakoll?",
+      a: "Sì: su malte, impermeabilizzazioni, adesivi e finiture ci orientiamo spesso su linee Mapei e Kerakoll, diffuse in Italia, oppure su prodotti equivalenti certificati con scheda tecnica chiara. Per cartongesso valutiamo lastre e sistemi Knauf o equivalenti in base ad acustica e ambienti. In preventivo indichiamo voci e alternative equivalenti, senza imporre un solo marchio se il progetto richiede altre soluzioni certificate.",
+    },
+    {
       q: "Potete fornire documentazione per le detrazioni fiscali?",
       a: "Sì: fatture, cronologia lavori e documentazione di cantiere utili al commercialista per la rendicontazione, in linea con le regole dell’anno d’imposta in cui ricadono i pagamenti. Per percentuali, massimali e requisiti specifici (incluso l’eventuale regime bonus per il 2026) rivolgetevi sempre a un professionista fiscalmente abilitato e alle fonti ufficiali aggiornate.",
     },
@@ -111,6 +115,10 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     {
       q: "What construction services do you provide in Modena and the province?",
       a: "Interior and exterior renovations, bathrooms, drywall and ceilings, roof replacement, finishes and supplier coordination with one contact. Where needed we support documentation for building filings; permits remain with your appointed professional.",
+    },
+    {
+      q: "Do you use brands such as Mapei or Kerakoll?",
+      a: "Yes: for mortars, waterproofing, adhesives and finishes we often use Mapei and Kerakoll lines—common in Italy—or certified equivalents with clear technical data sheets. For drywall we select Knauf or equivalent boards depending on acoustics and room use. Quotes list line items and equivalent alternatives; we do not force a single brand if the project calls for other certified solutions.",
     },
     {
       q: "Can you provide documentation for tax deductions?",

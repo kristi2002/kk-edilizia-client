@@ -6,7 +6,7 @@ export async function HomeLocalIntro() {
   const t = await getTranslations("HomeLocalIntro");
   return (
     <section
-      className="relative border-y border-white/[0.06] bg-[#0c0c0c] px-4 py-16 sm:px-6"
+      className="relative border-y border-white/[0.06] bg-[#0c0c0c] px-4 py-20 sm:px-6"
       aria-labelledby="home-local-heading"
     >
       <div className="relative mx-auto max-w-3xl">
@@ -22,6 +22,8 @@ export async function HomeLocalIntro() {
           </h2>
           <p className="mt-5 text-base leading-relaxed text-zinc-400">{t("p1")}</p>
           <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p2")}</p>
+          <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p3")}</p>
+          <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p4")}</p>
         </FadeIn>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
 const DESCRIPTION_IT =
-  "Impresa edile a Modena: ristrutturazioni chiavi in mano, cartongesso, rifacimento tetti e servizi edili in provincia (Sassuolo, Carpi, Formigine). Preventivo dopo sopralluogo.";
+  "Impresa edile a Modena: ristrutturazioni per privati e aziende, cartongesso, tetti. Materiali professionali (Mapei, Kerakoll, sistemi Knauf o equivalenti). Provincia di Modena. Preventivo dopo sopralluogo.";
 
 /** LocalBusiness / HomeAndConstructionBusiness per risultati locali e Knowledge Graph. */
 export async function LocalBusinessJsonLd() {
@@ -53,6 +53,9 @@ export async function LocalBusinessJsonLd() {
       "Rifacimento tetti",
       "Servizi edili Modena",
       "Impresa edile provincia di Modena",
+      "Materiali Mapei e Kerakoll",
+      "Sistemi a secco Knauf",
+      "Regolamento edilizio Comune di Modena",
     ],
     priceRange: "€€",
   };
