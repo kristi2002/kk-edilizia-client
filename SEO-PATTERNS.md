@@ -4,27 +4,42 @@ This document summarizes **search-oriented patterns** implemented in the codebas
 
 **See also:** [Guida introduttiva SEO (Google, contesto generale, IT)](docs/seo-guida-introduttiva-google-it.md) — general principles from Google Search Central; **this document** describes **this codebase** only.
 
+**Purpose for tooling:** Feed this file to another model when you want **suggestions** that respect existing architecture (Next.js App Router, `next-intl`, Redis site data, file locations below).
+
 ---
 
 ## 1. Technical foundation (Next.js App Router)
 
-- **Per-route metadata** — Pages export `generateMetadata` (or `metadata`) so each URL has its own **title**, **description**, and **Open Graph** fields (`opengraph-image.tsx`, layout metadata, service silo helper `buildServiceSiloMetadata`). **Canonical URL + `hreflang` alternates** (`it` / `en` / `x-default`) are applied via `withLocaleAlternates` in `src/lib/seo-metadata.ts` so each localized URL has a single canonical and clear language variants (aligns with Google guidance on duplicate content across locales). The HTML **meta keywords** tag is **not** emitted: Google Search ignores it; keyword lists for silos remain in `messages` only as editorial reference if needed.
-- **Canonical base URL** — `getSiteUrl()` (Redis `canonicalUrl` → `NEXT_PUBLIC_SITE_URL` → fallback) drives **sitemap**, **robots**, **JSON-LD `url`**, and consistent absolute links. On **Vercel**, set `NEXT_PUBLIC_SITE_URL` to the **live custom domain** (e.g. `https://kkedilizia.it`), not only the default `*.vercel.app` URL, or canonicals and schema can disagree with Search Console.
-- **`robots.ts`** — Allows crawlers on public routes, blocks `/admin` and `/api/admin`, and points to **`/sitemap.xml`**.
-- **`sitemap.ts`** — Generates URLs for **both locales** (`it`, `en`), static segments, **service silo** routes, portfolio slugs, and virtual-tour URLs when present. Uses **`lastModified`** (date `YYYY-MM-DD`), **`changeFrequency`**, and **`priority`** hints. Next.js outputs **`<?xml version="1.0" encoding="UTF-8"?>`** as the first line of **`/sitemap.xml`**. Base URL comes from **`getSiteUrl()`**; legacy **`kk-edilizia.it`** is rewritten to **`kkedilizia.it`** in **`normalizePublicSiteUrl`**.
+### Metadata & duplicates across locales
+
+- **Per-route metadata** — Pages export `generateMetadata` (or static `metadata`) so each URL has its own **title**, **description**, and **Open Graph** fields (`opengraph-image.tsx`, `[locale]/layout.tsx` defaults, service silo helper `buildServiceSiloMetadata`).
+- **Canonical URL + `hreflang`** — `it` / `en` / `x-default` (default = Italian site) via **`withLocaleAlternates`** in **`src/lib/seo-metadata.ts`**, merged into each page’s metadata. Aligns with Google guidance on localized duplicates.
+- **No HTML meta keywords** — The **`<meta name="keywords">`** tag is **not** emitted. Google Search ignores it. Arrays named `metaKeywords` under **`messages/*.json` → `ServiceSilos`** are **editorial / legacy only** and are not passed to Next `Metadata` (removed from `buildServiceSiloMetadata`).
+
+### Canonical base URL & legacy domain
+
+- **`getSiteUrl()`** — Resolution order: Redis **`canonicalUrl`** (admin) → **`NEXT_PUBLIC_SITE_URL`** → fallback **`PLACEHOLDER_PUBLIC_SITE_URL`** in **`src/lib/site.ts`** (`https://kkedilizia.it`).
+- **`normalizePublicSiteUrl()`** (in **`src/lib/site.ts`**) — Ensures absolute URLs; **rewrites legacy hostname** `kk-edilizia.it` (and `www` variants) to **`kkedilizia.it`** so env/Redis mistakes do not leak wrong absolute URLs into sitemap, schema, or canonicals.
+- **Production** — Set **`NEXT_PUBLIC_SITE_URL=https://kkedilizia.it`** on Vercel (and **`canonicalUrl`** in admin if used). Avoid relying only on **`*.vercel.app`** for canonical/sitemap/schema alignment with Search Console.
+
+### Crawl & index files
+
+- **`src/app/robots.ts`** — `allow: /` for `*`; **`disallow`**: `/admin`, `/api/admin`**; **`sitemap`**: absolute URL from `getSiteUrl()` + `/sitemap.xml`. View in browser: **`/robots.txt`**.
+- **`src/app/sitemap.ts`** + **`src/lib/sitemap-lastmod.ts`** — **`lastModified`** is **`YYYY-MM-DD`** (string). **Static** marketing routes use **`NEXT_PUBLIC_SITEMAP_STATIC_LASTMOD`** (see **`.env.example`**) or a code fallback—**bump the env date** when you ship copy/silo changes so Google does not see a fake “today” on every URL. **Home** and **`/portfolio`** index use **`max(static, latest portfolio date)`**. **Portfolio** and **virtual-tour** URLs use **`Project.updatedAt`** (optional, from API/admin JSON) if set, else **inferred from `year`** (`YYYY-12-01`). Next.js serializes with **`<?xml version="1.0" encoding="UTF-8"?>`** first (see Next’s `resolve-route-data` for sitemaps).
 
 ---
 
-## 2. Internationalization (broader query coverage)
+## 2. Internationalization
 
-- **Italian (default) and English** — Content lives in `messages/it.json` and `messages/en.json` with **`localePrefix: "as-needed"`** so Italian stays on clean paths (`/contatti`) and English is prefixed (`/en/contatti`).
-- **`localeDetection: false`** — The default experience is **Italian at `/`**; English is chosen explicitly (`/en/...` or the language control), avoiding accidental English results for Italian-first queries.
+- **Locales** — `it` (default), `en`; content in **`messages/it.json`** and **`messages/en.json`**.
+- **`localePrefix: "as-needed"`** — Italian URLs have no prefix (`/contatti`); English uses **`/en/...`**.
+- **`localeDetection: false`** — No automatic redirect by `Accept-Language`; Italian remains default at **`/`** unless the user picks English.
 
 ---
 
 ## 3. “Topical authority” — service silos
 
-Dedicated **keyword-aligned URLs** (not a single long homepage) help search engines map **intent** to pages:
+Keyword-aligned **dedicated URLs** (not everything on the homepage):
 
 | Path (IT default) | Focus |
 |-------------------|--------|
@@ -32,82 +47,103 @@ Dedicated **keyword-aligned URLs** (not a single long homepage) help search engi
 | `/cartongesso-modena` | Drywall / cartongesso |
 | `/rifacimento-tetto` | Roof work |
 
-Each silo page has:
-
-- **Unique `metaTitle` / `metaDescription` / `metaKeywords`** (IT + EN in `messages/*.json` → `ServiceSilos.<silo>`).
-- **Long-form body copy** — Six sections per silo (`body1`–`body6`) rendered by `ServiceSiloContent.tsx`, aimed at **substantial** Italian/English text (local services, materials such as Mapei/Kerakoll where relevant, Modena-area neighborhoods, process and permits explained at a high level).
-- **Local footprint** — `ServiceSilos.modenaArea` (IT): *Modena centro, Sassuolo, Carpi, Formigine, Castelfranco Emilia e tutta la provincia.* (mirrored in EN.)
-- **Internal links** to **preventivo** and **contatti** to keep crawl paths and user journeys clear.
-
-**Internal linking:**
-
-- Homepage section **`HomeServiceSilos`** links to the three silos.
-- Footer **quick links** repeat those URLs under “Servizi”.
+- **Metadata** — Unique **`metaTitle`** / **`metaDescription`** per silo via **`buildServiceSiloMetadata`** + **`withLocaleAlternates`** (path from **`src/lib/service-silos.ts`**).
+- **Body** — Long copy in **`messages` → `ServiceSilos.<key>`** (`body1`–`body6`), rendered by **`ServiceSiloContent.tsx`**. Mentions **Mapei**, **Kerakoll**, Modena-area zones (e.g. Via Emilia, Viale Amendola), high-level **CILA/SCIA** context (professional responsibility stays with client’s technician).
+- **Area string** — **`ServiceSilos.modenaArea`** (IT/EN).
+- **Internal links** — **`HomeServiceSilos`**, footer, CTAs to **preventivo** / **contatti**.
 
 ---
 
-## 4. Structured data (rich results & local relevance)
+## 4. Structured data (JSON-LD)
 
-- **`LocalBusinessJsonLd`** — Injects **schema.org** `HomeAndConstructionBusiness` with **name**, **legalName**, **taxID**, **vatID**, **numberOfEmployees**, **address**, **geo-related `areaServed`** (Modena, Sassuolo, Carpi, Formigine, Provincia di Modena), **contact**, and optional **`sameAs`** when a Google Business (or similar) URL is set in site data.
-- **`BreadcrumbJsonLd`** — Used on portfolio-style pages to expose breadcrumb trails where implemented.
+- **`LocalBusinessJsonLd`** (`src/components/seo/LocalBusinessJsonLd.tsx`) — **`@type`: `HomeAndConstructionBusiness`**: brand, legalName, tax/vat, employees, **description** (IT, aligned with services), **`url`** from `getSiteUrl()`, phone, email, **PostalAddress**, **`areaServed`** (cities + Provincia di Modena), **`geo`** (approximate **GeoCoordinates** for Modena area), **`knowsAbout`** (topics including services, **Mapei/Kerakoll**, **Knauf**, **Comune di Modena** building rules mention), **`priceRange`**, optional **`sameAs`** if **`publicReviewUrl`** is set in site data (Google Business Profile).
+- **`BreadcrumbJsonLd`** — Portfolio and virtual-tour pages where implemented.
 
-These help eligible **local** and **knowledge-panel-style** treatments; eligibility still depends on Google’s policies and entity data.
+Eligibility for rich/local features remains at Google’s discretion.
 
 ---
 
 ## 5. On-page content patterns
 
-- **FAQ (homepage)** — Questions and answers live in **`src/lib/data/faq.ts`** (`faqByLocale.it` / `.en`), not in `messages/*.json`. The UI uses `FaqSection` intro strings from **`messages` → `FaqSection`**. Include **informational** and **AEO-style** queries (permits, timelines, CILA, costs, area served, **Bonus Ristrutturazione / tax relief** with a disclaimer to verify current law with a commercialista). Answers avoid fake precision and point to **survey / quote** where appropriate.
-- **Portfolio** — Project pages with titles, descriptions, and images support **long-tail** and **location** relevance. Cover, gallery, and before/after images use **descriptive `alt`** (project title and gallery index) per Google image guidance. In **admin**, use descriptive titles (e.g. *Ristrutturazione appartamento storico — Centro Modena*) rather than generic labels; placeholders on the portfolio editor suggest this pattern.
+### Homepage — `HomeLocalIntro`
+
+- **Component** — **`src/components/sections/HomeLocalIntro.tsx`**, rendered on **`src/app/[locale]/page.tsx`** after **`StatsStrip`**, before **`Services`**.
+- **Strings** — **`messages/*.json` → `HomeLocalIntro`** (`label`, `title`, **`p1`–`p4`**). Italian copy covers: **impresa edile**, **servizi edili**, **privati** and **small businesses**, **Comune di Modena** / building regulations, **territory** (Modena, Sassuolo, Carpi, Formigine), **material brands** (**Mapei**, **Kerakoll**, **Knauf** or certified equivalents), transparency on **quotes** and **no guaranteed rankings** for local search.
+
+### Global homepage metadata
+
+- **`messages` → `Metadata`** — **`siteTitle`** / **`siteDescription`** tuned for **Modena**, **servizi edili**, **privati/aziende**, **materiali** (Mapei, Kerakoll, equivalenti), province towns.
+- **Root layout** — **`src/app/[locale]/layout.tsx`** sets default **title template** and **Open Graph** locale; per-page metadata overrides where defined.
+- **Verification** — Google **site verification** meta is set on the **home** `generateMetadata` in **`src/app/[locale]/page.tsx`** (alongside **`withLocaleAlternates`** for `/`).
+
+### FAQ
+
+- **Data** — **`src/lib/data/faq.ts`**: **`faqByLocale.it`** / **`.en`** arrays (not in `messages` for Q/A bodies).
+- **UI** — **`FaqSection`** intro from **`messages` → `FaqSection`**. Topics include: permits/CILA, **Bonus** disclaimer, timelines, **area served**, **local / “near me”** behavior (honest), **Mapei/Kerakoll/Knauf** FAQ entry, **servizi edili** scope.
+
+### Portfolio
+
+- **Metadata** — Per-project titles/descriptions; **`withLocaleAlternates`** on detail and virtual-tour routes.
+- **Images** — **`alt`** on cover, gallery (**`ProjectDetail.galleryAlt`** with index), before/after (**`ProjectBeforeAfterBlock`** alt props). Listing page has **`PortfolioPage.metaTitle` / `metaDescription`**.
+
+### Other
+
+- **Hero / Services / ProcessSteps** — Copy in **`messages`**; tuned for **edilizia** / **servizi edili** / Modena province where relevant.
 
 ---
 
 ## 6. Brand, crawl, and sharing assets
 
-- **Favicon / tab icon** — Configured only via the **Next.js Metadata API** in **`src/app/layout.tsx`** (`metadata.icons` → **`/logo.png`**). Do **not** duplicate `<link rel="icon">` in `<head>` unless you have a reason; avoid pointing **`metadata.icons`** at **`/favicon.ico`** until that file exists. **`next.config.ts`** rewrites **`/favicon.ico`** → **`/logo.png`** so bare `/favicon.ico` requests still get an image. **Recommended (Vercel / Next checklist):** export a **16×16 or 32×32** brand mark → save as **`public/favicon.ico`** (or **`src/app/favicon.ico`** in the App Router), then add it to **`metadata.icons`** (first in the `icon` array) and **remove the rewrite** so the static file is served. The current full-size **`logo.png`** is large; a small `.ico` improves tab clarity and load.
-- **`opengraph-image.tsx`** — Default social preview image for shares.
-- **`manifest.ts`** — Web app manifest includes **`icons`** referencing **`/logo.png`** for install/home-screen surfaces.
+- **Favicon** — **`public/favicon.ico`** (32×32 + 16×16 generated from **`public/logo.png`** via **`npm run generate:favicon`**, script: **`scripts/generate-favicon.mjs`**, uses **sharp** + **png-to-ico**). **`src/app/layout.tsx`** lists **`/favicon.ico`** first in **`metadata.icons`**, then **`/logo.png`**. No **`next.config`** rewrite for favicon (direct static file).
+- **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630) so crawlers and social CDNs can reserve space without probing the image. **`manifest.ts`** — icons still reference **`/logo.png`** for PWA/home-screen.
 
 ---
 
-## 7. Analytics & tags (measurement, not rankings)
+## 7. Analytics & tags
 
-- **Google Tag Manager / GA** (when env vars are set) — Supports **measurement** and campaigns; they do not directly “rank” pages. Cookie copy in **`messages` → `CookieBanner`** describes technical cookies and aggregate analytics; align text with what you actually load (e.g. GA via GTM).
+- **GTM / GA** — When env vars are set; measurement does not equal rankings. **`CookieBanner`** copy should match what is actually loaded.
 
 ---
 
 ## 8. Company data & CMS (Redis / admin)
 
-- **Site payload normalization** — `src/lib/validate-site-payload.ts` merges admin/Redis JSON with **`staticSite`** and **coalesces** empty or obvious **placeholder** values so the public site does not show wiped or demo fiscal/contact fields. Operational truth remains: save real data in admin and use production URLs in env.
+- **`src/lib/validate-site-payload.ts`** — Merges Redis/admin JSON with **`staticSite`**; coalesces empty placeholders.
+- **`src/lib/data/site-store.ts`** — **`getSite()`**, **`getSiteUrl()`** for runtime URL used across metadata, sitemap, robots, schema.
 
 ---
 
-## 9. Operational checklist for you
+## 9. Operational checklist
 
-1. Set **`NEXT_PUBLIC_SITE_URL`** in **production** (e.g. Vercel project env) to **`https://kkedilizia.it`** (or your definitive domain). Optionally set **`canonicalUrl`** in admin company settings. Avoid relying only on **`*.vercel.app`** for canonical/sitemap/schema.
-2. Submit **`https://<your-domain>/sitemap.xml`** in **Google Search Console** (and Bing Webmaster Tools) after major launches or domain changes.
-3. Keep **service silo** and **homepage** copy aligned with **real services** and **accurate** areas; extend FAQ in `faq.ts` as new recurring questions appear.
-4. Fill **`publicReviewUrl`** in company data when you have a stable **Google Business Profile** link for `sameAs` in JSON-LD.
-5. **Paid search / social** — The site exposes conversion paths (**Preventivo**, **Contatti**, silo landing pages). Campaign setup (keywords, negatives, geo, creatives) lives in ad platforms, not in this repo.
+1. **Env** — **`NEXT_PUBLIC_SITE_URL=https://kkedilizia.it`** in production; align **`canonicalUrl`** in admin if used. After **static marketing** content updates, bump **`NEXT_PUBLIC_SITEMAP_STATIC_LASTMOD`** (YYYY-MM-DD). Portfolio pages: set **`updatedAt`** on projects when editing in admin/API (optional field).
+2. **Search Console** — Submit **`https://kkedilizia.it/sitemap.xml`**; use **URL Inspection** after changes.
+3. **Google Business Profile** — Critical for **“near me”** and Maps; fill **`publicReviewUrl`** for **`sameAs`** in JSON-LD.
+4. **Content** — Keep silo and homepage copy truthful (materials, areas); extend **`faq.ts`** as new questions repeat.
+5. **Ads** — Campaign config lives outside the repo.
 
 ---
 
-## 10. Where to change things in code
+## 10. File map (where to edit)
 
 | Concern | Main locations |
-|--------|----------------|
-| Page titles / descriptions (global) | `src/app/[locale]/layout.tsx`, `messages/*.json` → `Metadata` |
-| Service silo SEO + long copy | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; rendering `src/components/sections/service-silo/ServiceSiloContent.tsx` |
-| FAQ Q&A text | **`src/lib/data/faq.ts`**; section titles `messages/*.json` → `FaqSection` |
-| Silo routes | `src/lib/service-silos.ts`, `src/app/[locale]/*/page.tsx` |
-| Canonical + hreflang | `src/lib/seo-metadata.ts` (`withLocaleAlternates`) |
-| Sitemap entries | `src/app/sitemap.ts` |
-| Local business schema | `src/components/seo/LocalBusinessJsonLd.tsx` |
+|--------|------------------|
+| Default layout metadata + title template | `src/app/[locale]/layout.tsx` |
+| Home: verification + alternates for `/` | `src/app/[locale]/page.tsx` |
+| Home local SEO block (`p1`–`p4`) | `src/components/sections/HomeLocalIntro.tsx`, `messages/*.json` → `HomeLocalIntro` |
+| Global site title/description | `messages/*.json` → `Metadata` |
+| Service silo copy + meta | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; `src/lib/service-silo-metadata.ts`; `ServiceSiloContent.tsx` |
+| FAQ Q&A | `src/lib/data/faq.ts`; intro `messages` → `FaqSection` |
+| Silo route table | `src/lib/service-silos.ts`; pages under `src/app/[locale]/` |
+| Canonical + hreflang helper | `src/lib/seo-metadata.ts` |
+| Public URL + legacy host rewrite | `src/lib/site.ts` (`normalizePublicSiteUrl`, `getFallbackSiteUrl`) |
+| Sitemap + lastmod logic | `src/app/sitemap.ts`, `src/lib/sitemap-lastmod.ts` |
 | Robots | `src/app/robots.ts` |
-| Favicon / manifest icons | `src/app/layout.tsx` (`metadata.icons` only), `src/app/manifest.ts`, `next.config.ts` rewrite → `public/logo.png`; optional `public/favicon.ico` |
-| Locale routing | `src/i18n/routing.ts` |
-| Site data validation / Redis read | `src/lib/validate-site-payload.ts`, `src/lib/data/site-store.ts` |
+| LocalBusiness JSON-LD | `src/components/seo/LocalBusinessJsonLd.tsx` |
+| Breadcrumbs JSON-LD | `src/components/seo/BreadcrumbJsonLd.tsx` |
+| Favicon / OG image | `src/app/layout.tsx`, `src/app/opengraph-image.tsx`, `src/app/manifest.ts`, `public/favicon.ico`, `public/logo.png`, `scripts/generate-favicon.mjs` |
+| Locale routing | `src/i18n/routing.ts`, `src/lib/i18n-path.ts` |
+| Site URL / Redis | `src/lib/data/site-store.ts`, `src/lib/validate-site-payload.ts` |
+| Portfolio `updatedAt` (Zod) | `src/lib/validate-projects-payload.ts`, `src/lib/data/projects.ts` (`Project` type) |
 
 ---
 
-*Last updated: April 2026 — canonical/hreflang via `seo-metadata.ts`, portfolio meta + image `alt`, no meta keywords in HTML, service silo long copy, FAQ in `faq.ts`, favicon/logo, manifest icons.*
+*Last updated: April 2026 — sitemap lastmod from env + projects; `favicon.ico` in `public`; OG exports `width`/`height`/`contentType`; plus HomeLocalIntro, FAQ, LocalBusiness, canonical/hreflang, no meta keywords in HTML.*

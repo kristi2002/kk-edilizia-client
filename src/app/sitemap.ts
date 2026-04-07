@@ -10,6 +10,11 @@ import { getSiteUrl } from "@/lib/data/site-store";
 import { getProjects } from "@/lib/data/projects-store";
 import { isCostEstimateEnabled } from "@/lib/features";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
+import {
+  getStaticSitemapLastmod,
+  lastmodFromProject,
+  maxIsoDate,
+} from "@/lib/sitemap-lastmod";
 
 function staticSegments(): string[] {
   return [
@@ -28,9 +33,12 @@ function staticSegments(): string[] {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (await getSiteUrl()).replace(/\/$/, "");
-  /** YYYY-MM-DD (UTC); Next.js emits `<lastmod>` as-is for strings. */
-  const lastModified = new Date().toISOString().slice(0, 10);
   const projects = await getProjects();
+  const staticLastmod = getStaticSitemapLastmod();
+  const projectDates = projects.map((p) => lastmodFromProject(p));
+  const latestProject = projectDates.length ? maxIsoDate(projectDates) : staticLastmod;
+  /** Home + portfolio index: reflect newest portfolio activity without faking per-page edits. */
+  const homeAndPortfolioIndexMod = maxIsoDate([staticLastmod, latestProject]);
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -38,6 +46,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const seg of staticSegments()) {
       const path = localizedPath(locale, seg === "" ? "/" : seg);
       const url = path === "/" ? `${base}/` : `${base}${path}`;
+      const lastModified =
+        seg === ""
+          ? homeAndPortfolioIndexMod
+          : seg === "/portfolio"
+            ? homeAndPortfolioIndexMod
+            : staticLastmod;
       entries.push({
         url,
         lastModified,
@@ -48,9 +62,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const p of projects) {
       const path = localizedPath(locale, `/portfolio/${p.slug}`);
+      const pMod = lastmodFromProject(p);
       entries.push({
         url: `${base}${path}`,
-        lastModified,
+        lastModified: pMod,
         changeFrequency: "monthly",
         priority: 0.7,
       });
@@ -61,7 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         );
         entries.push({
           url: `${base}${vtPath}`,
-          lastModified,
+          lastModified: pMod,
           changeFrequency: "monthly",
           priority: 0.65,
         });

@@ -2,7 +2,11 @@ import { ImageResponse } from "next/og";
 import { getSite } from "@/lib/data/site-store";
 
 export const alt = "K.K Edilizia — Ristrutturazioni Modena";
+
+/** Declared for Open Graph; helps platforms size previews without downloading the full image first. */
 export const size = { width: 1200, height: 630 };
+export const width = 1200;
+export const height = 630;
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {

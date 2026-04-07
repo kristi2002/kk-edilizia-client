@@ -35,6 +35,10 @@ const projectSchema = z.object({
   location: z.string(),
   locationEn: z.string(),
   year: z.string(),
+  updatedAt: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .nullish(),
   excerpt: z.string(),
   excerptEn: z.string(),
   description: z.string(),

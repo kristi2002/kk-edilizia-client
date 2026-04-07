@@ -30,14 +30,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(url),
     /**
-     * Favicon via Metadata API only (avoid duplicate `<link rel="icon">` in `<head>`).
-     * Do not set `icon: '/favicon.ico'` here until `public/favicon.ico` exists (e.g. 32×32).
-     * Until then, `next.config` rewrites `/favicon.ico` → `/logo.png` for default browser requests.
+     * Favicon: `public/favicon.ico` (see `npm run generate:favicon`). PNG fallback for larger displays.
      */
     icons: {
-      icon: [{ url: "/logo.png", type: "image/png", sizes: "any" }],
+      icon: [
+        { url: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
+        { url: "/logo.png", type: "image/png", sizes: "any" },
+      ],
       apple: [{ url: "/logo.png", type: "image/png" }],
-      shortcut: "/logo.png",
+      shortcut: "/favicon.ico",
     },
   };
 }

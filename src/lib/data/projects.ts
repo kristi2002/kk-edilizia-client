@@ -15,6 +15,8 @@ export type Project = {
   location: string;
   locationEn: string;
   year: string;
+  /** ISO date YYYY-MM-DD — set from admin when project is edited (sitemap lastmod). */
+  updatedAt?: string;
   excerpt: string;
   excerptEn: string;
   description: string;
