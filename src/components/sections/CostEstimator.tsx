@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Calculator, Info } from "lucide-react";
@@ -14,10 +14,6 @@ export function CostEstimator({ categories }: Props) {
   const locale = useLocale();
   const [sqm, setSqm] = useState("85");
   const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "completa");
-
-  useEffect(() => {
-    setCategoryId(categories[0]?.id ?? "completa");
-  }, [categories]);
 
   const eur = useMemo(
     () =>

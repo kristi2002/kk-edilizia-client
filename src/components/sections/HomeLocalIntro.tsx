@@ -24,6 +24,18 @@ export async function HomeLocalIntro() {
           <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p2")}</p>
           <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p3")}</p>
           <p className="mt-4 text-base leading-relaxed text-zinc-400">{t("p4")}</p>
+          <figure className="mt-10 rounded-2xl border border-[#c9a227]/20 bg-[#c9a227]/5 px-6 py-6">
+            <figcaption className="text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
+              {t("reviewLabel")}
+            </figcaption>
+            <blockquote className="mt-3 border-l-2 border-[#c9a227]/50 pl-4 font-serif text-lg leading-snug text-zinc-200">
+              {t("reviewQuote")}
+            </blockquote>
+            <p className="mt-3 text-xs leading-relaxed text-zinc-500">
+              {t("reviewAttribution")}
+            </p>
+            <p className="mt-2 text-xs text-zinc-600">{t("reviewLinkHint")}</p>
+          </figure>
         </FadeIn>
       </div>
     </section>

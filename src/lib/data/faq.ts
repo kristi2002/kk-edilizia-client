@@ -47,6 +47,10 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
       a: "Qui trovate informazioni su ristrutturazioni, cartongesso, rifacimento tetti e lavori chiavi in mano, con sede a Modena e interventi in provincia. Le pagine dedicate ai servizi approfondiscono materiali, fasi di cantiere e zone coperte; il portfolio mostra esempi reali. Il preventivo dettagliato arriva dopo sopralluogo, con voci e tempi chiari.",
     },
     {
+      q: "Le recensioni sulla scheda Google Business e sul sito devono coincidere?",
+      a: "La scheda Google Business Profile è il punto di riferimento pubblico per recensioni e indirizzo. Se riportate sul sito estratti di recensioni, usate testi già visibili su Google o citazioni autorizzate dal cliente, senza inventare valutazioni. Coerenza tra sito e scheda Google aiuta la fiducia e le ricerche locali; non copiate contenuti da piattaforme senza permesso.",
+    },
+    {
       q: "Cosa significa «edilizia vicino a me» nei risultati di ricerca?",
       a: "Le ricerche locali e le mappe combinano distanza dalla vostra posizione, segnali della scheda Google Business (orari, recensioni, categoria), coerenza di indirizzo e contenuti del sito. Un sito chiaro sulle zone servite e sui servizi edili aiuta, ma il posizionamento locale dipende da molti fattori: non esiste una posizione garantita per tutti.",
     },
@@ -107,6 +111,10 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     {
       q: "What will I find here if I search for building work or contractors in Modena?",
       a: "Renovations, drywall, roof replacement and turnkey projects, based in Modena with work across the province. Dedicated pages explain materials, site phases and areas covered; the portfolio shows real jobs. A detailed quote follows a site visit with clear line items and timing.",
+    },
+    {
+      q: "Should Google Business reviews match what you show on the website?",
+      a: "Your Google Business Profile is the public source for reviews and address. If you quote reviews on the site, use wording already visible on Google or text the client authorised—do not fabricate ratings. Consistency between the site and Google helps trust and local search; do not copy content from third-party platforms without permission.",
     },
     {
       q: "What does “construction near me” mean in search results?",

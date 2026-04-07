@@ -32,6 +32,8 @@ export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // After mount, sync with localStorage (avoid SSR/client mismatch on first paint).
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: read storage only in browser
     setVisible(readStored() === "none");
   }, []);
 

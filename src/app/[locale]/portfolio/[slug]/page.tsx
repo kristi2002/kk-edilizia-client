@@ -13,7 +13,7 @@ import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfte
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
-import { shouldOfferModenaServiceLinks } from "@/lib/constants/towns";
+import { shouldOfferModenaServiceLinks } from "@/lib/constants/service-area";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 
 export const revalidate = 60;

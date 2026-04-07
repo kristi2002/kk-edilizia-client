@@ -1,4 +1,7 @@
-/** Fascia €/m² indicativa per mercato Modena/provincia (solo orientamento). */
+/**
+ * Fascia €/m² indicativa per mercato Modena/provincia (solo orientamento).
+ * Aggiorna min/max quando i preventivi reali si spostano (materiali, manodopera, stagione).
+ */
 export type EstimatorCategory = {
   id: string;
   label: string;
@@ -20,10 +23,10 @@ export type EstimatorCategoryRow = {
 
 const baseCategories: Omit<EstimatorCategoryRow, "labelIt" | "descriptionIt" | "labelEn" | "descriptionEn">[] =
   [
-    { id: "completa", minPerSqm: 750, maxPerSqm: 1250 },
-    { id: "parziale", minPerSqm: 900, maxPerSqm: 1600 },
-    { id: "impianti", minPerSqm: 120, maxPerSqm: 320 },
-    { id: "facciata", minPerSqm: 140, maxPerSqm: 280 },
+    { id: "completa", minPerSqm: 800, maxPerSqm: 1300 },
+    { id: "parziale", minPerSqm: 950, maxPerSqm: 1650 },
+    { id: "impianti", minPerSqm: 130, maxPerSqm: 340 },
+    { id: "facciata", minPerSqm: 150, maxPerSqm: 290 },
   ];
 
 const labelsIt: Record<string, { label: string; description: string }> = {

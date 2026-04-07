@@ -120,6 +120,7 @@ export default async function ChiSiamoPage({ params }: Props) {
                 ),
               })}
             </p>
+            <p className="mt-2 text-xs text-zinc-600">{t("galleryFooterNote")}</p>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               <figure className="overflow-hidden rounded-2xl border border-white/10">
                 <div className="relative aspect-[4/3]">

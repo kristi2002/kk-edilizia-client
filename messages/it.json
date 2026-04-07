@@ -45,17 +45,22 @@
     "p1": "K.K Edilizia è un’impresa edile con sede a Modena: lavoriamo nel settore dell’edilizia residenziale e delle ristrutturazioni per privati, famiglie e piccole aziende che investono su immobili in città e in provincia. Offriamo servizi edili completi — dal cartongesso al rifacimento tetti — con preventivo dettagliato dopo sopralluogo e un solo referente di cantiere.",
     "p2": "Operiamo in stretta osservanza delle norme vigenti: dove servono titoli edilizi, fanno fede il Regolamento edilizio del Comune di Modena, il Testo unico dell’edilizia e le pratiche (CILA, SCIA o altro) che il vostro geometra o architetto predispone. Noi eseguiamo i lavori in conformità al progetto approvato e aggiorniamo cliente e tecnico su avanzamenti, così privati e attività possono pianificare tempi e budget in modo realistico.",
     "p3": "Interventi su appartamenti, villette e spazi commerciali nelle aree più richieste del territorio modenese — dal centro storico alle periferie collegate a Sassuolo, Carpi e Formigine. Che si tratti di una ristrutturazione chiavi in mano o di lavori mirati (bagno, tetto, tramezzi in cartongesso), il nostro approccio resta lo stesso: organizzazione del cantiere, fornitori coordinati e materiali scelti per durata e manutenzione nel tempo.",
-    "p4": "Sui materiali ci orientiamo su marchi presenti nei cantieri italiani e riconosciuti nel mondo dell’edilizia: sistemi Mapei e Kerakoll per malte, impermeabilizzazioni, adesivi e finiture; per cartongesso e sistemi a secco spesso integrano soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi. Le linee effettive sono indicate in preventivo con alternative equivalenti, sempre con schede tecniche e tracciabilità coerenti con le norme di posa."
+    "p4": "Sui materiali ci orientiamo su marchi presenti nei cantieri italiani e riconosciuti nel mondo dell’edilizia: sistemi Mapei e Kerakoll per malte, impermeabilizzazioni, adesivi e finiture; per cartongesso e sistemi a secco spesso integrano soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi. Le linee effettive sono indicate in preventivo con alternative equivalenti, sempre con schede tecniche e tracciabilità coerenti con le norme di posa.",
+    "reviewLabel": "Feedback dai clienti",
+    "reviewQuote": "«Cantiere pulito, tempi rispettati e un solo referente: chiarezza dall’inizio alla fine.»",
+    "reviewAttribution": "Testo dimostrativo — sostituisci con una citazione breve e reale dalla scheda Google Business (stesso testo pubblico) quando disponibile.",
+    "reviewLinkHint": "Le recensioni pubbliche sulla scheda Google rafforzano fiducia e coerenza con le ricerche locali; incolla qui un estratto autorizzato."
   },
   "StatsStrip": {
-    "v1": "15+",
-    "v2": "50+",
+    "v1": "10+",
+    "v2": "40+",
     "v3": "1",
     "v4": "100%",
-    "years": "Anni nel settore",
-    "projects": "Progetti consegnati",
+    "years": "Anni di attività nel settore",
+    "projects": "Interventi seguiti in provincia",
     "referent": "Referente unico di cantiere",
-    "quotes": "Preventivi dettagliati"
+    "quotes": "Preventivi con voci e tempi",
+    "footnote": "Cifre indicative del modello operativo: aggiornale con dati reali e verificabili prima di usarle in pubblicità."
   },
   "Services": {
     "label": "Cosa facciamo",
@@ -366,6 +371,7 @@
     "galleryEyebrow": "Cantieri e lavori",
     "galleryTitle": "Immagini di esempio",
     "galleryIntro": "Sostituisci queste foto stock con scatti dei vostri cantieri (prima / dopo, dettagli) caricando file in <code>public/images/</code> e aggiornando i percorsi in <code>chi-siamo/page.tsx</code>",
+    "galleryFooterNote": "Le immagini sottostanti restano segnaposto finché non carichi foto proprie (vedi CHECKLIST).",
     "fig1Alt": "Cantiere edile — sostituire con foto propria",
     "fig2Alt": "Interno ristrutturato — sostituire con foto propria",
     "fig1Caption": "Esempio: ristrutturazione in corso",

@@ -28,6 +28,9 @@ export function StatsStrip() {
           </FadeIn>
         ))}
       </div>
+      <p className="mx-auto mt-10 max-w-3xl text-center text-xs leading-relaxed text-zinc-600">
+        {t("footnote")}
+      </p>
     </section>
   );
 }

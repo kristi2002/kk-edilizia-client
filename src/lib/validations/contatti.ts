@@ -53,8 +53,7 @@ export function createContattiRequestSchema(locale: ContattiLocale) {
   });
 }
 
-const _schemaIt = createContattiSchema("it");
-export type ContattiInput = z.infer<typeof _schemaIt>;
-
-const _reqIt = createContattiRequestSchema("it");
-export type ContattiRequest = z.infer<typeof _reqIt>;
+export type ContattiInput = z.infer<ReturnType<typeof createContattiSchema>>;
+export type ContattiRequest = z.infer<
+  ReturnType<typeof createContattiRequestSchema>
+>;

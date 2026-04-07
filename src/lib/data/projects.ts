@@ -1,7 +1,12 @@
 import type { ProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
 import type { ProjectTypeDef } from "@/lib/data/project-types";
 
-/** Panorama equirettangolare di esempio (Pannellum demo) — sostituire da admin. */
+/**
+ * Portfolio statico / Redis: sostituisci `coverImage`, `gallery`, `beforeAfter` con file in `public/`
+ * o URL blob di produzione quando hai le foto (vedi CHECKLIST).
+ *
+ * Panorama equirettangolare di esempio (Pannellum demo) — sostituire da admin.
+ */
 export const DEMO_PANORAMA_URL = "https://pannellum.org/images/alma.jpg";
 
 export type Project = {

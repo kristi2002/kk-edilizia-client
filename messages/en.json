@@ -45,17 +45,22 @@
     "p1": "K.K Edilizia is a building contractor based in Modena: we work in residential construction and renovations for private clients, families and small businesses investing in property across the city and province. We provide full construction services—from drywall to roof replacement—with a detailed quote after a survey and a single site contact.",
     "p2": "We follow applicable rules: where building permits are required, the Modena municipal building code, national construction law and filings (CILA, SCIA or other) prepared by your surveyor or architect apply. We carry out work in line with the approved design and keep you and your technician updated on progress so homeowners and businesses can plan timing and budget realistically.",
     "p3": "Projects on flats, houses and commercial units across Modena’s most requested areas—from the historic centre to outer districts linked to Sassuolo, Carpi and Formigine. Whether you need a full renovation or targeted work (bathroom, roof, drywall partitions), we focus on site organisation, coordinated suppliers and materials chosen for durability.",
-    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards."
+    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards.",
+    "reviewLabel": "Client feedback",
+    "reviewQuote": "“Clean site, deadlines respected, and one point of contact—clear from start to finish.”",
+    "reviewAttribution": "Demo wording—replace with a short verbatim quote from your public Google Business Profile when available.",
+    "reviewLinkHint": "Public Google reviews build trust and align with local search; paste an authorised excerpt here."
   },
   "StatsStrip": {
-    "v1": "15+",
-    "v2": "50+",
+    "v1": "10+",
+    "v2": "40+",
     "v3": "1",
     "v4": "100%",
-    "years": "Years in the trade",
-    "projects": "Projects delivered",
+    "years": "Years active in construction",
+    "projects": "Jobs managed across the province",
     "referent": "Single site contact",
-    "quotes": "Detailed quotes"
+    "quotes": "Quotes with line items and timing",
+    "footnote": "Figures describe our operating model; replace with verifiable data before using them in advertising."
   },
   "Services": {
     "label": "What we do",
@@ -366,6 +371,7 @@
     "galleryEyebrow": "Sites and projects",
     "galleryTitle": "Sample images",
     "galleryIntro": "Replace these stock photos with your own site shots (before/after, details) by uploading files to <code>public/images/</code> and updating paths in <code>chi-siamo/page.tsx</code>",
+    "galleryFooterNote": "The images below stay as placeholders until you upload your own (see project checklist).",
     "fig1Alt": "Construction site — replace with your own photo",
     "fig2Alt": "Renovated interior — replace with your own photo",
     "fig1Caption": "Example: renovation in progress",

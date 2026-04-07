@@ -27,6 +27,15 @@ Apri [http://localhost:3000](http://localhost:3000). Il dev server usa Webpack (
 | `npm run build` | Build di produzione |
 | `npm run start` | Avvia la build (`next start`) |
 | `npm run lint` | ESLint |
+| `npm run test` | Vitest (unit tests) |
+
+## CI
+
+Su GitHub, il workflow **`.github/workflows/ci.yml`** esegue `lint`, `test` e `build` su push/PR verso `main` o `master`.
+
+## Operazioni e backup
+
+Vedi **`docs/OPERATIONS.md`** (env, Redis, Google Business, Sentry opzionale).
 
 ## Variabili d’ambiente
 

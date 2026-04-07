@@ -32,11 +32,14 @@ export default async function PrivacyPage({ params }: Props) {
           Privacy policy
         </h1>
         <p className="mt-4 text-sm text-zinc-500">
-          Ultimo aggiornamento: {new Date().toLocaleDateString("it-IT", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          Ultimo aggiornamento: 2 aprile 2026 — verifica periodica consigliata dopo modifiche ai moduli o agli strumenti di misurazione.
+        </p>
+        <p className="mt-2 text-xs text-zinc-600">
+          Per richieste sui dati personali scrivi a{" "}
+          <a className="text-[#c9a227] hover:underline" href={`mailto:${site.email}`}>
+            {site.email}
+          </a>{" "}
+          o alla PEC indicata nel punto 1.
         </p>
 
         <div className="mt-12 space-y-10 text-sm leading-relaxed text-zinc-400">

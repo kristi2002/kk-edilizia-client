@@ -1,3 +1,4 @@
+import { buildLocalBusinessAreaServed } from "@/lib/constants/service-area";
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
 
 const DESCRIPTION_IT =
@@ -32,30 +33,7 @@ export async function LocalBusinessJsonLd() {
       addressRegion: a.province,
       addressCountry: "IT",
     },
-    areaServed: [
-      { "@type": "City", name: "Modena" },
-      { "@type": "City", name: "Sassuolo" },
-      { "@type": "City", name: "Carpi" },
-      { "@type": "City", name: "Formigine" },
-      { "@type": "City", name: "Castelfranco Emilia" },
-      { "@type": "City", name: "Spilamberto" },
-      { "@type": "City", name: "Maranello" },
-      { "@type": "City", name: "Vignola" },
-      { "@type": "City", name: "Castelnuovo Rangone" },
-      { "@type": "City", name: "San Prospero" },
-      { "@type": "City", name: "Nonantola" },
-      { "@type": "City", name: "Mirandola" },
-      { "@type": "City", name: "Pavullo nel Frignano" },
-      { "@type": "City", name: "Fiorano Modenese" },
-      { "@type": "City", name: "Soliera" },
-      { "@type": "City", name: "Campogalliano" },
-      { "@type": "City", name: "Concordia sulla Secchia" },
-      { "@type": "City", name: "Finale Emilia" },
-      {
-        "@type": "AdministrativeArea",
-        name: "Provincia di Modena",
-      },
-    ],
+    areaServed: buildLocalBusinessAreaServed(),
     geo: {
       "@type": "GeoCoordinates",
       latitude: 44.6471,
