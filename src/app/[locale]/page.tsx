@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { HomeLocalIntro } from "@/components/sections/HomeLocalIntro";
+import { HomeInternalHub } from "@/components/sections/HomeInternalHub";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
+import { getSite } from "@/lib/data/site-store";
 import { isCostEstimateEnabled } from "@/lib/features";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import enMessages from "../../../messages/en.json";
+import itMessages from "../../../messages/it.json";
 
 const Services = dynamic(() =>
   import("@/components/sections/Services").then((m) => ({ default: m.Services })),
@@ -47,29 +51,48 @@ export async function generateMetadata({
   params,
 }: HomeParams): Promise<Metadata> {
   const { locale } = await params;
+  const meta = locale === "en" ? enMessages.Metadata : itMessages.Metadata;
+  const keywords = meta.homeKeywords
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   return withLocaleAlternates(locale, "/", {
     verification: {
       google: "KdPU4_43HtR4glC64es63YrJvtPMXdz6xrq06E2iRkc",
+    },
+    title: { absolute: meta.homeAbsoluteTitle },
+    description: meta.homeAbsoluteDescription,
+    keywords,
+    openGraph: {
+      title: meta.homeAbsoluteTitle,
+      description: meta.homeAbsoluteDescription,
+    },
+    twitter: {
+      title: meta.homeAbsoluteTitle,
+      description: meta.homeAbsoluteDescription,
     },
   });
 }
 
 export default async function Home() {
-  const [projects, projectTypes] = await Promise.all([
+  const [projects, projectTypes, site] = await Promise.all([
     getProjects(),
     getProjectTypes(),
+    getSite(),
   ]);
+  const reviewUrl = site.publicReviewUrl?.trim() || undefined;
   return (
     <main className="flex flex-1 flex-col">
       <Hero />
       <StatsStrip />
       <HomeLocalIntro />
+      <HomeInternalHub />
       <Services />
       <HomeServiceSilos />
       <ProcessSteps />
       {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
       <FeaturedProjects projects={projects} projectTypes={projectTypes} />
-      <ReviewsStrip />
+      <ReviewsStrip reviewUrl={reviewUrl} />
       <FaqSection />
       <CtaBanner />
     </main>

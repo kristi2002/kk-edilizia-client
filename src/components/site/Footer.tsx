@@ -3,10 +3,10 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HomeSectionLink } from "@/components/site/HomeSectionLink";
-import { Phone, Mail, MapPin, HardHat } from "lucide-react";
-import { formatLegalAddress, type SiteData } from "@/lib/site";
+import { Phone, Mail, HardHat } from "lucide-react";
+import { type SiteData } from "@/lib/site";
 import { isCostEstimateEnabled } from "@/lib/features";
-import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
+import { SERVICE_SILO_ROUTES, type ServiceSiloKey } from "@/lib/service-silos";
 
 type Props = { site: SiteData };
 
@@ -15,6 +15,17 @@ export function Footer({ site }: Props) {
   const tNav = useTranslations("Nav");
   const locale = useLocale();
   const area = locale === "en" ? site.serviceAreaEn : site.serviceArea;
+  const linkLabels: Record<ServiceSiloKey, string> = {
+    chiaviInMano: t("linkChiaviInMano"),
+    bagno: t("linkBagno"),
+    cucina: t("linkCucina"),
+    elettrico: t("linkElettrico"),
+    idraulico: t("linkIdraulico"),
+    murarie: t("linkMurarie"),
+    cartongessoIsolamento: t("linkCartongessoIsolamento"),
+    pavimentiRivestimenti: t("linkPavimentiRivestimenti"),
+    tettoFacciate: t("linkTettoFacciate"),
+  };
 
   return (
     <footer className="border-t border-white/10 bg-[#050505]">
@@ -45,15 +56,7 @@ export function Footer({ site }: Props) {
             <Mail className="h-4 w-4 shrink-0 text-[#c9a227]" />
             {site.email}
           </a>
-          <p className="flex items-start gap-2">
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" />
-            <span>
-              <span className="block text-zinc-300">{formatLegalAddress(site)}</span>
-              <span className="mt-2 block text-xs leading-relaxed text-zinc-400">
-                {t("napAreas")}
-              </span>
-            </span>
-          </p>
+          <p className="text-xs leading-relaxed text-zinc-400">{t("napAreas")}</p>
         </div>
         <div>
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
@@ -64,12 +67,7 @@ export function Footer({ site }: Props) {
           </p>
           <ul className="mt-3 space-y-2 text-sm text-zinc-400">
             {SERVICE_SILO_ROUTES.map((route) => {
-              const linkLabel =
-                route.key === "bagno"
-                  ? t("linkBagno")
-                  : route.key === "cartongesso"
-                    ? t("linkCartongesso")
-                    : t("linkTetto");
+              const linkLabel = linkLabels[route.key];
               return (
                 <li key={route.path}>
                   <Link href={route.path} className="hover:text-white">
@@ -83,6 +81,11 @@ export function Footer({ site }: Props) {
             {t("quick")}
           </p>
           <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+            <li>
+              <Link href="/impresa-edile-modena" className="hover:text-white">
+                {t("linkImpresaEdileModena")}
+              </Link>
+            </li>
             <li>
               <Link href="/portfolio" className="hover:text-white">
                 {tNav("portfolio")}

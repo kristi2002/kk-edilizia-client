@@ -1,14 +1,6 @@
 import { z } from "zod";
 import { staticSite, type SiteData } from "@/lib/site";
 
-const addressSchema = z.object({
-  street: z.string(),
-  postalCode: z.string(),
-  city: z.string(),
-  province: z.string(),
-  country: z.string(),
-});
-
 export const siteSchema = z.object({
   canonicalUrl: z.string(),
   brand: z.string().min(1),
@@ -19,7 +11,6 @@ export const siteSchema = z.object({
   legalForm: z.string(),
   vatEu: z.string(),
   numberOfEmployees: z.number().int().min(0),
-  address: addressSchema,
   serviceArea: z.string(),
   serviceAreaEn: z.string(),
   email: z.string().min(1),
@@ -96,26 +87,6 @@ function coalescePlaceholderWithStatic(
   o: Record<string, unknown>,
   base: Record<string, unknown>,
 ): void {
-  const ba = base.address as Record<string, string>;
-  if (typeof o.address === "object" && o.address !== null && !Array.isArray(o.address)) {
-    const oa = o.address as Record<string, unknown>;
-    for (const k of Object.keys(ba)) {
-      const v = oa[k];
-      if (typeof v !== "string") continue;
-      if (
-        k === "postalCode" &&
-        v.trim() === "41122" &&
-        typeof oa.street === "string" &&
-        oa.street.trim() === ba.street &&
-        typeof oa.city === "string" &&
-        oa.city.trim() === ba.city
-      ) {
-        oa[k] = ba[k];
-        continue;
-      }
-    }
-  }
-
   const phoneD = typeof o.phoneDisplay === "string" ? o.phoneDisplay : "";
   const phoneT = typeof o.phoneTel === "string" ? o.phoneTel : "";
   if (isPlaceholderPhoneDisplay(phoneD) || isPlaceholderPhoneTel(phoneT)) {
@@ -144,21 +115,7 @@ function coalesceEmptyWithStatic(
   o: Record<string, unknown>,
   base: Record<string, unknown>,
 ): void {
-  const ba = base.address as Record<string, string>;
-  if (typeof o.address === "object" && o.address !== null && !Array.isArray(o.address)) {
-    const oa = o.address as Record<string, unknown>;
-    for (const k of Object.keys(ba)) {
-      const v = oa[k];
-      if (v == null || (typeof v === "string" && v.trim() === "")) {
-        oa[k] = ba[k];
-      }
-    }
-  } else {
-    o.address = base.address;
-  }
-
   for (const key of Object.keys(base)) {
-    if (key === "address") continue;
     const bv = base[key];
     const ov = o[key];
     if (typeof bv === "string") {
@@ -181,16 +138,6 @@ function normalizeSitePayload(body: unknown): unknown {
   const incoming = body as Record<string, unknown>;
   const base = staticSite as unknown as Record<string, unknown>;
   const o = { ...base, ...incoming };
-  if (
-    typeof incoming.address === "object" &&
-    incoming.address !== null &&
-    !Array.isArray(incoming.address)
-  ) {
-    o.address = {
-      ...(base.address as object),
-      ...(incoming.address as object),
-    };
-  }
   if (typeof o.shareCapital === "string" && o.legalForm === undefined) {
     o.legalForm = o.shareCapital;
     delete o.shareCapital;

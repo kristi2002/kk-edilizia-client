@@ -1,13 +1,19 @@
 import { buildLocalBusinessAreaServed } from "@/lib/constants/service-area";
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
+import { localizedPath } from "@/lib/i18n-path";
 
 const DESCRIPTION_IT =
-  "Impresa edile a Modena: ristrutturazioni per privati e aziende, cartongesso, tetti. Materiali professionali (Mapei, Kerakoll, sistemi Knauf o equivalenti). Provincia di Modena. Preventivo dopo sopralluogo.";
+  "Impresa edile a Modena (ditta di costruzioni / general contractor): ristrutturazioni chiavi in mano, impianti e finiture per privati e aziende in città e provincia. Materiali professionali (Kerakoll, Mapei, Knauf e equivalenti certificati). Preventivo gratuito e dettagliato dopo sopralluogo.";
 
 /** LocalBusiness / HomeAndConstructionBusiness per risultati locali e Knowledge Graph. */
 export async function LocalBusinessJsonLd() {
   const [site, baseUrl] = await Promise.all([getSite(), getSiteUrl()]);
-  const a = site.address;
+  const origin = new URL(baseUrl).origin;
+  const serviceChannel = (path: string) => ({
+    "@type": "ServiceChannel",
+    serviceUrl: `${origin}${localizedPath("it", path)}`,
+    availableLanguage: ["it", "en"],
+  });
 
   const sameAs = site.publicReviewUrl?.trim()
     ? [site.publicReviewUrl.trim()]
@@ -15,7 +21,7 @@ export async function LocalBusinessJsonLd() {
 
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
+    "@type": ["HomeAndConstructionBusiness", "GeneralContractor"],
     name: site.brand,
     legalName: site.legalName,
     taxID: site.vatId,
@@ -25,31 +31,39 @@ export async function LocalBusinessJsonLd() {
     url: baseUrl,
     telephone: site.phoneTel,
     email: site.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: a.street,
-      postalCode: a.postalCode,
-      addressLocality: a.city,
-      addressRegion: a.province,
-      addressCountry: "IT",
-    },
     areaServed: buildLocalBusinessAreaServed(),
     geo: {
       "@type": "GeoCoordinates",
       latitude: 44.6471,
       longitude: 10.9252,
     },
-    knowsAbout: [
-      "Ristrutturazioni edilizie",
-      "Cartongesso e controsoffitti",
-      "Rifacimento tetti",
-      "Servizi edili Modena",
-      "Impresa edile provincia di Modena",
-      "Materiali Mapei e Kerakoll",
-      "Sistemi a secco Knauf",
-      "Regolamento edilizio Comune di Modena",
+    serviceType: [
+      "Ristrutturazioni chiavi in mano",
+      "Ristrutturazione bagno",
+      "Ristrutturazione cucina",
+      "Opere murarie",
+      "Impianti elettrici",
+      "Impianti idraulici",
+      "Cartongesso e isolamento",
+      "Posa pavimenti e rivestimenti",
+      "Rifacimento tetto e facciate",
     ],
-    priceRange: "€€",
+    availableChannel: [
+      serviceChannel("/contatti"),
+      serviceChannel("/preventivo"),
+      serviceChannel("/prenota"),
+      serviceChannel("/impresa-edile-modena"),
+    ],
+    knowsAbout: [
+      "Ristrutturazioni",
+      "Impianti idraulici",
+      "Impianti elettrici",
+      "Cartongesso",
+      "Posa piastrelle",
+      "Kerakoll",
+      "Isolamento termico",
+    ],
+    priceRange: "€€-€€€",
   };
 
   if (sameAs) {

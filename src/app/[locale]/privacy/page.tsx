@@ -49,11 +49,21 @@ export default async function PrivacyPage({ params }: Props) {
             </h2>
             <p className="mt-4">
               Il titolare del trattamento dei dati personali è{" "}
-              <strong>{site.legalName}</strong>, con sede in {site.address.street}
-              , {site.address.postalCode} {site.address.city} (
-              {site.address.province}), P.IVA {site.vatId}, e-mail{" "}
-              <a className="text-[#c9a227] hover:underline" href={`mailto:${site.email}`}>{site.email}</a>, PEC{" "}
-              <a className="text-[#c9a227] hover:underline" href={`mailto:${site.pec}`}>{site.pec}</a>.
+              <strong>{site.legalName}</strong>, P.IVA {site.vatId}, e-mail{" "}
+              <a
+                className="text-[#c9a227] hover:underline"
+                href={`mailto:${site.email}`}
+              >
+                {site.email}
+              </a>
+              , PEC{" "}
+              <a
+                className="text-[#c9a227] hover:underline"
+                href={`mailto:${site.pec}`}
+              >
+                {site.pec}
+              </a>
+              .
             </p>
           </section>
 

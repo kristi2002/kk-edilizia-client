@@ -114,11 +114,11 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     },
     {
       q: "Should Google Business reviews match what you show on the website?",
-      a: "Your Google Business Profile is the public source for reviews and address. If you quote reviews on the site, use wording already visible on Google or text the client authorised—do not fabricate ratings. Consistency between the site and Google helps trust and local search; do not copy content from third-party platforms without permission.",
+      a: "Your Google Business Profile is the public source for reviews and key business info. If you quote reviews on the site, use wording already visible on Google or text the client authorised—do not fabricate ratings. Consistency between the site and Google helps trust and local search; do not copy content from third-party platforms without permission.",
     },
     {
       q: "What does “construction near me” mean in search results?",
-      a: "Local search and maps combine distance, Google Business Profile signals (hours, reviews, category), address consistency and website content. A clear site helps, but local ranking depends on many factors—no position is guaranteed for everyone.",
+      a: "Local search and maps combine distance, Google Business Profile signals (hours, reviews, category) and website content. A clear site helps, but local ranking depends on many factors—no position is guaranteed for everyone.",
     },
     {
       q: "What construction services do you provide in Modena and the province?",

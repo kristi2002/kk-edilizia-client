@@ -29,6 +29,7 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
               {t("title")}
             </h2>
             <p className="mt-4 max-w-lg text-zinc-400">{t("intro")}</p>
+            <p className="mt-3 max-w-lg text-sm text-zinc-500">{t("localTrust")}</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <Link

@@ -40,16 +40,6 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
       setSite((s) => ({ ...s, [key]: v }));
     };
 
-  const setAddr =
-    (key: keyof SiteData["address"]) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const v = e.target.value;
-      setSite((s) => ({
-        ...s,
-        address: { ...s.address, [key]: v },
-      }));
-    };
-
   const save = async () => {
     setBusy(true);
     setError(null);
@@ -284,55 +274,10 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
       </div>
 
       <div className={adminSubCard}>
-        <h3 className="text-lg font-semibold text-white">Sede (via, CAP, città)</h3>
+        <h3 className="text-lg font-semibold text-white">Indirizzo</h3>
         <p className="mt-1 text-sm text-zinc-500">
-          Compare su contatti, footer e mappa. Controlla che sia esatta.
+          Non mostriamo più un indirizzo sul sito (nessun ufficio aperto al pubblico).
         </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label className={adminLabel}>Via e numero civico</label>
-            <input
-              className={adminInput}
-              value={site.address.street}
-              onChange={setAddr("street")}
-              placeholder="Via …, n."
-            />
-          </div>
-          <div>
-            <label className={adminLabel}>CAP</label>
-            <input
-              className={adminInput}
-              value={site.address.postalCode}
-              onChange={setAddr("postalCode")}
-              inputMode="numeric"
-            />
-          </div>
-          <div>
-            <label className={adminLabel}>Città</label>
-            <input
-              className={adminInput}
-              value={site.address.city}
-              onChange={setAddr("city")}
-            />
-          </div>
-          <div>
-            <label className={adminLabel}>Provincia (sigla)</label>
-            <input
-              className={adminInput}
-              value={site.address.province}
-              onChange={setAddr("province")}
-              placeholder="es. MO"
-            />
-          </div>
-          <div>
-            <label className={adminLabel}>Paese</label>
-            <input
-              className={adminInput}
-              value={site.address.country}
-              onChange={setAddr("country")}
-            />
-          </div>
-        </div>
       </div>
 
       <div className={adminSubCard}>

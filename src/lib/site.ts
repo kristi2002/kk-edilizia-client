@@ -3,14 +3,6 @@
  * URL canonico: `canonicalUrl` da admin, altrimenti `NEXT_PUBLIC_SITE_URL`, altrimenti esempio.
  */
 
-export type SiteAddress = {
-  street: string;
-  postalCode: string;
-  city: string;
-  province: string;
-  country: string;
-};
-
 export type SiteData = {
   /** Se valorizzato, ha priorità su NEXT_PUBLIC_SITE_URL (senza slash finale). */
   canonicalUrl: string;
@@ -25,7 +17,6 @@ export type SiteData = {
   vatEu: string;
   /** Valore numerico per schema.org (es. 1). */
   numberOfEmployees: number;
-  address: SiteAddress;
   serviceArea: string;
   serviceAreaEn: string;
   email: string;
@@ -49,13 +40,6 @@ export const staticSite: SiteData = {
   legalForm: "Impresa individuale",
   vatEu: "IT04117840365",
   numberOfEmployees: 1,
-  address: {
-    street: "Via Galileo Galilei, 145",
-    postalCode: "41126",
-    city: "Modena",
-    province: "MO",
-    country: "Italia",
-  },
   serviceArea: "Modena e provincia (comuni limitrofi su valutazione)",
   serviceAreaEn: "Modena and province (neighbouring municipalities on request)",
   email: "info@kkedilizia.it",
@@ -119,9 +103,4 @@ export function getFallbackSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (raw) return normalizePublicSiteUrl(raw);
   return PLACEHOLDER_PUBLIC_SITE_URL;
-}
-
-export function formatLegalAddress(site: SiteData): string {
-  const a = site.address;
-  return `${a.street}, ${a.postalCode} ${a.city} (${a.province}) — ${a.country}`;
 }

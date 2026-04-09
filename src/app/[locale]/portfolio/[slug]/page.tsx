@@ -144,11 +144,13 @@ export default async function ProjectPage({ params }: Props) {
             <div className="mt-10 text-sm leading-relaxed text-zinc-400">
               <p>{t("crossSellSiloIntro")}</p>
               <p className="mt-2">
-                {SERVICE_SILO_ROUTES.map((route, i) => {
+                {SERVICE_SILO_ROUTES.filter((r) =>
+                  ["bagno", "cartongessoIsolamento", "tettoFacciate"].includes(r.key),
+                ).map((route, i) => {
                   const label =
                     route.key === "bagno"
                       ? t("crossSellBagno")
-                      : route.key === "cartongesso"
+                      : route.key === "cartongessoIsolamento"
                         ? t("crossSellCartongesso")
                         : t("crossSellTetto");
                   return (
@@ -168,7 +170,7 @@ export default async function ProjectPage({ params }: Props) {
                 <p className="mt-4 text-zinc-500">
                   {t("crossSellModena")}{" "}
                   <Link
-                    href="/ristrutturazioni-bagno"
+                    href="/ristrutturazione-bagno"
                     className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
                   >
                     {t("crossSellBagno")}
@@ -176,6 +178,16 @@ export default async function ProjectPage({ params }: Props) {
                   .
                 </p>
               ) : null}
+              <p className="mt-4 text-zinc-500">
+                {t("crossSellImpresaPrefix")}
+                <Link
+                  href="/impresa-edile-modena"
+                  className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                >
+                  {t("crossSellImpresaLink")}
+                </Link>
+                {t("crossSellImpresaSuffix")}
+              </p>
             </div>
           </FadeIn>
 

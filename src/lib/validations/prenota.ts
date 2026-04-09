@@ -7,7 +7,6 @@ export const prenotaSchema = z
     name: z.string().trim().min(2, "Inserisci il nome").max(120),
     email: z.string().email("Email non valida").max(254),
     phone: z.string().min(6, "Telefono non valido").max(40),
-    address: z.string().max(500).optional(),
     preferredDate: z.string().min(1, "Scegli la data"),
     preferredTime: z.string().min(1, "Scegli l’orario"),
     notes: z.string().max(4000).optional(),

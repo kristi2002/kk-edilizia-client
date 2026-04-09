@@ -39,8 +39,9 @@ export default async function NoteLegaliPage({ params }: Props) {
           <section>
             <h2 className="font-serif text-xl text-white">Titolarità del sito</h2>
             <p className="mt-3">
-              Il presente sito web è gestito da <strong className="text-zinc-300">{site.legalName}</strong>, con sede in {site.address.street}, {site.address.postalCode}{" "}
-              {site.address.city} ({site.address.province}), P.IVA {site.vatId}, REA {site.rea}.
+              Il presente sito web è gestito da{" "}
+              <strong className="text-zinc-300">{site.legalName}</strong>, P.IVA{" "}
+              {site.vatId}, REA {site.rea}.
             </p>
           </section>
 

@@ -41,7 +41,6 @@ export function PrenotaForm() {
       name: "",
       email: "",
       phone: "",
-      address: "",
       preferredDate: "",
       preferredTime: "",
       notes: "",
@@ -73,7 +72,6 @@ export function PrenotaForm() {
       fd.append("name", data.name);
       fd.append("email", data.email);
       fd.append("phone", data.phone);
-      if (data.address?.trim()) fd.append("address", data.address.trim());
       fd.append("preferredDate", data.preferredDate);
       fd.append("preferredTime", data.preferredTime);
       if (data.notes?.trim()) fd.append("notes", data.notes.trim());
@@ -193,15 +191,6 @@ export function PrenotaForm() {
           {errors.phone && (
             <p className="mt-1 text-sm text-red-400">{errors.phone.message}</p>
           )}
-        </div>
-        <div>
-          <label className="text-sm text-zinc-500">{t("fieldAddress")}</label>
-          <p className="mt-1 text-xs text-zinc-600">{t("fieldAddressHint")}</p>
-          <input
-            autoComplete="street-address"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
-            {...register("address")}
-          />
         </div>
         <div>
           <p className="text-sm text-zinc-500">{t("fieldPreferred")}</p>

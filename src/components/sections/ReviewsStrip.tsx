@@ -4,7 +4,9 @@ import { useTranslations } from "next-intl";
 import { Quote } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-export function ReviewsStrip() {
+type Props = { reviewUrl?: string };
+
+export function ReviewsStrip({ reviewUrl }: Props) {
   const t = useTranslations("Reviews");
   const items = [
     { text: t("r1"), author: t("a1") },
@@ -23,6 +25,19 @@ export function ReviewsStrip() {
             {t("title")}
           </h2>
           <p className="mt-3 max-w-2xl text-zinc-400">{t("intro")}</p>
+          {reviewUrl ? (
+            <p className="mt-4 max-w-2xl text-sm text-zinc-500">
+              {t("gbpCta")}{" "}
+              <a
+                href={reviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+              >
+                {t("gbpLinkLabel")}
+              </a>
+            </p>
+          ) : null}
         </FadeIn>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">

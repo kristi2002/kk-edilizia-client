@@ -28,6 +28,7 @@ function staticSegments(): string[] {
     "/privacy",
     "/note-legali",
     "/prenota",
+    "/impresa-edile-modena",
   ];
 }
 
@@ -56,7 +57,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url,
         lastModified,
         changeFrequency: seg === "" ? "weekly" : "monthly",
-        priority: seg === "" ? 1 : 0.8,
+        priority:
+          seg === "" || seg === "/ristrutturazioni-chiavi-in-mano"
+            ? 1
+            : seg === "/impresa-edile-modena"
+              ? 0.9
+              : 0.8,
       });
     }
 

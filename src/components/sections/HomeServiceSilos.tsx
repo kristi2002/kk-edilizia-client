@@ -6,16 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 
 export async function HomeServiceSilos() {
   const t = await getTranslations("HomeServiceSilos");
-  const titles = {
-    bagno: t("bagnoTitle"),
-    cartongesso: t("cartongessoTitle"),
-    tetto: t("tettoTitle"),
-  };
-  const descs = {
-    bagno: t("bagnoDesc"),
-    cartongesso: t("cartongessoDesc"),
-    tetto: t("tettoDesc"),
-  };
 
   return (
     <section
@@ -43,10 +33,10 @@ export async function HomeServiceSilos() {
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-[#c9a227]/40 hover:bg-white/[0.06]"
                 >
                   <span className="font-serif text-xl text-white group-hover:text-[#c9a227]">
-                    {titles[route.key]}
+                    {t(`${route.key}Title`)}
                   </span>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-500">
-                    {descs[route.key]}
+                    {t(`${route.key}Desc`)}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#c9a227]">
                     {t("readMore")}

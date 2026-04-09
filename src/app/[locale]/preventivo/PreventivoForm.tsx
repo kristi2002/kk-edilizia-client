@@ -369,7 +369,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                     id="preventivo-notes"
                     rows={4}
                     className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
-                    placeholder="Indirizzo cantiere, esigenze particolari…"
+                    placeholder="Esigenze particolari, vincoli, note utili…"
                     {...register("notes")}
                     autoComplete="off"
                   />

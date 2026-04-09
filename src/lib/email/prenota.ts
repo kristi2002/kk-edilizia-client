@@ -124,7 +124,6 @@ function buildPrenotaOfficeHtml(
   data: PrenotaInput,
   attachments: EmailAttachment[],
 ): string {
-  const addr = data.address?.trim() || "—";
   const notes = data.notes?.trim() || "—";
   const attRow =
     attachments.length > 0
@@ -152,7 +151,6 @@ function buildPrenotaOfficeHtml(
             ${rowHtml("Nome", escapeHtml(data.name))}
             ${rowHtml("Email", escapeHtml(data.email))}
             ${rowHtml("Telefono", escapeHtml(data.phone))}
-            ${rowHtml("Indirizzo / luogo", escapeHtml(addr))}
           </table>
         </td></tr>
         <tr><td style="padding:0 28px 24px;">
@@ -178,7 +176,6 @@ function buildPrenotaOfficeText(
   data: PrenotaInput,
   attachments: EmailAttachment[],
 ): string {
-  const addr = data.address?.trim() || "—";
   const notes = data.notes?.trim() || "—";
   const attLines =
     attachments.length > 0
@@ -195,7 +192,6 @@ function buildPrenotaOfficeText(
     `Nome:      ${data.name}`,
     `Email:     ${data.email}`,
     `Telefono:  ${data.phone}`,
-    `Indirizzo: ${addr}`,
     "",
     "--- Preferenza data e ora ---",
     data.preferredSlot,

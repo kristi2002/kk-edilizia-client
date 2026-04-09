@@ -11,7 +11,10 @@ type Props = {
   titleHighlight: string;
   subtitle: string;
   ctaQuote: string;
+  ctaBooking: string;
   ctaWorks: string;
+  townsLabel: string;
+  towns: string[];
   statYears: string;
   statProjects: string;
   statCommitment: string;
@@ -24,7 +27,10 @@ export function HeroClient({
   titleHighlight,
   subtitle,
   ctaQuote,
+  ctaBooking,
   ctaWorks,
+  townsLabel,
+  towns,
   statYears,
   statProjects,
   statCommitment,
@@ -89,6 +95,26 @@ export function HeroClient({
         </motion.p>
 
         <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.22 }}
+          className="mt-6 flex max-w-3xl flex-wrap items-center gap-2 text-sm text-zinc-400"
+          aria-label={townsLabel}
+        >
+          <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            {townsLabel}
+          </span>
+          {towns.map((town) => (
+            <span
+              key={town}
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300"
+            >
+              {town}
+            </span>
+          ))}
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.28 }}
@@ -102,10 +128,25 @@ export function HeroClient({
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </Link>
           <Link
-            href="/portfolio"
+            href="/prenota"
             className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
           >
+            {ctaBooking}
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.42, duration: 0.6 }}
+          className="mt-4"
+        >
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-300 underline decoration-white/20 underline-offset-4 transition hover:text-white hover:decoration-white/40"
+          >
             {ctaWorks}
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
 

@@ -51,13 +51,11 @@ export async function POST(request: Request) {
           { status: 400 },
         );
       }
-      const addressRaw = String(formData.get("address") ?? "").trim();
       const notesRaw = String(formData.get("notes") ?? "").trim();
       parsed = prenotaRequestSchema.safeParse({
         name: String(formData.get("name") ?? ""),
         email: String(formData.get("email") ?? ""),
         phone: String(formData.get("phone") ?? ""),
-        address: addressRaw || undefined,
         preferredDate: String(formData.get("preferredDate") ?? ""),
         preferredTime: String(formData.get("preferredTime") ?? ""),
         notes: notesRaw || undefined,

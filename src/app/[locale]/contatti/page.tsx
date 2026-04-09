@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, Clock } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ContactForm } from "@/components/contatti/ContactForm";
-import { formatLegalAddress } from "@/lib/site";
 import { getSite } from "@/lib/data/site-store";
-import { googleMapsDirectionsUrl } from "@/lib/maps";
-import { ContactMap } from "@/components/contatti/ContactMap";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
@@ -30,7 +27,6 @@ export default async function ContattiPage({ params }: PageProps) {
   setRequestLocale(locale);
   const t = await getTranslations("ContactsPage");
   const site = await getSite();
-  const mapsDirectionsUrl = googleMapsDirectionsUrl(site);
   return (
     <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
@@ -95,27 +91,6 @@ export default async function ContattiPage({ params }: PageProps) {
               </FadeIn>
             </li>
             <li>
-              <FadeIn delay={0.15}>
-                <div className="flex gap-4">
-                  <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
-                  <div>
-                    <p className="text-sm text-zinc-500">{t("address")}</p>
-                    <a
-                      href={mapsDirectionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-lg font-medium text-white underline decoration-[#c9a227]/50 underline-offset-4 transition hover:text-[#c9a227] hover:decoration-[#c9a227]"
-                    >
-                      {formatLegalAddress(site)}
-                    </a>
-                    <p className="mt-1 text-xs text-zinc-600">
-                      {t("directionsHint")}
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            </li>
-            <li>
               <FadeIn delay={0.2}>
                 <div className="flex gap-4">
                   <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
@@ -157,9 +132,6 @@ export default async function ContattiPage({ params }: PageProps) {
         <div className="flex flex-col gap-8">
           <FadeIn delay={0.08}>
             <ContactForm />
-          </FadeIn>
-          <FadeIn delay={0.12}>
-            <ContactMap site={site} />
           </FadeIn>
         </div>
       </div>
