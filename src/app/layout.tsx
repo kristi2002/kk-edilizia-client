@@ -30,12 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(url),
     /**
-     * Favicon: `public/favicon.ico` (see `npm run generate:favicon`). PNG fallback for larger displays.
+     * Tab icons: browsers still request `/favicon.ico` often; it must match `logo.png` (run `generate:favicon`, wired in `prebuild`).
+     * PWA home screen uses `manifest.ts` → `logo.png` only, which is why install looked correct while the tab did not.
      */
     icons: {
       icon: [
-        { url: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
         { url: "/logo.png", type: "image/png", sizes: "any" },
+        { url: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
       ],
       apple: [{ url: "/logo.png", type: "image/png" }],
       shortcut: "/favicon.ico",
