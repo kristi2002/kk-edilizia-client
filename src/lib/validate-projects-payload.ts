@@ -20,7 +20,7 @@ const sceneSchema = z.object({
 });
 
 const virtualTourSchema = z.object({
-  scenes: z.array(sceneSchema).min(1),
+  scenes: z.array(sceneSchema),
   firstSceneId: z.string().optional(),
   sceneFadeMs: z.number().optional(),
 });

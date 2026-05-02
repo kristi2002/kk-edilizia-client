@@ -3,7 +3,7 @@ import { getSite, getSiteUrl } from "@/lib/data/site-store";
 import { localizedPath } from "@/lib/i18n-path";
 
 const DESCRIPTION_IT =
-  "Impresa edile a Modena (ditta di costruzioni / general contractor): ristrutturazioni chiavi in mano, impianti e finiture per privati e aziende in città e provincia. Materiali professionali (Kerakoll, Mapei, Knauf e equivalenti certificati). Preventivo gratuito e dettagliato dopo sopralluogo.";
+  "Impresa edile e servizi edili a Modena (ditta di costruzioni / general contractor): ristrutturazioni chiavi in mano, impianti e finiture per privati e aziende in città e provincia. Materiali professionali (Kerakoll, Mapei, Knauf e equivalenti certificati). Preventivo gratuito e dettagliato dopo sopralluogo.";
 
 /** LocalBusiness / HomeAndConstructionBusiness per risultati locali e Knowledge Graph. */
 export async function LocalBusinessJsonLd() {
@@ -38,6 +38,11 @@ export async function LocalBusinessJsonLd() {
       longitude: 10.9252,
     },
     serviceType: [
+      "Servizi edili Modena",
+      "Impresa edile Modena e provincia",
+      "Elettricista e impianti elettrici",
+      "Idraulico e impianti idraulici",
+      "Cartongesso pareti e controsoffitti",
       "Ristrutturazioni chiavi in mano",
       "Ristrutturazione bagno",
       "Ristrutturazione cucina",
@@ -55,12 +60,18 @@ export async function LocalBusinessJsonLd() {
       serviceChannel("/impresa-edile-modena"),
     ],
     knowsAbout: [
-      "Ristrutturazioni",
-      "Impianti idraulici",
+      "Ristrutturazioni Modena",
+      "Lavori edili",
+      "Elettricista",
       "Impianti elettrici",
+      "Idraulico",
+      "Impianti idraulici",
       "Cartongesso",
+      "Isolamento acustico",
       "Posa piastrelle",
+      "Mapei",
       "Kerakoll",
+      "Knauf",
       "Isolamento termico",
     ],
     priceRange: "€€-€€€",

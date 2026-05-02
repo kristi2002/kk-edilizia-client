@@ -75,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly",
         priority: 0.7,
       });
-      if (p.virtualTour) {
+      if (p.virtualTour.scenes.length > 0) {
         const vtPath = localizedPath(
           locale,
           `/portfolio/${p.slug}/virtual-tour`,

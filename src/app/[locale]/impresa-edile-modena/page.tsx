@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
 import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return withLocaleAlternates(locale, PATH, {
     title: meta.impresaEdileModenaTitle,
     description: meta.impresaEdileModenaDescription,
+    keywords: meta.impresaEdileModenaKeywords,
     openGraph: {
       title: meta.impresaEdileModenaTitle,
       description: meta.impresaEdileModenaDescription,
@@ -46,14 +48,20 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
     { href: "/portfolio" as const, label: t("internalPortfolio") },
   ];
 
+  const faqLd = faqs.map((item) => ({
+    question: item.q,
+    answer: item.a,
+  }));
+
   return (
     <>
       <BreadcrumbJsonLd
         items={[
           { name: tNav("home"), path: localizedPath(locale, "/") },
-          { name: t("title"), path: localizedPath(locale, PATH) },
+          { name: t("breadcrumbName"), path: localizedPath(locale, PATH) },
         ]}
       />
+      <FaqPageJsonLd items={faqLd} />
       <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
         <article className="mx-auto max-w-3xl">
           <FadeIn>

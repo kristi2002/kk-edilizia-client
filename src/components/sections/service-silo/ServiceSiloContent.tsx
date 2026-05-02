@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ServiceSiloKey } from "@/lib/service-silos";
@@ -36,8 +37,15 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
       })
     | undefined;
 
+  const faqLd =
+    Array.isArray(silo?.faqs) && silo!.faqs!.length > 0
+      ? silo!.faqs!.map((f) => ({ question: f.q, answer: f.a }))
+      : [];
+
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <>
+      <FaqPageJsonLd items={faqLd} />
+      <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
       <article className="mx-auto max-w-3xl">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
@@ -136,5 +144,6 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         </FadeIn>
       </article>
     </main>
+    </>
   );
 }

@@ -9,7 +9,10 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { getProjectLocalized } from "@/lib/data/projects";
 import { getProjectBySlug, getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
-import { buildPannellumConfigFromProjectVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
+import {
+  buildPannellumConfigFromProjectVirtualTour,
+  projectHasVirtualTour,
+} from "@/lib/virtual-tour/project-virtual-tour";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
@@ -20,15 +23,17 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export async function generateStaticParams() {
   const projects = await getProjects();
+  const withTour = projects.filter((p) => projectHasVirtualTour(p.virtualTour));
   return routing.locales.flatMap((locale) =>
-    projects.map((p) => ({ locale, slug: p.slug })),
+    withTour.map((p) => ({ locale, slug: p.slug })),
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const project = await getProjectBySlug(slug);
-  if (!project) return { title: "360°" };
+  if (!project || !projectHasVirtualTour(project.virtualTour))
+    return { title: "360°" };
   const projectTypes = await getProjectTypes();
   const loc = getProjectLocalized(project, locale, projectTypes);
   const path = `/portfolio/${project.slug}/virtual-tour`;
@@ -44,6 +49,7 @@ export default async function ProjectVirtualTourPage({ params }: Props) {
   setRequestLocale(locale);
   const project = await getProjectBySlug(slug);
   if (!project) notFound();
+  if (!projectHasVirtualTour(project.virtualTour)) notFound();
 
   const projectTypes = await getProjectTypes();
   const loc = getProjectLocalized(project, locale, projectTypes);

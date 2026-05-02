@@ -1,12 +1,21 @@
 {
   "Metadata": {
     "siteTitle": "K.K Edilizia Modena | Impresa edile e servizi edili in provincia",
-    "siteDescription": "Impresa edile a Modena: ristrutturazioni chiavi in mano, cartongesso, impianti e tetti per privati e aziende. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine e provincia. Materiali professionali (Mapei, Kerakoll e equivalenti certificati).",
+    "siteDescription": "Impresa edile e servizi edili a Modena: ristrutturazioni chiavi in mano, cartongesso, impianti e tetti per privati e aziende. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine e provincia. Materiali professionali (Mapei, Kerakoll e equivalenti certificati).",
     "homeAbsoluteTitle": "Impresa edile Modena | Ristrutturazioni chiavi in mano — K.K Edilizia",
-    "homeAbsoluteDescription": "Impresa edile a Modena e provincia: ristrutturazioni chiavi in mano, impianti e finiture. Preventivo gratuito dopo sopralluogo. Un solo referente di cantiere. Anche Sassuolo, Carpi, Formigine.",
-    "homeKeywords": "impresa edile Modena, ristrutturazioni Modena, ditta edile Modena, general contractor Modena, ristrutturazioni chiavi in mano, preventivo gratuito, Sassuolo, Carpi, Formigine",
-    "impresaEdileModenaTitle": "Impresa edile a Modena",
-    "impresaEdileModenaDescription": "Ditta edile a Modena e provincia: ristrutturazioni chiavi in mano, impianti e servizi edili. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine e altri comuni.",
+    "homeAbsoluteDescription": "Impresa edile e servizi edili a Modena e provincia: ristrutturazioni chiavi in mano, elettricista e impianti elettrici, idraulico, cartongesso, opere murarie e finiture. Preventivo gratuito dopo sopralluogo. Un solo referente. Sassuolo, Carpi, Formigine, Castelfranco Emilia e altri comuni.",
+    "homeKeywords": "impresa edile Modena, servizi edili Modena, ditta edile Modena, lavori edili Modena, ristrutturazioni Modena, ristrutturazioni chiavi in mano, elettricista Modena, impianti elettrici Modena, idraulico Modena, impianti idraulici Modena, cartongesso Modena, cartongesso e isolamento, opere murarie Modena, rifacimento bagno Modena, general contractor Modena, preventivo gratuito, Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola",
+    "impresaEdileModenaTitle": "Impresa edile Modena | Servizi edili e ristrutturazioni chiavi in mano",
+    "impresaEdileModenaDescription": "Impresa edile e servizi edili a Modena e provincia: ditta di costruzioni per ristrutturazioni chiavi in mano, impianti e finiture. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine, Spilamberto e altri comuni.",
+    "impresaEdileModenaKeywords": [
+      "impresa edile Modena",
+      "servizi edili Modena",
+      "ditta edile Modena",
+      "ristrutturazioni Modena",
+      "general contractor Modena",
+      "costruzioni Modena",
+      "preventivo edile Modena"
+    ],
     "contactsTitle": "Contatti",
     "contactsDescription": "Telefono, email, PEC e orari. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi, prenotazione sopralluogo e preventivo online.",
     "aboutTitle": "Chi siamo",
@@ -37,7 +46,7 @@
     "badge": "Modena & provincia",
     "titleLine1": "Impresa edile a Modena",
     "titleHighlight": "ristrutturazioni chiavi in mano",
-    "subtitle": "Ristrutturazioni chiavi in mano, edilizia e servizi edili a Modena e provincia — anche Sassuolo, Carpi e Formigine. Un’impresa edile locale con un solo referente: tempi chiari e finiture curate.",
+    "subtitle": "Ristrutturazioni chiavi in mano, servizi edili, impianti elettrici e idraulici, cartongesso e opere murarie a Modena e provincia — anche Sassuolo, Carpi e Formigine. Un solo referente di cantiere: tempi chiari e finiture curate.",
     "townsLabel": "Comuni serviti",
     "ctaQuote": "Preventivo gratuito",
     "ctaBooking": "Prenota sopralluogo",
@@ -336,13 +345,18 @@
       "ctaSecondary": "Contatti"
     },
     "elettrico": {
-      "metaTitle": "Impianti elettrici a Modena",
-      "metaDescription": "Impianti elettrici chiavi in mano a Modena e provincia: quadri, prese, illuminazione e conformità. Materiali BTicino/Vimar. Preventivo gratuito dopo sopralluogo.",
+      "metaTitle": "Elettricista Modena | Impianti elettrici in ristrutturazione",
+      "metaDescription": "Elettricista e impianti elettrici a Modena e provincia: quadri, prese, illuminazione, domotica e conformità. Coordinamento con lavori edili. BTicino, Vimar o equivalenti. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
-        "impianti elettrici modena",
         "elettricista modena",
+        "impianti elettrici modena",
+        "ristrutturazione impianto elettrico modena",
+        "quadro elettrico modena",
+        "prese e illuminazione modena",
         "conformità impianto elettrico",
-        "BTicino Vimar Modena"
+        "BTicino Modena",
+        "Vimar Modena",
+        "impresa edile modena"
       ],
       "eyebrow": "Impianti",
       "h1": "Impianti elettrici a Modena: sicurezza, materiali di qualità e certificazioni",
@@ -381,13 +395,18 @@
       "ctaSecondary": "Contatti"
     },
     "idraulico": {
-      "metaTitle": "Idraulico a Modena",
-      "metaDescription": "Idraulico chiavi in mano a Modena e provincia: impianti idraulici, riscaldamento e condizionamento con conformità e coordinamento lavori edili. Preventivo gratuito dopo sopralluogo.",
+      "metaTitle": "Idraulico Modena | Impianti idraulici, acqua e scarichi",
+      "metaDescription": "Idraulico a Modena e provincia: impianti idraulici, tubature, scarichi, riscaldamento e condizionamento in ristrutturazione. Coordinamento con murature e finiture. Kerakoll/Mapei dove serve. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
         "idraulico modena",
+        "idraulici modena",
         "impianti idraulici modena",
+        "tubature modena",
+        "rifacimento impianto idraulico modena",
         "riscaldamento modena",
-        "condizionamento modena"
+        "condizionamento modena",
+        "bagno e cucina modena",
+        "impresa edile modena"
       ],
       "eyebrow": "Impianti",
       "h1": "Idraulico a Modena: impianti, riscaldamento e condizionamento in ristrutturazione",
@@ -471,13 +490,18 @@
       "ctaSecondary": "Contatti"
     },
     "cartongessoIsolamento": {
-      "metaTitle": "Cartongesso e isolamento a Modena",
-      "metaDescription": "Cartongesso e isolamento termo-acustico chiavi in mano a Modena e provincia: pareti, controsoffitti, cappotto interno e finiture. Preventivo gratuito dopo sopralluogo.",
+      "metaTitle": "Cartongesso Modena | Pareti, controsoffitti e isolamento",
+      "metaDescription": "Cartongesso e isolamento a Modena e provincia: pareti in cartongesso, controsoffitti, isolamento termico e acustico, cappotto interno. Sistemi Knauf e finiture Mapei/Kerakoll dove indicato. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
+        "cartongesso modena",
         "cartongesso isolamento modena",
+        "controsoffitto cartongesso modena",
+        "pareti cartongesso modena",
         "isolamento termico modena",
         "isolamento acustico modena",
-        "cappotto termico interno"
+        "cappotto termico interno modena",
+        "knauf modena",
+        "impresa edile modena"
       ],
       "eyebrow": "Sistemi a secco",
       "h1": "Cartongesso e isolamento termo-acustico a Modena: comfort, prestazioni, finiture",
@@ -667,14 +691,34 @@
     "howWeWork": "Come lavoriamo",
     "linkImpresaEdileModena": "Impresa edile Modena (guida locale)"
   },
+  "BrandEcosystem": {
+    "label": "Materiali professionali",
+    "title": "Marchi che trovi spesso nei nostri cantieri",
+    "intro": "Non siamo rivenditori ufficiali: in preventivo indichiamo linee e alternative equivalenti certificate. Qui trovi i siti dei produttori per approfondire schede tecniche e gamma prodotti.",
+    "disclaimer": "I marchi citati sono di proprietà dei rispettivi titolari. La scelta dei materiali avviene di progetto in progetto, in base a supporti, norme di posa e budget.",
+    "brands": {
+      "mapei": "Mapei",
+      "kerakoll": "Kerakoll",
+      "knauf": "Knauf Italia",
+      "fassa": "Fassa Bortolo",
+      "bticino": "BTicino",
+      "vimar": "Vimar"
+    }
+  },
   "HomeInternalHub": {
     "label": "Modena e provincia",
-    "title": "Pagine utili per chi cerca un’impresa edile a Modena",
-    "intro": "Approfondimenti su servizi, ristrutturazioni chiavi in mano e come richiedere preventivo o sopralluogo.",
+    "title": "Pagine utili: edilizia, impianti e cartongesso",
+    "intro": "Guide locali su impresa edile, elettricista, idraulico, cartongesso, ristrutturazioni chiavi in mano, preventivo e portfolio.",
     "linkImpresa": "Impresa edile a Modena",
     "descImpresa": "Perché scegliere una ditta edile locale, cosa offriamo e domande frequenti.",
     "linkChiavi": "Ristrutturazioni chiavi in mano",
     "descChiavi": "Coordinamento unico: demolizioni, impianti, finiture e consegna organizzata.",
+    "linkElettrico": "Elettricista e impianti elettrici",
+    "descElettrico": "Quadri, prese, illuminazione e conformità a Modena e provincia — con lavori edili coordinati.",
+    "linkIdraulico": "Idraulico e impianti idraulici",
+    "descIdraulico": "Acqua, scarichi, riscaldamento e climatizzazione in ristrutturazione, con preventivo dopo sopralluogo.",
+    "linkCartongesso": "Cartongesso e isolamento",
+    "descCartongesso": "Pareti, controsoffitti, isolamento termo-acustico e cappotto interno.",
     "linkPreventivo": "Preventivo online",
     "descPreventivo": "Raccontaci il progetto: ti rispondiamo con i prossimi passi.",
     "linkPrenota": "Prenota sopralluogo",
@@ -685,10 +729,11 @@
     "descContatti": "Telefono, email e modulo messaggi."
   },
   "ImpresaEdileModenaPage": {
-    "eyebrow": "SEO locale",
-    "title": "Impresa edile a Modena: servizi, zona e come lavoriamo",
-    "intro": "Se cerchi un’impresa edile a Modena o in provincia, questa pagina riassume cosa facciamo, dove interveniamo e come richiedere un preventivo gratuito dopo sopralluogo.",
-    "p1": "K.K Edilizia è una ditta edile attiva su Modena e sui comuni della provincia (inclusi Sassuolo, Carpi, Formigine, Spilamberto, Maranello e Vignola). Affrontiamo ristrutturazioni chiavi in mano, interventi mirati (bagno, cucina, cartongesso, pavimenti, tetto e facciate) e coordinamento di impianti con un solo referente di cantiere.",
+    "eyebrow": "Modena e provincia",
+    "breadcrumbName": "Impresa edile Modena",
+    "title": "Impresa edile a Modena: servizi edili, dove operiamo e preventivo",
+    "intro": "Se cerchi un’impresa edile o servizi edili a Modena e in provincia, qui trovi cosa facciamo (ristrutturazioni chiavi in mano e lavori mirati), dove interveniamo e come ottenere un preventivo gratuito dopo sopralluogo.",
+    "p1": "K.K Edilizia è una ditta edile attiva su Modena e sui comuni della provincia (inclusi Sassuolo, Carpi, Formigine, Spilamberto, Maranello e Vignola). Offriamo servizi edili completi: ristrutturazioni chiavi in mano, interventi mirati (bagno, cucina, cartongesso, pavimenti, tetto e facciate) e coordinamento di impianti con un solo referente di cantiere.",
     "p2": "Lavoriamo in conformità a progetto e titoli edilizi quando richiesti (CILA, SCIA o altro, come da geometra o architetto). Il preventivo dettagliato arriva dopo sopralluogo: è gratuito e non vincolante fino alla firma di un accordo scritto.",
     "p3": "Sui materiali privilegiamo marchi diffusi nei cantieri italiani (es. Mapei, Kerakoll, Knauf o equivalenti certificati), con voci chiare in preventivo e alternative equivalenti dove ha senso tecnicamente.",
     "p4": "Per progetti simili al tuo puoi partire dal portfolio: ogni scheda indica tipologia e località. Per una prima valutazione puoi anche usare lo strumento stima costi, se attivo sul sito.",
@@ -698,7 +743,7 @@
     "internalPrenota": "Prenota sopralluogo",
     "internalPortfolio": "Vedi i lavori",
     "faqLabel": "Domande frequenti",
-    "faqTitle": "Impresa edile Modena: cosa chiedono più spesso",
+    "faqTitle": "Domande frequenti su impresa edile e servizi edili a Modena",
     "q1": "Quanto costa una ristrutturazione a Modena?",
     "a1": "Dipende da metratura, stato dei luoghi, finiture e impianti. Dopo sopralluogo prepariamo un preventivo con voci e tempi: la stima online, se presente, è solo orientativa.",
     "q2": "Fate solo Modena città o anche la provincia?",

@@ -33,6 +33,11 @@ export type ProjectVirtualTour = {
   sceneFadeMs?: number;
 };
 
+/** No UI or sitemap entry until at least one panorama scene is configured. */
+export function projectHasVirtualTour(vt: ProjectVirtualTour): boolean {
+  return vt.scenes.length > 0;
+}
+
 /**
  * Builds the JSON object passed to `pannellum.viewer(container, config)`.
  */

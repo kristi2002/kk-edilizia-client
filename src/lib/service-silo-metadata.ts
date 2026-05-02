@@ -25,6 +25,7 @@ export async function buildServiceSiloMetadata(
   return withLocaleAlternates(locale, path, {
     title: silo.metaTitle,
     description: silo.metaDescription,
+    keywords: silo.metaKeywords,
     openGraph: {
       title: silo.metaTitle,
       description: silo.metaDescription,

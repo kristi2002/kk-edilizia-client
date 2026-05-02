@@ -88,92 +88,41 @@ export function createEmptyProject(slug: string): Project {
     coverImage: DEMO_PANORAMA_URL,
     gallery: [],
     beforeAfter: { before: DEMO_PANORAMA_URL, after: DEMO_PANORAMA_URL },
-    virtualTour: {
-      firstSceneId: "main",
-      scenes: [
-        {
-          id: "main",
-          title: "Vista principale",
-          titleEn: "Main view",
-          panorama: DEMO_PANORAMA_URL,
-        },
-      ],
-    },
+    virtualTour: { scenes: [] },
   };
 }
 
 /** Portfolio default data. Runtime copy can live in Upstash (see `projects-store.ts`). */
 export const staticProjects: Project[] = [
   {
-    slug: "ristrutturazione-appartamento-isola",
+    slug: "ristrutturazione-modena-soggiorno",
     categoryId: "ristrutturazioni",
-    title: "Ristrutturazione residenziale — centro storico",
-    titleEn: "Residential renovation — historic centre",
+    title: "Ristrutturazione trilocale — zona giorno e open space",
+    titleEn: "Three-room flat — living area and open plan",
     category: "Ristrutturazioni",
     categoryEn: "Renovations",
-    location: "Modena, centro",
-    locationEn: "Modena, city centre",
-    year: "2024",
+    location: "Modena",
+    locationEn: "Modena",
+    year: "2025",
+    updatedAt: "2026-04-13",
     excerpt:
-      "Completa riqualificazione di un trilocale: impianti, pavimenti e cucina su misura.",
+      "Dal cantiere al soggiorno finito: finiture chiare, pavimento in gres effetto marmo e cucina integrata nell’open space.",
     excerptEn:
-      "Full refurbishment of a three-room flat: systems, flooring, and bespoke kitchen.",
+      "From building site to finished living room: light finishes, marble-effect porcelain flooring, and kitchen integrated into the open plan.",
     description:
-      "Intervento chiavi in mano su circa 95 m². Abbiamo rifatto impianti elettrici e idraulici a norma, posato resina e parquet, progettato la cucina con penisola e curato l’illuminazione architettonica. Tempi rispettati in 14 settimane.",
+      "Intervento sulla zona giorno di un trilocale: rifacimento impianti elettrici, illuminazione con plafoniere LED, tramezzi e finiture per separare in modo leggero cucina e living. Posato gres formato grande in toni neutri, radiatore sostituito e nuovi infissi sul balcone. Il prima mostra la fase di preparazione e tinteggiatura; il dopo il risultato con divano, zona pranzo e cucina a vista.",
     descriptionEn:
-      "Turnkey work on approx. 95 m². We renewed electrical and plumbing to code, laid resin and parquet, designed the kitchen with peninsula, and refined architectural lighting. Delivered in 14 weeks on schedule.",
-    coverImage:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80",
+      "Work on the day zone of a three-room flat: electrical systems, LED ceiling lighting, partitions and finishes to lightly separate kitchen and living. Large-format neutral porcelain tile, radiator replacement, and new balcony joinery. The “before” shows prep and painting; the “after” shows the finished space with sofa, dining area, and open kitchen.",
+    coverImage: "/portfolio/ristrutturazione-modena-soggiorno/after.png",
     beforeAfter: {
-      before:
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80",
-      after:
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
+      before: "/portfolio/ristrutturazione-modena-soggiorno/before.png",
+      after: "/portfolio/ristrutturazione-modena-soggiorno/after.png",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+      "/portfolio/ristrutturazione-modena-soggiorno/after.png",
+      "/portfolio/ristrutturazione-modena-soggiorno/before.png",
     ],
-    virtualTour: {
-      firstSceneId: "livingRoom",
-      scenes: [
-        {
-          id: "livingRoom",
-          title: "Soggiorno",
-          titleEn: "Living room",
-          panorama:
-            "/virtual-tour/projects/ristrutturazione-appartamento-isola/living-room.jpg",
-          hotSpots: [
-            {
-              pitch: -8,
-              yaw: 42,
-              type: "scene" as const,
-              text: "Vai alle scale",
-              textEn: "Go to stairs",
-              sceneId: "stairs",
-            },
-          ],
-        },
-        {
-          id: "stairs",
-          title: "Scale",
-          titleEn: "Stairs",
-          panorama:
-            "/virtual-tour/projects/ristrutturazione-appartamento-isola/stairs.jpg",
-          hotSpots: [
-            {
-              pitch: -5,
-              yaw: -135,
-              type: "scene" as const,
-              text: "Torna al soggiorno",
-              textEn: "Back to living room",
-              sceneId: "livingRoom",
-            },
-          ],
-        },
-      ],
-    },
+    virtualTour: { scenes: [] },
   },
   {
     slug: "facciata-condominio-bicocca",
@@ -205,23 +154,7 @@ export const staticProjects: Project[] = [
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80",
       "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80",
     ],
-    virtualTour: {
-      firstSceneId: "esterno",
-      scenes: [
-        {
-          id: "esterno",
-          title: "Vista esterna",
-          titleEn: "Exterior view",
-          panorama: DEMO_PANORAMA_URL,
-        },
-        {
-          id: "dettaglio",
-          title: "Dettaglio lavorazione",
-          titleEn: "Work detail",
-          panorama: DEMO_PANORAMA_URL,
-        },
-      ],
-    },
+    virtualTour: { scenes: [] },
   },
   {
     slug: "bagno-e-sauna-privata",
@@ -253,17 +186,7 @@ export const staticProjects: Project[] = [
       "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
     ],
-    virtualTour: {
-      firstSceneId: "bagno",
-      scenes: [
-        {
-          id: "bagno",
-          title: "Bagno",
-          titleEn: "Bathroom",
-          panorama: DEMO_PANORAMA_URL,
-        },
-      ],
-    },
+    virtualTour: { scenes: [] },
   },
   {
     slug: "open-space-ufficio",
@@ -295,17 +218,7 @@ export const staticProjects: Project[] = [
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
       "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80",
     ],
-    virtualTour: {
-      firstSceneId: "open",
-      scenes: [
-        {
-          id: "open",
-          title: "Open space",
-          titleEn: "Open space",
-          panorama: DEMO_PANORAMA_URL,
-        },
-      ],
-    },
+    virtualTour: { scenes: [] },
   },
 ];
 

@@ -10,6 +10,21 @@ const LINKS = [
     titleKey: "linkChiavi" as const,
     descKey: "descChiavi" as const,
   },
+  {
+    href: "/impianti-elettrici-modena" as const,
+    titleKey: "linkElettrico" as const,
+    descKey: "descElettrico" as const,
+  },
+  {
+    href: "/idraulico-modena" as const,
+    titleKey: "linkIdraulico" as const,
+    descKey: "descIdraulico" as const,
+  },
+  {
+    href: "/cartongesso-isolamento" as const,
+    titleKey: "linkCartongesso" as const,
+    descKey: "descCartongesso" as const,
+  },
   { href: "/preventivo" as const, titleKey: "linkPreventivo" as const, descKey: "descPreventivo" as const },
   { href: "/prenota" as const, titleKey: "linkPrenota" as const, descKey: "descPrenota" as const },
   { href: "/portfolio" as const, titleKey: "linkPortfolio" as const, descKey: "descPortfolio" as const },

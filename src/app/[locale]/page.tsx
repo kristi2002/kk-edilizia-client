@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import { HomeLocalIntro } from "@/components/sections/HomeLocalIntro";
 import { HomeInternalHub } from "@/components/sections/HomeInternalHub";
+import { BrandEcosystemStrip } from "@/components/seo/BrandEcosystemStrip";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
@@ -87,6 +88,7 @@ export default async function Home() {
       <StatsStrip />
       <HomeLocalIntro />
       <HomeInternalHub />
+      <BrandEcosystemStrip />
       <Services />
       <HomeServiceSilos />
       <ProcessSteps />

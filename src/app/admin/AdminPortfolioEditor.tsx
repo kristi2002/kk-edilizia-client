@@ -245,14 +245,15 @@ export function AdminPortfolioEditor({
   };
 
   const removeScene = (sceneId: string) => {
-    if (!selected || selected.virtualTour.scenes.length <= 1) {
-      setError("Serve almeno una scena 360°.");
-      return;
-    }
+    if (!selected) return;
     const scenes = selected.virtualTour.scenes.filter((s) => s.id !== sceneId);
     let first = selected.virtualTour.firstSceneId;
     if (first === sceneId) first = scenes[0]?.id;
-    const vt: ProjectVirtualTour = { ...selected.virtualTour, scenes, firstSceneId: first };
+    const vt: ProjectVirtualTour = {
+      ...selected.virtualTour,
+      scenes,
+      firstSceneId: scenes.length ? first : undefined,
+    };
     patchProject(selected.slug, { virtualTour: vt });
     setProjects((prev) =>
       prev.map((p) => (p.slug === selected.slug ? { ...p, virtualTour: vt } : p)),
