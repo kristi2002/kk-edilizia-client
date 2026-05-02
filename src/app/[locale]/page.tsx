@@ -7,8 +7,8 @@ import { BrandEcosystemStrip } from "@/components/seo/BrandEcosystemStrip";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { HomeStimaTeaser } from "@/components/sections/HomeStimaTeaser";
-import { getProjects } from "@/lib/data/projects-store";
-import { getProjectTypes } from "@/lib/data/project-types-store";
+// import { getProjects } from "@/lib/data/projects-store";
+// import { getProjectTypes } from "@/lib/data/project-types-store";
 import { getSite } from "@/lib/data/site-store";
 import { isCostEstimateEnabled } from "@/lib/features";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
@@ -23,11 +23,12 @@ const HomeServiceSilos = dynamic(() =>
     default: m.HomeServiceSilos,
   })),
 );
-const FeaturedProjects = dynamic(() =>
-  import("@/components/sections/FeaturedProjects").then((m) => ({
-    default: m.FeaturedProjects,
-  })),
-);
+// Progetti recenti / portfolio strip: restore when photos are ready.
+// const FeaturedProjects = dynamic(() =>
+//   import("@/components/sections/FeaturedProjects").then((m) => ({
+//     default: m.FeaturedProjects,
+//   })),
+// );
 const ReviewsStrip = dynamic(() =>
   import("@/components/sections/ReviewsStrip").then((m) => ({
     default: m.ReviewsStrip,
@@ -76,11 +77,12 @@ export async function generateMetadata({
 }
 
 export default async function Home() {
-  const [projects, projectTypes, site] = await Promise.all([
-    getProjects(),
-    getProjectTypes(),
-    getSite(),
-  ]);
+  // const [projects, projectTypes, site] = await Promise.all([
+  //   getProjects(),
+  //   getProjectTypes(),
+  //   getSite(),
+  // ]);
+  const site = await getSite();
   const reviewUrl = site.publicReviewUrl?.trim() || undefined;
   return (
     <main className="flex flex-1 flex-col">
@@ -93,7 +95,7 @@ export default async function Home() {
       <HomeServiceSilos />
       <ProcessSteps />
       {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
-      <FeaturedProjects projects={projects} projectTypes={projectTypes} />
+      {/* <FeaturedProjects projects={projects} projectTypes={projectTypes} /> */}
       <ReviewsStrip reviewUrl={reviewUrl} />
       <FaqSection />
       <CtaBanner />

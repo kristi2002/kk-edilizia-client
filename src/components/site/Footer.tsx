@@ -86,11 +86,13 @@ export function Footer({ site }: Props) {
                 {t("linkImpresaEdileModena")}
               </Link>
             </li>
+            {/* Portfolio / «Lavori»: hidden until photos are ready.
             <li>
               <Link href="/portfolio" className="hover:text-white">
                 {tNav("portfolio")}
               </Link>
             </li>
+            */}
             <li>
               <Link href="/contatti" className="hover:text-white">
                 {tNav("contacts")}

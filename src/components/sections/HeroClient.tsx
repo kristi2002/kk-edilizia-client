@@ -36,6 +36,7 @@ export function HeroClient({
   statCommitment,
   children,
 }: Props) {
+  void ctaWorks; // portfolio CTA hidden until photos are ready
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -135,6 +136,7 @@ export function HeroClient({
           </Link>
         </motion.div>
 
+        {/* Portfolio / «Vedi i lavori»: restore when photos are ready.
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -149,6 +151,7 @@ export function HeroClient({
             <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
+        */}
 
         <motion.div
           initial={{ opacity: 0 }}

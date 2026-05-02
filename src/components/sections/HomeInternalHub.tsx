@@ -27,7 +27,7 @@ const LINKS = [
   },
   { href: "/preventivo" as const, titleKey: "linkPreventivo" as const, descKey: "descPreventivo" as const },
   { href: "/prenota" as const, titleKey: "linkPrenota" as const, descKey: "descPrenota" as const },
-  { href: "/portfolio" as const, titleKey: "linkPortfolio" as const, descKey: "descPortfolio" as const },
+  // { href: "/portfolio" as const, titleKey: "linkPortfolio" as const, descKey: "descPortfolio" as const },
   { href: "/contatti" as const, titleKey: "linkContatti" as const, descKey: "descContatti" as const },
 ];
 

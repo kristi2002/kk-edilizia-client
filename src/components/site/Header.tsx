@@ -14,7 +14,8 @@ export function Header() {
 
   const links = [
     { href: "/", labelKey: "home" as const },
-    { href: "/portfolio", labelKey: "portfolio" as const },
+    // Portfolio / «Lavori»: hidden until site photos are ready (restore nav tab).
+    // { href: "/portfolio", labelKey: "portfolio" as const },
     { href: "/chi-siamo", labelKey: "about" as const },
     ...(isCostEstimateEnabled()
       ? [{ href: "/stima-costi", labelKey: "estimate" as const }]

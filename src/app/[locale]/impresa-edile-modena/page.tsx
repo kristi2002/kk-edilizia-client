@@ -45,7 +45,7 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
     { href: "/ristrutturazioni-chiavi-in-mano" as const, label: t("internalChiavi") },
     { href: "/preventivo" as const, label: t("internalPreventivo") },
     { href: "/prenota" as const, label: t("internalPrenota") },
-    { href: "/portfolio" as const, label: t("internalPortfolio") },
+    // { href: "/portfolio" as const, label: t("internalPortfolio") },
   ];
 
   const faqLd = faqs.map((item) => ({
