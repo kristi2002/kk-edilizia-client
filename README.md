@@ -48,7 +48,17 @@ Copia `.env.example` in `.env.local` nella **radice** del repo (accanto a `packa
 - **Redis (Upstash)** — rate limiting sulle API dei form; opzionale in dev.
 - **Admin** (`ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`) — area `/admin` (contenuti Redis, portfolio, blob); senza queste variabili l’admin non è esposta.
 - **Vercel Blob** — upload immagini portfolio da admin.
-- Altri flag opzionali: WhatsApp, mappa embed, cost estimate, ecc.
+- **`NEXT_PUBLIC_ENABLE_PORTFOLIO`** — `true` pubblica portfolio, schede progetto e tour 360° (link interni + sitemap). Con il flag spento quelle pagine sono `noindex` ed escluse dalla sitemap: tenerlo off finché non ci sono foto proprie.
+- **`NEXT_PUBLIC_ENABLE_COST_ESTIMATE`** — `true` pubblica `/stima-costi` e il teaser in home.
+- Altri flag opzionali: WhatsApp, mappa embed, ecc.
+
+## Cookie e analytics
+
+GTM / GA4 vengono caricati **solo dopo consenso esplicito** (`src/components/seo/Analytics.tsx`). I default Consent Mode v2 sono `denied` e vengono impostati nel `<head>` prima di qualsiasi tag (`src/lib/consent.ts`). Se cambi il testo del banner, verifica che descriva quello che accade davvero.
+
+## Immagini di brand
+
+Il master del logo sta in **`assets/brand/logo-master.png`** (fuori da `public/`). `npm run generate:favicon` — eseguito da `prebuild` — genera `favicon.ico`, `icon-192.png`, `icon-512.png`, `apple-icon.png` e `logo-mark.png`. Non mettere il master in `public/`: veniva servito come favicon a ogni richiesta.
 
 Dettaglio e valori di esempio sono documentati in **`.env.example`**.
 

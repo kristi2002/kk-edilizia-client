@@ -39,6 +39,14 @@ export default async function proxy(request: NextRequest) {
   return intlMiddleware(request);
 }
 
+/**
+ * Metadata file routes (`/opengraph-image`, `/sitemap.xml`, …) must bypass the intl
+ * middleware. `opengraph-image` has no dot, so the generic `.*\..*` escape hatch did
+ * not cover it and next-intl rewrote it to `/it/opengraph-image`, which 404s — which is
+ * why no page ever emitted an `og:image`. `/monitoring` is the Sentry tunnel route.
+ */
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  matcher: [
+    "/((?!api|_next|_vercel|monitoring|opengraph-image|twitter-image|icon|apple-icon|manifest\\.webmanifest|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
+  ],
 };

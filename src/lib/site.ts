@@ -24,6 +24,17 @@ export type SiteData = {
   phoneDisplay: string;
   phoneTel: string;
   privacyContactName: string;
+  /**
+   * Sede operativa. Required for the `address` property on the LocalBusiness schema —
+   * without it the business is not eligible for local pack / Maps surfacing, and the
+   * footer NAP block stays hidden. Leave blank rather than guessing: an address that
+   * disagrees with the Google Business Profile is worse than none.
+   */
+  streetAddress: string;
+  postalCode: string;
+  addressLocality: string;
+  addressRegion: string;
+  addressCountry: string;
   publicReviewUrl: string;
   insurance: string;
   compliance: string;
@@ -47,6 +58,12 @@ export const staticSite: SiteData = {
   phoneDisplay: "+39 376 120 1188",
   phoneTel: "+393761201188",
   privacyContactName: "Titolare del trattamento — KK EDILIZIA DI KOMINI KOLI",
+  /** TODO go-live: compilare da visura / scheda Google Business (vedi CHECKLIST §1). */
+  streetAddress: "",
+  postalCode: "",
+  addressLocality: "Modena",
+  addressRegion: "MO",
+  addressCountry: "IT",
   publicReviewUrl: "",
   insurance:
     "Copertura assicurativa RC professionale per attività esercitata, in linea con quanto previsto da contratto e normativa di settore.",

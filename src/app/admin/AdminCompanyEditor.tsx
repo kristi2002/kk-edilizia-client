@@ -150,8 +150,8 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
         confirmLabel="Sì, ripristina"
         onConfirm={performSeed}
       />
-      <p className="text-sm text-zinc-500">
-        Dopo ogni modifica premi <strong className="text-zinc-300">Salva</strong>. Il
+      <p className="text-sm text-ink-4">
+        Dopo ogni modifica premi <strong className="text-ink-2">Salva</strong>. Il
         pulsante «Ripristina» serve solo in emergenza.
       </p>
 
@@ -168,7 +168,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
 
       <div className={adminSubCard}>
         <h3 className="text-lg font-semibold text-white">Sito web e nome</h3>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Indirizzo del sito (con https://) e come vi chiamate sul sito.
         </p>
         <div className="mt-4 space-y-4">
@@ -212,7 +212,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
 
       <div className={adminSubCard}>
         <h3 className="text-lg font-semibold text-white">Dati fiscali</h3>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Partita IVA, codice fiscale, REA e forma giuridica (come in visura).
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -275,7 +275,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
 
       <div className={adminSubCard}>
         <h3 className="text-lg font-semibold text-white">Indirizzo</h3>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Non mostriamo più un indirizzo sul sito (nessun ufficio aperto al pubblico).
         </p>
       </div>
@@ -304,7 +304,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
 
       <div className={adminSubCard}>
         <h3 className="text-lg font-semibold text-white">Email e telefono</h3>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Email: quella che i clienti vedono. Per il telefono: una riga con spazi (come
           si legge) e una con prefisso per il tasto «chiama».
         </p>
@@ -375,7 +375,7 @@ export function AdminCompanyEditor({ initialSite, redisOk }: Props) {
 
       <div className={adminSubCard}>
         <h3 className="text-lg font-semibold text-white">Testi lunghi (pagine legali)</h3>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Assicurazione, sicurezza in cantiere, certificazioni. Puoi incollare testi già
           approvati dal commercialista.
         </p>

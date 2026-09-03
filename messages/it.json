@@ -40,7 +40,9 @@
     "langEn": "EN",
     "skipToContent": "Salta al contenuto",
     "switchToEnglish": "Passa alla versione in inglese",
-    "switchToItalian": "Passa alla versione in italiano"
+    "switchToItalian": "Passa alla versione in italiano",
+    "services": "Servizi",
+    "servicesMenu": "Apri il menu servizi"
   },
   "Hero": {
     "badge": "Modena & provincia",
@@ -50,7 +52,6 @@
     "townsLabel": "Comuni serviti",
     "ctaQuote": "Preventivo gratuito",
     "ctaBooking": "Prenota sopralluogo",
-    "ctaWorks": "Vedi i lavori",
     "statYears": "anni esperienza",
     "statProjects": "interventi",
     "statCommitment": "impegno sui tempi"
@@ -61,11 +62,7 @@
     "p1": "K.K Edilizia è un’impresa edile che opera a Modena e in provincia: lavoriamo nell’edilizia residenziale e nelle ristrutturazioni per privati, famiglie e piccole aziende che investono su immobili in città e nei comuni limitrofi. Offriamo servizi edili completi — dal cartongesso al rifacimento tetti — con preventivo gratuito e dettagliato dopo sopralluogo e un solo referente di cantiere.",
     "p2": "Operiamo in stretta osservanza delle norme vigenti: dove servono titoli edilizi, fanno fede il Regolamento edilizio del Comune di Modena, il Testo unico dell’edilizia e le pratiche (CILA, SCIA o altro) che il vostro geometra o architetto predispone. Noi eseguiamo i lavori in conformità al progetto approvato e aggiorniamo cliente e tecnico su avanzamenti, così privati e attività possono pianificare tempi e budget in modo realistico.",
     "p3": "Interventi su appartamenti, villette e spazi commerciali nelle aree più richieste del territorio modenese — dal centro storico alle periferie collegate a Sassuolo, Carpi e Formigine. Che si tratti di una ristrutturazione chiavi in mano o di lavori mirati (bagno, tetto, tramezzi in cartongesso), il nostro approccio resta lo stesso: organizzazione del cantiere, fornitori coordinati e materiali scelti per durata e manutenzione nel tempo.",
-    "p4": "Sui materiali ci orientiamo su marchi presenti nei cantieri italiani e riconosciuti nel mondo dell’edilizia: sistemi Mapei e Kerakoll per malte, impermeabilizzazioni, adesivi e finiture; per cartongesso e sistemi a secco spesso integrano soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi. Le linee effettive sono indicate in preventivo con alternative equivalenti, sempre con schede tecniche e tracciabilità coerenti con le norme di posa.",
-    "reviewLabel": "Feedback dai clienti",
-    "reviewQuote": "«Cantiere pulito, tempi rispettati e un solo referente: chiarezza dall’inizio alla fine.»",
-    "reviewAttribution": "Testo dimostrativo — sostituisci con una citazione breve e reale dalla scheda Google Business (stesso testo pubblico) quando disponibile.",
-    "reviewLinkHint": "Le recensioni pubbliche sulla scheda Google rafforzano fiducia e coerenza con le ricerche locali; incolla qui un estratto autorizzato."
+    "p4": "Sui materiali ci orientiamo su marchi presenti nei cantieri italiani e riconosciuti nel mondo dell’edilizia: sistemi Mapei e Kerakoll per malte, impermeabilizzazioni, adesivi e finiture; per cartongesso e sistemi a secco spesso integrano soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi. Le linee effettive sono indicate in preventivo con alternative equivalenti, sempre con schede tecniche e tracciabilità coerenti con le norme di posa."
   },
   "StatsStrip": {
     "v1": "10+",
@@ -75,8 +72,7 @@
     "years": "Anni di attività nel settore",
     "projects": "Interventi seguiti in provincia",
     "referent": "Referente unico di cantiere",
-    "quotes": "Preventivi con voci e tempi",
-    "footnote": "Cifre indicative del modello operativo: aggiornale con dati reali e verificabili prima di usarle in pubblicità."
+    "quotes": "Preventivi con voci e tempi"
   },
   "Services": {
     "label": "Cosa facciamo",
@@ -628,7 +624,13 @@
       ],
       "ctaPrimary": "Richiedi preventivo",
       "ctaSecondary": "Contatti"
-    }
+    },
+    "areaPanelTitle": "Dove interveniamo",
+    "compliancePanelTitle": "Pratiche e responsabilità",
+    "faqTitle": "Domande frequenti su questo servizio",
+    "siblingsTitle": "Altri servizi che seguiamo",
+    "closingTitle": "Parliamo del tuo intervento",
+    "closingBody": "Sopralluogo senza impegno a Modena e provincia, poi un preventivo con voci e tempi. Un solo referente dall’inizio alla consegna."
   },
   "FeaturedProjects": {
     "label": "Portfolio",
@@ -637,19 +639,6 @@
     "localTrust": "Cantieri in provincia di Modena: ogni scheda indica tipologia e località, così puoi valutare esperienza su contesti simili al tuo.",
     "cta": "Vedi tutti i lavori",
     "coverAlt": "{category}: {title} — cantiere a {location}"
-  },
-  "Reviews": {
-    "label": "Recensioni",
-    "title": "Cosa dicono i clienti",
-    "intro": "Feedback da chi ha scelto K.K Edilizia per cantieri a Modena e provincia (testi dimostrativi).",
-    "gbpCta": "Vedi anche le recensioni pubbliche sulla scheda Google Business: sono utili per verificare esperienze recenti e coerenza con le ricerche locali.",
-    "gbpLinkLabel": "Apri le recensioni Google",
-    "r1": "Cantiere pulito, tempi rispettati e un solo referente: finalmente chiarezza.",
-    "a1": "Cliente privato, Modena",
-    "r2": "Preventivo dettagliato e nessuna sorpresa in corso d’opera. Consigliati.",
-    "a2": "Amministratore condominio, provincia di Modena",
-    "r3": "Ottima coordinazione tra muratori e impiantisti. Risultato oltre le aspettative.",
-    "a3": "Cliente privato, Sassuolo"
   },
   "FaqSection": {
     "label": "Domande frequenti",
@@ -689,7 +678,8 @@
     "privacyLink": "Privacy policy",
     "legalLink": "Note legali",
     "howWeWork": "Come lavoriamo",
-    "linkImpresaEdileModena": "Impresa edile Modena (guida locale)"
+    "linkImpresaEdileModena": "Impresa edile Modena (guida locale)",
+    "reviewsLink": "Recensioni su Google"
   },
   "BrandEcosystem": {
     "label": "Materiali professionali",
@@ -834,9 +824,8 @@
   },
   "CookieBanner": {
     "title": "Cookie e trasparenza",
-    "text": "Usiamo cookie tecnici necessari; le statistiche di visita possono essere raccolte in forma aggregata (es. Google Analytics tramite tag manager). Maggiori informazioni nella",
+    "text": "Usiamo solo cookie tecnici. Le statistiche di visita partono soltanto se acconsenti. Dettagli nella",
     "privacyLink": "privacy policy",
-    "hint": "Puoi registrare la preferenza qui sotto (memorizzazione locale).",
     "essentialOnly": "Solo necessari",
     "acceptAll": "Ho capito"
   },
@@ -919,5 +908,11 @@
     "title": "Pagina non trovata",
     "text": "Il contenuto che cerchi non esiste o è stato spostato.",
     "home": "Torna alla home"
+  },
+  "Materials": {
+    "label": "Materiali e sistemi",
+    "title": "Con cosa lavoriamo in cantiere",
+    "intro": "Marchi che usiamo abitualmente per collanti, rasanti, impermeabilizzazioni e sistemi a secco, o equivalenti certificati con pari caratteristiche. La scelta finale viene indicata a voce e nel preventivo, prima dell’inizio dei lavori.",
+    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool"
   }
 }

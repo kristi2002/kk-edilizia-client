@@ -35,7 +35,7 @@ function StatusCard({
         <p className={`text-sm font-semibold ${ok ? "text-emerald-100" : "text-amber-100"}`}>
           {title}
         </p>
-        <p className="mt-0.5 text-sm text-zinc-400">{subtitle}</p>
+        <p className="mt-0.5 text-sm text-ink-3">{subtitle}</p>
       </div>
     </div>
   );
@@ -56,7 +56,7 @@ export function AdminEnvironmentBar({
           <p className="text-sm font-bold uppercase tracking-[0.15em] text-[#c9a227]">
             Stato tecnico (solo informativo)
           </p>
-          <p className="mt-2 max-w-xl text-base text-zinc-400">
+          <p className="mt-2 max-w-xl text-base text-ink-3">
             Se qualcosa è arancione, alcune funzioni potrebbero non salvare: contatta chi
             gestisce il server. Il sito pubblico si apre comunque con il pulsante a
             destra.

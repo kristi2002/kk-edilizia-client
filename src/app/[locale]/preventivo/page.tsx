@@ -39,7 +39,7 @@ export default async function PreventivoPage({ params }: PageProps) {
           <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <div className="mt-12">

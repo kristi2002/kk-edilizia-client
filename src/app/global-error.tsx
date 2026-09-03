@@ -8,7 +8,7 @@ export default function GlobalError({
 }) {
   return (
     <html lang="it">
-      <body className="flex min-h-screen flex-col items-center justify-center bg-[#080808] px-4 text-center text-zinc-300">
+      <body className="flex min-h-screen flex-col items-center justify-center bg-[#080808] px-4 text-center text-ink-2">
         <main role="alert" aria-live="assertive" className="max-w-md">
           <h1 className="font-serif text-2xl text-white">Errore dell&apos;applicazione</h1>
           <p className="mt-3 text-sm">

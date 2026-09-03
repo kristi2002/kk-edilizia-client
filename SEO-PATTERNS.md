@@ -12,9 +12,10 @@ This document summarizes **search-oriented patterns** implemented in the codebas
 
 ### Metadata & duplicates across locales
 
+- **Rendering** — Marketing routes are **statically prerendered** with `revalidate = 3600` (`src/app/[locale]/layout.tsx`). They previously carried `dynamic = "force-dynamic"`, which made every public URL server-render on demand and silently overrode each page's own `revalidate`. Static rendering requires **`setRequestLocale(locale)`** in every page that reads translations — the home route was the one missing it.
 - **Per-route metadata** — Pages export `generateMetadata` (or static `metadata`) so each URL has its own **title**, **description**, and **Open Graph** fields (`opengraph-image.tsx`, `[locale]/layout.tsx` defaults, service silo helper `buildServiceSiloMetadata`).
 - **Canonical URL + `hreflang`** — `it` / `en` / `x-default` (default = Italian site) via **`withLocaleAlternates`** in **`src/lib/seo-metadata.ts`**, merged into each page’s metadata. Aligns with Google guidance on localized duplicates.
-- **No HTML meta keywords** — The **`<meta name="keywords">`** tag is **not** emitted. Google Search ignores it. Arrays named `metaKeywords` under **`messages/*.json` → `ServiceSilos`** are **editorial / legacy only** and are not passed to Next `Metadata` (removed from `buildServiceSiloMetadata`).
+- **No HTML meta keywords** — The **`<meta name="keywords">`** tag is **not** emitted. Google Search ignores it. Arrays named `metaKeywords` under **`messages/*.json` → `ServiceSilos`** are **editorial / legacy only**. Until September 2026 they *were* still passed through `buildServiceSiloMetadata` (and on the home / `impresa-edile-modena` routes), so the tag was in fact emitted; that is now removed and the code matches this section.
 
 ### Canonical base URL & legacy domain
 
@@ -41,11 +42,21 @@ This document summarizes **search-oriented patterns** implemented in the codebas
 
 Keyword-aligned **dedicated URLs** (not everything on the homepage):
 
+Authoritative list: **`src/lib/service-silos.ts`** (`SERVICE_SILO_ROUTES`) — three hubs and six spokes. All nine appear in the header **Servizi** menu, the footer, and the sibling-links block at the foot of every silo page.
+
 | Path (IT default) | Focus |
 |-------------------|--------|
-| `/ristrutturazioni-bagno` | Bathroom renovation |
-| `/cartongesso-modena` | Drywall / cartongesso |
-| `/rifacimento-tetto` | Roof work |
+| `/ristrutturazioni-chiavi-in-mano` | Turnkey renovations (hub) |
+| `/ristrutturazione-bagno` | Bathroom renovation (hub) |
+| `/ristrutturazione-cucina` | Kitchen renovation (hub) |
+| `/impianti-elettrici-modena` | Electrical systems |
+| `/idraulico-modena` | Plumbing |
+| `/opere-murarie` | Masonry |
+| `/cartongesso-isolamento` | Drywall and insulation |
+| `/posa-pavimenti-rivestimenti` | Floor and wall tiling |
+| `/rifacimento-tetto-facciate` | Roof and facade work |
+
+**Legacy URLs** — `/ristrutturazioni-bagno`, `/cartongesso-modena` and `/rifacimento-tetto` are **308 permanent redirects** declared in `next.config.ts` (`redirects()`), for both locales. They were previously `redirect()` calls inside page components, which returned **HTTP 200** with the generic site title, no canonical, and only a `<meta http-equiv="refresh">`.
 
 - **Metadata** — Unique **`metaTitle`** / **`metaDescription`** per silo via **`buildServiceSiloMetadata`** + **`withLocaleAlternates`** (path from **`src/lib/service-silos.ts`**).
 - **Body** — Long copy in **`messages` → `ServiceSilos.<key>`** (`body1`–`body6`), rendered by **`ServiceSiloContent.tsx`**. Mentions **Mapei**, **Kerakoll**, Modena-area zones (e.g. Via Emilia, **Viale Amendola**, **Piazza Roma**, Quartiere Musicisti), province towns (e.g. **Spilamberto**, **Maranello**), high-level **CILA/SCIA** context (professional responsibility stays with client’s technician).
@@ -58,7 +69,8 @@ Keyword-aligned **dedicated URLs** (not everything on the homepage):
 ## 4. Structured data (JSON-LD)
 
 - **`LocalBusinessJsonLd`** (`src/components/seo/LocalBusinessJsonLd.tsx`) — **`@type`: `HomeAndConstructionBusiness`**: brand, legalName, tax/vat, employees, **description** (IT, aligned with services), **`url`** from `getSiteUrl()`, phone, email, **PostalAddress**, **`areaServed`** — array of schema.org **`City`** entries plus **`AdministrativeArea` “Provincia di Modena”**. **Authoritative list:** **`src/lib/constants/service-area.ts`** (`AREA_SERVED_CITY_NAMES` → **`buildLocalBusinessAreaServed()`**); do not duplicate town names in prose here. **`geo`** (approximate **GeoCoordinates** for Modena area), **`knowsAbout`** (topics including services, **Mapei/Kerakoll**, **Knauf**, **Comune di Modena** building rules mention), **`priceRange`**, optional **`sameAs`** if **`publicReviewUrl`** is set in site data (Google Business Profile).
-- **`BreadcrumbJsonLd`** — Portfolio and virtual-tour pages where implemented.
+- **`address`** — `PostalAddress` is emitted **only when `site.streetAddress` is set** (`src/lib/site.ts`). It was missing entirely despite being documented here; a `LocalBusiness` without an address is not a candidate for local pack results, so filling it is a go-live blocker (see CHECKLIST §1).
+- **`BreadcrumbJsonLd`** — All nine **service silos** (via `ServiceSiloContent`), plus portfolio and virtual-tour pages.
 
 Eligibility for rich/local features remains at Google’s discretion.
 
@@ -106,14 +118,16 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 
 ## 6. Brand, crawl, and sharing assets
 
-- **Favicon** — **`public/favicon.ico`** (32×32 + 16×16 generated from **`public/logo.png`** via **`npm run generate:favicon`**, script: **`scripts/generate-favicon.mjs`**, uses **sharp** + **png-to-ico**). **`src/app/layout.tsx`** lists **`/favicon.ico`** first in **`metadata.icons`**, then **`/logo.png`**. No **`next.config`** rewrite for favicon (direct static file).
-- **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630) so crawlers and social CDNs can reserve space without probing the image. **`manifest.ts`** — icons still reference **`/logo.png`** for PWA/home-screen.
+- **Favicon / brand images** — All generated from **`assets/brand/logo-master.png`** by **`npm run generate:favicon`** (`scripts/generate-favicon.mjs`, **sharp** + **png-to-ico**), wired into `prebuild`: `favicon.ico` (16+32), `icon-192.png`, `icon-512.png`, `apple-icon.png`, and **`logo-mark.png`** (256px, the mark rendered in the header and footer). No **`next.config`** rewrite (direct static files).
+- **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630). The route is referenced **explicitly** from **`withLocaleAlternates`** (`openGraph.images` / `twitter.images`): nested `[locale]` segments did not inherit the file convention, and the proxy matcher was rewriting `/opengraph-image` → `/it/opengraph-image` (404), so **no page emitted an `og:image` at all**. Both are fixed — see the matcher exclusions in `src/proxy.ts`.
+- **`manifest.ts`** — icons reference **`/icon-192.png`** and **`/icon-512.png`**, generated from `assets/brand/logo-master.png`. The master (2048², ~8 MB) is deliberately outside `public/`; it used to be served directly as the favicon and apple-touch-icon on every request.
 
 ---
 
 ## 7. Analytics & tags
 
-- **GTM / GA** — When env vars are set; measurement does not equal rankings. **`CookieBanner`** copy should match what is actually loaded.
+- **GTM / GA** — Loaded by **`src/components/seo/Analytics.tsx`** **only after the visitor accepts** (`readConsent() === "all"`). Consent Mode v2 defaults are set `denied` in the document head before any tag can fire (`CONSENT_DEFAULTS_SNIPPET` in `src/lib/consent.ts`). Previously both loaded unconditionally from the root layout and the banner's choice was never read, so "Solo necessari" had no effect.
+- **Portfolio** — Gated by **`isPortfolioEnabled()`** (`NEXT_PUBLIC_ENABLE_PORTFOLIO`). While off, `/portfolio` and project/tour routes serve `noindex, nofollow` and are excluded from the sitemap; with it on, every internal link returns. This replaces five files' worth of commented-out JSX, which hid the links from visitors but left the URLs in the sitemap.
 
 ---
 
@@ -161,4 +175,4 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 
 ---
 
-*Last updated: April 2026 — `areaServed` + portfolio town match: **`src/lib/constants/service-area.ts`** (used by `LocalBusinessJsonLd`); GBP checklist; silo RUE/compliance; portfolio `alt`; footer “Zone servite”; sitemap lastmod; canonical/hreflang.*
+*Last updated: September 2026 — static rendering restored; `og:image` fixed; legacy 308s; consent-gated analytics; portfolio flag; `PostalAddress`; silo table corrected. Previously: April 2026 — `areaServed` + portfolio town match: **`src/lib/constants/service-area.ts`** (used by `LocalBusinessJsonLd`); GBP checklist; silo RUE/compliance; portfolio `alt`; footer “Zone servite”; sitemap lastmod; canonical/hreflang.*

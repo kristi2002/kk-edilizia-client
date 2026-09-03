@@ -13,7 +13,7 @@ export default async function AdminPreventivoPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Modulo preventivo</h1>
-          <p className="mt-2 text-base text-zinc-400">
+          <p className="mt-2 text-base text-ink-3">
             Testi delle scelte (tipo di lavoro, budget, tempistiche) in italiano e inglese. I
             valori «id» sono quelli salvati con la richiesta e usati nelle email.
           </p>

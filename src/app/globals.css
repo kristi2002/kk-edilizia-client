@@ -3,13 +3,52 @@
 :root {
   --background: #080808;
   --foreground: #f4f4f5;
+
+  /* Brand */
   --accent: #c9a227;
+  --accent-light: #e8d48b;
+  --accent-deep: #a9822f;
   --accent-soft: rgba(201, 162, 39, 0.15);
+
+  /*
+   * Surfaces. The site used to run every section on #0a0a0a/#0c0c0c, which read as one
+   * undifferentiated block for ~13.000px of scroll. These three grounds alternate to
+   * give the page rhythm; --surface-warm carries a little of the gold's hue so the
+   * change reads as intentional rather than as a rendering artefact.
+   */
+  --surface-base: #0a0a0a;
+  --surface-warm: #12100c;
+  --surface-deep: #050505;
+
+  /*
+   * Text ramp. Replaces zinc-400/500/600, of which the last two failed WCAG AA on these
+   * grounds (4.10:1 and 2.56:1). Every step below clears 4.5:1 on all three surfaces,
+   * and the warm bias sits better next to the gold than the cool zinc greys did.
+   *   ink-1 18.0:1 · ink-2 12.1:1 · ink-3 7.8:1 · ink-4 5.8:1
+   */
+  --ink-1: #f4f4f5;
+  --ink-2: #cfcabf;
+  --ink-3: #a8a294;
+  --ink-4: #8f8a7d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-deep: var(--accent-deep);
+
+  --color-surface-base: var(--surface-base);
+  --color-surface-warm: var(--surface-warm);
+  --color-surface-deep: var(--surface-deep);
+
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+
   --font-sans: var(--font-dm-sans);
   --font-serif: var(--font-instrument-serif);
 }
@@ -66,4 +105,182 @@ body {
 ::selection {
   background: rgba(201, 162, 39, 0.35);
   color: #0a0a0a;
+}
+
+/* ==========================================================================
+   Decorative layer
+   Every device below is presentational: mark the element aria-hidden, keep it
+   pointer-events:none, and never put information in it.
+   ========================================================================== */
+
+/* Section divider — replaces `border-white/10`, which was invisible at 10% opacity. */
+.rule-gold {
+  position: relative;
+}
+.rule-gold::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-deep) 0%,
+    var(--accent) 25%,
+    var(--accent-light) 50%,
+    var(--accent) 75%,
+    var(--accent-deep) 100%
+  );
+  opacity: 0.75;
+}
+
+/* Oversized hollow wordmark, bleeding past the section edge. One word, never a phrase. */
+.wm-word {
+  position: absolute;
+  inset-inline-start: -2%;
+  bottom: -6%;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(5rem, 17vw, 15rem);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(201, 162, 39, 0.13);
+}
+
+/* Running annotation set in the gutter, like the edge of a drawing sheet. */
+.wm-vert {
+  position: absolute;
+  inset-block: 0;
+  right: 1rem;
+  display: none;
+  align-items: center;
+  writing-mode: vertical-rl;
+  font-size: 0.625rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.38);
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 1280px) {
+  .wm-vert {
+    display: flex;
+  }
+}
+
+/* Measured grid, masked so it dissolves before it reaches the text. */
+.wm-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(201, 162, 39, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.09) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 85% at 30% 50%,
+    #000 8%,
+    transparent 76%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 85% at 30% 50%,
+    #000 8%,
+    transparent 76%
+  );
+}
+
+/* Oversized ring, anchored off-canvas at a section corner. */
+.wm-ring {
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  border: 2.25rem solid rgba(201, 162, 39, 0.09);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Polished-floor reflection. Apply to a copy of the element sitting under the original. */
+.reflect {
+  transform: scaleY(-1);
+  filter: blur(0.6px);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 80%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 80%);
+  pointer-events: none;
+}
+
+/* Specular sweep across a filled control, on hover / keyboard focus. */
+.sweep {
+  position: relative;
+  overflow: hidden;
+}
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.sweep:hover::after,
+.sweep:focus-visible::after {
+  transform: translateX(120%);
+  transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Infinite marquee. The track must contain the item list exactly twice. */
+.marq {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+}
+.marq-track {
+  display: flex;
+  width: max-content;
+  animation: marq-scroll 26s linear infinite;
+}
+.marq:hover .marq-track,
+.marq:focus-within .marq-track {
+  animation-play-state: paused;
+}
+@keyframes marq-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marq-track {
+    animation: none;
+  }
+  .marq {
+    overflow-x: auto;
+  }
+  .sweep::after {
+    display: none;
+  }
 }

@@ -76,13 +76,13 @@ export function AdminConfirmDialog({
         <h2 id={titleId} className="font-serif text-xl text-white">
           {title}
         </h2>
-        <p className="mt-3 text-base leading-relaxed text-zinc-400">{description}</p>
+        <p className="mt-3 text-base leading-relaxed text-ink-3">{description}</p>
         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
             type="button"
             disabled={pending}
             onClick={() => onOpenChange(false)}
-            className="rounded-xl border-2 border-white/20 bg-white/[0.06] px-5 py-3 text-base font-medium text-zinc-100 transition hover:bg-white/12 disabled:opacity-50"
+            className="rounded-xl border-2 border-white/20 bg-white/[0.06] px-5 py-3 text-base font-medium text-ink-1 transition hover:bg-white/12 disabled:opacity-50"
           >
             {cancelLabel}
           </button>

@@ -1,16 +1,38 @@
 import { NextResponse } from "next/server";
 import {
+  ADMIN_SESSION_TTL_SECONDS,
   createAdminSessionToken,
   isAdminEnvConfigured,
 } from "@/lib/admin-session";
+import { assertRateLimit } from "@/lib/rate-limit";
 
 const COOKIE = "kk_admin_session";
+
+/** Constant-time compare so a wrong password costs the same as a right one. */
+function secretsMatch(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
+}
 
 export async function POST(request: Request) {
   if (!isAdminEnvConfigured()) {
     return NextResponse.json(
       { ok: false, error: "not_configured" },
       { status: 503 },
+    );
+  }
+
+  /** 5 attempts / 15 min per IP (see ROUTE_BUDGETS in lib/rate-limit). */
+  try {
+    await assertRateLimit("admin-login", request);
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "rate_limited" },
+      { status: 429 },
     );
   }
 
@@ -30,7 +52,7 @@ export async function POST(request: Request) {
       : "";
 
   const expectedPassword = process.env.ADMIN_PASSWORD?.trim() ?? "";
-  if (!expectedPassword || password !== expectedPassword) {
+  if (!expectedPassword || !secretsMatch(password, expectedPassword)) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
@@ -42,7 +64,7 @@ export async function POST(request: Request) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: ADMIN_SESSION_TTL_SECONDS,
   });
   return res;
 }

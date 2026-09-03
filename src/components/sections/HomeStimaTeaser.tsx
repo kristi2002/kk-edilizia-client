@@ -17,7 +17,7 @@ export async function HomeStimaTeaser() {
           <h2 className="mt-4 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
             {t("title")}
           </h2>
-          <p className="mt-4 text-lg text-zinc-400">{t("body")}</p>
+          <p className="mt-4 text-lg text-ink-3">{t("body")}</p>
         </FadeIn>
         <FadeIn delay={0.06}>
           <Link

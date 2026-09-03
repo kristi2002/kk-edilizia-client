@@ -5,6 +5,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { isPortfolioEnabled } from "@/lib/features";
 import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
@@ -45,7 +46,9 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
     { href: "/ristrutturazioni-chiavi-in-mano" as const, label: t("internalChiavi") },
     { href: "/preventivo" as const, label: t("internalPreventivo") },
     { href: "/prenota" as const, label: t("internalPrenota") },
-    // { href: "/portfolio" as const, label: t("internalPortfolio") },
+    ...(isPortfolioEnabled()
+      ? [{ href: "/portfolio" as const, label: t("internalPortfolio") }]
+      : []),
   ];
 
   const faqLd = faqs.map((item) => ({
@@ -69,10 +72,10 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
               {t("eyebrow")}
             </p>
             <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">{t("title")}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-zinc-400">{t("intro")}</p>
+            <p className="mt-6 text-lg leading-relaxed text-ink-3">{t("intro")}</p>
           </FadeIn>
 
-          <div className="mt-12 space-y-6 text-base leading-relaxed text-zinc-400">
+          <div className="mt-12 space-y-6 text-base leading-relaxed text-ink-3">
             {[t("p1"), t("p2"), t("p3"), t("p4")].map((p, i) => (
               <FadeIn key={i} delay={0.04 * (i + 1)}>
                 <p>{p}</p>
@@ -117,7 +120,7 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
                 <FadeIn key={item.q} delay={0.06 * i}>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4">
                     <dt className="font-medium text-white">{item.q}</dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-zinc-400">{item.a}</dd>
+                    <dd className="mt-2 text-sm leading-relaxed text-ink-3">{item.a}</dd>
                   </div>
                 </FadeIn>
               ))}

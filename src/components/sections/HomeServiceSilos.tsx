@@ -21,7 +21,7 @@ export async function HomeServiceSilos() {
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
             {t("title")}
           </h2>
-          <p className="mt-4 max-w-2xl text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 max-w-2xl text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <ul className="mt-14 grid gap-5 md:grid-cols-3">
@@ -35,7 +35,7 @@ export async function HomeServiceSilos() {
                   <span className="font-serif text-xl text-white group-hover:text-[#c9a227]">
                     {t(`${route.key}Title`)}
                   </span>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-500">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-4">
                     {t(`${route.key}Desc`)}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#c9a227]">

@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
         </span>
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Accesso riservato</h1>
-          <p className="mt-1 text-base text-zinc-500">
+          <p className="mt-1 text-base text-ink-4">
             Solo per chi gestisce i contenuti del sito.
           </p>
         </div>

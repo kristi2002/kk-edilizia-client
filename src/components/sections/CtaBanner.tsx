@@ -23,7 +23,7 @@ export function CtaBanner() {
         <h2 className="font-serif text-3xl text-white sm:text-4xl md:text-5xl">
           {t("title")}
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-zinc-400">{t("subtitle")}</p>
+        <p className="mx-auto mt-4 max-w-xl text-ink-3">{t("subtitle")}</p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link
             href="/preventivo"

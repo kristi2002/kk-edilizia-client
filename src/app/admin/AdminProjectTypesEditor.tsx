@@ -115,7 +115,7 @@ export function AdminProjectTypesEditor({
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[#c9a227]">
           Elenco tipi
         </h2>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-1 text-sm text-ink-4">
           Questi valori compaiono nel menu «Tipo» di ogni progetto nel portfolio. Modifica IT/EN e
           salva qui.
         </p>
@@ -125,7 +125,7 @@ export function AdminProjectTypesEditor({
               key={t.id}
               className="flex flex-wrap items-end gap-2 border-b border-white/5 pb-2"
             >
-              <label className="text-xs text-zinc-500">
+              <label className="text-xs text-ink-4">
                 id
                 <input
                   className={adminField}
@@ -139,7 +139,7 @@ export function AdminProjectTypesEditor({
                   }
                 />
               </label>
-              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
+              <label className="min-w-[120px] flex-1 text-xs text-ink-4">
                 IT
                 <input
                   className={adminField}
@@ -153,7 +153,7 @@ export function AdminProjectTypesEditor({
                   }
                 />
               </label>
-              <label className="min-w-[120px] flex-1 text-xs text-zinc-500">
+              <label className="min-w-[120px] flex-1 text-xs text-ink-4">
                 EN
                 <input
                   className={adminField}
@@ -207,8 +207,8 @@ export function AdminProjectTypesEditor({
       {message && <p className="text-sm text-emerald-400/90">{message}</p>}
       {error && <p className="text-sm text-red-400">{error}</p>}
 
-      <p className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-400">
-        Dopo aver salvato, in <strong className="text-zinc-200">Portfolio</strong> potrai
+      <p className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-ink-3">
+        Dopo aver salvato, in <strong className="text-ink-2">Portfolio</strong> potrai
         assegnare ogni lavoro a un tipo dal menu a tendina.
       </p>
     </div>

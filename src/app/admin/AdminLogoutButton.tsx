@@ -21,7 +21,7 @@ export function AdminLogoutButton() {
       type="button"
       onClick={() => void logout()}
       disabled={busy}
-      className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/25 bg-white/[0.07] px-6 py-3.5 text-base font-medium text-zinc-100 transition hover:bg-white/12 disabled:cursor-not-allowed disabled:opacity-50"
+      className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/25 bg-white/[0.07] px-6 py-3.5 text-base font-medium text-ink-1 transition hover:bg-white/12 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <LogOut className="size-5" aria-hidden />
       {busy ? "Uscita…" : "Esci dall’area riservata"}

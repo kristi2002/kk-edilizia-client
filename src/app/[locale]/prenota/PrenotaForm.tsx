@@ -134,7 +134,7 @@ export function PrenotaForm() {
     return (
       <div className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-6 py-10 text-center">
         <p className="font-medium text-white">{t("successTitle")}</p>
-        <p className="mt-2 text-sm text-zinc-400">{t("successBody")}</p>
+        <p className="mt-2 text-sm text-ink-3">{t("successBody")}</p>
         <button
           type="button"
           onClick={() => setDone(false)}
@@ -148,7 +148,7 @@ export function PrenotaForm() {
 
   return (
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-ink-4">
         {t("formPrivacy")}{" "}
         <Link href="/privacy" className="text-[#c9a227] hover:underline">
           {t("privacyLink")}
@@ -158,7 +158,7 @@ export function PrenotaForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="relative mt-6 space-y-4">
         <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <div>
-          <label className="text-sm text-zinc-500">{t("fieldName")}</label>
+          <label className="text-sm text-ink-4">{t("fieldName")}</label>
           <input
             autoComplete="name"
             className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
@@ -169,7 +169,7 @@ export function PrenotaForm() {
           )}
         </div>
         <div>
-          <label className="text-sm text-zinc-500">{t("fieldEmail")}</label>
+          <label className="text-sm text-ink-4">{t("fieldEmail")}</label>
           <input
             type="email"
             autoComplete="email"
@@ -181,7 +181,7 @@ export function PrenotaForm() {
           )}
         </div>
         <div>
-          <label className="text-sm text-zinc-500">{t("fieldPhone")}</label>
+          <label className="text-sm text-ink-4">{t("fieldPhone")}</label>
           <input
             type="tel"
             autoComplete="tel"
@@ -193,13 +193,13 @@ export function PrenotaForm() {
           )}
         </div>
         <div>
-          <p className="text-sm text-zinc-500">{t("fieldPreferred")}</p>
-          <p className="mt-1 text-xs text-zinc-600">{t("fieldPreferredHint")}</p>
+          <p className="text-sm text-ink-4">{t("fieldPreferred")}</p>
+          <p className="mt-1 text-xs text-ink-4">{t("fieldPreferredHint")}</p>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <div>
               <label
                 htmlFor="prenota-date"
-                className="text-xs font-medium text-zinc-500"
+                className="text-xs font-medium text-ink-4"
               >
                 {t("fieldPreferredDate")}
               </label>
@@ -226,7 +226,7 @@ export function PrenotaForm() {
             <div>
               <label
                 htmlFor="prenota-time"
-                className="text-xs font-medium text-zinc-500"
+                className="text-xs font-medium text-ink-4"
               >
                 {t("fieldPreferredTime")}
               </label>
@@ -253,7 +253,7 @@ export function PrenotaForm() {
           </div>
         </div>
         <div>
-          <label className="text-sm text-zinc-500">{t("fieldNotes")}</label>
+          <label className="text-sm text-ink-4">{t("fieldNotes")}</label>
           <textarea
             rows={3}
             className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
@@ -266,11 +266,11 @@ export function PrenotaForm() {
         <div>
           <label
             htmlFor="prenota-attachments"
-            className="text-sm text-zinc-500"
+            className="text-sm text-ink-4"
           >
             {t("fieldAttachments")}
           </label>
-          <p className="mt-1 text-xs text-zinc-600">{t("attachmentsHint")}</p>
+          <p className="mt-1 text-xs text-ink-4">{t("attachmentsHint")}</p>
           <FormAttachmentPicker
             items={attachmentItems}
             onItemsChange={(next) => {

@@ -28,8 +28,8 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
             <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
               {t("title")}
             </h2>
-            <p className="mt-4 max-w-lg text-zinc-400">{t("intro")}</p>
-            <p className="mt-3 max-w-lg text-sm text-zinc-500">{t("localTrust")}</p>
+            <p className="mt-4 max-w-lg text-ink-3">{t("intro")}</p>
+            <p className="mt-3 max-w-lg text-sm text-ink-4">{t("localTrust")}</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <Link
@@ -76,7 +76,7 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
                       <h3 className="mt-2 font-serif text-xl text-white">
                         {loc.title}
                       </h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-zinc-400">
+                      <p className="mt-2 line-clamp-2 text-sm text-ink-3">
                         {loc.excerpt}
                       </p>
                     </div>

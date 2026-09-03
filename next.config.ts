@@ -22,9 +22,28 @@ const sentryPluginDebug =
   process.env.SENTRY_DEBUG_BUILD === "1" ||
   process.env.SENTRY_LOG_LEVEL === "debug";
 
+/**
+ * Legacy silo URLs → current silo URLs. Handled here (edge, 308 permanent) instead of
+ * `redirect()` inside a page: a page-level redirect renders a full HTML document and
+ * emits only a `<meta http-equiv="refresh">`, so crawlers saw HTTP 200 + no canonical.
+ */
+const LEGACY_SILO_REDIRECTS: { from: string; to: string }[] = [
+  { from: "/cartongesso-modena", to: "/cartongesso-isolamento" },
+  { from: "/ristrutturazioni-bagno", to: "/ristrutturazione-bagno" },
+  { from: "/rifacimento-tetto", to: "/rifacimento-tetto-facciate" },
+];
+
 const nextConfig: NextConfig = {
+  /** Multiple lockfiles exist above this repo; pin the root so build traces are correct. */
+  outputFileTracingRoot: path.join(process.cwd()),
   experimental: {
     optimizePackageImports: ["framer-motion"],
+  },
+  async redirects() {
+    return LEGACY_SILO_REDIRECTS.flatMap(({ from, to }) => [
+      { source: from, destination: to, permanent: true },
+      { source: `/en${from}`, destination: `/en${to}`, permanent: true },
+    ]);
   },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
@@ -39,16 +58,6 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 72, 70],
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "pannellum.org",
-        pathname: "/images/**",
-      },
       {
         protocol: "https",
         hostname: "**.public.blob.vercel-storage.com",

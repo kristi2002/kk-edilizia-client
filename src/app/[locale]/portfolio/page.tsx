@@ -9,6 +9,7 @@ import { getProjectLocalized } from "@/lib/data/projects";
 import { getProjects } from "@/lib/data/projects-store";
 import { getProjectTypes } from "@/lib/data/project-types-store";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { isPortfolioEnabled } from "@/lib/features";
 
 export const revalidate = 60;
 
@@ -18,6 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const bundle = locale === "en" ? enMessages : itMessages;
   return withLocaleAlternates(locale, "/portfolio", {
+    /** Demonstration media until the company's own photos land; keep it out of the index. */
+    ...(isPortfolioEnabled() ? {} : { robots: { index: false, follow: false } }),
     title: bundle.PortfolioPage.metaTitle,
     description: bundle.PortfolioPage.metaDescription,
   });
@@ -43,7 +46,7 @@ export default async function PortfolioPage({ params }: Props) {
           <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 max-w-2xl text-lg text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <ul className="mt-16 grid gap-8 sm:grid-cols-2">
@@ -79,7 +82,7 @@ export default async function PortfolioPage({ params }: Props) {
                         </h2>
                       </div>
                     </div>
-                    <p className="p-6 text-sm leading-relaxed text-zinc-500">
+                    <p className="p-6 text-sm leading-relaxed text-ink-4">
                       {loc.excerpt}
                     </p>
                   </Link>

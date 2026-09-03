@@ -16,6 +16,7 @@ import {
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { isPortfolioEnabled } from "@/lib/features";
 
 export const revalidate = 60;
 
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = getProjectLocalized(project, locale, projectTypes);
   const path = `/portfolio/${project.slug}/virtual-tour`;
   return withLocaleAlternates(locale, path, {
+    ...(isPortfolioEnabled() ? {} : { robots: { index: false, follow: false } }),
     title: `${loc.title} — 360°`,
     description: loc.excerpt,
     openGraph: { images: [{ url: project.coverImage }] },
@@ -88,7 +90,7 @@ export default async function ProjectVirtualTourPage({ params }: Props) {
           <FadeIn>
             <Link
               href={`/portfolio/${project.slug}`}
-              className="inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+              className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" />
               {t("virtualTourBack")}
@@ -99,7 +101,7 @@ export default async function ProjectVirtualTourPage({ params }: Props) {
             <h1 className="mt-3 font-serif text-3xl text-white md:text-4xl">
               {loc.title}
             </h1>
-            <p className="mt-3 max-w-2xl text-zinc-400">{t("virtualTourIntro")}</p>
+            <p className="mt-3 max-w-2xl text-ink-3">{t("virtualTourIntro")}</p>
           </FadeIn>
 
           <FadeIn delay={0.08}>

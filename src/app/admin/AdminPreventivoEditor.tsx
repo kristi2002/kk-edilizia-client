@@ -147,12 +147,12 @@ export function AdminPreventivoEditor({ initialOptions, redisOk }: Props) {
     <section className="space-y-3">
       <div>
         <h3 className="font-serif text-lg text-white">{title}</h3>
-        <p className="mt-1 text-sm text-zinc-500">{hint}</p>
+        <p className="mt-1 text-sm text-ink-4">{hint}</p>
       </div>
       <div className="overflow-x-auto rounded-xl border border-white/10">
         <table className="w-full min-w-[720px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-white/10 bg-white/[0.03] text-zinc-400">
+            <tr className="border-b border-white/10 bg-white/[0.03] text-ink-3">
               <th className="px-3 py-3 font-semibold">Valore (id)</th>
               <th className="py-3 pr-2 font-semibold">Testo IT</th>
               <th className="py-3 pr-2 font-semibold">Testo EN</th>

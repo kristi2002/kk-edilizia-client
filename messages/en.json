@@ -40,7 +40,9 @@
     "langEn": "EN",
     "skipToContent": "Skip to content",
     "switchToEnglish": "Switch to English",
-    "switchToItalian": "Switch to Italian"
+    "switchToItalian": "Switch to Italian",
+    "services": "Services",
+    "servicesMenu": "Open services menu"
   },
   "Hero": {
     "badge": "Modena & province",
@@ -50,7 +52,6 @@
     "ctaQuote": "Request a quote",
     "ctaBooking": "Book a site visit",
     "townsLabel": "Towns served",
-    "ctaWorks": "See our work",
     "statYears": "years’ experience",
     "statProjects": "projects",
     "statCommitment": "commitment to deadlines"
@@ -61,11 +62,7 @@
     "p1": "K.K Edilizia is a building contractor working in Modena and across the province: we focus on residential construction and renovations for private clients, families and small businesses investing in property in the city and surrounding towns. We provide full construction services—from drywall to roof replacement—with a free, detailed quote after a site survey and a single point of contact.",
     "p2": "We follow applicable rules: where building permits are required, the Modena municipal building code, national construction law and filings (CILA, SCIA or other) prepared by your surveyor or architect apply. We carry out work in line with the approved design and keep you and your technician updated on progress so homeowners and businesses can plan timing and budget realistically.",
     "p3": "Projects on flats, houses and commercial units across Modena’s most requested areas—from the historic centre to outer districts linked to Sassuolo, Carpi and Formigine. Whether you need a full renovation or targeted work (bathroom, roof, drywall partitions), we focus on site organisation, coordinated suppliers and materials chosen for durability.",
-    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards.",
-    "reviewLabel": "Client feedback",
-    "reviewQuote": "“Clean site, deadlines respected, and one point of contact—clear from start to finish.”",
-    "reviewAttribution": "Demo wording—replace with a short verbatim quote from your public Google Business Profile when available.",
-    "reviewLinkHint": "Public Google reviews build trust and align with local search; paste an authorised excerpt here."
+    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards."
   },
   "StatsStrip": {
     "v1": "10+",
@@ -75,8 +72,7 @@
     "years": "Years active in construction",
     "projects": "Jobs managed across the province",
     "referent": "Single site contact",
-    "quotes": "Quotes with line items and timing",
-    "footnote": "Figures describe our operating model; replace with verifiable data before using them in advertising."
+    "quotes": "Quotes with line items and timing"
   },
   "Services": {
     "label": "What we do",
@@ -164,7 +160,10 @@
     "chiaviInMano": {
       "metaTitle": "Turnkey renovations in Modena",
       "metaDescription": "Turnkey renovations across Modena and the province: one point of contact coordinating masonry, systems and finishes. Free quote after a site visit.",
-      "metaKeywords": ["turnkey renovation modena", "general contractor modena"],
+      "metaKeywords": [
+        "turnkey renovation modena",
+        "general contractor modena"
+      ],
       "eyebrow": "General contractor",
       "h1": "Turnkey renovations in Modena",
       "lead": "End-to-end renovation management with one site lead.",
@@ -180,7 +179,9 @@
     "cucina": {
       "metaTitle": "Kitchen renovation in Modena",
       "metaDescription": "Kitchen renovation in Modena and province: plumbing, electrics and finishes, coordinated as one job. Free quote after a site visit.",
-      "metaKeywords": ["kitchen renovation modena"],
+      "metaKeywords": [
+        "kitchen renovation modena"
+      ],
       "eyebrow": "Renovations",
       "h1": "Kitchen renovation in Modena",
       "lead": "Plumbing, electrics and finishes with one coordinator.",
@@ -244,7 +245,9 @@
     "murarie": {
       "metaTitle": "Masonry works in Modena",
       "metaDescription": "Masonry works in Modena and province: controlled demolition, partitions and repairs for renovations. Free quote after a site visit.",
-      "metaKeywords": ["masonry works modena"],
+      "metaKeywords": [
+        "masonry works modena"
+      ],
       "eyebrow": "Construction",
       "h1": "Masonry works in Modena",
       "lead": "Demolition, repairs and preparation for systems and finishes.",
@@ -285,7 +288,10 @@
     "pavimentiRivestimenti": {
       "metaTitle": "Flooring & wall finishes in Modena",
       "metaDescription": "Floors and wall finishes in Modena and province: tiling, parquet and cladding with professional systems. Free quote after a site visit.",
-      "metaKeywords": ["tiling modena", "flooring modena"],
+      "metaKeywords": [
+        "tiling modena",
+        "flooring modena"
+      ],
       "eyebrow": "Finishes",
       "h1": "Floors and wall finishes in Modena",
       "lead": "Substrate prep, waterproofing and clean details for durable results.",
@@ -301,7 +307,10 @@
     "tettoFacciate": {
       "metaTitle": "Roof & façades in Modena",
       "metaDescription": "Roof and façade works in Modena and province: scaffolding, safety and coordinated phases. Free quote after a site visit.",
-      "metaKeywords": ["roof facade modena", "scaffolding modena"],
+      "metaKeywords": [
+        "roof facade modena",
+        "scaffolding modena"
+      ],
       "eyebrow": "Roof & façades",
       "h1": "Roof and façades in Modena",
       "lead": "One coordinated site for roofing, façades and scaffolding.",
@@ -376,7 +385,13 @@
       "body6": "Quotes list build-ups, quantities, labour, estimated duration and manufacturer warranties. Duration depends on pitches, height, scaffolding and weather. One K.K Edilizia lead runs through handover and watertightness checks, with documentation your accountant may use for any applicable tax relief.",
       "ctaPrimary": "Request a quote",
       "ctaSecondary": "Contact"
-    }
+    },
+    "areaPanelTitle": "Where we work",
+    "compliancePanelTitle": "Permits and responsibility",
+    "faqTitle": "Frequently asked questions about this service",
+    "siblingsTitle": "Other services we handle",
+    "closingTitle": "Let’s talk about your project",
+    "closingBody": "A no-obligation site visit in Modena and province, then a quote with line items and timings. One point of contact from start to handover."
   },
   "FeaturedProjects": {
     "label": "Portfolio",
@@ -385,19 +400,6 @@
     "localTrust": "Sites across Modena province: each project lists type and location so you can judge experience in contexts similar to yours.",
     "cta": "See all projects",
     "coverAlt": "{category}: {title} — job site in {location}"
-  },
-  "Reviews": {
-    "label": "Reviews",
-    "title": "What clients say",
-    "intro": "Feedback from clients who chose K.K Edilizia for sites in Modena and province (demo text).",
-    "gbpCta": "See public reviews on the Google Business Profile too—they help verify recent experience and align with local search.",
-    "gbpLinkLabel": "Open Google reviews",
-    "r1": "Clean site, deadlines met, and one contact—finally clarity.",
-    "a1": "Private client, Modena",
-    "r2": "Detailed quote and no mid-project surprises. Recommended.",
-    "a2": "Condominium administrator, Modena province",
-    "r3": "Great coordination between masons and MEP. Result beyond expectations.",
-    "a3": "Private client, Sassuolo"
   },
   "FaqSection": {
     "label": "FAQ",
@@ -437,7 +439,8 @@
     "privacyLink": "Privacy policy",
     "legalLink": "Legal notice",
     "howWeWork": "How we work",
-    "linkImpresaEdileModena": "Building contractor Modena (local guide)"
+    "linkImpresaEdileModena": "Building contractor Modena (local guide)",
+    "reviewsLink": "Reviews on Google"
   },
   "BrandEcosystem": {
     "label": "Professional materials",
@@ -582,9 +585,8 @@
   },
   "CookieBanner": {
     "title": "Cookies & transparency",
-    "text": "We use strictly necessary cookies; aggregate visit statistics may be collected (e.g. Google Analytics via your tag manager). More information in our",
+    "text": "We use strictly necessary cookies only. Visit statistics are collected solely if you agree. Details in our",
     "privacyLink": "privacy policy",
-    "hint": "You can record your choice below (stored locally).",
     "essentialOnly": "Essential only",
     "acceptAll": "OK"
   },
@@ -667,5 +669,11 @@
     "title": "Page not found",
     "text": "The page you’re looking for doesn’t exist or has been moved.",
     "home": "Back to home"
+  },
+  "Materials": {
+    "label": "Materials and systems",
+    "title": "What we build with",
+    "intro": "Brands we regularly use for adhesives, skim coats, waterproofing and drywall systems, or certified equivalents with matching specifications. The final choice is stated in the quote before work begins.",
+    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool"
   }
 }

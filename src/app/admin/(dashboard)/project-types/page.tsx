@@ -12,7 +12,7 @@ export default async function AdminProjectTypesPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Tipi di progetto</h1>
-          <p className="mt-2 text-base text-zinc-400">
+          <p className="mt-2 text-base text-ink-3">
             Categorie usate nel portfolio (menu «Tipo» su ogni progetto). Modifica qui; poi assegna
             ogni lavoro dalla sezione Portfolio.
           </p>

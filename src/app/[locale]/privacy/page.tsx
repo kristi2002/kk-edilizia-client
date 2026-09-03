@@ -31,10 +31,10 @@ export default async function PrivacyPage({ params }: Props) {
         <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
           Privacy policy
         </h1>
-        <p className="mt-4 text-sm text-zinc-500">
+        <p className="mt-4 text-sm text-ink-4">
           Ultimo aggiornamento: 2 aprile 2026 — verifica periodica consigliata dopo modifiche ai moduli o agli strumenti di misurazione.
         </p>
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs text-ink-4">
           Per richieste sui dati personali scrivi a{" "}
           <a className="text-[#c9a227] hover:underline" href={`mailto:${site.email}`}>
             {site.email}
@@ -42,7 +42,7 @@ export default async function PrivacyPage({ params }: Props) {
           o alla PEC indicata nel punto 1.
         </p>
 
-        <div className="mt-12 space-y-10 text-sm leading-relaxed text-zinc-400">
+        <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink-3">
           <section id="titolare">
             <h2 className="font-serif text-2xl text-white">
               1. Titolare del trattamento
@@ -79,14 +79,14 @@ export default async function PrivacyPage({ params }: Props) {
             </p>
             <ul className="mt-4 list-disc space-y-3 pl-5">
               <li>
-                <strong className="text-zinc-300">Dati di contatto e contenuto delle richieste</strong>{" "}
+                <strong className="text-ink-2">Dati di contatto e contenuto delle richieste</strong>{" "}
                 (nome, e-mail, telefono, testo del messaggio, dettagli
                 dell&apos;intervento): per rispondere alle richieste, preparare
                 preventivi, organizzare sopralluoghi e gestire il rapporto
                 precontrattuale/contrattuale.
               </li>
               <li>
-                <strong className="text-zinc-300">Dati tecnici e di sicurezza</strong>{" "}
+                <strong className="text-ink-2">Dati tecnici e di sicurezza</strong>{" "}
                 (indirizzo IP, tipo di browser, orario di accesso, pagine visitate ove
                 raccolti dai sistemi; misure anti-spam come limitazione della
                 frequenza di invio moduli): per sicurezza del sito, prevenzione di
@@ -188,7 +188,7 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
         </div>
 
-        <p className="mt-16 text-center text-sm text-zinc-600">
+        <p className="mt-16 text-center text-sm text-ink-4">
           <Link href="/" className="text-[#c9a227] hover:underline">
             Torna alla home
           </Link>

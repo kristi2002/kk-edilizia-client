@@ -8,7 +8,7 @@ export default function GlobalNotFound() {
         404
       </p>
       <h1 className="mt-4 font-serif text-4xl text-white">Pagina non trovata</h1>
-      <p className="mt-3 max-w-md text-zinc-500">
+      <p className="mt-3 max-w-md text-ink-4">
         Il contenuto che cerchi non esiste o è stato spostato.
       </p>
       <Link

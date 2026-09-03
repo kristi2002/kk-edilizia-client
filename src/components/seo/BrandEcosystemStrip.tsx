@@ -31,21 +31,21 @@ export async function BrandEcosystemStrip() {
         >
           {t("title")}
         </h2>
-        <p className="mt-4 text-sm leading-relaxed text-zinc-400">{t("intro")}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink-3">{t("intro")}</p>
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {BRANDS.map((b) => (
             <li key={b.key}>
               <a
                 href={b.href}
                 rel="noopener noreferrer"
-                className="inline-flex rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-[#c9a227]/40 hover:text-[#c9a227] sm:text-sm"
+                className="inline-flex rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-ink-2 transition hover:border-[#c9a227]/40 hover:text-[#c9a227] sm:text-sm"
               >
                 {t(`brands.${b.key}`)}
               </a>
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-xs leading-relaxed text-zinc-600">{t("disclaimer")}</p>
+        <p className="mt-8 text-xs leading-relaxed text-ink-4">{t("disclaimer")}</p>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { isPortfolioEnabled } from "@/lib/features";
 import { Link } from "@/i18n/navigation";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ArrowUpRight } from "lucide-react";
@@ -27,7 +28,9 @@ const LINKS = [
   },
   { href: "/preventivo" as const, titleKey: "linkPreventivo" as const, descKey: "descPreventivo" as const },
   { href: "/prenota" as const, titleKey: "linkPrenota" as const, descKey: "descPrenota" as const },
-  // { href: "/portfolio" as const, titleKey: "linkPortfolio" as const, descKey: "descPortfolio" as const },
+  ...(isPortfolioEnabled()
+    ? [{ href: "/portfolio" as const, titleKey: "linkPortfolio" as const, descKey: "descPortfolio" as const }]
+    : []),
   { href: "/contatti" as const, titleKey: "linkContatti" as const, descKey: "descContatti" as const },
 ];
 
@@ -50,7 +53,7 @@ export async function HomeInternalHub() {
           >
             {t("title")}
           </h2>
-          <p className="mt-4 max-w-2xl text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 max-w-2xl text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -65,7 +68,7 @@ export async function HomeInternalHub() {
                     <span className="font-medium text-white">{t(item.titleKey)}</span>
                     <ArrowUpRight className="h-4 w-4 shrink-0 text-[#c9a227] opacity-70 transition group-hover:opacity-100" />
                   </span>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-3">
                     {t(item.descKey)}
                   </p>
                 </Link>

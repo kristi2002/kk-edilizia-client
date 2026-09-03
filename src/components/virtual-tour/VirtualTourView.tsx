@@ -131,14 +131,14 @@ export function VirtualTourView({ config }: VirtualTourViewProps) {
       />
       <div className="vt-shell">
         {isLoading && !error && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#0a0a0a] text-sm text-zinc-500">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#0a0a0a] text-sm text-ink-4">
             {t("viewerLoading")}
           </div>
         )}
         {error && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#0a0a0a] p-6 text-center">
-            <p className="text-sm text-zinc-300">{t("viewerError")}</p>
-            <p className="max-w-md text-xs text-zinc-500">
+            <p className="text-sm text-ink-2">{t("viewerError")}</p>
+            <p className="max-w-md text-xs text-ink-4">
               {error === "images"
                 ? t("viewerErrorImages")
                 : t("viewerErrorGeneric")}

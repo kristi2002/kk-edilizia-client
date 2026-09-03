@@ -261,7 +261,7 @@ export function AdminPortfolioEditor({
   };
 
   if (!selected) {
-    return <p className="text-sm text-zinc-500">Nessun progetto.</p>;
+    return <p className="text-sm text-ink-4">Nessun progetto.</p>;
   }
 
   return (
@@ -286,9 +286,9 @@ export function AdminPortfolioEditor({
         confirmLabel="Sì, elimina"
         onConfirm={performDeleteProject}
       />
-      <p className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-400">
-        Le <strong className="text-zinc-200">categorie / tipi</strong> si modificano nella sezione
-        dedicata del menu: <strong className="text-zinc-200">Tipi di progetto</strong>. Qui assegni
+      <p className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-ink-3">
+        Le <strong className="text-ink-2">categorie / tipi</strong> si modificano nella sezione
+        dedicata del menu: <strong className="text-ink-2">Tipi di progetto</strong>. Qui assegni
         solo il tipo a ogni lavoro.
       </p>
 
@@ -335,7 +335,7 @@ export function AdminPortfolioEditor({
       {error && <p className="text-sm text-red-400">{error}</p>}
 
       <div>
-        <label className="text-xs font-semibold uppercase text-zinc-500">Progetto</label>
+        <label className="text-xs font-semibold uppercase text-ink-4">Progetto</label>
         <select
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
@@ -350,7 +350,7 @@ export function AdminPortfolioEditor({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Tipo (da elenco)
           <select
             className={adminField}
@@ -365,7 +365,7 @@ export function AdminPortfolioEditor({
             ))}
           </select>
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Slug (URL)
           <input
             className={adminField}
@@ -382,7 +382,7 @@ export function AdminPortfolioEditor({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Titolo IT
           <input
             className={adminField}
@@ -391,7 +391,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { title: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Titolo EN
           <input
             className={adminField}
@@ -400,7 +400,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { titleEn: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Categoria IT (testo)
           <input
             className={adminField}
@@ -408,7 +408,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { category: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Categoria EN (testo)
           <input
             className={adminField}
@@ -416,7 +416,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { categoryEn: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Luogo IT
           <input
             className={adminField}
@@ -424,7 +424,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { location: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Luogo EN
           <input
             className={adminField}
@@ -432,7 +432,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { locationEn: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Anno
           <input
             className={adminField}
@@ -440,7 +440,7 @@ export function AdminPortfolioEditor({
             onChange={(e) => patchProject(selected.slug, { year: e.target.value })}
           />
         </label>
-        <label className="text-xs text-zinc-500">
+        <label className="text-xs text-ink-4">
           Copertina (URL)
           <input
             className={adminField}
@@ -450,7 +450,7 @@ export function AdminPortfolioEditor({
         </label>
       </div>
 
-      <label className="block text-xs text-zinc-500">
+      <label className="block text-xs text-ink-4">
         Estratto IT
         <textarea
           className={`${adminField} min-h-[72px]`}
@@ -458,7 +458,7 @@ export function AdminPortfolioEditor({
           onChange={(e) => patchProject(selected.slug, { excerpt: e.target.value })}
         />
       </label>
-      <label className="block text-xs text-zinc-500">
+      <label className="block text-xs text-ink-4">
         Estratto EN
         <textarea
           className={`${adminField} min-h-[72px]`}
@@ -466,7 +466,7 @@ export function AdminPortfolioEditor({
           onChange={(e) => patchProject(selected.slug, { excerptEn: e.target.value })}
         />
       </label>
-      <label className="block text-xs text-zinc-500">
+      <label className="block text-xs text-ink-4">
         Descrizione IT
         <textarea
           className={`${adminField} min-h-[100px]`}
@@ -474,7 +474,7 @@ export function AdminPortfolioEditor({
           onChange={(e) => patchProject(selected.slug, { description: e.target.value })}
         />
       </label>
-      <label className="block text-xs text-zinc-500">
+      <label className="block text-xs text-ink-4">
         Descrizione EN
         <textarea
           className={`${adminField} min-h-[100px]`}
@@ -486,7 +486,7 @@ export function AdminPortfolioEditor({
       <section>
         <h3 className="text-xs font-semibold uppercase text-[#c9a227]">Prima / dopo</h3>
         <div className="mt-2 grid gap-3 md:grid-cols-2">
-          <label className="text-xs text-zinc-500">
+          <label className="text-xs text-ink-4">
             URL prima
             <input
               className={adminField}
@@ -498,7 +498,7 @@ export function AdminPortfolioEditor({
               }
             />
           </label>
-          <label className="text-xs text-zinc-500">
+          <label className="text-xs text-ink-4">
             URL dopo
             <input
               className={adminField}
@@ -565,7 +565,7 @@ export function AdminPortfolioEditor({
             e.preventDefault();
             void uploadGallery(e.dataTransfer.files);
           }}
-          className="mt-2 rounded border border-dashed border-white/20 p-4 text-center text-sm text-zinc-400"
+          className="mt-2 rounded border border-dashed border-white/20 p-4 text-center text-sm text-ink-3"
         >
           Trascina immagini o{" "}
           <label className="cursor-pointer text-[#c9a227]">
@@ -607,12 +607,12 @@ export function AdminPortfolioEditor({
         <h3 className="text-xs font-semibold uppercase text-[#c9a227]">
           Tour 360° — panorami equirettangolari (2:1 consigliato)
         </h3>
-        <p className="mt-1 text-xs text-zinc-500">
+        <p className="mt-1 text-xs text-ink-4">
           Per ogni scena: id univoco nel progetto, titoli, URL panoramica (carica o incolla). Aggiungi
           scene per ambienti diversi; collega le foto al progetto selezionato sopra o crea un progetto
           nuovo prima di caricare.
         </p>
-        <label className="mt-2 block text-xs text-zinc-500">
+        <label className="mt-2 block text-xs text-ink-4">
           Scena iniziale
           <select
             className={adminField}
@@ -640,7 +640,7 @@ export function AdminPortfolioEditor({
               className="rounded border border-white/10 bg-white/[0.02] p-3"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-xs font-medium text-zinc-300">Scena: {sc.id}</span>
+                <span className="text-xs font-medium text-ink-2">Scena: {sc.id}</span>
                 <button
                   type="button"
                   onClick={() => removeScene(sc.id)}
@@ -650,8 +650,8 @@ export function AdminPortfolioEditor({
                 </button>
               </div>
               <div className="mt-2 grid gap-2 md:grid-cols-2">
-                <p className="text-xs text-zinc-600 md:col-span-2">
-                  Id scena: <code className="text-zinc-400">{sc.id}</code> (fisso — aggiungi una nuova scena per un nuovo id)
+                <p className="text-xs text-ink-4 md:col-span-2">
+                  Id scena: <code className="text-ink-3">{sc.id}</code> (fisso — aggiungi una nuova scena per un nuovo id)
                 </p>
                 <input
                   className={adminField}
@@ -725,7 +725,7 @@ export function AdminPortfolioEditor({
       </section>
 
       <div className="rounded-xl border border-[#c9a227]/35 bg-[#c9a227]/10 px-4 py-4">
-        <p className="text-sm text-zinc-200">
+        <p className="text-sm text-ink-2">
           <strong>Salva portfolio</strong> per pubblicare progetti, gallerie e tour sul sito.
         </p>
         <button

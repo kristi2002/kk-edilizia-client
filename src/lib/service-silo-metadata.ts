@@ -4,10 +4,14 @@ import enMessages from "../../messages/en.json";
 import { serviceSiloPathForKey, type ServiceSiloKey } from "./service-silos";
 import { withLocaleAlternates } from "./seo-metadata";
 
+/**
+ * `metaKeywords` still exists in `messages` as editorial notes, but is deliberately not
+ * read here: Next would emit `<meta name="keywords">`, which Google ignores and which
+ * SEO-PATTERNS.md §1 already states this site does not output.
+ */
 type SiloMeta = {
   metaTitle: string;
   metaDescription: string;
-  metaKeywords: string[];
 };
 
 function getSilo(locale: string, key: ServiceSiloKey): SiloMeta {
@@ -25,7 +29,6 @@ export async function buildServiceSiloMetadata(
   return withLocaleAlternates(locale, path, {
     title: silo.metaTitle,
     description: silo.metaDescription,
-    keywords: silo.metaKeywords,
     openGraph: {
       title: silo.metaTitle,
       description: silo.metaDescription,

@@ -59,11 +59,11 @@ export function AdminSidebar() {
               className={`flex shrink-0 items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition sm:gap-3 sm:py-3 sm:text-base md:w-full ${
                 active
                   ? "bg-[#c9a227]/15 text-[#f0e6c8] ring-1 ring-[#c9a227]/40"
-                  : "text-zinc-400 hover:bg-white/[0.06] hover:text-zinc-100"
+                  : "text-ink-3 hover:bg-white/[0.06] hover:text-ink-1"
               }`}
             >
               <Icon
-                className={`h-5 w-5 shrink-0 ${active ? "text-[#c9a227]" : "text-zinc-500"}`}
+                className={`h-5 w-5 shrink-0 ${active ? "text-[#c9a227]" : "text-ink-4"}`}
                 aria-hidden
               />
               {label}

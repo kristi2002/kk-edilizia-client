@@ -22,7 +22,7 @@ export default function Error({
       <h1 className="mt-4 font-serif text-3xl text-white md:text-4xl">
         Qualcosa è andato storto
       </h1>
-      <p className="mt-3 max-w-md text-zinc-500">
+      <p className="mt-3 max-w-md text-ink-4">
         Non siamo riusciti a completare l&apos;operazione. Riprova o torna alla
         home.
       </p>

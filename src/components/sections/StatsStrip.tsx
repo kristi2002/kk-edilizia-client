@@ -1,10 +1,13 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-export function StatsStrip() {
-  const t = useTranslations("StatsStrip");
+/**
+ * Server component: it only reads translations, so it does not need to ship the
+ * `StatsStrip` namespace to the client. The values here are the single source of truth —
+ * the hero reads the same keys.
+ */
+export async function StatsStrip() {
+  const t = await getTranslations("StatsStrip");
   const stats = [
     { value: t("v1"), label: t("years") },
     { value: t("v2"), label: t("projects") },
@@ -13,24 +16,28 @@ export function StatsStrip() {
   ];
 
   return (
-    <section className="border-y border-white/10 bg-[#0c0c0c] px-4 py-12 sm:px-6">
-      <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="rule-gold border-b border-white/10 bg-surface-deep px-4 py-14 sm:px-6">
+      <dl className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <FadeIn key={s.label}>
             <div className="text-center lg:text-left">
-              <p className="font-serif text-4xl text-[#c9a227] sm:text-5xl">
-                {s.value}
-              </p>
-              <p className="mt-2 text-sm font-medium uppercase tracking-wider text-zinc-500">
-                {s.label}
-              </p>
+              <dt className="sr-only">{s.label}</dt>
+              <dd>
+                <span className="block font-serif text-4xl text-[#c9a227] sm:text-5xl">
+                  {s.value}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="mx-auto mt-3 block h-px w-10 bg-[#c9a227]/35 lg:mx-0"
+                />
+                <span className="mt-3 block text-sm font-medium uppercase tracking-wider text-ink-3">
+                  {s.label}
+                </span>
+              </dd>
             </div>
           </FadeIn>
         ))}
-      </div>
-      <p className="mx-auto mt-10 max-w-3xl text-center text-xs leading-relaxed text-zinc-600">
-        {t("footnote")}
-      </p>
+      </dl>
     </section>
   );
 }

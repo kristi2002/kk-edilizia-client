@@ -9,7 +9,7 @@ export function getStaticSitemapLastmod(): string {
   if (raw && /^\d{4}-\d{2}-\d{2}$/.test(raw)) {
     return raw;
   }
-  return "2026-04-02";
+  return "2026-09-03";
 }
 
 /** Portfolio / virtual-tour URLs: prefer explicit admin `updatedAt`, else infer from `year`. */

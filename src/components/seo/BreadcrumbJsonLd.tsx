@@ -4,7 +4,8 @@ type Crumb = { name: string; path: string };
 
 function crumbUrl(base: string, path: string) {
   const normalized = base.replace(/\/$/, "");
-  return path === "/" ? `${normalized}/` : `${normalized}${path.startsWith("/") ? path : `/${path}`}`;
+  /** Bare origin for home, matching the canonical Next emits. */
+  return path === "/" ? normalized : `${normalized}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export async function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {

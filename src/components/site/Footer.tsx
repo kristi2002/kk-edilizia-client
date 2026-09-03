@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HomeSectionLink } from "@/components/site/HomeSectionLink";
-import { Phone, Mail, HardHat } from "lucide-react";
+import { Phone, Mail, MapPin, Star, HardHat } from "lucide-react";
 import { type SiteData } from "@/lib/site";
-import { isCostEstimateEnabled } from "@/lib/features";
+import { isCostEstimateEnabled, isPortfolioEnabled } from "@/lib/features";
 import { SERVICE_SILO_ROUTES, type ServiceSiloKey } from "@/lib/service-silos";
 
 type Props = { site: SiteData };
@@ -31,14 +32,23 @@ export function Footer({ site }: Props) {
     <footer className="border-t border-white/10 bg-[#050505]">
       <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="min-h-0 lg:col-span-1">
-          <p className="text-balance text-2xl font-semibold leading-tight tracking-tight text-white">
-            {site.brand}
-          </p>
-          <p className="mt-3 max-w-xs min-h-[7.5rem] text-pretty text-sm leading-relaxed text-zinc-400 sm:min-h-[6.5rem]">
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+            />
+            <p className="text-balance text-2xl font-semibold leading-tight tracking-tight text-white">
+              {site.brand}
+            </p>
+          </div>
+          <p className="mt-3 max-w-xs min-h-[7.5rem] text-pretty text-sm leading-relaxed text-ink-3 sm:min-h-[6.5rem]">
             {t("tagline", { area })}
           </p>
         </div>
-        <div className="space-y-3 text-sm text-zinc-400">
+        <div className="space-y-3 text-sm text-ink-3">
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
             {t("contacts")}
           </p>
@@ -56,16 +66,39 @@ export function Footer({ site }: Props) {
             <Mail className="h-4 w-4 shrink-0 text-[#c9a227]" />
             {site.email}
           </a>
-          <p className="text-xs leading-relaxed text-zinc-400">{t("napAreas")}</p>
+          {site.streetAddress?.trim() ? (
+            <p className="flex items-start gap-2 text-sm not-italic text-ink-3">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden />
+              <span>
+                {site.streetAddress}
+                <br />
+                {[site.postalCode, site.addressLocality, site.addressRegion]
+                  .filter(Boolean)
+                  .join(" ")}
+              </span>
+            </p>
+          ) : null}
+          {site.publicReviewUrl?.trim() ? (
+            <a
+              href={site.publicReviewUrl.trim()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition-colors hover:text-white"
+            >
+              <Star className="h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden />
+              {t("reviewsLink")}
+            </a>
+          ) : null}
+          <p className="text-xs leading-relaxed text-ink-3">{t("napAreas")}</p>
         </div>
         <div>
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
             {t("zonesTitle")}
           </p>
-          <p className="mt-2 text-xs leading-relaxed text-zinc-500">
+          <p className="mt-2 text-xs leading-relaxed text-ink-4">
             {t("zonesIntro")}
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-ink-3">
             {SERVICE_SILO_ROUTES.map((route) => {
               const linkLabel = linkLabels[route.key];
               return (
@@ -80,19 +113,19 @@ export function Footer({ site }: Props) {
           <p className="mt-6 font-medium uppercase tracking-wider text-[#c9a227]">
             {t("quick")}
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-ink-3">
             <li>
               <Link href="/impresa-edile-modena" className="hover:text-white">
                 {t("linkImpresaEdileModena")}
               </Link>
             </li>
-            {/* Portfolio / «Lavori»: hidden until photos are ready.
-            <li>
-              <Link href="/portfolio" className="hover:text-white">
-                {tNav("portfolio")}
-              </Link>
-            </li>
-            */}
+            {isPortfolioEnabled() ? (
+              <li>
+                <Link href="/portfolio" className="hover:text-white">
+                  {tNav("portfolio")}
+                </Link>
+              </li>
+            ) : null}
             <li>
               <Link href="/contatti" className="hover:text-white">
                 {tNav("contacts")}
@@ -145,11 +178,11 @@ export function Footer({ site }: Props) {
             </li>
           </ul>
         </div>
-        <div className="text-xs leading-relaxed text-zinc-400">
+        <div className="text-xs leading-relaxed text-ink-3">
           <p className="font-medium uppercase tracking-wider text-[#c9a227]">
             {t("legalData")}
           </p>
-          <p className="mt-3 text-zinc-400">{site.legalName}</p>
+          <p className="mt-3 text-ink-3">{site.legalName}</p>
           <p className="mt-2">P.IVA {site.vatId}</p>
           <p>C.F. {site.fiscalCode}</p>
           <p>REA {site.rea}</p>
@@ -165,7 +198,7 @@ export function Footer({ site }: Props) {
             {t("pec")}:{" "}
             <a
               href={`mailto:${site.pec}`}
-              className="text-zinc-400 underline hover:text-white"
+              className="text-ink-3 underline hover:text-white"
             >
               {site.pec}
             </a>
@@ -174,7 +207,7 @@ export function Footer({ site }: Props) {
       </div>
       <div className="border-t border-white/5 py-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-3 px-4 text-center sm:flex-row sm:gap-6 sm:px-6">
-          <div className="flex items-center gap-2 text-xs text-zinc-400">
+          <div className="flex items-center gap-2 text-xs text-ink-3">
             <HardHat
               className="h-4 w-4 shrink-0 text-[#c9a227]"
               aria-hidden
@@ -187,7 +220,7 @@ export function Footer({ site }: Props) {
             className="hidden h-4 w-px bg-white/10 sm:block"
             aria-hidden
           />
-          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-500">
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-4">
             {t("craftMark")}
           </p>
         </div>

@@ -83,13 +83,13 @@ export function BookingDatePicker({
       >
         <span
           className={`flex min-w-0 flex-1 items-center px-4 py-3 ${
-            selected ? "text-white" : "text-zinc-500"
+            selected ? "text-white" : "text-ink-4"
           }`}
         >
           {label}
         </span>
         <span
-          className="flex w-11 shrink-0 items-center justify-center border-l border-white/10 text-zinc-400"
+          className="flex w-11 shrink-0 items-center justify-center border-l border-white/10 text-ink-3"
           aria-hidden
         >
           <Calendar className="h-4 w-4" strokeWidth={1.75} />

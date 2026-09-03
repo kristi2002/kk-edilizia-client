@@ -19,6 +19,22 @@ export async function LocalBusinessJsonLd() {
     ? [site.publicReviewUrl.trim()]
     : undefined;
 
+  /**
+   * `address` was missing entirely, although SEO-PATTERNS.md described it. A
+   * LocalBusiness without a PostalAddress is not a candidate for local pack results.
+   * Emitted only once a street address exists so we never publish a partial address.
+   */
+  const address = site.streetAddress?.trim()
+    ? {
+        "@type": "PostalAddress",
+        streetAddress: site.streetAddress.trim(),
+        postalCode: site.postalCode?.trim() || undefined,
+        addressLocality: site.addressLocality?.trim() || "Modena",
+        addressRegion: site.addressRegion?.trim() || "MO",
+        addressCountry: site.addressCountry?.trim() || "IT",
+      }
+    : undefined;
+
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": ["HomeAndConstructionBusiness", "GeneralContractor"],
@@ -31,6 +47,7 @@ export async function LocalBusinessJsonLd() {
     url: baseUrl,
     telephone: site.phoneTel,
     email: site.email,
+    ...(address ? { address } : {}),
     areaServed: buildLocalBusinessAreaServed(),
     geo: {
       "@type": "GeoCoordinates",

@@ -9,7 +9,14 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     description:
       "Ristrutturazioni e lavori edili a Modena: preventivi chiari e cantieri organizzati.",
     icons: [
-      { src: "/logo.png", type: "image/png", sizes: "512x512", purpose: "any" },
+      { src: "/icon-192.png", type: "image/png", sizes: "192x192", purpose: "any" },
+      { src: "/icon-512.png", type: "image/png", sizes: "512x512", purpose: "any" },
+      {
+        src: "/icon-512.png",
+        type: "image/png",
+        sizes: "512x512",
+        purpose: "maskable",
+      },
     ],
     start_url: "/",
     display: "standalone",

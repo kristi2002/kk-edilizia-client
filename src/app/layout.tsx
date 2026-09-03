@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
-import {
-  GoogleTagManagerBody,
-  GoogleTagManagerHead,
-} from "@/components/seo/GoogleTagManager";
+import { Analytics } from "@/components/seo/Analytics";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
+import { CONSENT_DEFAULTS_SNIPPET } from "@/lib/consent";
 import { getSiteUrl } from "@/lib/data/site-store";
 
 const dmSans = DM_Sans({
@@ -30,15 +28,17 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(url),
     /**
-     * Tab icons: browsers still request `/favicon.ico` often; it must match `logo.png` (run `generate:favicon`, wired in `prebuild`).
-     * PWA home screen uses `manifest.ts` → `logo.png` only, which is why install looked correct while the tab did not.
+     * Icons are the small derivatives written by `npm run generate:favicon` (wired into
+     * `prebuild`). They used to point at `logo.png` — a 2048x2048, 8.1 MB master that
+     * every page request pulled down just to paint a 16px tab icon.
      */
     icons: {
       icon: [
-        { url: "/logo.png", type: "image/png", sizes: "any" },
-        { url: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
+        { url: "/favicon.ico", type: "image/x-icon", sizes: "16x16 32x32" },
+        { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+        { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
       ],
-      apple: [{ url: "/logo.png", type: "image/png" }],
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
       shortcut: "/favicon.ico",
     },
   };
@@ -57,17 +57,20 @@ export default function RootLayout({
       className={`${dmSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <head>
-        <link
-          rel="preconnect"
-          href="https://images.unsplash.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/*
+          Scroll-reveal wrappers render with an inline `opacity: 0` that only
+          framer-motion clears, so without JS everything below the fold stayed blank.
+        */}
+        <noscript>
+          <style>{`[data-fade]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
       </head>
       <body className="flex min-h-full flex-col bg-[#080808] font-sans">
-        <GoogleTagManagerBody />
-        <GoogleTagManagerHead />
-        <GoogleAnalytics />
+        {/* Consent Mode v2 defaults must be in place before any tag can fire. */}
+        <Script id="consent-defaults" strategy="beforeInteractive">
+          {CONSENT_DEFAULTS_SNIPPET}
+        </Script>
+        <Analytics />
         <LocalBusinessJsonLd />
         {children}
       </body>

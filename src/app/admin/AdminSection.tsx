@@ -36,7 +36,7 @@ export function AdminSection({
         </span>
         <div className="min-w-0 flex-1">
           <h2 className="font-serif text-2xl text-white sm:text-3xl">{title}</h2>
-          <p className="mt-2 text-base leading-relaxed text-zinc-400">{intro}</p>
+          <p className="mt-2 text-base leading-relaxed text-ink-3">{intro}</p>
         </div>
       </div>
       <div className="mt-8 space-y-6">{children}</div>

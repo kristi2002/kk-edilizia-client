@@ -137,9 +137,9 @@ export function ContactForm() {
     return (
       <div className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-6 py-10 text-center">
         <p className="font-medium text-white">{t("successTitle")}</p>
-        <p className="mt-2 text-sm text-zinc-400">{t("successBody")}</p>
+        <p className="mt-2 text-sm text-ink-3">{t("successBody")}</p>
         {waHref ? (
-          <p className="mt-4 text-sm text-zinc-500">
+          <p className="mt-4 text-sm text-ink-4">
             {t("successWhatsappIntro")}{" "}
             <a
               href={waHref}
@@ -165,7 +165,7 @@ export function ContactForm() {
   return (
     <div className="relative z-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
       <h2 className="font-serif text-xl text-white">{t("formTitle")}</h2>
-      <p className="mt-2 text-sm text-zinc-500">
+      <p className="mt-2 text-sm text-ink-4">
         {t("formPrivacyBefore")}{" "}
         <Link href="/privacy" className="text-[#c9a227] hover:underline">
           {t("formPrivacyLink")}
@@ -180,7 +180,7 @@ export function ContactForm() {
       >
         <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <div>
-          <label htmlFor="contact-name" className="text-sm text-zinc-500">
+          <label htmlFor="contact-name" className="text-sm text-ink-4">
             {t("fieldName")}
           </label>
           <input
@@ -195,7 +195,7 @@ export function ContactForm() {
           )}
         </div>
         <div>
-          <label htmlFor="contact-email" className="text-sm text-zinc-500">
+          <label htmlFor="contact-email" className="text-sm text-ink-4">
             {t("fieldEmail")}
           </label>
           <input
@@ -213,7 +213,7 @@ export function ContactForm() {
           )}
         </div>
         <div>
-          <label htmlFor="contact-phone" className="text-sm text-zinc-500">
+          <label htmlFor="contact-phone" className="text-sm text-ink-4">
             {t("fieldPhone")}
           </label>
           <input
@@ -227,7 +227,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="contact-message" className="text-sm text-zinc-500">
+          <label htmlFor="contact-message" className="text-sm text-ink-4">
             {t("fieldMessage")}
           </label>
           <textarea
@@ -248,11 +248,11 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="contact-attachments"
-            className="text-sm text-zinc-500"
+            className="text-sm text-ink-4"
           >
             {t("attachmentsLabel")}
           </label>
-          <p className="mt-1 text-xs text-zinc-600">{t("attachmentsHint")}</p>
+          <p className="mt-1 text-xs text-ink-4">{t("attachmentsHint")}</p>
           <FormAttachmentPicker
             items={attachmentItems}
             onItemsChange={(next) => {

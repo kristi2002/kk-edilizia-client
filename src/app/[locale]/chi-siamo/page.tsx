@@ -66,7 +66,7 @@ export default async function ChiSiamoPage({ params }: Props) {
             <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
               {t("title")}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-zinc-400">
+            <p className="mt-6 text-lg leading-relaxed text-ink-3">
               {t("intro", { brand: site.brand })}
             </p>
           </FadeIn>
@@ -83,7 +83,7 @@ export default async function ChiSiamoPage({ params }: Props) {
                       <h2 className="font-serif text-xl text-white">
                         {item.title}
                       </h2>
-                      <p className="mt-2 text-zinc-500">{item.text}</p>
+                      <p className="mt-2 text-ink-4">{item.text}</p>
                     </div>
                   </div>
                 </FadeIn>
@@ -96,7 +96,7 @@ export default async function ChiSiamoPage({ params }: Props) {
               <h2 className="font-serif text-lg text-white">
                 {t("certificationsTitle")}
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+              <p className="mt-2 text-sm leading-relaxed text-ink-4">
                 {t("certificationsHint", { base: site.certifications })}
               </p>
             </div>
@@ -111,16 +111,16 @@ export default async function ChiSiamoPage({ params }: Props) {
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
               {t("galleryTitle")}
             </h2>
-            <p className="mt-3 max-w-2xl text-sm text-zinc-500">
+            <p className="mt-3 max-w-2xl text-sm text-ink-4">
               {t.rich("galleryIntro", {
                 code: (chunks) => (
-                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-zinc-300">
+                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-ink-2">
                     {chunks}
                   </code>
                 ),
               })}
             </p>
-            <p className="mt-2 text-xs text-zinc-600">{t("galleryFooterNote")}</p>
+            <p className="mt-2 text-xs text-ink-4">{t("galleryFooterNote")}</p>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               <figure className="overflow-hidden rounded-2xl border border-white/10">
                 <div className="relative aspect-[4/3]">
@@ -132,7 +132,7 @@ export default async function ChiSiamoPage({ params }: Props) {
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
-                <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500">
+                <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-ink-4">
                   {t("fig1Caption")}
                 </figcaption>
               </figure>
@@ -146,7 +146,7 @@ export default async function ChiSiamoPage({ params }: Props) {
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
-                <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-zinc-500">
+                <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-ink-4">
                   {t("fig2Caption")}
                 </figcaption>
               </figure>

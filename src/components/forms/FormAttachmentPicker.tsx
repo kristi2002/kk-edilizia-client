@@ -95,14 +95,14 @@ export function FormAttachmentPicker({
               className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/25 px-2 py-1.5"
             >
               <span
-                className="min-w-0 flex-1 truncate text-sm text-zinc-300"
+                className="min-w-0 flex-1 truncate text-sm text-ink-2"
                 title={item.file.name}
               >
                 {item.file.name}
               </span>
               <button
                 type="button"
-                className="inline-flex shrink-0 cursor-pointer rounded-md p-1 text-zinc-500 transition hover:bg-white/10 hover:text-red-400"
+                className="inline-flex shrink-0 cursor-pointer rounded-md p-1 text-ink-4 transition hover:bg-white/10 hover:text-red-400"
                 aria-label={removeAriaLabel(item.file.name)}
                 onClick={() => remove(item.id)}
               >

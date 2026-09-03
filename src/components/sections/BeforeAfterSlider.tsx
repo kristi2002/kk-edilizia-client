@@ -44,7 +44,7 @@ export function BeforeAfterSlider({
           style={{ aspectRatio: "16/10", width: "100%" }}
         />
       </div>
-      <div className="flex justify-between text-xs uppercase tracking-wider text-zinc-500">
+      <div className="flex justify-between text-xs uppercase tracking-wider text-ink-4">
         <span>{beforeLabel}</span>
         <span>{afterLabel}</span>
       </div>

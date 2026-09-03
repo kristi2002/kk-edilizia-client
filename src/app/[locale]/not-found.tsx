@@ -18,7 +18,7 @@ export default async function NotFound() {
         404
       </p>
       <h1 className="mt-4 font-serif text-4xl text-white">{t("title")}</h1>
-      <p className="mt-3 max-w-md text-zinc-500">{t("text")}</p>
+      <p className="mt-3 max-w-md text-ink-4">{t("text")}</p>
       <Link
         href="/"
         className="mt-10 inline-flex rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10"

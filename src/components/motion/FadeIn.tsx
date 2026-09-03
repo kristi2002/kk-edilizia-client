@@ -21,6 +21,9 @@ export function FadeIn({
 
   return (
     <motion.div
+      /* Targeted by the <noscript> override in the root layout: the SSR markup carries
+         an inline `opacity: 0` that only framer-motion clears. */
+      data-fade=""
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}

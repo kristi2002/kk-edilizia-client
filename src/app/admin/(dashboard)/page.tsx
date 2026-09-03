@@ -32,11 +32,11 @@ export default async function AdminDashboardPage() {
       <div className="flex flex-col gap-6 border-b border-white/10 pb-8 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Panoramica</h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-ink-3">
             Usa il menu a sinistra per aprire una sezione. Salva spesso: ogni area ha il
             proprio pulsante di salvataggio.
           </p>
-          <p className="mt-3 text-sm text-zinc-500">
+          <p className="mt-3 text-sm text-ink-4">
             Le modifiche compaiono sul sito dopo il salvataggio (a volte serve aggiornare con
             F5).
           </p>
@@ -61,7 +61,7 @@ export default async function AdminDashboardPage() {
 
       <section className="rounded-2xl border-2 border-white/10 bg-[#121212] p-6 sm:p-8">
         <h2 className="font-serif text-xl text-white sm:text-2xl">Anteprima rapida</h2>
-        <p className="mt-2 text-base text-zinc-500">
+        <p className="mt-2 text-base text-ink-4">
           Dati attualmente salvati (nome e email):
         </p>
         <dl className="mt-6 grid gap-4 text-base sm:grid-cols-2">
@@ -74,7 +74,7 @@ export default async function AdminDashboardPage() {
             <dd className="mt-1 text-lg text-white break-all">{site.email}</dd>
           </div>
         </dl>
-        <p className="mt-6 text-sm text-zinc-500">
+        <p className="mt-6 text-sm text-ink-4">
           FAQ in progetto: {faqByLocale.it.length} voci IT, {faqByLocale.en.length} EN — vedi
           sezione &quot;Info &amp; FAQ&quot;.
         </p>

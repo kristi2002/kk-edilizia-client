@@ -28,7 +28,7 @@ export function FaqSection() {
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">
             {t("title")}
           </h2>
-          <p className="mt-4 text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <ul className="mt-12 space-y-3">
@@ -58,7 +58,7 @@ export function FaqSection() {
                       transition={{ duration: 0.25 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-4 pt-1 text-sm leading-relaxed text-zinc-400">
+                      <p className="px-5 pb-4 pt-1 text-sm leading-relaxed text-ink-3">
                         {item.a}
                       </p>
                     </motion.div>

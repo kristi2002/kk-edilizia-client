@@ -30,17 +30,17 @@ export default async function NoteLegaliPage({ params }: Props) {
         <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
           Note legali
         </h1>
-        <p className="mt-4 text-sm text-zinc-500">
+        <p className="mt-4 text-sm text-ink-4">
           Testo informativo — far verificare da un professionista prima della
           pubblicazione definitiva.
         </p>
 
-        <div className="mt-12 space-y-10 text-sm leading-relaxed text-zinc-400">
+        <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink-3">
           <section>
             <h2 className="font-serif text-xl text-white">Titolarità del sito</h2>
             <p className="mt-3">
               Il presente sito web è gestito da{" "}
-              <strong className="text-zinc-300">{site.legalName}</strong>, P.IVA{" "}
+              <strong className="text-ink-2">{site.legalName}</strong>, P.IVA{" "}
               {site.vatId}, REA {site.rea}.
             </p>
           </section>
@@ -89,7 +89,7 @@ export default async function NoteLegaliPage({ params }: Props) {
           </section>
         </div>
 
-        <p className="mt-16 text-center text-sm text-zinc-600">
+        <p className="mt-16 text-center text-sm text-ink-4">
           <Link href="/" className="text-[#c9a227] hover:underline">
             Torna alla home
           </Link>

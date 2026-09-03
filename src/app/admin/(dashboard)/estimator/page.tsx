@@ -15,7 +15,7 @@ export default async function AdminEstimatorPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Stima costi</h1>
-          <p className="mt-2 text-base text-zinc-400">
+          <p className="mt-2 text-base text-ink-3">
             Fasce di prezzo al m² e testi in italiano e inglese. Categorie:{" "}
             {costIt.map((c) => c.id).join(", ")}.
           </p>

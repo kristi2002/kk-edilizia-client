@@ -138,7 +138,7 @@ export function PreventivoForm({ initialOptions }: Props) {
         <h2 className="mt-6 font-serif text-2xl text-white">
           Richiesta inviata
         </h2>
-        <p className="mt-3 text-zinc-400">
+        <p className="mt-3 text-ink-3">
           Ti contatteremo entro 1–2 giorni lavorativi con i prossimi passi.
         </p>
       </motion.div>
@@ -188,7 +188,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                     className={`flex cursor-pointer items-center rounded-xl border px-4 py-3 text-sm transition ${
                       workType === w.value
                         ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                        : "border-white/15 text-zinc-400 hover:border-white/30"
+                        : "border-white/15 text-ink-3 hover:border-white/30"
                     }`}
                   >
                     <input
@@ -207,13 +207,13 @@ export function PreventivoForm({ initialOptions }: Props) {
                 </p>
               )}
               <div>
-                <label className="text-sm text-zinc-500">
+                <label className="text-sm text-ink-4">
                   Metri quadri (opzionale)
                 </label>
                 <input
                   type="text"
                   placeholder="es. 85"
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                   {...register("sqm")}
                 />
               </div>
@@ -236,7 +236,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                 Budget e tempistiche
               </h2>
               <div>
-                <p className="text-sm text-zinc-500">Fascia di investimento</p>
+                <p className="text-sm text-ink-4">Fascia di investimento</p>
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   {budgets.map((b) => (
                     <label
@@ -244,7 +244,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                       className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
                         budget === b.value
                           ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                          : "border-white/15 text-zinc-400 hover:border-white/30"
+                          : "border-white/15 text-ink-3 hover:border-white/30"
                       }`}
                     >
                       <input
@@ -264,7 +264,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                 )}
               </div>
               <div>
-                <p className="text-sm text-zinc-500">Quando vorresti iniziare?</p>
+                <p className="text-sm text-ink-4">Quando vorresti iniziare?</p>
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   {timelines.map((t) => (
                     <label
@@ -272,7 +272,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                       className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
                         timeline === t.value
                           ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                          : "border-white/15 text-zinc-400 hover:border-white/30"
+                          : "border-white/15 text-ink-3 hover:border-white/30"
                       }`}
                     >
                       <input
@@ -309,7 +309,7 @@ export function PreventivoForm({ initialOptions }: Props) {
               <h2 className="font-serif text-2xl text-white">I tuoi contatti</h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
-                  <label htmlFor="preventivo-name" className="text-sm text-zinc-500">
+                  <label htmlFor="preventivo-name" className="text-sm text-ink-4">
                     Nome e cognome
                   </label>
                   <input
@@ -325,7 +325,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                   )}
                 </div>
                 <div>
-                  <label htmlFor="preventivo-email" className="text-sm text-zinc-500">
+                  <label htmlFor="preventivo-email" className="text-sm text-ink-4">
                     Email
                   </label>
                   <input
@@ -344,7 +344,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                   )}
                 </div>
                 <div>
-                  <label htmlFor="preventivo-phone" className="text-sm text-zinc-500">
+                  <label htmlFor="preventivo-phone" className="text-sm text-ink-4">
                     Telefono
                   </label>
                   <input
@@ -362,13 +362,13 @@ export function PreventivoForm({ initialOptions }: Props) {
                   )}
                 </div>
                 <div className="sm:col-span-2">
-                  <label htmlFor="preventivo-notes" className="text-sm text-zinc-500">
+                  <label htmlFor="preventivo-notes" className="text-sm text-ink-4">
                     Note aggiuntive (opzionale)
                   </label>
                   <textarea
                     id="preventivo-notes"
                     rows={4}
-                    className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                     placeholder="Esigenze particolari, vincoli, note utili…"
                     {...register("notes")}
                     autoComplete="off"

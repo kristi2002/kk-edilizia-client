@@ -8,7 +8,7 @@ import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { getSiteUrl } from "@/lib/data/site-store";
 import { getProjects } from "@/lib/data/projects-store";
-import { isCostEstimateEnabled } from "@/lib/features";
+import { isCostEstimateEnabled, isPortfolioEnabled } from "@/lib/features";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 import {
   getStaticSitemapLastmod,
@@ -20,7 +20,7 @@ function staticSegments(): string[] {
   return [
     "",
     ...SERVICE_SILO_ROUTES.map((r) => r.path),
-    "/portfolio",
+    ...(isPortfolioEnabled() ? ["/portfolio"] : []),
     ...(isCostEstimateEnabled() ? ["/stima-costi"] : []),
     "/chi-siamo",
     "/contatti",
@@ -34,7 +34,8 @@ function staticSegments(): string[] {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (await getSiteUrl()).replace(/\/$/, "");
-  const projects = await getProjects();
+  /** With the portfolio flag off these pages are noindex, so they stay out of the sitemap. */
+  const projects = isPortfolioEnabled() ? await getProjects() : [];
   const staticLastmod = getStaticSitemapLastmod();
   const projectDates = projects.map((p) => lastmodFromProject(p));
   const latestProject = projectDates.length ? maxIsoDate(projectDates) : staticLastmod;
@@ -46,7 +47,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of routing.locales) {
     for (const seg of staticSegments()) {
       const path = localizedPath(locale, seg === "" ? "/" : seg);
-      const url = path === "/" ? `${base}/` : `${base}${path}`;
+      /** Bare origin: Next normalises the root canonical without a trailing slash. */
+      const url = path === "/" ? base : `${base}${path}`;
       const lastModified =
         seg === ""
           ? homeAndPortfolioIndexMod

@@ -38,7 +38,7 @@ export default async function ContattiPage({ params }: PageProps) {
             <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
               {t("title")}
             </h1>
-            <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
+            <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
           </FadeIn>
 
           <ul className="mt-12 space-y-6">
@@ -47,7 +47,7 @@ export default async function ContattiPage({ params }: PageProps) {
                 <div className="flex gap-4">
                   <Phone className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">{t("phone")}</p>
+                    <p className="text-sm text-ink-4">{t("phone")}</p>
                     <a
                       href={`tel:${site.phoneTel}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -63,7 +63,7 @@ export default async function ContattiPage({ params }: PageProps) {
                 <div className="flex gap-4">
                   <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">{t("email")}</p>
+                    <p className="text-sm text-ink-4">{t("email")}</p>
                     <a
                       href={`mailto:${site.email}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -79,7 +79,7 @@ export default async function ContattiPage({ params }: PageProps) {
                 <div className="flex gap-4">
                   <Mail className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">{t("pec")}</p>
+                    <p className="text-sm text-ink-4">{t("pec")}</p>
                     <a
                       href={`mailto:${site.pec}`}
                       className="text-lg font-medium text-white hover:text-[#c9a227]"
@@ -95,7 +95,7 @@ export default async function ContattiPage({ params }: PageProps) {
                 <div className="flex gap-4">
                   <Clock className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" />
                   <div>
-                    <p className="text-sm text-zinc-500">{t("hours")}</p>
+                    <p className="text-sm text-ink-4">{t("hours")}</p>
                     <p className="text-white">{t("hoursValue")}</p>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default async function ContattiPage({ params }: PageProps) {
 
           {site.publicReviewUrl ? (
             <FadeIn delay={0.22}>
-              <p className="mt-10 text-sm text-zinc-500">
+              <p className="mt-10 text-sm text-ink-4">
                 {t("reviewsPrefix")}{" "}
                 <a
                   href={site.publicReviewUrl}

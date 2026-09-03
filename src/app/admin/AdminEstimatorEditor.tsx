@@ -173,7 +173,7 @@ export function AdminEstimatorEditor({ initialRows, redisOk }: Props) {
       <div className="overflow-x-auto rounded-xl border border-white/10">
         <table className="w-full min-w-[960px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-white/10 bg-white/[0.03] text-zinc-400">
+            <tr className="border-b border-white/10 bg-white/[0.03] text-ink-3">
               <th className="px-3 py-3 pr-2 font-semibold">Codice</th>
               <th className="py-3 pr-2 font-semibold">Min €/m²</th>
               <th className="py-3 pr-2 font-semibold">Max €/m²</th>

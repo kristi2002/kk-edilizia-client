@@ -9,7 +9,7 @@ export default function Loading() {
         className="h-10 w-10 animate-spin rounded-full border-2 border-[#c9a227]/30 border-t-[#c9a227]"
         role="status"
       />
-      <p className="text-sm text-zinc-500">Caricamento…</p>
+      <p className="text-sm text-ink-4">Caricamento…</p>
     </div>
   );
 }

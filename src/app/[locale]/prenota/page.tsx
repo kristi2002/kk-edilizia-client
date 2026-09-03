@@ -34,7 +34,7 @@ export default async function PrenotaPage({ params }: Props) {
           <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
+          <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
         </FadeIn>
 
         <FadeIn delay={0.08}>
@@ -44,7 +44,7 @@ export default async function PrenotaPage({ params }: Props) {
         </FadeIn>
 
         <FadeIn delay={0.12}>
-          <p className="mt-8 text-center text-sm text-zinc-500">
+          <p className="mt-8 text-center text-sm text-ink-4">
             {t("fallbackCta")}{" "}
             <Link
               href="/contatti"

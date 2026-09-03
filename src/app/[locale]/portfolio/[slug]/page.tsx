@@ -13,6 +13,7 @@ import { ProjectBeforeAfterBlock } from "@/components/sections/ProjectBeforeAfte
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/lib/i18n-path";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { isPortfolioEnabled } from "@/lib/features";
 import { shouldOfferModenaServiceLinks } from "@/lib/constants/service-area";
 import { SERVICE_SILO_ROUTES } from "@/lib/service-silos";
 import { projectHasVirtualTour } from "@/lib/virtual-tour/project-virtual-tour";
@@ -36,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = getProjectLocalized(project, locale, projectTypes);
   const path = `/portfolio/${project.slug}`;
   return withLocaleAlternates(locale, path, {
+    ...(isPortfolioEnabled() ? {} : { robots: { index: false, follow: false } }),
     title: loc.title,
     description: loc.excerpt,
     openGraph: { images: [{ url: project.coverImage }] },
@@ -90,7 +92,7 @@ export default async function ProjectPage({ params }: Props) {
             <FadeIn>
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+                className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-white"
               >
                 <ArrowLeft className="h-4 w-4" />
                 {t("back")}
@@ -111,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
                 {tPort("beforeAfter")}
               </p>
-              <p className="mt-2 text-sm text-zinc-500">
+              <p className="mt-2 text-sm text-ink-4">
                 {tPort("beforeAfterHint")}
               </p>
               <div className="mt-6">
@@ -136,13 +138,13 @@ export default async function ProjectPage({ params }: Props) {
           </FadeIn>
 
           <FadeIn>
-            <p className="text-lg leading-relaxed text-zinc-300">
+            <p className="text-lg leading-relaxed text-ink-2">
               {loc.description}
             </p>
           </FadeIn>
 
           <FadeIn>
-            <div className="mt-10 text-sm leading-relaxed text-zinc-400">
+            <div className="mt-10 text-sm leading-relaxed text-ink-3">
               <p>{t("crossSellSiloIntro")}</p>
               <p className="mt-2">
                 {SERVICE_SILO_ROUTES.filter((r) =>
@@ -168,7 +170,7 @@ export default async function ProjectPage({ params }: Props) {
                 })}
               </p>
               {shouldOfferModenaServiceLinks(loc.location) ? (
-                <p className="mt-4 text-zinc-500">
+                <p className="mt-4 text-ink-4">
                   {t("crossSellModena")}{" "}
                   <Link
                     href="/ristrutturazione-bagno"
@@ -179,7 +181,7 @@ export default async function ProjectPage({ params }: Props) {
                   .
                 </p>
               ) : null}
-              <p className="mt-4 text-zinc-500">
+              <p className="mt-4 text-ink-4">
                 {t("crossSellImpresaPrefix")}
                 <Link
                   href="/impresa-edile-modena"
@@ -199,7 +201,7 @@ export default async function ProjectPage({ params }: Props) {
                   <p className="text-sm font-medium text-white">
                     {t("virtualTourLabel")}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-500">
+                  <p className="mt-1 text-sm text-ink-4">
                     {t("virtualTourCardHint")}
                   </p>
                 </div>
@@ -237,7 +239,7 @@ export default async function ProjectPage({ params }: Props) {
 
           <FadeIn>
             <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center">
-              <p className="text-zinc-400">{t("similar")}</p>
+              <p className="text-ink-3">{t("similar")}</p>
               <Link
                 href="/preventivo"
                 className="mt-6 inline-flex rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"

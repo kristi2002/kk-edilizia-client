@@ -48,8 +48,8 @@ export function CostEstimator({ categories }: Props) {
             <h2 className="mt-4 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
               {t("title")}
             </h2>
-            <p className="mt-4 text-lg text-zinc-400">{t("intro")}</p>
-            <ul className="mt-8 space-y-3 text-sm text-zinc-500">
+            <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
+            <ul className="mt-8 space-y-3 text-sm text-ink-4">
               <li className="flex gap-2">
                 <span className="text-[#c9a227]">—</span>
                 {t("li1")}
@@ -63,7 +63,7 @@ export function CostEstimator({ categories }: Props) {
 
           <FadeIn delay={0.08}>
             <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-              <label className="block text-sm font-medium text-zinc-400">
+              <label className="block text-sm font-medium text-ink-3">
                 {t("sqm")}
               </label>
               <input
@@ -71,11 +71,11 @@ export function CostEstimator({ categories }: Props) {
                 inputMode="decimal"
                 value={sqm}
                 onChange={(e) => setSqm(e.target.value)}
-                className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-zinc-600 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
                 placeholder={t("sqmPh")}
               />
 
-              <p className="mt-6 text-sm font-medium text-zinc-400">
+              <p className="mt-6 text-sm font-medium text-ink-3">
                 {t("typeLabel")}
               </p>
               <div className="mt-3 space-y-2">
@@ -85,7 +85,7 @@ export function CostEstimator({ categories }: Props) {
                     className={`flex cursor-pointer flex-col rounded-xl border px-4 py-3 text-sm transition ${
                       categoryId === c.id
                         ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                        : "border-white/15 text-zinc-400 hover:border-white/25"
+                        : "border-white/15 text-ink-3 hover:border-white/25"
                     }`}
                   >
                     <span className="flex items-start gap-3">
@@ -99,7 +99,7 @@ export function CostEstimator({ categories }: Props) {
                       />
                       <span>
                         <span className="font-medium text-white">{c.label}</span>
-                        <span className="mt-0.5 block text-xs text-zinc-500">
+                        <span className="mt-0.5 block text-xs text-ink-4">
                           {c.description}
                         </span>
                       </span>
@@ -119,12 +119,12 @@ export function CostEstimator({ categories }: Props) {
                     </p>
                   </>
                 ) : (
-                  <p className="text-sm text-zinc-500">{t("rangeEmpty")}</p>
+                  <p className="text-sm text-ink-4">{t("rangeEmpty")}</p>
                 )}
               </div>
 
-              <div className="mt-4 flex gap-2 text-xs text-zinc-500">
-                <Info className="h-4 w-4 shrink-0 text-zinc-600" />
+              <div className="mt-4 flex gap-2 text-xs text-ink-4">
+                <Info className="h-4 w-4 shrink-0 text-ink-4" />
                 <span>{t("disclaimer")}</span>
               </div>
 

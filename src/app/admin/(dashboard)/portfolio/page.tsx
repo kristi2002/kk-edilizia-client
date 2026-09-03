@@ -19,7 +19,7 @@ export default async function AdminPortfolioPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl text-white sm:text-3xl">Portfolio</h1>
-          <p className="mt-2 text-base text-zinc-400">
+          <p className="mt-2 text-base text-ink-3">
             Progetti attivi: {projects.length}. Tipi di categoria: menu{" "}
             <span className="text-[#c9a227]">Tipi di progetto</span>. Qui: foto, testi e tour 360°.
           </p>
