@@ -18,14 +18,14 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
   const locale = useLocale();
 
   return (
-    <section className="bg-[#080808] px-4 py-24 sm:px-6">
+    <section className="bg-page px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
               {t("label")}
             </p>
-            <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
+            <h2 className="mt-3 font-serif text-3xl text-ink-1 sm:text-4xl md:text-5xl">
               {t("title")}
             </h2>
             <p className="mt-4 max-w-lg text-ink-3">{t("intro")}</p>
@@ -34,7 +34,7 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
           <FadeIn delay={0.1}>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#c9a227] hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent-ink hover:underline"
             >
               {t("cta")}
               <ArrowUpRight className="h-4 w-4" />
@@ -68,12 +68,12 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
                       className="object-cover transition duration-700 group-hover:scale-105"
                       sizes="(max-width: 767px) 100vw, 400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-inverse/90 via-black/20 to-transparent opacity-90 transition group-hover:opacity-100" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <p className="text-xs font-medium uppercase tracking-wider text-[#c9a227]">
+                      <p className="text-xs font-medium uppercase tracking-wider text-accent-ink">
                         {loc.category} · {p.year}
                       </p>
-                      <h3 className="mt-2 font-serif text-xl text-white">
+                      <h3 className="mt-2 font-serif text-xl text-ink-1">
                         {loc.title}
                       </h3>
                       <p className="mt-2 line-clamp-2 text-sm text-ink-3">

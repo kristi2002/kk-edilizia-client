@@ -65,7 +65,7 @@ export default function RootLayout({
           <style>{`[data-fade]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="flex min-h-full flex-col bg-[#080808] font-sans">
+      <body className="flex min-h-full flex-col bg-page font-sans">
         {/* Consent Mode v2 defaults must be in place before any tag can fire. */}
         <Script id="consent-defaults" strategy="beforeInteractive">
           {CONSENT_DEFAULTS_SNIPPET}

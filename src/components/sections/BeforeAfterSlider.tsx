@@ -25,7 +25,7 @@ export function BeforeAfterSlider({
 }: Props) {
   return (
     <div className="space-y-3">
-      <div className="relative overflow-hidden rounded-2xl border border-white/10">
+      <div className="relative overflow-hidden rounded-2xl border border-line">
         <ReactCompareSlider
           itemOne={
             <ReactCompareSliderImage

@@ -16,19 +16,19 @@ export async function StatsStrip() {
   ];
 
   return (
-    <section className="rule-gold border-b border-white/10 bg-surface-deep px-4 py-14 sm:px-6">
+    <section className="rule-gold border-b border-line bg-sunken px-4 py-14 sm:px-6">
       <dl className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <FadeIn key={s.label}>
             <div className="text-center lg:text-left">
               <dt className="sr-only">{s.label}</dt>
               <dd>
-                <span className="block font-serif text-4xl text-[#c9a227] sm:text-5xl">
+                <span className="block font-serif text-4xl text-accent-ink sm:text-5xl">
                   {s.value}
                 </span>
                 <span
                   aria-hidden="true"
-                  className="mx-auto mt-3 block h-px w-10 bg-[#c9a227]/35 lg:mx-0"
+                  className="mx-auto mt-3 block h-px w-10 bg-accent/35 lg:mx-0"
                 />
                 <span className="mt-3 block text-sm font-medium uppercase tracking-wider text-ink-3">
                   {s.label}

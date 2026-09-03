@@ -135,8 +135,8 @@ export function ContactForm() {
         t("whatsappPrefill"),
       )}`;
     return (
-      <div className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-6 py-10 text-center">
-        <p className="font-medium text-white">{t("successTitle")}</p>
+      <div className="rounded-3xl border border-accent/30 bg-accent/10 px-6 py-10 text-center">
+        <p className="font-medium text-ink-1">{t("successTitle")}</p>
         <p className="mt-2 text-sm text-ink-3">{t("successBody")}</p>
         {waHref ? (
           <p className="mt-4 text-sm text-ink-4">
@@ -154,7 +154,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setDone(false)}
-          className="mt-6 text-sm font-medium text-[#c9a227] hover:underline"
+          className="mt-6 text-sm font-medium text-accent-ink hover:underline"
         >
           {t("sendAnother")}
         </button>
@@ -163,11 +163,11 @@ export function ContactForm() {
   }
 
   return (
-    <div className="relative z-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-      <h2 className="font-serif text-xl text-white">{t("formTitle")}</h2>
+    <div className="relative z-10 rounded-3xl border border-line bg-raised p-6 sm:p-8">
+      <h2 className="font-serif text-xl text-ink-1">{t("formTitle")}</h2>
       <p className="mt-2 text-sm text-ink-4">
         {t("formPrivacyBefore")}{" "}
-        <Link href="/privacy" className="text-[#c9a227] hover:underline">
+        <Link href="/privacy" className="text-accent-ink hover:underline">
           {t("formPrivacyLink")}
         </Link>
         .
@@ -185,7 +185,7 @@ export function ContactForm() {
           </label>
           <input
             id="contact-name"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             suppressHydrationWarning
             {...register("name")}
             autoComplete="name"
@@ -203,7 +203,7 @@ export function ContactForm() {
             type="email"
             inputMode="email"
             autoCapitalize="none"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             suppressHydrationWarning
             {...register("email")}
             autoComplete="email"
@@ -220,7 +220,7 @@ export function ContactForm() {
             id="contact-phone"
             type="tel"
             inputMode="tel"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             suppressHydrationWarning
             {...register("phone")}
             autoComplete="tel"
@@ -233,7 +233,7 @@ export function ContactForm() {
           <textarea
             id="contact-message"
             rows={5}
-            className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             placeholder={t("messagePlaceholder")}
             suppressHydrationWarning
             {...register("message")}
@@ -280,7 +280,7 @@ export function ContactForm() {
           type="submit"
           disabled={isSubmitting}
           suppressHydrationWarning
-          className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c9a227] py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? (
             <Loader2 className="h-4 w-4 animate-spin" />

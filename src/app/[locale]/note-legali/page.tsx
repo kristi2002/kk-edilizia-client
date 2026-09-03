@@ -22,12 +22,12 @@ export default async function NoteLegaliPage({ params }: Props) {
   setRequestLocale(locale);
   const site = await getSite();
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
       <article className="mx-auto max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
           Legal
         </p>
-        <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+        <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
           Note legali
         </h1>
         <p className="mt-4 text-sm text-ink-4">
@@ -37,7 +37,7 @@ export default async function NoteLegaliPage({ params }: Props) {
 
         <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink-3">
           <section>
-            <h2 className="font-serif text-xl text-white">Titolarità del sito</h2>
+            <h2 className="font-serif text-xl text-ink-1">Titolarità del sito</h2>
             <p className="mt-3">
               Il presente sito web è gestito da{" "}
               <strong className="text-ink-2">{site.legalName}</strong>, P.IVA{" "}
@@ -46,7 +46,7 @@ export default async function NoteLegaliPage({ params }: Props) {
           </section>
 
           <section>
-            <h2 className="font-serif text-xl text-white">
+            <h2 className="font-serif text-xl text-ink-1">
               Proprietà intellettuale
             </h2>
             <p className="mt-3">
@@ -58,7 +58,7 @@ export default async function NoteLegaliPage({ params }: Props) {
           </section>
 
           <section>
-            <h2 className="font-serif text-xl text-white">
+            <h2 className="font-serif text-xl text-ink-1">
               Limitazione di responsabilità
             </h2>
             <p className="mt-3">
@@ -71,7 +71,7 @@ export default async function NoteLegaliPage({ params }: Props) {
           </section>
 
           <section>
-            <h2 className="font-serif text-xl text-white">Link esterni</h2>
+            <h2 className="font-serif text-xl text-ink-1">Link esterni</h2>
             <p className="mt-3">
               Eventuali collegamenti a siti terzi sono forniti per comodità;
               {site.legalName} non controlla i contenuti esterni e declina ogni
@@ -80,7 +80,7 @@ export default async function NoteLegaliPage({ params }: Props) {
           </section>
 
           <section>
-            <h2 className="font-serif text-xl text-white">Legge applicabile</h2>
+            <h2 className="font-serif text-xl text-ink-1">Legge applicabile</h2>
             <p className="mt-3">
               Per quanto non diversamente previsto, si applica la legge italiana.
               Foro competente, ove previsto, quello del luogo di residenza o sede
@@ -90,7 +90,7 @@ export default async function NoteLegaliPage({ params }: Props) {
         </div>
 
         <p className="mt-16 text-center text-sm text-ink-4">
-          <Link href="/" className="text-[#c9a227] hover:underline">
+          <Link href="/" className="text-accent-ink hover:underline">
             Torna alla home
           </Link>
         </p>

@@ -131,12 +131,12 @@ export function VirtualTourView({ config }: VirtualTourViewProps) {
       />
       <div className="vt-shell">
         {isLoading && !error && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#0a0a0a] text-sm text-ink-4">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-page text-sm text-ink-4">
             {t("viewerLoading")}
           </div>
         )}
         {error && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#0a0a0a] p-6 text-center">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-page p-6 text-center">
             <p className="text-sm text-ink-2">{t("viewerError")}</p>
             <p className="max-w-md text-xs text-ink-4">
               {error === "images"
@@ -145,7 +145,7 @@ export function VirtualTourView({ config }: VirtualTourViewProps) {
             </p>
             <button
               type="button"
-              className="rounded-full border border-white/20 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+              className="rounded-full border border-line-2 px-4 py-2 text-sm text-ink-1 transition hover:bg-raised-2"
               onClick={() => {
                 setError(null);
                 setRetryKey((k) => k + 1);

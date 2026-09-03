@@ -29,7 +29,7 @@ export function Footer({ site }: Props) {
   };
 
   return (
-    <footer className="border-t border-white/10 bg-[#050505]">
+    <footer className="on-dark border-t border-line bg-inverse">
       <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="min-h-0 lg:col-span-1">
           <div className="flex items-center gap-2.5">
@@ -40,7 +40,7 @@ export function Footer({ site }: Props) {
               height={36}
               className="h-9 w-9 object-contain"
             />
-            <p className="text-balance text-2xl font-semibold leading-tight tracking-tight text-white">
+            <p className="text-balance text-2xl font-semibold leading-tight tracking-tight text-ink-1">
               {site.brand}
             </p>
           </div>
@@ -49,26 +49,26 @@ export function Footer({ site }: Props) {
           </p>
         </div>
         <div className="space-y-3 text-sm text-ink-3">
-          <p className="font-medium uppercase tracking-wider text-[#c9a227]">
+          <p className="font-medium uppercase tracking-wider text-accent-ink">
             {t("contacts")}
           </p>
           <a
             href={`tel:${site.phoneTel}`}
-            className="flex items-center gap-2 transition-colors hover:text-white"
+            className="flex items-center gap-2 transition-colors hover:text-ink-1"
           >
-            <Phone className="h-4 w-4 shrink-0 text-[#c9a227]" />
+            <Phone className="h-4 w-4 shrink-0 text-accent-ink" />
             {site.phoneDisplay}
           </a>
           <a
             href={`mailto:${site.email}`}
-            className="flex items-center gap-2 transition-colors hover:text-white"
+            className="flex items-center gap-2 transition-colors hover:text-ink-1"
           >
-            <Mail className="h-4 w-4 shrink-0 text-[#c9a227]" />
+            <Mail className="h-4 w-4 shrink-0 text-accent-ink" />
             {site.email}
           </a>
           {site.streetAddress?.trim() ? (
             <p className="flex items-start gap-2 text-sm not-italic text-ink-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink" aria-hidden />
               <span>
                 {site.streetAddress}
                 <br />
@@ -83,16 +83,16 @@ export function Footer({ site }: Props) {
               href={site.publicReviewUrl.trim()}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 transition-colors hover:text-white"
+              className="flex items-center gap-2 transition-colors hover:text-ink-1"
             >
-              <Star className="h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden />
+              <Star className="h-4 w-4 shrink-0 text-accent-ink" aria-hidden />
               {t("reviewsLink")}
             </a>
           ) : null}
           <p className="text-xs leading-relaxed text-ink-3">{t("napAreas")}</p>
         </div>
         <div>
-          <p className="font-medium uppercase tracking-wider text-[#c9a227]">
+          <p className="font-medium uppercase tracking-wider text-accent-ink">
             {t("zonesTitle")}
           </p>
           <p className="mt-2 text-xs leading-relaxed text-ink-4">
@@ -103,83 +103,83 @@ export function Footer({ site }: Props) {
               const linkLabel = linkLabels[route.key];
               return (
                 <li key={route.path}>
-                  <Link href={route.path} className="hover:text-white">
+                  <Link href={route.path} className="hover:text-ink-1">
                     {linkLabel}
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <p className="mt-6 font-medium uppercase tracking-wider text-[#c9a227]">
+          <p className="mt-6 font-medium uppercase tracking-wider text-accent-ink">
             {t("quick")}
           </p>
           <ul className="mt-3 space-y-2 text-sm text-ink-3">
             <li>
-              <Link href="/impresa-edile-modena" className="hover:text-white">
+              <Link href="/impresa-edile-modena" className="hover:text-ink-1">
                 {t("linkImpresaEdileModena")}
               </Link>
             </li>
             {isPortfolioEnabled() ? (
               <li>
-                <Link href="/portfolio" className="hover:text-white">
+                <Link href="/portfolio" className="hover:text-ink-1">
                   {tNav("portfolio")}
                 </Link>
               </li>
             ) : null}
             <li>
-              <Link href="/contatti" className="hover:text-white">
+              <Link href="/contatti" className="hover:text-ink-1">
                 {tNav("contacts")}
               </Link>
             </li>
             <li>
-              <Link href="/prenota" className="hover:text-white">
+              <Link href="/prenota" className="hover:text-ink-1">
                 {tNav("booking")}
               </Link>
             </li>
             <li>
-              <Link href="/preventivo" className="hover:text-white">
+              <Link href="/preventivo" className="hover:text-ink-1">
                 {tNav("quote")}
               </Link>
             </li>
             {isCostEstimateEnabled() ? (
               <li>
-                <Link href="/stima-costi" className="hover:text-white">
+                <Link href="/stima-costi" className="hover:text-ink-1">
                   {tNav("estimate")}
                 </Link>
               </li>
             ) : null}
             <li>
-              <HomeSectionLink sectionId="faq" className="hover:text-white">
+              <HomeSectionLink sectionId="faq" className="hover:text-ink-1">
                 FAQ
               </HomeSectionLink>
             </li>
             <li>
               <HomeSectionLink
                 sectionId="come-lavoriamo"
-                className="hover:text-white"
+                className="hover:text-ink-1"
               >
                 {t("howWeWork")}
               </HomeSectionLink>
             </li>
             <li>
-              <Link href="/chi-siamo" className="hover:text-white">
+              <Link href="/chi-siamo" className="hover:text-ink-1">
                 {tNav("about")}
               </Link>
             </li>
             <li>
-              <Link href="/privacy" className="hover:text-white">
+              <Link href="/privacy" className="hover:text-ink-1">
                 {t("privacyLink")}
               </Link>
             </li>
             <li>
-              <Link href="/note-legali" className="hover:text-white">
+              <Link href="/note-legali" className="hover:text-ink-1">
                 {t("legalLink")}
               </Link>
             </li>
           </ul>
         </div>
         <div className="text-xs leading-relaxed text-ink-3">
-          <p className="font-medium uppercase tracking-wider text-[#c9a227]">
+          <p className="font-medium uppercase tracking-wider text-accent-ink">
             {t("legalData")}
           </p>
           <p className="mt-3 text-ink-3">{site.legalName}</p>
@@ -198,18 +198,18 @@ export function Footer({ site }: Props) {
             {t("pec")}:{" "}
             <a
               href={`mailto:${site.pec}`}
-              className="text-ink-3 underline hover:text-white"
+              className="text-ink-3 underline hover:text-ink-1"
             >
               {site.pec}
             </a>
           </p>
         </div>
       </div>
-      <div className="border-t border-white/5 py-6">
+      <div className="border-t border-line py-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-3 px-4 text-center sm:flex-row sm:gap-6 sm:px-6">
           <div className="flex items-center gap-2 text-xs text-ink-3">
             <HardHat
-              className="h-4 w-4 shrink-0 text-[#c9a227]"
+              className="h-4 w-4 shrink-0 text-accent-ink"
               aria-hidden
             />
             <span>
@@ -217,7 +217,7 @@ export function Footer({ site }: Props) {
             </span>
           </div>
           <span
-            className="hidden h-4 w-px bg-white/10 sm:block"
+            className="hidden h-4 w-px bg-raised-2 sm:block"
             aria-hidden
           />
           <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-4">

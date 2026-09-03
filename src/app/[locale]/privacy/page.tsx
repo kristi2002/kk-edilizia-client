@@ -23,12 +23,12 @@ export default async function PrivacyPage({ params }: Props) {
   const [url, site] = await Promise.all([getSiteUrl(), getSite()]);
 
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
       <article className="mx-auto max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
           Legal
         </p>
-        <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+        <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
           Privacy policy
         </h1>
         <p className="mt-4 text-sm text-ink-4">
@@ -36,7 +36,7 @@ export default async function PrivacyPage({ params }: Props) {
         </p>
         <p className="mt-2 text-xs text-ink-4">
           Per richieste sui dati personali scrivi a{" "}
-          <a className="text-[#c9a227] hover:underline" href={`mailto:${site.email}`}>
+          <a className="text-accent-ink hover:underline" href={`mailto:${site.email}`}>
             {site.email}
           </a>{" "}
           o alla PEC indicata nel punto 1.
@@ -44,21 +44,21 @@ export default async function PrivacyPage({ params }: Props) {
 
         <div className="mt-12 space-y-10 text-sm leading-relaxed text-ink-3">
           <section id="titolare">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               1. Titolare del trattamento
             </h2>
             <p className="mt-4">
               Il titolare del trattamento dei dati personali è{" "}
               <strong>{site.legalName}</strong>, P.IVA {site.vatId}, e-mail{" "}
               <a
-                className="text-[#c9a227] hover:underline"
+                className="text-accent-ink hover:underline"
                 href={`mailto:${site.email}`}
               >
                 {site.email}
               </a>
               , PEC{" "}
               <a
-                className="text-[#c9a227] hover:underline"
+                className="text-accent-ink hover:underline"
                 href={`mailto:${site.pec}`}
               >
                 {site.pec}
@@ -68,7 +68,7 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
 
           <section id="finalita">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               2. Tipologie di dati e finalità
             </h2>
             <p className="mt-4">
@@ -99,7 +99,7 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
 
           <section id="base-giuridica">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               3. Base giuridica e conservazione
             </h2>
             <p className="mt-4">
@@ -114,7 +114,7 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
 
           <section id="destinatari">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               4. Destinatari e trasferimenti
             </h2>
             <p className="mt-4">
@@ -129,7 +129,7 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
 
           <section id="diritti">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               5. Diritti dell&apos;interessato
             </h2>
             <p className="mt-4">
@@ -137,7 +137,7 @@ export default async function PrivacyPage({ params }: Props) {
               limitazione, opposizione e portabilità nei limiti di legge, nonché
               proporre reclamo al Garante per la protezione dei dati personali (
               <a
-                className="text-[#c9a227] hover:underline"
+                className="text-accent-ink hover:underline"
                 href="https://www.garanteprivacy.it"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -145,12 +145,12 @@ export default async function PrivacyPage({ params }: Props) {
                 www.garanteprivacy.it
               </a>
               ). Per richieste relative ai tuoi dati:{" "}
-              <a className="text-[#c9a227] hover:underline" href={`mailto:${site.email}`}>{site.email}</a>.
+              <a className="text-accent-ink hover:underline" href={`mailto:${site.email}`}>{site.email}</a>.
             </p>
           </section>
 
           <section id="cookie">
-            <h2 className="font-serif text-2xl text-white">
+            <h2 className="font-serif text-2xl text-ink-1">
               6. Cookie e tecnologie simili
             </h2>
             <p className="mt-4">
@@ -176,11 +176,11 @@ export default async function PrivacyPage({ params }: Props) {
           </section>
 
           <section id="modifiche">
-            <h2 className="font-serif text-2xl text-white">7. Modifiche</h2>
+            <h2 className="font-serif text-2xl text-ink-1">7. Modifiche</h2>
             <p className="mt-4">
               La presente informativa può essere aggiornata. La versione
               vigente è pubblicata su{" "}
-              <Link href="/privacy" className="text-[#c9a227]">
+              <Link href="/privacy" className="text-accent-ink">
                 {url}/privacy
               </Link>
               .
@@ -189,7 +189,7 @@ export default async function PrivacyPage({ params }: Props) {
         </div>
 
         <p className="mt-16 text-center text-sm text-ink-4">
-          <Link href="/" className="text-[#c9a227] hover:underline">
+          <Link href="/" className="text-accent-ink hover:underline">
             Torna alla home
           </Link>
         </p>

@@ -103,17 +103,17 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
 
       <main className="flex flex-1 flex-col">
         {/* ---------- Hero ---------- */}
-        <section className="relative overflow-hidden bg-[#080808] px-4 py-20 sm:px-6">
+        <section className="relative overflow-hidden bg-raised px-4 py-20 sm:px-6">
           <WatermarkGrid />
           <WatermarkRing position="top-right" />
           <WatermarkGutter>K.K EDILIZIA — MODENA E PROVINCIA</WatermarkGutter>
 
           <div className="relative mx-auto max-w-3xl">
             <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
                 {silo?.eyebrow ?? t(`${siloKey}.eyebrow`)}
               </p>
-              <h1 className="mt-3 text-balance font-serif text-4xl text-white md:text-5xl">
+              <h1 className="mt-3 text-balance font-serif text-4xl text-ink-1 md:text-5xl">
                 {h1}
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-ink-2">
@@ -126,14 +126,14 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="/preventivo"
-                  className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-[#c9a227] px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+                  className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
                 >
                   {silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`)}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
                   href="/contatti"
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition hover:border-[#c9a227]/50 hover:text-[#c9a227]"
+                  className="inline-flex items-center justify-center rounded-full border border-line-2 px-8 py-3.5 text-sm font-semibold text-ink-1 transition hover:border-accent/50 hover:text-accent-ink"
                 >
                   {silo?.ctaSecondary ?? t(`${siloKey}.ctaSecondary`)}
                 </Link>
@@ -143,11 +143,11 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         </section>
 
         {/* ---------- Area + compliance, as two labelled panels ---------- */}
-        <section className="rule-gold border-b border-white/[0.06] bg-surface-warm px-4 py-14 sm:px-6">
+        <section className="rule-gold border-b border-line bg-sunken px-4 py-14 sm:px-6">
           <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2">
             <FadeIn>
-              <div className="h-full rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/[0.07] p-6">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#c9a227]">
+              <div className="h-full rounded-2xl border border-accent/25 bg-accent/[0.07] p-6">
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-ink">
                   <MapPin className="h-4 w-4" aria-hidden />
                   {t("areaPanelTitle")}
                 </p>
@@ -157,9 +157,9 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
               </div>
             </FadeIn>
             <FadeIn delay={0.06}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="h-full rounded-2xl border border-line bg-raised p-6">
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink-3">
-                  <ShieldCheck className="h-4 w-4 text-[#c9a227]" aria-hidden />
+                  <ShieldCheck className="h-4 w-4 text-accent-ink" aria-hidden />
                   {t("compliancePanelTitle")}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-ink-3">
@@ -171,7 +171,7 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         </section>
 
         {/* ---------- Body copy ---------- */}
-        <section className="relative overflow-hidden bg-surface-base px-4 py-20 sm:px-6">
+        <section className="relative overflow-hidden bg-page px-4 py-20 sm:px-6">
           <WatermarkWord>MODENA</WatermarkWord>
           <article className="relative mx-auto max-w-3xl">
             <FadeIn>
@@ -186,8 +186,8 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
               <div className="mt-16 space-y-10">
                 {silo!.headings.map((h, idx) => (
                   <FadeIn key={`${idx}-${h.title}`} delay={0.04}>
-                    <div className="border-l-2 border-[#c9a227]/30 pl-6">
-                      <h2 className="font-serif text-2xl text-white">
+                    <div className="border-l-2 border-accent/30 pl-6">
+                      <h2 className="font-serif text-2xl text-ink-1">
                         {h.title}
                       </h2>
                       <p className="mt-3 text-base leading-relaxed text-ink-2">
@@ -201,7 +201,7 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
                               className="flex gap-3 text-sm leading-relaxed text-ink-3"
                             >
                               <Check
-                                className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]"
+                                className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink"
                                 aria-hidden
                               />
                               <span>{b}</span>
@@ -219,21 +219,21 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
 
         {/* ---------- FAQ ---------- */}
         {Array.isArray(silo?.faqs) && silo!.faqs.length > 0 ? (
-          <section className="rule-gold bg-surface-warm px-4 py-20 sm:px-6">
+          <section className="rule-gold bg-sunken px-4 py-20 sm:px-6">
             <div className="mx-auto max-w-3xl">
               <FadeIn>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
                   FAQ
                 </p>
-                <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+                <h2 className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl">
                   {t("faqTitle")}
                 </h2>
               </FadeIn>
               <dl className="mt-9 space-y-3">
                 {silo!.faqs.map((f, i) => (
                   <FadeIn key={f.q} delay={i * 0.04}>
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                      <dt className="font-semibold text-white">{f.q}</dt>
+                    <div className="rounded-2xl border border-line bg-raised p-6">
+                      <dt className="font-semibold text-ink-1">{f.q}</dt>
                       <dd className="mt-2 text-sm leading-relaxed text-ink-3">
                         {f.a}
                       </dd>
@@ -246,14 +246,14 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         ) : null}
 
         {/* ---------- Sibling services: spreads link equity across the silo set ---------- */}
-        <section className="rule-gold relative overflow-hidden bg-surface-base px-4 py-20 sm:px-6">
+        <section className="rule-gold relative overflow-hidden bg-page px-4 py-20 sm:px-6">
           <WatermarkRing position="bottom-left" />
           <div className="relative mx-auto max-w-5xl">
             <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
                 {tNav("services")}
               </p>
-              <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+              <h2 className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl">
                 {t("siblingsTitle")}
               </h2>
             </FadeIn>
@@ -262,13 +262,13 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
                 <FadeIn key={r.path} delay={i * 0.03}>
                   <Link
                     href={r.path}
-                    className="group flex h-full items-start justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-[#c9a227]/35 hover:bg-white/[0.06]"
+                    className="group flex h-full items-start justify-between gap-3 rounded-xl border border-line bg-raised p-4 transition hover:border-accent/35 hover:bg-raised-2"
                   >
-                    <span className="text-sm font-medium text-ink-2 group-hover:text-white">
+                    <span className="text-sm font-medium text-ink-2 group-hover:text-ink-1">
                       {siloLabels[r.key]}
                     </span>
                     <ArrowRight
-                      className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227] opacity-60 transition group-hover:opacity-100"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink opacity-60 transition group-hover:opacity-100"
                       aria-hidden
                     />
                   </Link>
@@ -279,11 +279,11 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         </section>
 
         {/* ---------- Closing CTA ---------- */}
-        <section className="relative overflow-hidden bg-surface-deep px-4 py-20 sm:px-6">
-          <div className="pointer-events-none absolute -left-24 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#c9a227]/15 blur-3xl" />
+        <section className="on-band relative overflow-hidden bg-[linear-gradient(120deg,#6b511d_0%,#75591f_55%,#806322_100%)] px-4 py-20 sm:px-6">
+          <WatermarkRing position="bottom-left" />
           <div className="relative mx-auto max-w-3xl text-center">
             <FadeIn>
-              <h2 className="text-balance font-serif text-3xl text-white sm:text-4xl">
+              <h2 className="text-balance font-serif text-3xl text-ink-1 sm:text-4xl">
                 {t("closingTitle")}
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-ink-2">
@@ -292,14 +292,14 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/preventivo"
-                  className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-[#c9a227] px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+                  className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#6b511d] shadow-lg shadow-black/15 transition hover:-translate-y-0.5 hover:shadow-xl"
                 >
                   {silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`)}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
                   href="/prenota"
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition hover:border-[#c9a227]/50 hover:text-[#c9a227]"
+                  className="inline-flex items-center justify-center rounded-full border border-line-2 px-8 py-3.5 text-sm font-semibold text-ink-1 transition hover:border-accent/50 hover:text-accent-ink"
                 >
                   {tNav("booking")}
                 </Link>

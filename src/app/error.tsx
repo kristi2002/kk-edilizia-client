@@ -16,10 +16,10 @@ export default function Error({
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-4 py-24 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
         Errore
       </p>
-      <h1 className="mt-4 font-serif text-3xl text-white md:text-4xl">
+      <h1 className="mt-4 font-serif text-3xl text-ink-1 md:text-4xl">
         Qualcosa è andato storto
       </h1>
       <p className="mt-3 max-w-md text-ink-4">
@@ -30,13 +30,13 @@ export default function Error({
         <button
           type="button"
           onClick={() => reset()}
-          className="rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] hover:bg-[#ddb92e]"
+          className="rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent hover:bg-accent-deep"
         >
           Riprova
         </button>
         <Link
           href="/"
-          className="rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10"
+          className="rounded-full border border-line-2 px-8 py-3 text-sm font-semibold text-ink-1 hover:bg-raised-2"
         >
           Torna alla home
         </Link>

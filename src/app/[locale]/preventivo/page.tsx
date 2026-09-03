@@ -30,13 +30,13 @@ export default async function PreventivoPage({ params }: PageProps) {
   const preventivoOptions = await getPreventivoFormOptions();
 
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
       <div className="mx-auto w-full max-w-2xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("eyebrow")}
           </p>
-          <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+          <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
             {t("title")}
           </h1>
           <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>

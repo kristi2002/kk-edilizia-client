@@ -1,53 +1,125 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Palette
+
+   The site was eleven near-black sections in a row. It now reads as a printed
+   document: a warm paper ground, white cards, and a small number of deliberately
+   dark bands (hero, closing CTA, footer) that carry the brand gold.
+
+   Two token sets, one vocabulary. `:root` holds the light values; `.on-dark`
+   redefines the same names for dark grounds, so a component written with
+   `bg-raised text-ink-2 border-line` renders correctly in either context and
+   nothing needs a second set of classes.
+   ========================================================================== */
+
 :root {
-  --background: #080808;
-  --foreground: #f4f4f5;
+  /* Grounds */
+  --page: #f3f1eb;
+  --sunken: #e9e6dd;
+  --raised: #ffffff;
+  --raised-2: #fbfaf6;
+  --inverse: #14171a;
 
-  /* Brand */
+  /* Lines */
+  --line: #dcd7c9;
+  --line-2: #c9c3b2;
+  /*
+   * Form control outlines. WCAG 1.4.11 wants 3:1 for the boundary of an interactive
+   * component, which --line (1.4:1 on white) does not meet. Card edges are decorative
+   * and keep --line; anything a visitor types into uses this.
+   */
+  --control-line: #8f8770;
+
+  /*
+   * Ink ramp. Every step clears WCAG AA (4.5:1) on page, sunken and raised:
+   * ink-1 15.6 · ink-2 9.4 · ink-3 5.6 · ink-4 5.0 (on --page).
+   */
+  --ink-1: #17191c;
+  --ink-2: #3a3f45;
+  --ink-3: #5a616a;
+  --ink-4: #61686f;
+
+  /*
+   * Gold. `--accent` is the brand value and is only ever a fill, a border or a
+   * rule — as text on paper it measures 2.1:1. `--accent-ink` is the darkened
+   * gold used whenever gold has to be read (5.2:1 on --page).
+   */
   --accent: #c9a227;
-  --accent-light: #e8d48b;
+  --accent-ink: #7e6015;
   --accent-deep: #a9822f;
-  --accent-soft: rgba(201, 162, 39, 0.15);
+  --accent-light: #e8d48b;
+  --on-accent: #14171a;
 
-  /*
-   * Surfaces. The site used to run every section on #0a0a0a/#0c0c0c, which read as one
-   * undifferentiated block for ~13.000px of scroll. These three grounds alternate to
-   * give the page rhythm; --surface-warm carries a little of the gold's hue so the
-   * change reads as intentional rather than as a rendering artefact.
-   */
-  --surface-base: #0a0a0a;
-  --surface-warm: #12100c;
-  --surface-deep: #050505;
+  /* Decorative layer, tuned per ground so the marks stay barely-there but visible */
+  --wm-stroke: rgba(126, 96, 21, 0.18);
+  --wm-grid: rgba(126, 96, 21, 0.1);
+  --wm-ring: rgba(201, 162, 39, 0.16);
+}
 
-  /*
-   * Text ramp. Replaces zinc-400/500/600, of which the last two failed WCAG AA on these
-   * grounds (4.10:1 and 2.56:1). Every step below clears 4.5:1 on all three surfaces,
-   * and the warm bias sits better next to the gold than the cool zinc greys did.
-   *   ink-1 18.0:1 · ink-2 12.1:1 · ink-3 7.8:1 · ink-4 5.8:1
-   */
-  --ink-1: #f4f4f5;
-  --ink-2: #cfcabf;
-  --ink-3: #a8a294;
-  --ink-4: #8f8a7d;
+.on-dark {
+  --page: #14171a;
+  --sunken: #101315;
+  --raised: rgba(255, 255, 255, 0.05);
+  --raised-2: rgba(255, 255, 255, 0.09);
+  --inverse: #14171a;
+
+  --line: rgba(255, 255, 255, 0.12);
+  --line-2: rgba(255, 255, 255, 0.24);
+  --control-line: rgba(255, 255, 255, 0.34);
+
+  /* ink-1 18.0 · ink-2 11.9 · ink-3 7.5 · ink-4 5.3 (on --inverse) */
+  --ink-1: #ffffff;
+  --ink-2: #d6d2c7;
+  --ink-3: #ada79a;
+  --ink-4: #918b7e;
+
+  --accent-ink: #e0bc45;
+
+  --wm-stroke: rgba(201, 162, 39, 0.16);
+  --wm-grid: rgba(201, 162, 39, 0.1);
+  --wm-ring: rgba(201, 162, 39, 0.12);
+}
+
+/* The closing CTA band: gold-brown, white type. */
+.on-band {
+  --page: #7c5f20;
+  --raised: rgba(255, 255, 255, 0.1);
+  --raised-2: rgba(255, 255, 255, 0.16);
+  --line: rgba(255, 255, 255, 0.22);
+  --line-2: rgba(255, 255, 255, 0.4);
+  --control-line: rgba(255, 255, 255, 0.55);
+  --ink-1: #ffffff;
+  /* Checked against the gradient's lightest stop (#806322), not its mid-point:
+     white 5.6 · ink-2/3 5.0 · ink-4 4.6. */
+  --ink-2: #f5f0e2;
+  --ink-3: #f5f0e2;
+  --ink-4: #efe7d2;
+  --accent-ink: #ffffff;
+  --wm-ring: rgba(255, 255, 255, 0.07);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-page: var(--page);
+  --color-sunken: var(--sunken);
+  --color-raised: var(--raised);
+  --color-raised-2: var(--raised-2);
+  --color-inverse: var(--inverse);
 
-  --color-accent: var(--accent);
-  --color-accent-light: var(--accent-light);
-  --color-accent-deep: var(--accent-deep);
-
-  --color-surface-base: var(--surface-base);
-  --color-surface-warm: var(--surface-warm);
-  --color-surface-deep: var(--surface-deep);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-control-line: var(--control-line);
 
   --color-ink-1: var(--ink-1);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-ink-4: var(--ink-4);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-light: var(--accent-light);
+  --color-on-accent: var(--on-accent);
 
   --font-sans: var(--font-dm-sans);
   --font-serif: var(--font-instrument-serif);
@@ -55,6 +127,7 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--page);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -64,8 +137,8 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--page);
+  color: var(--ink-2);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
 }
 
@@ -94,26 +167,26 @@ body {
   clip: auto;
   white-space: normal;
   background: var(--accent);
-  color: #0a0a0a;
+  color: var(--on-accent);
   font-weight: 600;
   font-size: 0.875rem;
   border-radius: 0.375rem;
-  outline: 2px solid #fff;
+  outline: 2px solid var(--ink-1);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(201, 162, 39, 0.35);
-  color: #0a0a0a;
+  background: rgba(201, 162, 39, 0.3);
+  color: #14171a;
 }
 
 /* ==========================================================================
    Decorative layer
-   Every device below is presentational: mark the element aria-hidden, keep it
-   pointer-events:none, and never put information in it.
+   Presentational only: aria-hidden, pointer-events:none, never information.
+   Colours come from the --wm-* tokens so each device adapts to its ground.
    ========================================================================== */
 
-/* Section divider — replaces `border-white/10`, which was invisible at 10% opacity. */
+/* Section divider — replaces `border-white/10`, invisible at 10% opacity. */
 .rule-gold {
   position: relative;
 }
@@ -131,10 +204,9 @@ body {
     var(--accent) 75%,
     var(--accent-deep) 100%
   );
-  opacity: 0.75;
 }
 
-/* Oversized hollow wordmark, bleeding past the section edge. One word, never a phrase. */
+/* Oversized hollow wordmark bleeding past the section edge. One word, never a phrase. */
 .wm-word {
   position: absolute;
   inset-inline-start: -2%;
@@ -148,10 +220,10 @@ body {
   line-height: 0.82;
   letter-spacing: -0.02em;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(201, 162, 39, 0.13);
+  -webkit-text-stroke: 1.5px var(--wm-stroke);
 }
 
-/* Running annotation set in the gutter, like the edge of a drawing sheet. */
+/* Running annotation in the gutter, like the edge of a drawing sheet. */
 .wm-vert {
   position: absolute;
   inset-block: 0;
@@ -162,7 +234,8 @@ body {
   font-size: 0.625rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
-  color: rgba(201, 162, 39, 0.38);
+  color: var(--accent-ink);
+  opacity: 0.5;
   pointer-events: none;
   user-select: none;
 }
@@ -178,8 +251,8 @@ body {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(201, 162, 39, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 162, 39, 0.09) 1px, transparent 1px);
+    linear-gradient(var(--wm-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--wm-grid) 1px, transparent 1px);
   background-size: 34px 34px;
   -webkit-mask-image: radial-gradient(
     ellipse 75% 85% at 30% 50%,
@@ -193,22 +266,22 @@ body {
   );
 }
 
-/* Oversized ring, anchored off-canvas at a section corner. */
+/* Oversized ring anchored off-canvas at a section corner. */
 .wm-ring {
   position: absolute;
   width: 22rem;
   height: 22rem;
-  border: 2.25rem solid rgba(201, 162, 39, 0.09);
+  border: 2.25rem solid var(--wm-ring);
   border-radius: 50%;
   pointer-events: none;
 }
 
-/* Polished-floor reflection. Apply to a copy of the element sitting under the original. */
+/* Polished-floor reflection: apply to a copy sitting under the original. */
 .reflect {
   transform: scaleY(-1);
   filter: blur(0.6px);
-  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 80%);
-  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 80%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 80%);
   pointer-events: none;
 }
 

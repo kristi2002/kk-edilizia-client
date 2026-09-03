@@ -37,13 +37,13 @@ export default async function PortfolioPage({ params }: Props) {
   ]);
 
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
       <div className="mx-auto w-full max-w-6xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
-          <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+          <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
             {t("title")}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-ink-3">{t("intro")}</p>
@@ -57,7 +57,7 @@ export default async function PortfolioPage({ params }: Props) {
                 <FadeIn delay={i * 0.05}>
                   <Link
                     href={`/portfolio/${p.slug}`}
-                    className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition hover:border-[#c9a227]/35"
+                    className="group block overflow-hidden rounded-2xl border border-line bg-raised transition hover:border-accent/35"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
@@ -72,12 +72,12 @@ export default async function PortfolioPage({ params }: Props) {
                         className="object-cover transition duration-700 group-hover:scale-[1.03]"
                         sizes="(max-width: 639px) 100vw, 560px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-inverse/80 to-transparent opacity-80" />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <p className="text-xs font-medium uppercase tracking-wider text-[#c9a227]">
+                        <p className="text-xs font-medium uppercase tracking-wider text-accent-ink">
                           {loc.category} · {loc.location}
                         </p>
-                        <h2 className="mt-2 font-serif text-2xl text-white">
+                        <h2 className="mt-2 font-serif text-2xl text-ink-1">
                           {loc.title}
                         </h2>
                       </div>

@@ -75,13 +75,13 @@ export function FormAttachmentPicker({
         onChange={handleInputChange}
       />
       {atMax ? (
-        <span className="inline-flex shrink-0 cursor-not-allowed items-center rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-white/50">
+        <span className="inline-flex shrink-0 cursor-not-allowed items-center rounded-lg border border-line bg-raised px-3 py-2 text-sm font-medium text-ink-1/50">
           {chooseLabel}
         </span>
       ) : (
         <label
           htmlFor={inputId}
-          className="inline-flex shrink-0 cursor-pointer items-center rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/15"
+          className="inline-flex shrink-0 cursor-pointer items-center rounded-lg border border-line bg-raised-2 px-3 py-2 text-sm font-medium text-ink-1 transition hover:bg-raised-2"
         >
           {chooseLabel}
         </label>
@@ -92,7 +92,7 @@ export function FormAttachmentPicker({
           {items.map((item) => (
             <li
               key={item.id}
-              className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/25 px-2 py-1.5"
+              className="flex items-center gap-2 rounded-lg border border-line bg-raised px-2 py-1.5"
             >
               <span
                 className="min-w-0 flex-1 truncate text-sm text-ink-2"
@@ -102,7 +102,7 @@ export function FormAttachmentPicker({
               </span>
               <button
                 type="button"
-                className="inline-flex shrink-0 cursor-pointer rounded-md p-1 text-ink-4 transition hover:bg-white/10 hover:text-red-400"
+                className="inline-flex shrink-0 cursor-pointer rounded-md p-1 text-ink-4 transition hover:bg-raised-2 hover:text-red-400"
                 aria-label={removeAriaLabel(item.file.name)}
                 onClick={() => remove(item.id)}
               >

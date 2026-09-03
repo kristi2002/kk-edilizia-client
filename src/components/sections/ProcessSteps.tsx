@@ -16,18 +16,18 @@ export async function ProcessSteps() {
   return (
     <section
       id="come-lavoriamo"
-      className="rule-gold relative scroll-mt-24 overflow-hidden bg-surface-warm px-4 py-24 sm:px-6"
+      className="rule-gold relative scroll-mt-24 overflow-hidden bg-sunken px-4 py-24 sm:px-6"
     >
       <WatermarkGrid />
 
       <div className="relative mx-auto max-w-6xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
           <h2
             id="process-steps-heading"
-            className="mt-3 text-balance font-serif text-3xl text-white sm:text-4xl md:text-5xl"
+            className="mt-3 text-balance font-serif text-3xl text-ink-1 sm:text-4xl md:text-5xl"
           >
             {t("title")}
           </h2>
@@ -41,7 +41,7 @@ export async function ProcessSteps() {
           */}
           <span
             aria-hidden="true"
-            className="absolute left-[12.5%] right-[12.5%] top-5 hidden h-px bg-gradient-to-r from-[#c9a227]/10 via-[#c9a227]/45 to-[#c9a227]/10 lg:block"
+            className="absolute left-[12.5%] right-[12.5%] top-5 hidden h-px bg-gradient-to-r from-accent/10 via-accent/45 to-accent/10 lg:block"
           />
           <ol
             aria-labelledby="process-steps-heading"
@@ -52,14 +52,14 @@ export async function ProcessSteps() {
                 <FadeIn delay={i * 0.06}>
                   <span
                     aria-hidden="true"
-                    className="relative z-10 mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c9a227]/40 bg-surface-warm font-serif text-lg text-[#c9a227]"
+                    className="relative z-10 mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/40 bg-sunken font-serif text-lg text-accent-ink"
                   >
                     {i + 1}
                   </span>
-                  <div className="mb-3 inline-flex rounded-xl bg-white/[0.04] p-3 text-[#c9a227]">
+                  <div className="mb-3 inline-flex rounded-xl bg-raised p-3 text-accent-ink">
                     <s.icon className="h-6 w-6" aria-hidden />
                   </div>
-                  <h3 className="font-serif text-xl text-white">{s.title}</h3>
+                  <h3 className="font-serif text-xl text-ink-1">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-3">
                     {s.text}
                   </p>
@@ -74,7 +74,7 @@ export async function ProcessSteps() {
             {t("cta")}{" "}
             <Link
               href="/preventivo"
-              className="font-medium text-[#c9a227] underline-offset-4 hover:underline"
+              className="font-medium text-accent-ink underline-offset-4 hover:underline"
             >
               {t("ctaLink")}
             </Link>

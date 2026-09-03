@@ -17,15 +17,15 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative bg-[#080808] px-4 py-24 sm:px-6"
+      className="relative bg-page px-4 py-24 sm:px-6"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(201,162,39,0.05),transparent_45%)]" />
       <div className="relative mx-auto max-w-3xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
-          <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">
+          <h2 className="mt-3 font-serif text-3xl text-ink-1 sm:text-4xl">
             {t("title")}
           </h2>
           <p className="mt-4 text-ink-3">{t("intro")}</p>
@@ -39,12 +39,12 @@ export function FaqSection() {
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-start justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-left transition hover:border-[#c9a227]/35 hover:bg-white/[0.05]"
+                  className="flex w-full items-start justify-between gap-4 rounded-2xl border border-line bg-raised px-5 py-4 text-left transition hover:border-accent/35 hover:bg-raised"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-medium text-white">{item.q}</span>
+                  <span className="font-medium text-ink-1">{item.q}</span>
                   <ChevronDown
-                    className={`mt-0.5 h-5 w-5 shrink-0 text-[#c9a227] transition-transform ${
+                    className={`mt-0.5 h-5 w-5 shrink-0 text-accent-ink transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />

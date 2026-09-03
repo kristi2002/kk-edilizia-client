@@ -132,10 +132,10 @@ export function PreventivoForm({ initialOptions }: Props) {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-8 py-16 text-center"
+        className="rounded-3xl border border-accent/30 bg-accent/10 px-8 py-16 text-center"
       >
-        <CheckCircle2 className="mx-auto h-14 w-14 text-[#c9a227]" />
-        <h2 className="mt-6 font-serif text-2xl text-white">
+        <CheckCircle2 className="mx-auto h-14 w-14 text-accent-ink" />
+        <h2 className="mt-6 font-serif text-2xl text-ink-1">
           Richiesta inviata
         </h2>
         <p className="mt-3 text-ink-3">
@@ -146,15 +146,15 @@ export function PreventivoForm({ initialOptions }: Props) {
   }
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+    <div className="rounded-3xl border border-line bg-raised p-6 sm:p-10">
       <div className="mb-10 flex gap-2">
         {Array.from({ length: totalSteps }).map((_, i) => (
           <div
             key={i}
-            className="h-1 flex-1 overflow-hidden rounded-full bg-white/10"
+            className="h-1 flex-1 overflow-hidden rounded-full bg-raised-2"
           >
             <motion.div
-              className="h-full bg-[#c9a227]"
+              className="h-full bg-accent"
               initial={false}
               animate={{ width: i <= step ? "100%" : "0%" }}
               transition={{ duration: 0.35 }}
@@ -175,10 +175,10 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
                 Passo 1 di 3
               </p>
-              <h2 className="font-serif text-2xl text-white">
+              <h2 className="font-serif text-2xl text-ink-1">
                 Che tipo di intervento ti serve?
               </h2>
               <div className="grid gap-2 sm:grid-cols-2">
@@ -187,8 +187,8 @@ export function PreventivoForm({ initialOptions }: Props) {
                     key={w.value}
                     className={`flex cursor-pointer items-center rounded-xl border px-4 py-3 text-sm transition ${
                       workType === w.value
-                        ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                        : "border-white/15 text-ink-3 hover:border-white/30"
+                        ? "border-accent bg-accent/10 text-ink-1"
+                        : "border-line text-ink-3 hover:border-line-2"
                     }`}
                   >
                     <input
@@ -213,7 +213,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                 <input
                   type="text"
                   placeholder="es. 85"
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                  className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 placeholder:text-ink-4 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                   {...register("sqm")}
                 />
               </div>
@@ -229,10 +229,10 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
                 Passo 2 di 3
               </p>
-              <h2 className="font-serif text-2xl text-white">
+              <h2 className="font-serif text-2xl text-ink-1">
                 Budget e tempistiche
               </h2>
               <div>
@@ -243,8 +243,8 @@ export function PreventivoForm({ initialOptions }: Props) {
                       key={b.value}
                       className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
                         budget === b.value
-                          ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                          : "border-white/15 text-ink-3 hover:border-white/30"
+                          ? "border-accent bg-accent/10 text-ink-1"
+                          : "border-line text-ink-3 hover:border-line-2"
                       }`}
                     >
                       <input
@@ -271,8 +271,8 @@ export function PreventivoForm({ initialOptions }: Props) {
                       key={t.value}
                       className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
                         timeline === t.value
-                          ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                          : "border-white/15 text-ink-3 hover:border-white/30"
+                          ? "border-accent bg-accent/10 text-ink-1"
+                          : "border-line text-ink-3 hover:border-line-2"
                       }`}
                     >
                       <input
@@ -303,10 +303,10 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-5"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
                 Passo 3 di 3
               </p>
-              <h2 className="font-serif text-2xl text-white">I tuoi contatti</h2>
+              <h2 className="font-serif text-2xl text-ink-1">I tuoi contatti</h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
                   <label htmlFor="preventivo-name" className="text-sm text-ink-4">
@@ -314,7 +314,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                   </label>
                   <input
                     id="preventivo-name"
-                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                     {...register("name")}
                     autoComplete="name"
                   />
@@ -333,7 +333,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                     type="email"
                     inputMode="email"
                     autoCapitalize="none"
-                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                     {...register("email")}
                     autoComplete="email"
                   />
@@ -351,7 +351,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                     id="preventivo-phone"
                     type="tel"
                     inputMode="tel"
-                    className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                     {...register("phone")}
                     autoComplete="tel"
                   />
@@ -368,7 +368,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                   <textarea
                     id="preventivo-notes"
                     rows={4}
-                    className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                    className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 placeholder:text-ink-4 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                     placeholder="Esigenze particolari, vincoli, note utili…"
                     {...register("notes")}
                     autoComplete="off"
@@ -391,7 +391,7 @@ export function PreventivoForm({ initialOptions }: Props) {
                 setStep((s) => s - 1);
                 setSubmitError(null);
               }}
-              className="rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-white hover:bg-white/10"
+              className="rounded-full border border-line-2 px-6 py-3 text-sm font-medium text-ink-1 hover:bg-raised-2"
             >
               Indietro
             </button>
@@ -402,7 +402,7 @@ export function PreventivoForm({ initialOptions }: Props) {
             <button
               type="button"
               onClick={validateAndNext}
-              className="ml-auto rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] hover:bg-[#ddb92e]"
+              className="ml-auto rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent hover:bg-accent-deep"
             >
               Avanti
             </button>
@@ -410,7 +410,7 @@ export function PreventivoForm({ initialOptions }: Props) {
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="ml-auto inline-flex items-center gap-2 rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] hover:bg-[#ddb92e] disabled:opacity-60"
+              className="ml-auto inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent hover:bg-accent-deep disabled:opacity-60"
             >
               {formState.isSubmitting && (
                 <Loader2 className="h-4 w-4 animate-spin" />

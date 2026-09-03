@@ -37,32 +37,32 @@ export function CostEstimator({ categories }: Props) {
   }, [sqm, categoryId, categories]);
 
   return (
-    <section className="scroll-mt-24 border-y border-white/10 bg-[#0a0a0a] px-4 py-24 sm:px-6">
+    <section className="scroll-mt-24 border-y border-line bg-page px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#c9a227]/30 bg-[#c9a227]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-ink">
               <Calculator className="h-3.5 w-3.5" />
               {t("badge")}
             </div>
-            <h2 className="mt-4 font-serif text-3xl text-white sm:text-4xl md:text-5xl">
+            <h2 className="mt-4 font-serif text-3xl text-ink-1 sm:text-4xl md:text-5xl">
               {t("title")}
             </h2>
             <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
             <ul className="mt-8 space-y-3 text-sm text-ink-4">
               <li className="flex gap-2">
-                <span className="text-[#c9a227]">—</span>
+                <span className="text-accent-ink">—</span>
                 {t("li1")}
               </li>
               <li className="flex gap-2">
-                <span className="text-[#c9a227]">—</span>
+                <span className="text-accent-ink">—</span>
                 {t("li2")}
               </li>
             </ul>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+            <div className="rounded-3xl border border-line bg-raised p-6 sm:p-8">
               <label className="block text-sm font-medium text-ink-3">
                 {t("sqm")}
               </label>
@@ -71,7 +71,7 @@ export function CostEstimator({ categories }: Props) {
                 inputMode="decimal"
                 value={sqm}
                 onChange={(e) => setSqm(e.target.value)}
-                className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white placeholder:text-ink-4 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+                className="mt-2 w-full rounded-xl border border-line bg-raised px-4 py-3 text-ink-1 placeholder:text-ink-4 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                 placeholder={t("sqmPh")}
               />
 
@@ -84,8 +84,8 @@ export function CostEstimator({ categories }: Props) {
                     key={c.id}
                     className={`flex cursor-pointer flex-col rounded-xl border px-4 py-3 text-sm transition ${
                       categoryId === c.id
-                        ? "border-[#c9a227] bg-[#c9a227]/10 text-white"
-                        : "border-white/15 text-ink-3 hover:border-white/25"
+                        ? "border-accent bg-accent/10 text-ink-1"
+                        : "border-line text-ink-3 hover:border-line-2"
                     }`}
                   >
                     <span className="flex items-start gap-3">
@@ -98,7 +98,7 @@ export function CostEstimator({ categories }: Props) {
                         className="mt-1"
                       />
                       <span>
-                        <span className="font-medium text-white">{c.label}</span>
+                        <span className="font-medium text-ink-1">{c.label}</span>
                         <span className="mt-0.5 block text-xs text-ink-4">
                           {c.description}
                         </span>
@@ -108,13 +108,13 @@ export function CostEstimator({ categories }: Props) {
                 ))}
               </div>
 
-              <div className="mt-8 rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/5 px-5 py-6">
+              <div className="mt-8 rounded-2xl border border-accent/25 bg-accent/5 px-5 py-6">
                 {range ? (
                   <>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                       {t("rangeLabel")}
                     </p>
-                    <p className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+                    <p className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl">
                       {eur.format(range.min)} — {eur.format(range.max)}
                     </p>
                   </>
@@ -130,7 +130,7 @@ export function CostEstimator({ categories }: Props) {
 
               <Link
                 href="/preventivo"
-                className="mt-8 flex w-full items-center justify-center rounded-full bg-[#c9a227] py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+                className="mt-8 flex w-full items-center justify-center rounded-full bg-accent py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
               >
                 {t("cta")}
               </Link>

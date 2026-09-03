@@ -30,7 +30,7 @@ export default async function StimaCostiPage({ params }: Props) {
   const categories = rows.map((r) => toEstimatorCategory(locale, r));
 
   return (
-    <main className="flex flex-1 flex-col bg-[#080808]">
+    <main className="flex flex-1 flex-col bg-page">
       <CostEstimator categories={categories} />
     </main>
   );

@@ -48,7 +48,7 @@ export function HeroClient({
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[min(88svh,46rem)] items-center overflow-hidden bg-[#080808]"
+      className="on-dark relative flex min-h-[min(88svh,46rem)] items-center overflow-hidden bg-inverse"
     >
       <motion.div style={{ y }} className="absolute inset-0">
         {children}
@@ -61,7 +61,7 @@ export function HeroClient({
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-flex items-center gap-2 rounded-full border border-[#c9a227]/25 bg-[#c9a227]/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-[#c9a227] backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent/15 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-accent-ink backdrop-blur-sm"
         >
           <HardHat className="h-3.5 w-3.5" aria-hidden />
           {badge}
@@ -71,10 +71,10 @@ export function HeroClient({
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 max-w-4xl text-balance font-serif text-4xl leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl"
+          className="mt-8 max-w-4xl text-balance font-serif text-4xl leading-[1.08] tracking-tight text-ink-1 sm:text-6xl md:text-7xl"
         >
           {titleLine1}{" "}
-          <span className="bg-gradient-to-r from-[#e8d48b] to-[#c9a227] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-accent-light to-accent bg-clip-text text-transparent">
             {titleHighlight}
           </span>
         </motion.h1>
@@ -101,7 +101,7 @@ export function HeroClient({
           {towns.map((town) => (
             <span
               key={town}
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-ink-2"
+              className="rounded-full border border-line bg-raised px-3 py-1 text-xs text-ink-2"
             >
               {town}
             </span>
@@ -116,7 +116,7 @@ export function HeroClient({
         >
           <Link
             href="/preventivo"
-            className="sweep group inline-flex items-center gap-2 rounded-full bg-[#c9a227] px-7 py-3.5 text-sm font-semibold text-[#0a0a0a] shadow-lg shadow-[#c9a227]/25 transition hover:bg-[#ddb92e]"
+            className="sweep group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-on-accent shadow-lg shadow-accent/25 transition hover:bg-accent-deep"
           >
             {ctaQuote}
             <ArrowRight
@@ -126,7 +126,7 @@ export function HeroClient({
           </Link>
           <Link
             href="/prenota"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
+            className="inline-flex items-center gap-2 rounded-full border border-line-2 px-7 py-3.5 text-sm font-semibold text-ink-1 transition hover:bg-raised-2"
           >
             {ctaBooking}
           </Link>
@@ -136,13 +136,13 @@ export function HeroClient({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-16 grid grid-cols-3 gap-6 border-t border-[#c9a227]/20 pt-8 sm:max-w-lg"
+          className="mt-16 grid grid-cols-3 gap-6 border-t border-accent/20 pt-8 sm:max-w-lg"
         >
           {stats.map((s) => (
             <div key={s.label}>
               <dt className="sr-only">{s.label}</dt>
               <dd>
-                <span className="block font-serif text-2xl text-white sm:text-3xl">
+                <span className="block font-serif text-2xl text-ink-1 sm:text-3xl">
                   {s.value}
                 </span>
                 <span className="mt-1 block text-xs uppercase tracking-wider text-ink-4">
@@ -154,7 +154,7 @@ export function HeroClient({
         </motion.dl>
       </div>
 
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080808] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-inverse to-transparent" />
     </section>
   );
 }

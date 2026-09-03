@@ -132,13 +132,13 @@ export function PrenotaForm() {
 
   if (done) {
     return (
-      <div className="rounded-3xl border border-[#c9a227]/30 bg-[#c9a227]/10 px-6 py-10 text-center">
-        <p className="font-medium text-white">{t("successTitle")}</p>
+      <div className="rounded-3xl border border-accent/30 bg-accent/10 px-6 py-10 text-center">
+        <p className="font-medium text-ink-1">{t("successTitle")}</p>
         <p className="mt-2 text-sm text-ink-3">{t("successBody")}</p>
         <button
           type="button"
           onClick={() => setDone(false)}
-          className="mt-6 text-sm font-medium text-[#c9a227] hover:underline"
+          className="mt-6 text-sm font-medium text-accent-ink hover:underline"
         >
           {t("sendAnother")}
         </button>
@@ -147,10 +147,10 @@ export function PrenotaForm() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+    <div className="rounded-3xl border border-line bg-raised p-6 sm:p-8">
       <p className="text-sm text-ink-4">
         {t("formPrivacy")}{" "}
-        <Link href="/privacy" className="text-[#c9a227] hover:underline">
+        <Link href="/privacy" className="text-accent-ink hover:underline">
           {t("privacyLink")}
         </Link>
         .
@@ -161,7 +161,7 @@ export function PrenotaForm() {
           <label className="text-sm text-ink-4">{t("fieldName")}</label>
           <input
             autoComplete="name"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             {...register("name")}
           />
           {errors.name && (
@@ -173,7 +173,7 @@ export function PrenotaForm() {
           <input
             type="email"
             autoComplete="email"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             {...register("email")}
           />
           {errors.email && (
@@ -185,7 +185,7 @@ export function PrenotaForm() {
           <input
             type="tel"
             autoComplete="tel"
-            className="mt-2 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             {...register("phone")}
           />
           {errors.phone && (
@@ -256,7 +256,7 @@ export function PrenotaForm() {
           <label className="text-sm text-ink-4">{t("fieldNotes")}</label>
           <textarea
             rows={3}
-            className="mt-2 w-full resize-none rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]"
+            className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             {...register("notes")}
           />
           {errors.notes && (
@@ -292,7 +292,7 @@ export function PrenotaForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#c9a227] py-3.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e] disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep disabled:opacity-60"
         >
           {isSubmitting ? (
             <>

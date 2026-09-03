@@ -122,7 +122,7 @@ export function Header() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/85 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-page/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 items-center gap-2.5">
           {/* The brand mark existed only as an 8 MB favicon; it now appears on screen. */}
@@ -135,10 +135,10 @@ export function Header() {
             className="h-8 w-8 shrink-0 object-contain"
           />
           <span className="flex min-w-0 items-baseline gap-2">
-            <span className="font-serif text-xl tracking-tight text-white sm:text-2xl">
+            <span className="font-serif text-xl tracking-tight text-ink-1 sm:text-2xl">
               K.K
             </span>
-            <span className="hidden text-sm font-medium uppercase tracking-[0.2em] text-[#c9a227] sm:inline">
+            <span className="hidden text-sm font-medium uppercase tracking-[0.2em] text-accent-ink sm:inline">
               Edilizia
             </span>
           </span>
@@ -158,11 +158,11 @@ export function Header() {
               aria-controls={servicesId}
               onClick={() => setServicesOpen((v) => !v)}
               className={`relative z-0 inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-sm font-medium transition-colors ${
-                servicesActive ? "text-white" : "text-ink-3 hover:text-white"
+                servicesActive ? "text-ink-1" : "text-ink-3 hover:text-ink-1"
               }`}
             >
               {servicesActive && (
-                <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-white/10" />
+                <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-accent/15" />
               )}
               {t("services")}
               <ChevronDown
@@ -178,14 +178,14 @@ export function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.18 }}
-                  className="absolute right-0 top-full mt-2 w-72 overflow-hidden rounded-2xl border border-white/10 bg-[#0c0c0c] p-2 shadow-2xl shadow-black/60"
+                  className="absolute right-0 top-full mt-2 w-72 overflow-hidden rounded-2xl border border-line bg-raised p-2 shadow-xl shadow-black/10"
                 >
                   <ul>
                     {SERVICE_SILO_ROUTES.map((route) => (
                       <li key={route.path}>
                         <Link
                           href={route.path}
-                          className="block rounded-lg px-3 py-2 text-sm text-ink-2 transition hover:bg-white/[0.06] hover:text-white"
+                          className="block rounded-lg px-3 py-2 text-sm text-ink-2 transition hover:bg-raised-2 hover:text-ink-1"
                         >
                           {siloLabels[route.key]}
                         </Link>
@@ -201,7 +201,7 @@ export function Header() {
 
           <Link
             href="/preventivo"
-            className="sweep ml-2 inline-flex items-center rounded-full bg-[#c9a227] px-4 py-2 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+            className="sweep ml-2 inline-flex items-center rounded-full bg-accent px-4 py-2 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
           >
             {t("quote")}
           </Link>
@@ -212,7 +212,7 @@ export function Header() {
           <button
             ref={toggleRef}
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-control-line text-ink-1"
             aria-label={open ? t("closeMenu") : t("openMenu")}
             aria-expanded={open}
             aria-controls={menuId}
@@ -237,7 +237,7 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-white/10 bg-[#0a0a0a] lg:hidden"
+            className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line bg-raised shadow-xl shadow-black/10 lg:hidden"
           >
             <nav className="flex flex-col gap-1 px-4 py-4">
               {links.map((l) => (
@@ -247,7 +247,7 @@ export function Header() {
                   onClick={closeAll}
                   className={`rounded-lg px-3 py-3 text-base ${
                     isActive(l.href)
-                      ? "bg-white/10 text-white"
+                      ? "bg-accent/15 text-ink-1"
                       : "text-ink-3"
                   }`}
                 >
@@ -255,7 +255,7 @@ export function Header() {
                 </Link>
               ))}
 
-              <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+              <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
                 {t("services")}
               </p>
               {SERVICE_SILO_ROUTES.map((route) => (
@@ -265,7 +265,7 @@ export function Header() {
                   onClick={closeAll}
                   className={`rounded-lg px-3 py-2.5 text-sm ${
                     pathname.startsWith(route.path)
-                      ? "bg-white/10 text-white"
+                      ? "bg-accent/15 text-ink-1"
                       : "text-ink-3"
                   }`}
                 >
@@ -276,7 +276,7 @@ export function Header() {
               <Link
                 href="/preventivo"
                 onClick={closeAll}
-                className="mt-4 rounded-full bg-[#c9a227] px-5 py-3 text-center text-sm font-semibold text-[#0a0a0a]"
+                className="mt-4 rounded-full bg-accent px-5 py-3 text-center text-sm font-semibold text-on-accent"
               >
                 {t("quote")}
               </Link>
@@ -301,11 +301,11 @@ function NavLink({
     <Link
       href={href}
       className={`relative z-0 rounded-full px-2.5 py-2 text-sm font-medium transition-colors ${
-        active ? "text-white" : "text-ink-3 hover:text-white"
+        active ? "text-ink-1" : "text-ink-3 hover:text-ink-1"
       }`}
     >
       {active && (
-        <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-white/10" />
+        <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-accent/15" />
       )}
       {children}
     </Link>
@@ -322,7 +322,7 @@ function LocaleSwitcher() {
       href={pathname}
       locale={other}
       aria-label={other === "en" ? t("switchToEnglish") : t("switchToItalian")}
-      className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-ink-3 transition hover:border-[#c9a227]/50 hover:text-white"
+      className="rounded-full border border-line px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-ink-3 transition hover:border-accent/50 hover:text-ink-1"
     >
       {other === "en" ? t("langEn") : t("langIt")}
     </Link>

@@ -65,13 +65,13 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
         ]}
       />
       <FaqPageJsonLd items={faqLd} />
-      <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+      <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
         <article className="mx-auto max-w-3xl">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
               {t("eyebrow")}
             </p>
-            <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">{t("title")}</h1>
+            <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">{t("title")}</h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-3">{t("intro")}</p>
           </FadeIn>
 
@@ -84,8 +84,8 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
           </div>
 
           <FadeIn delay={0.2}>
-            <div className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#c9a227]">
+            <div className="mt-14 rounded-2xl border border-line bg-raised p-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                 {t("internalTitle")}
               </p>
               <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
@@ -93,7 +93,7 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                      className="text-accent-ink underline-offset-2 hover:text-accent-deep hover:underline"
                     >
                       {item.label}
                     </Link>
@@ -105,12 +105,12 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
 
           <section className="mt-16" aria-labelledby="impresa-faq-heading">
             <FadeIn delay={0.24}>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
                 {t("faqLabel")}
               </p>
               <h2
                 id="impresa-faq-heading"
-                className="mt-3 font-serif text-2xl text-white sm:text-3xl"
+                className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl"
               >
                 {t("faqTitle")}
               </h2>
@@ -118,8 +118,8 @@ export default async function ImpresaEdileModenaPage({ params }: Props) {
             <dl className="mt-8 space-y-6">
               {faqs.map((item, i) => (
                 <FadeIn key={item.q} delay={0.06 * i}>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4">
-                    <dt className="font-medium text-white">{item.q}</dt>
+                  <div className="rounded-2xl border border-line bg-raised px-5 py-4">
+                    <dt className="font-medium text-ink-1">{item.q}</dt>
                     <dd className="mt-2 text-sm leading-relaxed text-ink-3">{item.a}</dd>
                   </div>
                 </FadeIn>

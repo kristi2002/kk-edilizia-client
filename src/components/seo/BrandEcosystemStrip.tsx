@@ -18,16 +18,16 @@ export async function BrandEcosystemStrip() {
   const t = await getTranslations("BrandEcosystem");
   return (
     <section
-      className="border-y border-white/[0.06] bg-[#0a0a0a] px-4 py-16 sm:px-6"
+      className="rule-gold border-b border-line bg-sunken px-4 py-16 sm:px-6"
       aria-labelledby="brand-ecosystem-heading"
     >
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
           {t("label")}
         </p>
         <h2
           id="brand-ecosystem-heading"
-          className="mt-3 font-serif text-2xl text-white sm:text-3xl"
+          className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl"
         >
           {t("title")}
         </h2>
@@ -38,7 +38,7 @@ export async function BrandEcosystemStrip() {
               <a
                 href={b.href}
                 rel="noopener noreferrer"
-                className="inline-flex rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-ink-2 transition hover:border-[#c9a227]/40 hover:text-[#c9a227] sm:text-sm"
+                className="inline-flex rounded-full border border-line bg-raised px-3 py-1.5 text-xs font-medium text-ink-2 transition hover:border-accent/40 hover:text-accent-ink sm:text-sm"
               >
                 {t(`brands.${b.key}`)}
               </a>

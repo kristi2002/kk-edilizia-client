@@ -25,13 +25,13 @@ export default async function PrenotaPage({ params }: Props) {
   const t = await getTranslations("Booking");
 
   return (
-    <main className="flex flex-1 flex-col bg-[#080808] px-4 py-20 sm:px-6">
+    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
       <div className="mx-auto w-full max-w-3xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
-          <h1 className="mt-3 font-serif text-4xl text-white md:text-5xl">
+          <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
             {t("title")}
           </h1>
           <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
@@ -48,7 +48,7 @@ export default async function PrenotaPage({ params }: Props) {
             {t("fallbackCta")}{" "}
             <Link
               href="/contatti"
-              className="font-medium text-[#c9a227] underline hover:text-[#ddb92e]"
+              className="font-medium text-accent-ink underline hover:text-accent-deep"
             >
               {t("fallbackLink")}
             </Link>

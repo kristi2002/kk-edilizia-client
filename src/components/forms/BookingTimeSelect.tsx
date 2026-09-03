@@ -63,18 +63,18 @@ export function BookingTimeSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}
-        className="mt-1.5 flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-white/15 bg-black/40 text-left text-sm text-white transition focus-within:border-[#c9a227] focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227]"
+        className="mt-1.5 flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-control-line bg-raised text-left text-sm text-ink-1 transition focus-within:border-accent focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227]"
         onClick={() => setOpen((o) => !o)}
       >
         <span
           className={`flex min-w-0 flex-1 items-center px-4 py-3 ${
-            value ? "text-white" : "text-ink-4"
+            value ? "text-ink-1" : "text-ink-4"
           }`}
         >
           {label}
         </span>
         <span
-          className="flex w-11 shrink-0 items-center justify-center border-l border-white/10 text-ink-3"
+          className="flex w-11 shrink-0 items-center justify-center border-l border-line text-ink-3"
           aria-hidden
         >
           <ChevronDown
@@ -88,7 +88,7 @@ export function BookingTimeSelect({
         <ul
           id={listId}
           role="listbox"
-          className="absolute bottom-full left-0 right-0 z-30 mb-1.5 max-h-[min(11rem,40vh)] overflow-y-auto overscroll-contain rounded-xl border border-white/15 bg-[#0a0a0a] py-1 shadow-[0_-8px_32px_rgba(0,0,0,0.55)] [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent]"
+          className="absolute bottom-full left-0 right-0 z-30 mb-1.5 max-h-[min(11rem,40vh)] overflow-y-auto overscroll-contain rounded-xl border border-line bg-page py-1 shadow-[0_-8px_32px_rgba(0,0,0,0.55)] [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent]"
         >
           {slots.map((slot) => {
             const selected = value === slot;
@@ -100,8 +100,8 @@ export function BookingTimeSelect({
                   aria-selected={selected}
                   className={`w-full px-3 py-1.5 text-left text-sm transition ${
                     selected
-                      ? "bg-[#c9a227]/15 text-[#c9a227]"
-                      : "text-ink-3 hover:bg-white/[0.06] hover:text-white"
+                      ? "bg-accent/15 text-accent-ink"
+                      : "text-ink-3 hover:bg-raised-2 hover:text-ink-1"
                   }`}
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => {

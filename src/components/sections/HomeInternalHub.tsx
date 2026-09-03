@@ -39,17 +39,17 @@ export async function HomeInternalHub() {
   const t = await getTranslations("HomeInternalHub");
   return (
     <section
-      className="border-y border-white/[0.06] bg-[#0a0a0a] px-4 py-20 sm:px-6"
+      className="border-y border-line bg-raised px-4 py-20 sm:px-6"
       aria-labelledby="home-internal-hub-heading"
     >
       <div className="mx-auto max-w-6xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
           <h2
             id="home-internal-hub-heading"
-            className="mt-3 font-serif text-3xl text-white sm:text-4xl"
+            className="mt-3 font-serif text-3xl text-ink-1 sm:text-4xl"
           >
             {t("title")}
           </h2>
@@ -62,11 +62,11 @@ export async function HomeInternalHub() {
               <FadeIn delay={i * 0.05}>
                 <Link
                   href={item.href}
-                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-[#c9a227]/35 hover:bg-white/[0.05]"
+                  className="group flex h-full flex-col rounded-2xl border border-line bg-raised p-5 transition hover:border-accent/35 hover:bg-raised"
                 >
                   <span className="flex items-start justify-between gap-3">
-                    <span className="font-medium text-white">{t(item.titleKey)}</span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-[#c9a227] opacity-70 transition group-hover:opacity-100" />
+                    <span className="font-medium text-ink-1">{t(item.titleKey)}</span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-accent-ink opacity-70 transition group-hover:opacity-100" />
                   </span>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-3">
                     {t(item.descKey)}

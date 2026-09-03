@@ -78,18 +78,18 @@ export function BookingDatePicker({
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={calendarId}
-        className="flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-white/15 bg-black/40 text-left text-sm text-white transition focus-within:border-[#c9a227] focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227] mt-1.5"
+        className="flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-control-line bg-raised text-left text-sm text-ink-1 transition focus-within:border-accent focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227] mt-1.5"
         onClick={() => setOpen((o) => !o)}
       >
         <span
           className={`flex min-w-0 flex-1 items-center px-4 py-3 ${
-            selected ? "text-white" : "text-ink-4"
+            selected ? "text-ink-1" : "text-ink-4"
           }`}
         >
           {label}
         </span>
         <span
-          className="flex w-11 shrink-0 items-center justify-center border-l border-white/10 text-ink-3"
+          className="flex w-11 shrink-0 items-center justify-center border-l border-line text-ink-3"
           aria-hidden
         >
           <Calendar className="h-4 w-4" strokeWidth={1.75} />
@@ -99,7 +99,7 @@ export function BookingDatePicker({
       {open ? (
         <div
           id={calendarId}
-          className="booking-date-popover absolute left-0 right-0 top-full z-30 mt-1.5 rounded-xl border border-white/15 bg-[#0a0a0a] p-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)]"
+          className="booking-date-popover absolute left-0 right-0 top-full z-30 mt-1.5 rounded-xl border border-line bg-page p-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)]"
           onMouseDown={(e) => e.preventDefault()}
         >
           <DayPicker

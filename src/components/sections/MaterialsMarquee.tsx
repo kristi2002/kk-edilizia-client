@@ -18,14 +18,14 @@ export async function MaterialsMarquee() {
     .filter(Boolean);
 
   return (
-    <section className="rule-gold relative overflow-hidden bg-surface-warm px-4 py-16 sm:px-6">
+    <section className="rule-gold relative overflow-hidden bg-sunken px-4 py-16 sm:px-6">
       <WatermarkRing position="top-right" />
       <div className="relative mx-auto max-w-6xl">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {t("label")}
           </p>
-          <h2 className="mt-3 max-w-2xl font-serif text-2xl text-white sm:text-3xl">
+          <h2 className="mt-3 max-w-2xl font-serif text-2xl text-ink-1 sm:text-3xl">
             {t("title")}
           </h2>
         </FadeIn>

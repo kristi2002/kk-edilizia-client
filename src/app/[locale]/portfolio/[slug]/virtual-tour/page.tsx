@@ -85,20 +85,20 @@ export default async function ProjectVirtualTourPage({ params }: Props) {
           },
         ]}
       />
-      <main className="flex flex-1 flex-col bg-[#080808] px-4 py-16 sm:px-6">
+      <main className="flex flex-1 flex-col bg-page px-4 py-16 sm:px-6">
         <div className="mx-auto w-full max-w-6xl">
           <FadeIn>
             <Link
               href={`/portfolio/${project.slug}`}
-              className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-white"
+              className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-ink-1"
             >
               <ArrowLeft className="h-4 w-4" />
               {t("virtualTourBack")}
             </Link>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
               {t("virtualTourLabel")}
             </p>
-            <h1 className="mt-3 font-serif text-3xl text-white md:text-4xl">
+            <h1 className="mt-3 font-serif text-3xl text-ink-1 md:text-4xl">
               {loc.title}
             </h1>
             <p className="mt-3 max-w-2xl text-ink-3">{t("virtualTourIntro")}</p>

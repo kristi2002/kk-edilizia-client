@@ -75,8 +75,8 @@ export function HeroBackgroundLayers() {
         </video>
       ) : null}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/30 via-[#080808]/75 to-[#080808]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#c9a227]/12 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-inverse/30 via-inverse/75 to-inverse" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/15 via-transparent to-transparent" />
     </>
   );
 }
@@ -86,10 +86,10 @@ const subscribeNever = () => () => {};
 /** CSS-only backdrop: blueprint grid, a warm pool of light, and two oversized rings. */
 function DesignedGround() {
   return (
-    <div aria-hidden="true" className="absolute inset-0 bg-[#080808]">
+    <div aria-hidden="true" className="absolute inset-0 bg-inverse">
       <span className="wm-grid opacity-90" />
-      <span className="absolute -left-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-[#c9a227]/[0.07] blur-3xl" />
-      <span className="absolute -right-32 bottom-0 h-[26rem] w-[26rem] rounded-full bg-[#a9822f]/[0.06] blur-3xl" />
+      <span className="absolute -left-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-accent/10 blur-3xl" />
+      <span className="absolute -right-32 bottom-0 h-[26rem] w-[26rem] rounded-full bg-accent-deep/10 blur-3xl" />
       <span className="wm-ring -right-40 top-10 hidden sm:block" />
       <span className="wm-ring -bottom-52 left-1/3 hidden lg:block" />
     </div>

@@ -71,7 +71,7 @@ export default async function ProjectPage({ params }: Props) {
           },
         ]}
       />
-      <main className="flex flex-1 flex-col bg-[#080808]">
+      <main className="flex flex-1 flex-col bg-page">
         <div className="relative h-[min(55vh,520px)] w-full">
           <Image
             src={project.coverImage}
@@ -92,15 +92,15 @@ export default async function ProjectPage({ params }: Props) {
             <FadeIn>
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-white"
+                className="inline-flex items-center gap-2 text-sm text-ink-3 transition hover:text-ink-1"
               >
                 <ArrowLeft className="h-4 w-4" />
                 {t("back")}
               </Link>
-              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#c9a227]">
+              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
                 {loc.category} · {project.year} · {loc.location}
               </p>
-              <h1 className="mt-3 max-w-3xl font-serif text-4xl text-white md:text-5xl">
+              <h1 className="mt-3 max-w-3xl font-serif text-4xl text-ink-1 md:text-5xl">
                 {loc.title}
               </h1>
             </FadeIn>
@@ -110,7 +110,7 @@ export default async function ProjectPage({ params }: Props) {
         <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
           <FadeIn>
             <div className="mb-14">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c9a227]">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
                 {tPort("beforeAfter")}
               </p>
               <p className="mt-2 text-sm text-ink-4">
@@ -161,7 +161,7 @@ export default async function ProjectPage({ params }: Props) {
                       {i > 0 ? " · " : null}
                       <Link
                         href={route.path}
-                        className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                        className="text-accent-ink underline-offset-2 hover:text-accent-deep hover:underline"
                       >
                         {label}
                       </Link>
@@ -174,7 +174,7 @@ export default async function ProjectPage({ params }: Props) {
                   {t("crossSellModena")}{" "}
                   <Link
                     href="/ristrutturazione-bagno"
-                    className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                    className="text-accent-ink underline-offset-2 hover:text-accent-deep hover:underline"
                   >
                     {t("crossSellBagno")}
                   </Link>
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: Props) {
                 {t("crossSellImpresaPrefix")}
                 <Link
                   href="/impresa-edile-modena"
-                  className="text-[#c9a227] underline-offset-2 hover:text-[#ddb92e] hover:underline"
+                  className="text-accent-ink underline-offset-2 hover:text-accent-deep hover:underline"
                 >
                   {t("crossSellImpresaLink")}
                 </Link>
@@ -196,9 +196,9 @@ export default async function ProjectPage({ params }: Props) {
 
           {projectHasVirtualTour(project.virtualTour) ? (
             <FadeIn>
-              <div className="mt-12 rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/5 px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+              <div className="mt-12 rounded-2xl border border-accent/25 bg-accent/5 px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
                 <div>
-                  <p className="text-sm font-medium text-white">
+                  <p className="text-sm font-medium text-ink-1">
                     {t("virtualTourLabel")}
                   </p>
                   <p className="mt-1 text-sm text-ink-4">
@@ -207,7 +207,7 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
                 <Link
                   href={`/portfolio/${project.slug}/virtual-tour`}
-                  className="mt-4 inline-flex shrink-0 justify-center rounded-full border border-[#c9a227]/50 bg-[#c9a227]/15 px-6 py-2.5 text-sm font-semibold text-[#c9a227] transition hover:bg-[#c9a227]/25 sm:mt-0"
+                  className="mt-4 inline-flex shrink-0 justify-center rounded-full border border-accent/50 bg-accent/15 px-6 py-2.5 text-sm font-semibold text-accent-ink transition hover:bg-accent/25 sm:mt-0"
                 >
                   {t("virtualTourCta")}
                 </Link>
@@ -238,11 +238,11 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <FadeIn>
-            <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <div className="mt-16 rounded-2xl border border-line bg-raised p-8 text-center">
               <p className="text-ink-3">{t("similar")}</p>
               <Link
                 href="/preventivo"
-                className="mt-6 inline-flex rounded-full bg-[#c9a227] px-8 py-3 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#ddb92e]"
+                className="mt-6 inline-flex rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
               >
                 {t("cta")}
               </Link>
