@@ -8,20 +8,30 @@ import { useReducedMotion } from "framer-motion";
  * Hero backdrop.
  *
  * Was a hotlinked Unsplash photograph of a stranger's face, reused on two other pages
- * and sitting on the LCP path behind a third-party DNS + TLS handshake. Until the
- * company's own media exists this renders a designed, self-contained ground.
+ * and sitting on the LCP path behind a third-party DNS + TLS handshake. Now self-hosted:
+ * a locked-off shot of a facade restoration from scaffolding — stock footage standing in
+ * until the company's own site photography exists.
  *
- * To switch media on, drop the files into `public/media/` and flip HERO_MEDIA:
+ * Source: Pexels #32228167 (Pexels License — commercial use, no attribution required).
+ * Re-cut from the 1080p original: 1280x720, silent, and looped seamlessly by crossfading
+ * the tail back over the head, so the 7.3s repeat has no visible seam (endpoints match at
+ * ~39 dB PSNR). No face is identifiable in frame.
+ *
+ * To swap the media, replace the files in `public/media/` keeping these constraints:
  *   hero-poster.jpg   the still (must be the video's own first frame)
  *   hero.webm/.mp4    8-12s silent loop, 1280x720, webm under ~2.5 MB
+ * Setting either field back to null restores the CSS-only <DesignedGround /> below.
  *
  * The poster stays mounted underneath so it — not the video — remains the LCP
  * candidate, and the video fades in only once it is genuinely playing, so there is no
  * black frame between the two.
  */
 const HERO_MEDIA = {
-  poster: null as string | null,
-  video: null as { webm: string; mp4: string } | null,
+  poster: "/media/hero-poster.jpg" as string | null,
+  video: { webm: "/media/hero.webm", mp4: "/media/hero.mp4" } as {
+    webm: string;
+    mp4: string;
+  } | null,
 };
 
 export function HeroBackgroundLayers() {

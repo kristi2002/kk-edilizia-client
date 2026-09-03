@@ -5,9 +5,15 @@ import type { ProjectTypeDef } from "@/lib/data/project-types";
  * Portfolio statico / Redis: sostituisci `coverImage`, `gallery`, `beforeAfter` con file in `public/`
  * o URL blob di produzione quando hai le foto (vedi CHECKLIST).
  *
- * Panorama equirettangolare di esempio (Pannellum demo) — sostituire da admin.
+ * Media dimostrativi: placeholder locali, non foto reali. Sostituire da admin (blob)
+ * o in `public/` quando arrivano le foto del cantiere, poi accendere
+ * NEXT_PUBLIC_ENABLE_PORTFOLIO.
  */
-export const DEMO_PANORAMA_URL = "https://pannellum.org/images/alma.jpg";
+/**
+ * Placeholder panorama. This pointed at pannellum.org's demo image — the ALMA
+ * observatory in Chile — which the 360 tour presented as a K.K Edilizia project.
+ */
+export const DEMO_PANORAMA_URL = "/virtual-tour/projects/ristrutturazione-appartamento-isola/living-room.jpg";
 
 export type Project = {
   slug: string;
@@ -143,16 +149,16 @@ export const staticProjects: Project[] = [
     descriptionEn:
       "Work on stairwell core with repair of unsafe areas, thermal coat, and painting. Coordination with administrator and residents; site logistics to minimise disruption.",
     coverImage:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=80",
+      "/media/placeholder.jpg",
     beforeAfter: {
       before:
-        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80",
+        "/media/placeholder.jpg",
       after:
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80",
+        "/media/placeholder.jpg",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80",
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80",
+      "/media/placeholder.jpg",
+      "/media/placeholder.jpg",
     ],
     virtualTour: { scenes: [] },
   },
@@ -175,16 +181,16 @@ export const staticProjects: Project[] = [
     descriptionEn:
       "Bespoke design with reinforced waterproofing, underfloor heating, and stone-effect porcelain. Sauna installation with humidity control and dedicated mechanical ventilation.",
     coverImage:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1600&q=80",
+      "/media/placeholder.jpg",
     beforeAfter: {
       before:
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
+        "/media/placeholder.jpg",
       after:
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+        "/media/placeholder.jpg",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+      "/media/placeholder.jpg",
+      "/media/placeholder.jpg",
     ],
     virtualTour: { scenes: [] },
   },
@@ -207,16 +213,16 @@ export const staticProjects: Project[] = [
     descriptionEn:
       "220 m² refit with movable partitions, structured cabling, and DALI lighting. Phased handover for business continuity.",
     coverImage:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+      "/media/placeholder.jpg",
     beforeAfter: {
       before:
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
+        "/media/placeholder.jpg",
       after:
-        "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80",
+        "/media/placeholder.jpg",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
-      "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80",
+      "/media/placeholder.jpg",
+      "/media/placeholder.jpg",
     ],
     virtualTour: { scenes: [] },
   },

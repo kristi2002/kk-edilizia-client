@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { Shield, Users, Award, FileCheck } from "lucide-react";
+import { Shield, Users, Award, FileCheck, Camera } from "lucide-react";
 import { getSite } from "@/lib/data/site-store";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
@@ -19,10 +18,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-const workPhoto =
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80";
-const sitePhoto =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80";
 
 export default async function ChiSiamoPage({ params }: Props) {
   const { locale } = await params;
@@ -121,35 +116,27 @@ export default async function ChiSiamoPage({ params }: Props) {
               })}
             </p>
             <p className="mt-2 text-xs text-ink-4">{t("galleryFooterNote")}</p>
+            {/*
+              Placeholders, not photographs. These two slots hotlinked Unsplash — one of
+              them the same stranger's face the old hero used — presented as this
+              company’s work. Swap each tile for an <Image> once real site photos exist.
+            */}
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <figure className="overflow-hidden rounded-2xl border border-line">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={workPhoto}
-                    alt={t("fig1Alt")}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                </div>
-                <figcaption className="border-t border-line px-4 py-3 text-xs text-ink-4">
-                  {t("fig1Caption")}
-                </figcaption>
-              </figure>
-              <figure className="overflow-hidden rounded-2xl border border-line">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={sitePhoto}
-                    alt={t("fig2Alt")}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                </div>
-                <figcaption className="border-t border-line px-4 py-3 text-xs text-ink-4">
-                  {t("fig2Caption")}
-                </figcaption>
-              </figure>
+              {[t("fig1Caption"), t("fig2Caption")].map((caption) => (
+                <figure
+                  key={caption}
+                  className="overflow-hidden rounded-2xl border border-line bg-raised"
+                >
+                  <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-sunken">
+                    <span aria-hidden="true" className="wm-grid" />
+                    <span aria-hidden="true" className="wm-ring -bottom-40 -right-36" />
+                    <Camera className="relative h-8 w-8 text-accent-ink opacity-50" aria-hidden />
+                  </div>
+                  <figcaption className="border-t border-line px-4 py-3 text-xs text-ink-4">
+                    {caption}
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </div>
         </FadeIn>
