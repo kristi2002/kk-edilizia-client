@@ -67,9 +67,31 @@ Il codice è già pronto in **`src/components/sections/HeroBackgroundLayers.tsx`
 
 ---
 
+## 6-ter. Foto della home (settembre 2026)
+
+La home ha ora **14 fotografie** in **`public/media/work/`**, indicizzate da **`src/lib/media/home-imagery.ts`** (slug → file + id Pexels di origine). Sono **stock su licenza Pexels** (uso commerciale libero, senza attribuzione): stanno lì **al posto** delle foto aziendali, esattamente come il video dell’hero.
+
+Scelta deliberata: **solo materiali, dettagli e lavorazioni, nessun volto riconoscibile**. Una foto stock di un operaio identificabile sul sito di un’impresa suggerisce che quella persona ci lavori — e non è un’affermazione che possiamo fare.
+
+- [ ] **Sostituire con foto proprie** — stesso percorso, taglio **3:2** (~1200×800). Non serve toccare altro: i componenti leggono il manifest.
+- [ ] **Dopo la sostituzione, ricalcolare il tono:** `node scripts/compute-image-tone.mjs work` (il set è un argomento: `work` per la home, `about` per chi siamo), poi incollare i valori `tone` in `src/lib/media/home-imagery.ts`. Serve solo alle 4 card di `Services`, dove la foto sta **sotto** un velo bianco: una foto già chiara (i disegni di progetto erano luma 205 su 255) lì sparisce del tutto, mentre una scura resta leggibile. Lo script riporta ogni immagine verso lo stesso tono medio.
+- [ ] **Aggiornare gli `alt`** in **`messages/*.json` → `HomeMedia`** (IT **e** EN): sono testo indicizzabile, quindi **servizio + soggetto + luogo**, non “bagno” e basta.
+- Le 4 card di `Services` usano la foto come **sfondo** (`alt=""`, decorativa); le 9 card dei silos e `HomeLocalIntro` la mostrano **in chiaro** e hanno `alt` reale.
+
+---
+
 ## 7. `src/app/[locale]/chi-siamo/page.tsx`
 
-- [ ] **Media** — foto stock; testo **`galleryFooterNote`** ricorda sostituzione immagini.
+La pagina è stata rifatta (settembre 2026): non è più una colonna di testo con due riquadri vuoti, ma nove sezioni — hero scuro, numeri, manifesto, banda con citazione, quattro pilastri, territorio, mosaico dei cantieri, garanzie, CTA. I componenti stanno in **`src/components/sections/about/`**.
+
+**17 fotografie** in **`public/media/about/`**, indicizzate da **`src/lib/media/about-imagery.ts`**. Stock Pexels come per la home, ma **set separato**: nessuna immagine è condivisa con `/`, così chi passa dalla home a `/chi-siamo` non rivede le stesse foto. Stessa regola di sempre: materiali e lavorazioni, **nessun volto riconoscibile**. Tre scatti sono di Modena (skyline con la Ghirlandina, portici, torre): sono le uniche immagini del sito che affermano un *luogo* invece di un lavoro, ed è un'affermazione che possiamo fare.
+
+- [ ] **Sostituire con foto proprie** — stessi percorsi. **I tagli non sono uniformi**: l'hero è 16:9, la banda 21:9, due verticali 4:5, un inserto 1:1, il resto 3:2 (~1200×800). Il rapporto di ogni file è annotato nel manifest; cambiarlo fa comparire bande nere.
+- [ ] **Dopo la sostituzione:** `node scripts/compute-image-tone.mjs about` e incollare i `tone` nel manifest. Serve **solo** alle 4 card dei pilastri, le uniche con la foto sotto un velo.
+- [ ] **Aggiornare gli `alt`** in `messages/*.json` → **`AboutMedia`** (IT **e** EN).
+- [x] ~~Testo `galleryFooterNote`~~ — la vecchia copia della galleria era rivolta a chi mantiene il repository ("carica i file in `public/images/` e aggiorna i percorsi in `chi-siamo/page.tsx`") ed era **stampata ai visitatori** in entrambe le lingue. Sostituita da `galleryNote`, che dichiara onestamente che sono immagini di riferimento su licenza Pexels e non cantieri nostri.
+- [ ] **Categorie SOA e qualificazioni** — si aggiornano in **`site.certifications`** (`src/lib/site.ts` o pannello admin), non nei messaggi. Anche qui la vecchia `certificationsHint` mostrava ai visitatori l'istruzione "aggiorna questo testo con categorie SOA reali": rimossa, il pannello ora rende solo il dato.
+- [ ] **`site.insurance` / `site.compliance` / `site.certifications` sono monolingua**: la versione EN della pagina li mostra in italiano. Servono campi EN nel record azienda se `/en` deve essere completo.
 
 ---
 
@@ -117,4 +139,4 @@ npm run build
 
 ---
 
-*Ultimo aggiornamento: settembre 2026 — rimedi perizia tecnica; media, indirizzo, numeri e revisione legale ancora a carico del titolare. Precedente: aprile 2026 — allineamento repository; media e revisione legale esterna ancora a carico del titolare.*
+*Ultimo aggiornamento: settembre 2026 (rev. 2) — home alleggerita: copy a schermo da ~1.180 a ~700 parole senza perdere testo indicizzabile (anzi, +366: la FAQ ora rende **tutte** le risposte nell’HTML e `/` emette `FAQPage`); `BrandEcosystemStrip` accorpato in `Materials`; 14 foto in `public/media/work/` (§6-ter). Precedente: settembre 2026 — rimedi perizia tecnica; media, indirizzo, numeri e revisione legale ancora a carico del titolare. Precedente: aprile 2026 — allineamento repository; media e revisione legale esterna ancora a carico del titolare.*

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { Phone, Mail, Clock } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { WatermarkWord } from "@/components/decor/Watermark";
 import { ContactForm } from "@/components/contatti/ContactForm";
+import { ContactHero } from "@/components/contatti/ContactHero";
+import { ContactAside } from "@/components/contatti/ContactAside";
+import { ContactRoutes } from "@/components/contatti/ContactRoutes";
 import { getSite } from "@/lib/data/site-store";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
 import enMessages from "../../../../messages/en.json";
@@ -22,119 +24,54 @@ export async function generateMetadata({
   });
 }
 
+/**
+ * Three grounds in sequence — dark, paper, sunken — the same rhythm the home page reads
+ * in, rather than the single flat panel this page used to be. The dark band carries the
+ * channels a visitor reaches for first; the paper band is the form and the details you
+ * need while filling it; the sunken band is everything that is an alternative to writing
+ * a message at all.
+ */
 export default async function ContattiPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("ContactsPage");
   const site = await getSite();
+
   return (
-    <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
-      <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-2">
-        <div>
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-              {t("eyebrow")}
-            </p>
-            <h1 className="mt-3 font-serif text-4xl text-ink-1 md:text-5xl">
-              {t("title")}
-            </h1>
-            <p className="mt-4 text-lg text-ink-3">{t("intro")}</p>
-          </FadeIn>
+    <main className="flex flex-1 flex-col">
+      <ContactHero site={site} />
 
-          <ul className="mt-12 space-y-6">
-            <li>
-              <FadeIn delay={0.05}>
-                <div className="flex gap-4">
-                  <Phone className="mt-1 h-5 w-5 shrink-0 text-accent-ink" />
-                  <div>
-                    <p className="text-sm text-ink-4">{t("phone")}</p>
-                    <a
-                      href={`tel:${site.phoneTel}`}
-                      className="text-lg font-medium text-ink-1 hover:text-accent-ink"
-                    >
-                      {site.phoneDisplay}
-                    </a>
-                  </div>
-                </div>
-              </FadeIn>
-            </li>
-            <li>
-              <FadeIn delay={0.1}>
-                <div className="flex gap-4">
-                  <Mail className="mt-1 h-5 w-5 shrink-0 text-accent-ink" />
-                  <div>
-                    <p className="text-sm text-ink-4">{t("email")}</p>
-                    <a
-                      href={`mailto:${site.email}`}
-                      className="text-lg font-medium text-ink-1 hover:text-accent-ink"
-                    >
-                      {site.email}
-                    </a>
-                  </div>
-                </div>
-              </FadeIn>
-            </li>
-            <li>
-              <FadeIn delay={0.12}>
-                <div className="flex gap-4">
-                  <Mail className="mt-1 h-5 w-5 shrink-0 text-accent-ink" />
-                  <div>
-                    <p className="text-sm text-ink-4">{t("pec")}</p>
-                    <a
-                      href={`mailto:${site.pec}`}
-                      className="text-lg font-medium text-ink-1 hover:text-accent-ink"
-                    >
-                      {site.pec}
-                    </a>
-                  </div>
-                </div>
-              </FadeIn>
-            </li>
-            <li>
-              <FadeIn delay={0.2}>
-                <div className="flex gap-4">
-                  <Clock className="mt-1 h-5 w-5 shrink-0 text-accent-ink" />
-                  <div>
-                    <p className="text-sm text-ink-4">{t("hours")}</p>
-                    <p className="text-ink-1">{t("hoursValue")}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            </li>
-          </ul>
+      <section className="rule-gold relative overflow-hidden border-b border-line bg-page px-4 py-20 sm:px-6 md:py-24">
+        <WatermarkWord>MODENA</WatermarkWord>
 
-          {site.publicReviewUrl ? (
-            <FadeIn delay={0.22}>
-              <p className="mt-10 text-sm text-ink-4">
-                {t("reviewsPrefix")}{" "}
-                <a
-                  href={site.publicReviewUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-accent-ink hover:underline"
-                >
-                  {t("reviewsLink")}
-                </a>
+        <div className="relative mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <FadeIn>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
+                {t("formLabel")}
+              </p>
+              <h2 className="mt-3 text-balance font-serif text-3xl text-ink-1 sm:text-4xl">
+                {t("formTitle")}
+              </h2>
+              <p className="mt-4 max-w-xl text-pretty text-ink-3">
+                {t("formIntro")}
               </p>
             </FadeIn>
-          ) : null}
 
-          <FadeIn delay={0.25}>
-            <Link
-              href="/preventivo"
-              className="mt-12 inline-flex rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
-            >
-              {t("ctaQuote")}
-            </Link>
-          </FadeIn>
-        </div>
+            <FadeIn delay={0.08}>
+              <div className="mt-9">
+                <ContactForm />
+              </div>
+            </FadeIn>
+          </div>
 
-        <div className="flex flex-col gap-8">
-          <FadeIn delay={0.08}>
-            <ContactForm />
-          </FadeIn>
+          <div className="lg:col-span-5">
+            <ContactAside site={site} locale={locale} />
+          </div>
         </div>
-      </div>
+      </section>
+
+      <ContactRoutes site={site} locale={locale} />
     </main>
   );
 }

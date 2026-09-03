@@ -59,10 +59,11 @@
   "HomeLocalIntro": {
     "label": "Construction in Modena",
     "title": "Local contractor serving Modena and the province",
-    "p1": "K.K Edilizia is a building contractor working in Modena and across the province: we focus on residential construction and renovations for private clients, families and small businesses investing in property in the city and surrounding towns. We provide full construction services—from drywall to roof replacement—with a free, detailed quote after a site survey and a single point of contact.",
-    "p2": "We follow applicable rules: where building permits are required, the Modena municipal building code, national construction law and filings (CILA, SCIA or other) prepared by your surveyor or architect apply. We carry out work in line with the approved design and keep you and your technician updated on progress so homeowners and businesses can plan timing and budget realistically.",
-    "p3": "Projects on flats, houses and commercial units across Modena’s most requested areas—from the historic centre to outer districts linked to Sassuolo, Carpi and Formigine. Whether you need a full renovation or targeted work (bathroom, roof, drywall partitions), we focus on site organisation, coordinated suppliers and materials chosen for durability.",
-    "p4": "For materials we rely on brands widely used on Italian sites and recognised in construction: Mapei and Kerakoll systems for mortars, waterproofing, adhesives and finishes; drywall and dry lining often use Knauf or equivalent certified boards depending on acoustics, loads and wet rooms. Actual product lines are listed in the quote with equivalent alternatives, always with technical data sheets aligned with installation standards."
+    "p1": "K.K Edilizia is a building contractor working in Modena and across the province: renovations and residential construction for private clients, families and small businesses.",
+    "p2": "Full construction services — from drywall to roof replacement — with a free quote after a site survey and a single point of contact.",
+    "p3": "Where building permits are required, the Modena municipal building code and national construction law apply: the filings (CILA, SCIA or other) are prepared by your surveyor or architect, while we carry out the work in line with the approved design and keep you and your technician updated on progress.",
+    "p4": "Projects on flats, houses and commercial units across the Modena area — from the historic centre to districts linked to Sassuolo, Carpi and Formigine. For materials we rely on Mapei and Kerakoll systems for mortars, waterproofing and finishes; for drywall and dry lining, Knauf or equivalent certified boards, depending on acoustics, loads and wet rooms.",
+    "moreLabel": "Area, regulations and materials"
   },
   "StatsStrip": {
     "v1": "10+",
@@ -77,7 +78,7 @@
   "Services": {
     "label": "What we do",
     "title": "Full service, one point of contact",
-    "intro": "From demolition to handover: we plan phases, manage suppliers, and keep you updated on progress and timing. Full construction services for homeowners and businesses across the Modena area.",
+    "intro": "We plan the phases, manage suppliers and keep you updated. Full construction services across the Modena area.",
     "r1t": "Renovations",
     "r1d": "Apartments and houses, systems and finishes with a single coordinator.",
     "r2t": "Construction",
@@ -88,19 +89,28 @@
     "r4d": "Flooring, painting, and details that define the look."
   },
   "ProcessSteps": {
-    "label": "After the site visit",
+    "label": "From request to handover",
     "title": "How we work, step by step",
-    "intro": "Transparency on what happens after the first site visit, so you know what to expect before signing.",
+    "intro": "Four steps, from first contact to documented handover. You start the first two.",
     "s1t": "Request & site visit",
     "s1d": "Gathering requirements, inspecting the space, and initial technical checks.",
+    "s1Action": "Book the site visit",
     "s2t": "Proposal & quote",
     "s2d": "A proposal with line items, indicative materials, and a schedule.",
+    "s2Action": "Request the quote",
     "s3t": "Contract & kick-off",
     "s3d": "Contract, site planning, and supplier orders.",
     "s4t": "Build & handover",
     "s4d": "Work with regular updates, testing, and documented handover.",
-    "cta": "Want to start here?",
-    "ctaLink": "Request an online quote"
+    "startLabel": "Modena & province",
+    "startTitle": "Where to start",
+    "startIntro": "The other pages worth reading before you decide.",
+    "linkImpresa": "Building contractor in Modena",
+    "descImpresa": "Who we are, what we offer and common questions.",
+    "linkPortfolio": "Project portfolio",
+    "descPortfolio": "Photos and details from real sites in the province.",
+    "linkContatti": "Contact",
+    "descContatti": "Phone, email and message form."
   },
   "CostEstimator": {
     "badge": "Tool",
@@ -129,26 +139,26 @@
   "HomeServiceSilos": {
     "label": "Services",
     "title": "Specialisations in Modena and province",
-    "intro": "Dedicated pages for high-intent searches: clear, local expertise for homeowners and businesses.",
+    "intro": "Dedicated pages for the most searched services in Modena.",
     "readMore": "Learn more",
     "chiaviInManoTitle": "Turnkey renovations",
-    "chiaviInManoDesc": "General contractor in Modena: end-to-end coordination with one point of contact.",
+    "chiaviInManoDesc": "End-to-end coordination with one point of contact.",
     "bagnoTitle": "Bathroom renovation",
     "bagnoDesc": "Turnkey refits, tiling, plumbing and lighting.",
     "cucinaTitle": "Kitchen renovation",
-    "cucinaDesc": "Demolition, plumbing and electrics, finishes and handover.",
+    "cucinaDesc": "Demolition, services and finishes, up to code.",
     "elettricoTitle": "Electrical systems",
-    "elettricoDesc": "Consumer units, sockets, lighting and compliance (BTicino/Vimar).",
+    "elettricoDesc": "Consumer units, sockets and compliance (BTicino/Vimar).",
     "idraulicoTitle": "Plumbing & heating",
-    "idraulicoDesc": "Water, heating and air conditioning, coordinated with building works.",
+    "idraulicoDesc": "Water and gas systems, boilers and air conditioning.",
     "murarieTitle": "Masonry works",
     "murarieDesc": "Controlled demolition, partitions and structural repairs.",
     "cartongessoIsolamentoTitle": "Drywall & insulation",
-    "cartongessoIsolamentoDesc": "Thermal/acoustic upgrades with dry lining systems.",
+    "cartongessoIsolamentoDesc": "Partitions, dropped ceilings and thermal/acoustic insulation.",
     "cartongessoTitle": "Drywall / plasterboard",
     "cartongessoDesc": "Partitions, dropped ceilings and bulkheads ready to paint.",
     "pavimentiRivestimentiTitle": "Floors & wall finishes",
-    "pavimentiRivestimentiDesc": "Tiling, parquet and wall cladding with professional systems.",
+    "pavimentiRivestimentiDesc": "Tiling, parquet and cladding with Kerakoll/Mapei systems.",
     "tettoFacciateTitle": "Roof & façades",
     "tettoFacciateDesc": "Roofing, façades and scaffolding with clear scheduling.",
     "tettoTitle": "Roof replacement",
@@ -174,7 +184,67 @@
       "body5": "Documentation is organised to support compliance and any tax relief handled by your advisor.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and measure",
+          "text": "Dimensions, the state of services and structure, access and building rules, a first budget range."
+        },
+        {
+          "icon": "hardhat",
+          "title": "A single coordinator",
+          "text": "One contact for bricklayers, plumber, electrician, dryliner and tilers."
+        },
+        {
+          "icon": "hammer",
+          "title": "Strip-out and masonry",
+          "text": "Selective demolition, new partitions, chases, making good and disposal at a licensed site."
+        },
+        {
+          "icon": "wrench",
+          "title": "Plumbing and electrics",
+          "text": "Renewing or upgrading the services, with the installer's declaration of conformity at the end."
+        },
+        {
+          "icon": "paint",
+          "title": "Finishes and laying",
+          "text": "Screeds, plaster, plasterboard, floors, wall tiling, decorating and windows."
+        },
+        {
+          "icon": "file",
+          "title": "Handover and paperwork",
+          "text": "Final clean, a walk-through of the work and the documents needed for warranties and tax relief."
+        }
+      ],
+      "gallery": [
+        "Strip-out stage: partitions out and the structure exposed, before the services are renewed.",
+        "A room at the end of the job: floor laid, decorating finished and the site cleared."
+      ],
+      "headings": [
+        {
+          "title": "What a turnkey renovation includes",
+          "body": "A complete project pulls several trades together: masonry, plumbing and electrics, drylining and insulation, floor and wall tiling, decorating and finishes. We work as a builder organised to manage the dependencies between stages and cut down on rework."
+        },
+        {
+          "title": "Where we work: Modena and the towns around it",
+          "body": "We work regularly in Modena, Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello and Rubiera, adapting protection and logistics to the old town, commercial areas and apartment blocks."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "What is the difference between a builder and a general contractor?",
+          "a": "In practice it is the coordination: a general contractor plans and integrates the stages — masonry, services, finishes — with one point of contact and operational responsibility on site."
+        },
+        {
+          "q": "Do you handle CILA/SCIA applications and building tax relief?",
+          "a": "The application is prepared by the client's qualified professional. We build in line with the design and provide the paperwork needed for the filing, conformity of the services and tax relief."
+        },
+        {
+          "q": "Do you quote free of charge for turnkey renovations in Modena?",
+          "a": "Yes: after a site visit we prepare a free, itemised quote with materials and estimated timings."
+        }
+      ]
     },
     "cucina": {
       "metaTitle": "Kitchen renovation in Modena",
@@ -192,7 +262,67 @@
       "body5": "We keep documentation organised for smooth admin handling.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and layout",
+          "text": "Measurements, waste, gas and socket positions, checked against the kitchen supplier's drawings."
+        },
+        {
+          "icon": "hammer",
+          "title": "Builder's work",
+          "text": "Removing old tiling, any openings, chases and making good flush."
+        },
+        {
+          "icon": "droplets",
+          "title": "Waste and supply",
+          "text": "New connections for sink and dishwasher, with correct falls and a tightness test."
+        },
+        {
+          "icon": "zap",
+          "title": "Dedicated circuits",
+          "text": "Separate lines for oven, induction hob and small appliances, protected to match the load."
+        },
+        {
+          "icon": "fan",
+          "title": "Extraction and venting",
+          "text": "Provision for a flue or recirculation, in line with the building's own rules."
+        },
+        {
+          "icon": "layout",
+          "title": "Tiling and finishes",
+          "text": "Splashback, floor, decorating and sealing, ready for the units to be fitted."
+        }
+      ],
+      "gallery": [
+        "Slab splashback and a continuous worktop: fewer joints and easier to keep clean.",
+        "A kitchen completed after services, tiling and lighting were renewed."
+      ],
+      "headings": [
+        {
+          "title": "Services and safety: a modern kitchen, running costs and compliance",
+          "body": "A kitchen means water, gas where present, electricity and ventilation: getting the provision right cuts faults and future work. We coordinate the trades with the builder's work so every stage can be checked before the walls close."
+        },
+        {
+          "title": "Modena and province: old town sites, apartment blocks and houses",
+          "body": "Around the Duomo and Piazza Grande, and along the Via Emilia, access and delivery windows differ from the residential quarters (Buon Pastore, Crocetta, Musicisti). We plan protection and logistics accordingly, out to Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello and Rubiera."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Does a kitchen refit need a CILA or SCIA in Modena?",
+          "a": "It depends what changes — services, walls, layout. A qualified professional assesses the filing against the rules and the RUE; we build in line with it."
+        },
+        {
+          "q": "Do you do turnkey kitchen renovations outside the city too?",
+          "a": "Yes: Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello, Rubiera and other towns in the province of Modena."
+        },
+        {
+          "q": "Can I choose the brands and finishes (Kerakoll, Mapei, Fassa Bortolo)?",
+          "a": "Yes: the quote names materials and certified equivalents. For adhesives, grouts and tanking we often work with Kerakoll and Mapei systems, and Fassa Bortolo products where suitable."
+        }
+      ]
     },
     "elettrico": {
       "metaTitle": "Electrician Modena | Electrical systems for renovations",
@@ -217,7 +347,67 @@
       "body5": "We keep traceability and documentation for checks and handover.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Checking the installation",
+          "text": "Consumer unit, cable sizes, earthing and the state of the existing containment."
+        },
+        {
+          "icon": "layout",
+          "title": "Planning the points",
+          "text": "How many sockets, lights, TV and data points, and where, agreed room by room."
+        },
+        {
+          "icon": "drill",
+          "title": "Chases and containment",
+          "text": "Cutting chases, running conduit and setting back boxes and junction boxes."
+        },
+        {
+          "icon": "zap",
+          "title": "Consumer unit and protection",
+          "text": "A new board with RCDs and breakers sized against the real load."
+        },
+        {
+          "icon": "light",
+          "title": "Wiring and fittings",
+          "text": "Pulling the circuits in, fitting accessories, plates and light fittings."
+        },
+        {
+          "icon": "file",
+          "title": "Testing and conformity",
+          "text": "Instrument testing and a declaration of conformity issued by the qualified installer."
+        }
+      ],
+      "gallery": [
+        "A consumer unit being wired: separated circuits and protection sized to the load.",
+        "A junction box with the connections made off in push-fit terminals."
+      ],
+      "headings": [
+        {
+          "title": "Working with the builder's work: chases, making good and finishes",
+          "body": "The electrical installation and the masonry have to agree: we mark out, install, close up and finish with professional products and checks, so no cracks or blemishes appear after the paint goes on."
+        },
+        {
+          "title": "Home automation and provision: ready for what comes next",
+          "body": "Getting the provision right now avoids opening walls again later: data points, video entry, alarm, gates and the load for air conditioning. On a turnkey renovation we sequence this with the masonry and the drylining, keeping it consistent with the design and the paperwork whenever tax relief is involved."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you issue the declaration of conformity for the installation?",
+          "a": "Yes: conformity is handled to the standard through testing and documentation, coordinated between the installers and the site."
+        },
+        {
+          "q": "Do you use BTicino or Vimar?",
+          "a": "Yes: on request we use BTicino or Vimar, or certified equivalents, named in the quote with their specification and alternatives."
+        },
+        {
+          "q": "Do you work in Modena's old town?",
+          "a": "Yes: we plan access and hours in the central areas (Duomo–Piazza Grande, Via Emilia) and in residential quarters, keeping disruption down and the building's own rules respected."
+        }
+      ]
     },
     "idraulico": {
       "metaTitle": "Plumber Modena | Plumbing, heating & A/C",
@@ -240,7 +430,67 @@
       "body5": "Predispositions are planned to reduce future interventions.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Diagnosis and survey",
+          "text": "Finding leaks, checking pressure, waste runs and the condition of the existing pipework."
+        },
+        {
+          "icon": "droplets",
+          "title": "Water supply",
+          "text": "New multilayer or copper runs, accessible manifolds and isolating valves."
+        },
+        {
+          "icon": "waves",
+          "title": "Waste and venting",
+          "text": "Renewing waste runs with correct falls and traps to standard."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Heating",
+          "text": "Radiators, thermostatic valves and underfloor systems, with manifold and balancing."
+        },
+        {
+          "icon": "gauge",
+          "title": "Boiler and hot water",
+          "text": "Replacement or relocation, flue and connections as specified by the qualified professional."
+        },
+        {
+          "icon": "file",
+          "title": "Testing and commissioning",
+          "text": "Pressure test, tightness check and the paperwork that supports conformity."
+        }
+      ],
+      "gallery": [
+        "Wall connections left ready before closing up and tiling.",
+        "Waste and supply runs gathered into a single accessible duct."
+      ],
+      "headings": [
+        {
+          "title": "The right sequence, so nothing leaks later",
+          "body": "On bathrooms and kitchens the order matters: strip-out, new waste and supply, testing, tanking, then floor and wall tiling. We sequence the stages with professional products (Kerakoll, Mapei) and check them before walls and linings are closed."
+        },
+        {
+          "title": "Heating and cooling: clean provision, easier maintenance",
+          "body": "Well-planned provision cuts invasive work later: routes, recesses and condensate drains are thought through together with the drylining and the finishes. In homes and commercial units across Modena, Sassuolo, Carpi and Formigine, we plan logistics and timings to limit downtime."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you cover heating and air conditioning as well?",
+          "a": "Yes: we coordinate the provision and the builder's work for heating and cooling systems, to the design and to what the property needs."
+        },
+        {
+          "q": "Do you quote free of charge in Modena and the province?",
+          "a": "Yes: a free visit and quote, with line items and indicative timings for the services and the associated builder's work."
+        },
+        {
+          "q": "Do I need a CILA or SCIA to move connections in a bathroom or kitchen?",
+          "a": "It depends on the job as a whole and on any internal changes: a qualified professional decides against Modena's RUE and the national rules. We build to the approved design."
+        }
+      ]
     },
     "murarie": {
       "metaTitle": "Masonry works in Modena",
@@ -258,7 +508,67 @@
       "body5": "We coordinate with other trades to avoid clashes.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and checks",
+          "text": "Reading the existing fabric, with a qualified professional for anything touching structure."
+        },
+        {
+          "icon": "hammer",
+          "title": "Selective demolition",
+          "text": "Taking out partitions and screeds while protecting everything that stays."
+        },
+        {
+          "icon": "brick",
+          "title": "Partitions and walls",
+          "text": "Clay brick, block or hollow units, with lintels and reveals set true."
+        },
+        {
+          "icon": "drill",
+          "title": "Chases and making good",
+          "text": "Cutting chases for the services, then filling flush once they are in."
+        },
+        {
+          "icon": "layers",
+          "title": "Plaster and screeds",
+          "text": "Scratch coat, plaster, skim and screeds to level, ready for the finishes."
+        },
+        {
+          "icon": "truck",
+          "title": "Disposal and cleaning",
+          "text": "Getting the spoil down, disposal at a licensed site and the area handed back clean."
+        }
+      ],
+      "gallery": [
+        "Laying a course of brick to the line, on an even bed of mortar.",
+        "Spreading mortar and setting the next block to the course."
+      ],
+      "headings": [
+        {
+          "title": "Controlled demolition and making good: safety, dust and neighbours",
+          "body": "In the old town (Duomo–Piazza Grande, Via Emilia) and in quarters like Buon Pastore or Crocetta, access and dust control drive the programme. We protect shared routes, plan removals and disposal, and sequence the work with the electrical and plumbing trades."
+        },
+        {
+          "title": "Structure and permits: SCIA/CILA, RUE and keeping site and design aligned",
+          "body": "If the work touches load-bearing elements or involves substantial changes, a qualified professional assesses and files the CILA/SCIA under Modena's RUE and D.P.R. 380/2001. We work to the survey and record progress against it, which is what keeps site and drawings from diverging."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you handle demolition and disposal?",
+          "a": "Yes: controlled demolition and waste handling are part of how the site is run, with the protection and logistics that go with them."
+        },
+        {
+          "q": "Do you carry out structural work?",
+          "a": "Yes, where the design provides for it: a qualified professional assesses and certifies, we build in line with it and sequence the stages."
+        },
+        {
+          "q": "Do you work outside the city of Modena?",
+          "a": "Yes: we run sites in Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello and Rubiera, and other towns in the province."
+        }
+      ]
     },
     "cartongessoIsolamento": {
       "metaTitle": "Drywall Modena | Partitions, ceilings & insulation",
@@ -283,7 +593,67 @@
       "body5": "Documentation supports compliance and admin handling.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and design",
+          "text": "Levels, the depth available, fixing points and how the services will run through."
+        },
+        {
+          "icon": "panels",
+          "title": "Metal framing",
+          "text": "Track and studs at the right centres, with isolating tape at floor and ceiling."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Thermal insulation",
+          "text": "Mineral wool or an equivalent, at a thickness chosen for the wall it sits in."
+        },
+        {
+          "icon": "wind",
+          "title": "Acoustic treatment",
+          "text": "Double boarding, staggered joints and sealing, to cut the sound passing through."
+        },
+        {
+          "icon": "stack",
+          "title": "Boards and ceilings",
+          "text": "Standard, moisture-resistant or fire-rated board to suit the room; bulkheads and niches to drawing."
+        },
+        {
+          "icon": "paint",
+          "title": "Jointing and finish",
+          "text": "Taped joints, filled in several passes and sanded, ready for decoration."
+        }
+      ],
+      "gallery": [
+        "Cutting a board to size before fixing it to the metal frame.",
+        "Sanding the joints on moisture-resistant board, before the finish."
+      ],
+      "headings": [
+        {
+          "title": "Thermal and acoustic insulation: comfort you can actually feel",
+          "body": "In many flats between the old town and Modena's residential quarters, comfort comes down to cold bridges and noise between units. We propose linings and suspended ceilings with build-ups chosen for the case, weighing space, moisture and loads, rather than one standard answer for every wall."
+        },
+        {
+          "title": "Materials and systems: Knauf, Mapei, Kerakoll (or certified equivalents)",
+          "body": "For framing and boards we use Knauf dry systems or certified equivalents; for finishes, skims and joint treatments we often use Mapei or Kerakoll. The quote names the specification and the equivalents, so performance and traceability are kept."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Can plasterboard be used for acoustic insulation?",
+          "a": "Yes: we choose the dry system and the build-up against the target — voices, footfall, services — and the space available."
+        },
+        {
+          "q": "Can thermal performance be improved without external insulation?",
+          "a": "Often yes: insulated linings and suspended ceilings can improve comfort. Which solution fits depends on constraints, space and the design."
+        },
+        {
+          "q": "Do plasterboard and insulation need a CILA or SCIA?",
+          "a": "It depends on the work and the context: a qualified professional decides against Modena's RUE and the national rules. We build what the approved design provides for."
+        }
+      ]
     },
     "pavimentiRivestimenti": {
       "metaTitle": "Flooring & wall finishes in Modena",
@@ -302,7 +672,67 @@
       "body5": "Wet areas need careful tanking, falls and drainage details.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and format",
+          "text": "Checking levels, out-of-square walls and which format suits the room."
+        },
+        {
+          "icon": "layers",
+          "title": "Preparing the substrate",
+          "text": "Screed, primer, self-levelling compound and checks on flatness and residual moisture."
+        },
+        {
+          "icon": "grid",
+          "title": "Floor laying",
+          "text": "Porcelain, large formats, terracotta or parquet, with levelling clips and set joint widths."
+        },
+        {
+          "icon": "panels",
+          "title": "Wall tiling",
+          "text": "Bathroom, kitchen and utility areas, with cuts, corner beads and trims set flush."
+        },
+        {
+          "icon": "droplets",
+          "title": "Tanking",
+          "text": "Membranes and tapes in wet areas, done before the tiling rather than after."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Grouting and sealing",
+          "text": "Grout, silicone to the movement joints and a final clean of the surfaces."
+        }
+      ],
+      "gallery": [
+        "Adhesive back-buttered and levelling clips set, so the bed has no voids or lipping.",
+        "A hexagonal porcelain floor once laid, with joints of constant width."
+      ],
+      "headings": [
+        {
+          "title": "Laying properly: substrate, flatness and the details large formats need",
+          "body": "Quality here is not only how it looks: it is substrate preparation, the right adhesive and correct curing times. In bathrooms and kitchens we coordinate tanking and falls (level-access showers) before laying, which is what keeps tiles from lifting and water from getting through."
+        },
+        {
+          "title": "Site materials and brands: Kerakoll, Mapei, Marazzi and specifications",
+          "body": "For laying systems we often work with Kerakoll and Mapei; for ceramics and surfaces, Marazzi comes up depending on your choice. The quote names materials and certified equivalents, so nothing is substituted without being agreed."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you lay parquet and specialist finishes?",
+          "a": "Yes: we assess the substrate and its condition — moisture, flatness — and propose what suits, sequencing it with the rest of the site."
+        },
+        {
+          "q": "Do you use Kerakoll and Mapei?",
+          "a": "Yes: they come up often for laying systems and tanking. The quote names the products and certified equivalents."
+        },
+        {
+          "q": "Do you work in Modena and the towns nearby (Carpi, Sassuolo, Formigine)?",
+          "a": "Yes: across Modena and the province (Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello, Rubiera), adapting logistics and timings to apartment blocks and businesses."
+        }
+      ]
     },
     "tettoFacciate": {
       "metaTitle": "Roof & façades in Modena",
@@ -321,7 +751,67 @@
       "body5": "Documentation supports compliance and admin handling.",
       "body6": "Request a free quote after a site visit.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Contact"
+      "ctaSecondary": "Contact",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey at height",
+          "text": "Checking the covering, the timbers, the gutters and the state of the render."
+        },
+        {
+          "icon": "hardhat",
+          "title": "Scaffold and safety",
+          "text": "Erecting the scaffold, anchor lines and edge protection, with the paperwork that goes with them."
+        },
+        {
+          "icon": "hammer",
+          "title": "Structure and battens",
+          "text": "Repairing or replacing rafters and battens, with the timber treated."
+        },
+        {
+          "icon": "umbrella",
+          "title": "Covering and waterproofing",
+          "text": "Breather membrane, pantiles or tiles, valleys, flashings and gutters."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Roof insulation",
+          "text": "An insulation layer under the covering, to cut the losses through the roof space."
+        },
+        {
+          "icon": "paint",
+          "title": "Facade and finishes",
+          "text": "Repairing the render, skimming and painting with products made for exteriors."
+        }
+      ],
+      "gallery": [
+        "New timber framing, before the roof covering goes on.",
+        "Scaffold up against an elevation, for render repairs at height."
+      ],
+      "headings": [
+        {
+          "title": "Scaffold and safety: what changes between city and province",
+          "body": "Between central Modena, where access is tighter and logistics constrained, and towns like Sassuolo, Carpi or Castelfranco Emilia, the space, timings and plant all differ. We plan the scaffold and the stages to reduce interference and keep the site safe and legible for residents and their professionals."
+        },
+        {
+          "title": "Compliance and permits: SCIA/CILA, RUE and building tax relief",
+          "body": "Work to facades and roofs can require specific applications and consents: a qualified professional handles the CILA/SCIA and checks for constraints. We build in line with it and keep the paperwork in order for any tax relief claimed."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you handle the scaffold as well?",
+          "a": "Yes: the scaffold and site safety are part of how a roof or facade job is organised."
+        },
+        {
+          "q": "Do you work on apartment blocks in the old town?",
+          "a": "Yes: we plan logistics and access and, where needed, coordinate with the building manager and their professionals, respecting constraints and working hours."
+        },
+        {
+          "q": "Do you quote free of charge for roofs and facades in Modena?",
+          "a": "Yes: after a site visit we send a free quote covering stages, scaffold, materials and indicative timings for a turnkey job."
+        }
+      ]
     },
     "bagno": {
       "metaTitle": "Bathroom Renovation Modena | K.K Edilizia",
@@ -342,7 +832,72 @@
       "body5": "Permits: we do not replace your qualified technician, but we help you understand what is typical for a Modena bathroom (municipal filings, historic constraints) and what invoices and records your accountant needs for active tax relief. We execute work matching the CILA/SCIA so inspections find no gap between filing and site.",
       "body6": "After you accept the quote, the programme covers demolition, systems, screeds, tanking and finishes — usually several weeks, depending on supplies, season and condominium coordination. You get progress updates and a documented handover. One K.K Edilizia contact from first visit to final installation.",
       "ctaPrimary": "Request a quote",
-      "ctaSecondary": "Talk to us"
+      "ctaSecondary": "Talk to us",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Survey and layout",
+          "text": "Measurements, waste positions, ventilation and the clearances the room has to leave."
+        },
+        {
+          "icon": "trash",
+          "title": "Strip-out and disposal",
+          "text": "Removing sanitaryware, tiling and screed, taken to a licensed disposal site."
+        },
+        {
+          "icon": "droplets",
+          "title": "Plumbing and waste",
+          "text": "New supplies, traps, connection to the risers and a pressure test before closing up."
+        },
+        {
+          "icon": "zap",
+          "title": "Lighting and sockets",
+          "text": "Dedicated circuits and IP ratings suited to each zone of a bathroom."
+        },
+        {
+          "icon": "waves",
+          "title": "Tanking",
+          "text": "Membrane over the shower tray and wet areas, with taped corners, before any tile is laid."
+        },
+        {
+          "icon": "grid",
+          "title": "Tiling and sanitaryware",
+          "text": "Tiles and large-format slabs, then sanitaryware, shower enclosure and vanity unit."
+        }
+      ],
+      "gallery": [
+        "Mosaic and large-format tiling laid flush, with set joint widths.",
+        "Shower enclosure, sanitaryware and a continuous floor in a finished bathroom."
+      ],
+      "headings": [
+        {
+          "title": "Why a turnkey bathroom saves time",
+          "body": "A bathroom refit needs masonry, plumbing and electrics, drylining where required and tiling: with a single contractor you cut the handovers between suppliers and the delays that come with them. We work in Modena's old town and across the province (Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola, Spilamberto, Maranello, Rubiera), with logistics suited to apartment blocks and awkward access.",
+          "bullets": [
+            "One site contact and a programme that holds up",
+            "Professional materials (Kerakoll, Mapei) with data sheets quoted",
+            "Coordination with your professional on CILA/SCIA and tax relief"
+          ]
+        },
+        {
+          "title": "Compliance: CILA, SCIA, tax relief and completion paperwork",
+          "body": "Modena has its RUE alongside national rules: a qualified professional assesses and files the application (CILA/SCIA) and handles the design side. On site we build what was approved and hand over the paperwork that supports conformity and tax relief."
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How long does a bathroom renovation in Modena take?",
+          "a": "It depends on the services, the tile format and the building. Typically a few weeks: survey, quote, strip-out, new services, tanking and laying."
+        },
+        {
+          "q": "Do I need a CILA or SCIA to redo a bathroom?",
+          "a": "Not always: a qualified professional decides, based on the work (services, internal changes, constraints) and Modena's RUE. We build in line with whatever is filed."
+        },
+        {
+          "q": "Do you quote free of charge?",
+          "a": "Yes: after a visit in Modena or the province we prepare a detailed quote with line items, materials and timings for a turnkey job."
+        }
+      ]
     },
     "cartongesso": {
       "metaTitle": "Drywall Modena | Partitions & Ceilings | K.K Edilizia",
@@ -391,7 +946,62 @@
     "faqTitle": "Frequently asked questions about this service",
     "siblingsTitle": "Other services we handle",
     "closingTitle": "Let’s talk about your project",
-    "closingBody": "A no-obligation site visit in Modena and province, then a quote with line items and timings. One point of contact from start to handover."
+    "closingBody": "A no-obligation site visit in Modena and province, then a quote with line items and timings. One point of contact from start to handover.",
+    "chipReferent": "One site contact throughout",
+    "chipCompliance": "Work carried out as authorised",
+    "chipArea": "Modena and its province",
+    "scopeEyebrow": "What it covers",
+    "scopeTitle": "What the job includes",
+    "scopeIntro": "The line items you will find in the quote, in the order they actually happen on site.",
+    "methodEyebrow": "Method",
+    "methodTitle": "How we work, from the first visit to handover",
+    "processEyebrow": "The route",
+    "processTitle": "Five stages, from first call to handover",
+    "process": [
+      {
+        "title": "Site visit",
+        "text": "We come and look: measurements, the state of the services, access constraints and what you want. No obligation."
+      },
+      {
+        "title": "Written quote",
+        "text": "Separate lines for works, materials and labour, with indicative timings beside each stage."
+      },
+      {
+        "title": "Permits and supplies",
+        "text": "Your qualified professional assesses whether a CILA or SCIA is needed; we order materials and set a start date."
+      },
+      {
+        "title": "On site",
+        "text": "Protection, the works in programme order, and updates whenever something is decided."
+      },
+      {
+        "title": "Handover",
+        "text": "Cleaning, a walk-through of the work and the paperwork you need for warranties and tax relief."
+      }
+    ],
+    "galleryEyebrow": "The work",
+    "galleryTitle": "What the work looks like",
+    "galleryNote": "Reference photography under the Pexels licence, not shots of our own sites. We will publish ours once the portfolio is ready.",
+    "detailEyebrow": "In detail",
+    "detailTitle": "Neighbourhoods, apartment blocks, permits and timings",
+    "zonesEyebrow": "Where we work",
+    "zonesTitle": "Across Modena and its province",
+    "zones": [
+      "Modena old town",
+      "Buon Pastore",
+      "Crocetta",
+      "Quartiere Musicisti",
+      "Sassuolo",
+      "Carpi",
+      "Formigine",
+      "Castelfranco Emilia",
+      "Vignola",
+      "Spilamberto",
+      "Maranello",
+      "Rubiera"
+    ],
+    "zonesNote": "The list is not exhaustive: if your address is not on it, ask anyway — we weigh distance, access and travel time before booking a visit.",
+    "siblingsIntro": "Almost no job stays inside a single heading: a bathroom touches plumbing, drylining and tiling. If yours spans more than one, start here."
   },
   "FeaturedProjects": {
     "label": "Portfolio",
@@ -404,7 +1014,7 @@
   "FaqSection": {
     "label": "FAQ",
     "title": "Common questions",
-    "intro": "Timing, process, site organisation, and common questions about building work in Modena and local search."
+    "intro": "Permits, timing, costs and how the site is run in Modena."
   },
   "CtaBanner": {
     "title": "Ready to start?",
@@ -442,43 +1052,6 @@
     "linkImpresaEdileModena": "Building contractor Modena (local guide)",
     "reviewsLink": "Reviews on Google"
   },
-  "BrandEcosystem": {
-    "label": "Professional materials",
-    "title": "Brands you’ll often see on our sites",
-    "intro": "We are not an official dealer: your quote lists product lines and certified equivalents. These are the manufacturers’ official sites for technical data sheets and ranges.",
-    "disclaimer": "Brand names belong to their respective owners. Material choices are made per project based on substrates, installation standards and budget.",
-    "brands": {
-      "mapei": "Mapei",
-      "kerakoll": "Kerakoll",
-      "knauf": "Knauf Italia",
-      "fassa": "Fassa Bortolo",
-      "bticino": "BTicino",
-      "vimar": "Vimar"
-    }
-  },
-  "HomeInternalHub": {
-    "label": "Modena & province",
-    "title": "Useful pages: construction, systems & drywall",
-    "intro": "Local guides on building contractor, electrician, plumber, drywall, turnkey renovations, quotes and portfolio.",
-    "linkImpresa": "Building contractor in Modena",
-    "descImpresa": "Why choose a local contractor, what we offer, and common questions.",
-    "linkChiavi": "Turnkey renovations",
-    "descChiavi": "Single point of contact: demolition, systems, finishes and handover.",
-    "linkElettrico": "Electrician & electrical systems",
-    "descElettrico": "Boards, sockets, lighting and compliance in Modena and province — coordinated with building works.",
-    "linkIdraulico": "Plumber & plumbing",
-    "descIdraulico": "Water, waste, heating and A/C in renovation, with a quote after site survey.",
-    "linkCartongesso": "Drywall & insulation",
-    "descCartongesso": "Partitions, suspended ceilings, thermal/acoustic insulation and internal dry lining.",
-    "linkPreventivo": "Online quote request",
-    "descPreventivo": "Tell us about your project—we reply with next steps.",
-    "linkPrenota": "Book a site visit",
-    "descPrenota": "Pick indicative date and time; we confirm after first contact.",
-    "linkPortfolio": "Project portfolio",
-    "descPortfolio": "Photos and details from real sites in the province.",
-    "linkContatti": "Contact",
-    "descContatti": "Phone, email and message form."
-  },
   "ImpresaEdileModenaPage": {
     "eyebrow": "Modena & province",
     "breadcrumbName": "Building contractor Modena",
@@ -512,6 +1085,38 @@
     "label": "Appointments",
     "title": "Book a site visit",
     "intro": "Submit the form: you’ll get a confirmation email and we’ll contact you to schedule the visit. No paid third-party booking tool required.",
+    "trust1": "Free quote after the site visit",
+    "trust2": "One site contact throughout",
+    "trust3": "Modena and province",
+    "heroCtaForm": "Go to the form",
+    "heroCtaCall": "Call {phone}",
+    "formLabel": "Request",
+    "formTitle": "The form, in three steps",
+    "stepContact": "Your details",
+    "stepWhen": "When it suits you",
+    "stepDetails": "Useful context",
+    "stepDetailsHint": "Optional, but it helps us arrive prepared: floors, floor area, photos of how things look now.",
+    "optional": "optional",
+    "requiredMark": "required field",
+    "submitNote": "You get a summary email straight away. The date and time are still confirmed together.",
+    "nextLabel": "After you send",
+    "nextTitle": "What happens next",
+    "next1t": "Summary by email",
+    "next1d": "A confirmation with the details you entered lands in your inbox right away.",
+    "next2t": "We get back to you",
+    "next2d": "We confirm the date and time together, or suggest the closest alternative.",
+    "next3t": "Visit and quote",
+    "next3d": "We measure up and check the state of the rooms. The itemised quote is free.",
+    "asideContactTitle": "Rather talk first?",
+    "asideContactIntro": "We answer the phone too: if the form isn’t for you, call or write.",
+    "asideAreaTitle": "Where we work",
+    "altLabel": "Other routes",
+    "altTitle": "Not ready for a site visit yet?",
+    "altIntro": "You can start in writing instead — the visit comes later, when it is actually needed.",
+    "altQuoteTitle": "Request a quote online",
+    "altQuoteDesc": "A few questions about the project, then we get back to you.",
+    "altContactTitle": "Send us a message",
+    "altContactDesc": "Phone, email and a form for a quick question.",
     "formPrivacy": "Your data is processed as described in our",
     "privacyLink": "privacy policy",
     "fieldName": "Full name",
@@ -538,9 +1143,7 @@
     "errorConfig": "Email is not configured on the server (Gmail or Resend).",
     "errName": "Enter your name",
     "errEmail": "Invalid email",
-    "errPhone": "Invalid phone number",
-    "fallbackCta": "Prefer to write to us?",
-    "fallbackLink": "Contact page"
+    "errPhone": "Invalid phone number"
   },
   "PortfolioPage": {
     "label": "Our work",
@@ -601,7 +1204,34 @@
     "hoursValue": "Mon–Fri 8:30–18:30 · Sat by appointment",
     "reviewsPrefix": "Reviews:",
     "reviewsLink": "Google Business profile",
-    "ctaQuote": "Request an online quote"
+    "callAction": "Call now",
+    "whatsapp": "WhatsApp",
+    "whatsappValue": "Message us in chat",
+    "whatsappAction": "Open WhatsApp",
+    "whatsappPrefill": "Hello, I would like information about a renovation project.",
+    "emailAction": "Write an email",
+    "formLabel": "Message form",
+    "formTitle": "Write to us",
+    "formIntro": "Tell us about the work in a few lines. If you have photos of the rooms or a quote to compare, attach them: they help us answer on substance.",
+    "asideLabel": "Details",
+    "asideTitle": "Useful details",
+    "pecHint": "For official communications and e-invoicing.",
+    "area": "Service area",
+    "companyLabel": "Company details",
+    "routesLabel": "Other routes",
+    "routesTitle": "Or start from here",
+    "routesIntro": "If you already know what you need, these forms get there faster than a free-form message.",
+    "routeQuoteTitle": "Detailed quote",
+    "routeQuoteDesc": "Describe the work and attach photos: we reply with line items, materials and timings.",
+    "routeBookingTitle": "Book a site visit",
+    "routeBookingDesc": "Pick a day and a time slot: we see the rooms before quoting.",
+    "routeEstimateTitle": "Online cost estimate",
+    "routeEstimateDesc": "A ballpark figure in a few steps, before we talk.",
+    "routeImpresaTitle": "Building firm in Modena",
+    "routeImpresaDesc": "What we do, how we work and the most common questions.",
+    "routeAboutTitle": "About us",
+    "routeAboutDesc": "One site contact, insurance cover and site compliance.",
+    "townsLabel": "Towns we serve"
   },
   "PreventivoPage": {
     "metaTitle": "Quote request",
@@ -614,6 +1244,23 @@
     "eyebrow": "Company",
     "title": "About us",
     "intro": "{brand} brings together skilled tradespeople and project management: a single point of contact to plan the site, coordinate suppliers, and meet the timelines we promise our clients.",
+    "heroBadge": "Modena and province",
+    "heroCta": "Request a quote",
+    "heroCtaSecondary": "Book a site visit",
+    "identityLabel": "Company details",
+    "identityLegal": "Registered name",
+    "identityVat": "VAT number",
+    "identityRea": "REA",
+    "identityArea": "Area served",
+    "craftLabel": "The craft",
+    "craftTitle": "One site, one point of contact",
+    "craftP1": "The person who comes out to survey the job is the same person who runs the site through to handover. One voice for decisions, for surprises, and for dates — not a switchboard passing you to another department.",
+    "craftP2": "Around that contact work specialist tradespeople and firms — masonry, systems, drylining, finishes — chosen for the job at hand and coordinated by us. You speak to one person; the coordination is our problem, not yours.",
+    "craftP3": "It is a way of working sized for human-scale jobs: flats, houses, offices and small commercial spaces. We would rather turn down work we could not run properly than run it badly.",
+    "quote": "A quote is a promise in writing. That is why we itemise it line by line, with timings, before the site opens.",
+    "quoteSource": "The method, in one line",
+    "pillarsLabel": "Our commitment",
+    "pillarsTitle": "Four things we do not compromise on",
     "p1t": "Multidisciplinary team",
     "p1d": "Masonry, systems, finishes: in-house roles and certified partners for every phase.",
     "p2t": "Safety and compliance",
@@ -621,20 +1268,30 @@
     "p3t": "Perceived quality",
     "p3d": "Selected materials and on-site checks for a result that lasts.",
     "p4t": "Insurance and compliance",
-    "p4d": "{insurance} {compliance}",
+    "p4d": "Professional indemnity cover, site documentation and PPE for the crew. The full wording is further down the page, without convenient acronyms.",
+    "territoryLabel": "Where we work",
+    "territoryTitle": "Modena is our site",
+    "territoryP1": "We work where we live: the city of Modena and its province, with neighbouring municipalities assessed case by case. Sassuolo, Carpi, Formigine and the surrounding villages are within the radius where we can be on site the day after a call.",
+    "territoryP2": "Knowing the area means knowing what is built on it: 1960s apartment blocks, courtyard houses, flats in the historic centre where every job goes through the municipal building regulations. Your surveyor or architect files the paperwork; we build to the approved design and keep both of you up to date.",
+    "territoryLink": "Building contractor in Modena",
+    "galleryEyebrow": "From site to handover",
+    "galleryTitle": "How a job progresses",
+    "galleryIntro": "Every job goes through the same phases, in the same order: open the site, make it safe, do the work, hand it over clean. The scale and the timings change; the sequence does not.",
+    "g1": "Opening the site: protection, setting out, and services marked before a wall is touched.",
+    "g2": "Masonry: partitions, repairs and new openings, with line and level on every course.",
+    "g3": "Scaffolding and safety measures when the job touches the outside of the building.",
+    "g4": "Facades and roofs: repair work on existing buildings, often in historic settings.",
+    "g5": "Lofts and reclaimed spaces: insulation, drylining and chased-in services.",
+    "g6": "Handover: floors laid, decoration finished, the site cleared.",
+    "galleryNote": "Reference photographs under the Pexels licence, not shots of our own sites. Ours will go up when the portfolio is ready.",
+    "credentialsLabel": "Assurances",
+    "credentialsTitle": "Cover, obligations and qualifications",
+    "insuranceTitle": "Insurance cover",
+    "complianceTitle": "Obligations and safety",
     "certificationsTitle": "Certifications and qualifications",
-    "certificationsHint": "{base} Update this text with real SOA categories, classifications, and expiry dates when available.",
-    "galleryEyebrow": "Sites and projects",
-    "galleryTitle": "Sample images",
-    "galleryIntro": "Replace these stock photos with your own site shots (before/after, details) by uploading files to <code>public/images/</code> and updating paths in <code>chi-siamo/page.tsx</code>",
-    "galleryFooterNote": "The images below stay as placeholders until you upload your own (see project checklist).",
-    "fig1Alt": "Construction site — replace with your own photo",
-    "fig2Alt": "Renovated interior — replace with your own photo",
-    "fig1Caption": "Example: renovation in progress",
-    "fig2Caption": "Example: finishes and living spaces"
+    "p4Link": "Cover and obligations"
   },
   "ContactForm": {
-    "formTitle": "Write to us",
     "formPrivacyBefore": "Fill in the form: your data is processed as described in our",
     "formPrivacyLink": "privacy policy",
     "fieldName": "Full name",
@@ -673,7 +1330,79 @@
   "Materials": {
     "label": "Materials and systems",
     "title": "What we build with",
-    "intro": "Brands we regularly use for adhesives, skim coats, waterproofing and drywall systems, or certified equivalents with matching specifications. The final choice is stated in the quote before work begins.",
-    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool"
+    "intro": "Brands we use regularly, or certified equivalents with matching specifications. We are not an official dealer: actual product lines are listed in the quote.",
+    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool",
+    "disclaimer": "Brand names belong to their respective owners."
+  },
+  "HomeMedia": {
+    "altRistrutturazioni": "Renovated living room with parquet flooring and bespoke finishes",
+    "altEdilizia": "Façade of a period building after restoration",
+    "altProgetto": "Architectural drawings for a residential renovation",
+    "altFiniture": "Roller painting an interior wall",
+    "altChiaviInMano": "Living room handed over at the end of a turnkey renovation",
+    "altBagno": "Marble-clad bathroom after a full refit",
+    "altCucina": "Modern kitchen on completion of the work",
+    "altElettrico": "Electrical wiring in a junction box during renovation",
+    "altIdraulico": "Waste pipework on a plumbing installation",
+    "altMurarie": "Exposed masonry wall after structural works",
+    "altCartongesso": "Skimming the joints of a plasterboard sheet",
+    "altPavimenti": "Laying tiles with a notched trowel and spacers",
+    "altTetto": "Laying clay roof tiles on a pitched roof"
+  },
+  "AboutMedia": {
+    "altSkyline": "Rooftops of Modena's historic centre with the Ghirlandina tower",
+    "altIntonaco": "Skimming an internal wall with a trowel during a renovation",
+    "altMuratura": "Laying a solid brick on a bed of mortar",
+    "altBanco": "Workbench with tools, clamps and site notes",
+    "altSicurezza": "Safety helmet and work gloves on a building site",
+    "altLavorazione": "Working a timber board at the bench, among the shavings",
+    "altProgettoTavolo": "Floor plan of a flat with a tape measure and pen on the work table",
+    "altPortici": "Sunlit arcades of a historic building in Modena",
+    "altGhirlandina": "The Ghirlandina tower and Modena cathedral seen from below",
+    "altCantiere": "Room under renovation with dust sheets, a ladder and services set out",
+    "altPosaMattoni": "Laying bricks to a line on a course of mortar",
+    "altPonteggio": "Scaffolding erected on the facade of a house under renovation",
+    "altFacciata": "Historic building facade fully scaffolded for repair work",
+    "altMansarda": "Reclaimed loft with an exposed brick pillar and skylights",
+    "altConsegna": "Handed-over room with laid parquet and painted walls",
+    "altDocumenti": "Site paperwork on a clipboard"
+  },
+  "ServiceMedia": {
+    "chiaviInManoHero": "A room under renovation with a ladder, trestle and services left exposed",
+    "chiaviInManoAside": "An exposed brick wall with a ladder and mesh panels leaning against it during works",
+    "chiaviInManoA": "An interior with partitions taken out and timber studs exposed",
+    "chiaviInManoB": "An empty room at the end of the job, with a wood floor and painted walls",
+    "bagnoHero": "A finished bathroom with twin basins, a wooden vanity unit and a bath",
+    "bagnoAside": "A shower with a stone wall and glass enclosure in a finished bathroom",
+    "bagnoA": "Mosaic and wood-effect tiling above a bathroom vanity unit",
+    "bagnoB": "A bathroom with a glass shower enclosure, sanitaryware and a tiled floor",
+    "cucinaHero": "A kitchen with a marble island, wooden units and a pendant light",
+    "cucinaAside": "Close-up of a white cabinet door with a brass handle",
+    "cucinaA": "A marble-effect slab worktop and splashback above base units",
+    "cucinaB": "A completed kitchen with tall oven housings and a timber ceiling",
+    "elettricoHero": "An open consumer unit with circuit breakers and cables run to order",
+    "elettricoAside": "Red back boxes set into a wall, with cables waiting to be connected",
+    "elettricoA": "A distribution board being wired, with terminal blocks and coloured conductors",
+    "elettricoB": "A junction box with the connections made off in terminals",
+    "idraulicoHero": "The manifold of an underfloor heating system, with circuits and pump",
+    "idraulicoAside": "Exposed copper pipework on a tiled wall",
+    "idraulicoA": "Plumbing connections left ready on a wall before the tiling goes on",
+    "idraulicoB": "Waste and supply pipework gathered along a service wall",
+    "murarieHero": "Two brick walls seen from below, with the sky between them",
+    "murarieAside": "Perforated clay bricks stacked on site",
+    "murarieA": "Laying a brick on a bed of mortar with a trowel",
+    "murarieB": "A gloved hand spreading mortar across a course of blocks",
+    "cartongessoHero": "A suspended ceiling in moisture-resistant board on metal framing",
+    "cartongessoAside": "Mineral wool insulation being fitted between the studs",
+    "cartongessoA": "Cutting a plasterboard sheet to size with a knife and tape measure",
+    "cartongessoB": "A joint sander at work on a wall of moisture-resistant board",
+    "pavimentiHero": "An empty room with a laid parquet floor and natural light",
+    "pavimentiAside": "The boards of a newly laid wood floor, seen in perspective",
+    "pavimentiA": "Laying a tile with combed adhesive and levelling clips",
+    "pavimentiB": "A hexagonal porcelain floor laid with even joints",
+    "tettoHero": "A pantile roof with a dormer window, seen from outside against the sky",
+    "tettoAside": "The ridge of an old pantile roof, photographed close up",
+    "tettoA": "The timber framing of a new roof, before the covering is laid",
+    "tettoB": "Scaffold erected against the elevation of a residential building"
   }
 }

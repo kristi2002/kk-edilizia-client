@@ -48,7 +48,7 @@ export function HeroClient({
   return (
     <section
       ref={ref}
-      className="on-dark relative flex min-h-[min(88svh,46rem)] items-center overflow-hidden bg-inverse"
+      className="on-dark relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-inverse"
     >
       <motion.div style={{ y }} className="absolute inset-0">
         {children}
@@ -56,7 +56,7 @@ export function HeroClient({
 
       <WatermarkGutter>K.K EDILIZIA — MODENA E PROVINCIA</WatermarkGutter>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-[clamp(1.5rem,4svh,5rem)] sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export function HeroClient({
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 max-w-4xl text-balance font-serif text-4xl leading-[1.08] tracking-tight text-ink-1 sm:text-6xl md:text-7xl"
+          className="mt-[clamp(1rem,3svh,2rem)] max-w-4xl text-balance font-serif text-4xl leading-[1.08] tracking-tight text-ink-1 sm:text-5xl md:text-6xl lg:text-7xl [@media(min-width:40rem)_and_(max-height:46rem)]:text-5xl"
         >
           {titleLine1}{" "}
           <span className="bg-gradient-to-r from-accent-light to-accent bg-clip-text text-transparent">
@@ -83,7 +83,7 @@ export function HeroClient({
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.18 }}
-          className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl"
+          className="mt-[clamp(0.75rem,2svh,1.5rem)] max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl"
         >
           {subtitle}
         </motion.p>
@@ -92,7 +92,7 @@ export function HeroClient({
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
-          className="mt-6 flex max-w-3xl flex-wrap items-center gap-2 text-sm text-ink-3"
+          className="mt-[clamp(0.75rem,2svh,1.5rem)] flex max-w-3xl flex-wrap items-center gap-2 text-sm text-ink-3"
           aria-label={townsLabel}
         >
           <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-ink-4">
@@ -112,7 +112,7 @@ export function HeroClient({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.28 }}
-          className="mt-10 flex flex-wrap gap-4"
+          className="mt-[clamp(1.25rem,3svh,2.5rem)] flex flex-wrap gap-4"
         >
           <Link
             href="/preventivo"
@@ -136,7 +136,7 @@ export function HeroClient({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-16 grid grid-cols-3 gap-6 border-t border-accent/20 pt-8 sm:max-w-lg"
+          className="mt-[clamp(1.5rem,4svh,4rem)] grid grid-cols-3 gap-6 border-t border-accent/20 pt-[clamp(1rem,2.5svh,2rem)] sm:max-w-lg"
         >
           {stats.map((s) => (
             <div key={s.label}>

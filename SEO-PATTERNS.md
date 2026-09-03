@@ -12,7 +12,7 @@ This document summarizes **search-oriented patterns** implemented in the codebas
 
 ### Metadata & duplicates across locales
 
-- **Rendering** — Marketing routes are **statically prerendered** with `revalidate = 3600` (`src/app/[locale]/layout.tsx`). They previously carried `dynamic = "force-dynamic"`, which made every public URL server-render on demand and silently overrode each page's own `revalidate`. Static rendering requires **`setRequestLocale(locale)`** in every page that reads translations — the home route was the one missing it.
+- **Rendering** — Marketing routes are **statically prerendered** with `revalidate = 3600` (`src/app/[locale]/layout.tsx`). They previously carried `dynamic = "force-dynamic"`, which made every public URL server-render on demand and silently overrode each page's own `revalidate`. Static rendering requires **`setRequestLocale(locale)`** in every page that reads translations — the home route was the one missing it.
 - **Per-route metadata** — Pages export `generateMetadata` (or static `metadata`) so each URL has its own **title**, **description**, and **Open Graph** fields (`opengraph-image.tsx`, `[locale]/layout.tsx` defaults, service silo helper `buildServiceSiloMetadata`).
 - **Canonical URL + `hreflang`** — `it` / `en` / `x-default` (default = Italian site) via **`withLocaleAlternates`** in **`src/lib/seo-metadata.ts`**, merged into each page’s metadata. Aligns with Google guidance on localized duplicates.
 - **No HTML meta keywords** — The **`<meta name="keywords">`** tag is **not** emitted. Google Search ignores it. Arrays named `metaKeywords` under **`messages/*.json` → `ServiceSilos`** are **editorial / legacy only**. Until September 2026 they *were* still passed through `buildServiceSiloMetadata` (and on the home / `impresa-edile-modena` routes), so the tag was in fact emitted; that is now removed and the code matches this section.
@@ -69,8 +69,10 @@ Authoritative list: **`src/lib/service-silos.ts`** (`SERVICE_SILO_ROUTES`) — t
 ## 4. Structured data (JSON-LD)
 
 - **`LocalBusinessJsonLd`** (`src/components/seo/LocalBusinessJsonLd.tsx`) — **`@type`: `HomeAndConstructionBusiness`**: brand, legalName, tax/vat, employees, **description** (IT, aligned with services), **`url`** from `getSiteUrl()`, phone, email, **PostalAddress**, **`areaServed`** — array of schema.org **`City`** entries plus **`AdministrativeArea` “Provincia di Modena”**. **Authoritative list:** **`src/lib/constants/service-area.ts`** (`AREA_SERVED_CITY_NAMES` → **`buildLocalBusinessAreaServed()`**); do not duplicate town names in prose here. **`geo`** (approximate **GeoCoordinates** for Modena area), **`knowsAbout`** (topics including services, **Mapei/Kerakoll**, **Knauf**, **Comune di Modena** building rules mention), **`priceRange`**, optional **`sameAs`** if **`publicReviewUrl`** is set in site data (Google Business Profile).
-- **`address`** — `PostalAddress` is emitted **only when `site.streetAddress` is set** (`src/lib/site.ts`). It was missing entirely despite being documented here; a `LocalBusiness` without an address is not a candidate for local pack results, so filling it is a go-live blocker (see CHECKLIST §1).
+- **`address`** — `PostalAddress` is emitted **only when `site.streetAddress` is set** (`src/lib/site.ts`). It was missing entirely despite being documented here; a `LocalBusiness` without an address is not a candidate for local pack results, so filling it is a go-live blocker (see CHECKLIST §1).
 - **`BreadcrumbJsonLd`** — All nine **service silos** (via `ServiceSiloContent`), plus portfolio and virtual-tour pages.
+
+- **`FaqPageJsonLd`** — the nine **service silos** (via `ServiceSiloContent`), **`/impresa-edile-modena`**, and — since September 2026 — the **home route**. See §5 “FAQ”.
 
 Eligibility for rich/local features remains at Google’s discretion.
 
@@ -81,7 +83,24 @@ Eligibility for rich/local features remains at Google’s discretion.
 ### Homepage — `HomeLocalIntro`
 
 - **Component** — **`src/components/sections/HomeLocalIntro.tsx`**, rendered on **`src/app/[locale]/page.tsx`** after **`StatsStrip`**, before **`Services`**.
-- **Strings** — **`messages/*.json` → `HomeLocalIntro`** (`label`, `title`, **`p1`–`p4`**). Italian copy covers: **impresa edile**, **servizi edili**, **privati** and **small businesses**, **Comune di Modena** / building regulations, **territory** (Modena, Sassuolo, Carpi, Formigine), **material brands** (**Mapei**, **Kerakoll**, **Knauf** or certified equivalents), transparency on **quotes** and **no guaranteed rankings** for local search.
+- **Strings** — **`messages/*.json` → `HomeLocalIntro`** (`label`, `title`, **`p1`–`p4`**, `moreLabel`). Italian copy covers: **impresa edile**, **servizi edili**, **privati** and **small businesses**, **Comune di Modena** / building regulations, **territory** (Modena, Sassuolo, Carpi, Formigine), **material brands** (**Mapei**, **Kerakoll**, **Knauf** or certified equivalents), transparency on **quotes**.
+- **Progressive disclosure (September 2026)** — Only **`p1`–`p2`** are on screen; **`p3`–`p4`** sit inside a native **`<details>`**. This is a **`<details>`**, not a JS toggle, on purpose: the element ships its contents in the served HTML whether open or closed, so collapsed copy is still crawled. **Do not** convert it to a state-driven mount — that is exactly the bug this replaced in `FaqSection`.
+
+### Homepage — copy budget
+
+The page ran ~1,180 words of body copy across eleven stacked text sections. Two changes cut what is **on screen** without cutting what is **in the HTML**:
+
+- **`BrandEcosystemStrip` was removed.** It duplicated the `Materials` caveat ("not an official dealer, equivalents listed in the quote") in different words, four sections apart. Its **outbound manufacturer links** (Mapei, Kerakoll, Knauf, Fassa Bortolo, BTicino, Vimar) and the **`brands.*`** strings moved into **`MaterialsMarquee.tsx`** / **`messages` → `Materials`**; the duplicate prose did not survive.
+- **`HomeInternalHub` dropped four of nine cards, then was merged away entirely.** `linkChiavi`, `linkElettrico`, `linkIdraulico` and `linkCartongesso` pointed at URLs the **silo grid already links two sections above** — plus the Servizi menu and the footer. Removing the second link to the same URL costs no crawl path. The four that remained then turned out to duplicate **`ProcessSteps`**: the "Da dove iniziare" cards retold the sequence the section immediately above had just walked through, and `ProcessSteps` closed with a CTA to `/preventivo` — the hub's own primary card.
+- **The two are now one section** (`ProcessSteps.tsx`, anchor `#come-lavoriamo`). Steps 1 and 2 are the ones a visitor triggers, so each carries its own action link (`/prenota`, `/preventivo`); the pages that are not steps close the section as an index (`/impresa-edile-modena`, `/contatti`, + `/portfolio` when the flag is on). **Every URL the hub linked is still linked from here**, and each is in the footer besides, so no crawl path depended on the block that went away. Its strings moved into **`messages` → `ProcessSteps`** (`startLabel`, `startTitle`, `startIntro`, `link*`/`desc*`, plus `s1Action`/`s2Action`); the `HomeInternalHub` namespace is gone, as are the orphaned `cta`/`ctaLink`.
+
+Net: ~697 words on screen, ~1,545 in the HTML (up from ~1,179 both, because of the FAQ fix below).
+
+### Homepage — imagery
+
+- **Manifest** — **`src/lib/media/home-imagery.ts`** maps each slug to a file in **`public/media/work/`** plus the **Pexels id** it came from (Pexels License: free commercial use, no attribution required). Stock standing in until the company's own photography exists — same arrangement as the hero video, and an open item in CHECKLIST.md.
+- **`alt` is translated**, not literal: keys live under **`messages/*.json` → `HomeMedia`**, following the portfolio rule (**service + subject + place**, never a bare noun).
+- **Decorative vs content** — `Services` cards use the photograph as a **ground** (26% behind a scrim, `.photo-card` in `globals.css`) and therefore pass **`alt=""`**; the nine **silo cards** and `HomeLocalIntro` show theirs at full strength and carry **real `alt` text**. Do not give an empty `alt` to a picture a visitor is meant to look at, and do not describe one they cannot see.
 
 ### Global homepage metadata
 
@@ -93,6 +112,8 @@ Eligibility for rich/local features remains at Google’s discretion.
 
 - **Data** — **`src/lib/data/faq.ts`**: **`faqByLocale.it`** / **`.en`** arrays (not in `messages` for Q/A bodies).
 - **UI** — **`FaqSection`** intro from **`messages` → `FaqSection`**. Topics include: permits/CILA, **Bonus** disclaimer, timelines, **area served**, **local / “near me”** behavior (honest), **Mapei/Kerakoll/Knauf** FAQ entry, **servizi edili** scope.
+- **Every answer is rendered (September 2026).** The accordion used to mount only the open panel (`{isOpen && …}`), so the served HTML carried **16 questions and 1 answer** — about **680 words** of CILA/SCIA, bonus and Modena copy that no crawler could reach, on a page whose schema is supposed to mirror it. Panels are now always in the markup and collapsed with CSS (`0fr → 1fr` grid row; `visibility` is what removes a closed panel from the accessibility tree and tab order). **Keep it that way** — hidden-but-rendered text is indexed, text that never renders is not.
+- **`FAQPage` on the home route** — **`src/app/[locale]/page.tsx`** now emits **`FaqPageJsonLd`** from the same `faqByLocale` array the section renders, so the schema and the visible content match (a Google requirement). Previously only the silos and `/impresa-edile-modena` emitted it, and `/` had none despite showing the block.
 
 ### Portfolio
 
@@ -119,14 +140,14 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 ## 6. Brand, crawl, and sharing assets
 
 - **Favicon / brand images** — All generated from **`assets/brand/logo-master.png`** by **`npm run generate:favicon`** (`scripts/generate-favicon.mjs`, **sharp** + **png-to-ico**), wired into `prebuild`: `favicon.ico` (16+32), `icon-192.png`, `icon-512.png`, `apple-icon.png`, and **`logo-mark.png`** (256px, the mark rendered in the header and footer). No **`next.config`** rewrite (direct static files).
-- **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630). The route is referenced **explicitly** from **`withLocaleAlternates`** (`openGraph.images` / `twitter.images`): nested `[locale]` segments did not inherit the file convention, and the proxy matcher was rewriting `/opengraph-image` → `/it/opengraph-image` (404), so **no page emitted an `og:image` at all**. Both are fixed — see the matcher exclusions in `src/proxy.ts`.
+- **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630). The route is referenced **explicitly** from **`withLocaleAlternates`** (`openGraph.images` / `twitter.images`): nested `[locale]` segments did not inherit the file convention, and the proxy matcher was rewriting `/opengraph-image` → `/it/opengraph-image` (404), so **no page emitted an `og:image` at all**. Both are fixed — see the matcher exclusions in `src/proxy.ts`.
 - **`manifest.ts`** — icons reference **`/icon-192.png`** and **`/icon-512.png`**, generated from `assets/brand/logo-master.png`. The master (2048², ~8 MB) is deliberately outside `public/`; it used to be served directly as the favicon and apple-touch-icon on every request.
 
 ---
 
 ## 7. Analytics & tags
 
-- **GTM / GA** — Loaded by **`src/components/seo/Analytics.tsx`** **only after the visitor accepts** (`readConsent() === "all"`). Consent Mode v2 defaults are set `denied` in the document head before any tag can fire (`CONSENT_DEFAULTS_SNIPPET` in `src/lib/consent.ts`). Previously both loaded unconditionally from the root layout and the banner's choice was never read, so "Solo necessari" had no effect.
+- **GTM / GA** — Loaded by **`src/components/seo/Analytics.tsx`** **only after the visitor accepts** (`readConsent() === "all"`). Consent Mode v2 defaults are set `denied` in the document head before any tag can fire (`CONSENT_DEFAULTS_SNIPPET` in `src/lib/consent.ts`). Previously both loaded unconditionally from the root layout and the banner's choice was never read, so "Solo necessari" had no effect.
 - **Portfolio** — Gated by **`isPortfolioEnabled()`** (`NEXT_PUBLIC_ENABLE_PORTFOLIO`). While off, `/portfolio` and project/tour routes serve `noindex, nofollow` and are excluded from the sitemap; with it on, every internal link returns. This replaces five files' worth of commented-out JSX, which hid the links from visitors but left the URLs in the sitemap.
 
 ---
@@ -154,7 +175,11 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 |--------|------------------|
 | Default layout metadata + title template | `src/app/[locale]/layout.tsx` |
 | Home: verification + alternates for `/` | `src/app/[locale]/page.tsx` |
-| Home local SEO block (`p1`–`p4`) | `src/components/sections/HomeLocalIntro.tsx`, `messages/*.json` → `HomeLocalIntro` |
+| Home local SEO block (`p1`–`p4`, `<details>`) | `src/components/sections/HomeLocalIntro.tsx`, `messages/*.json` → `HomeLocalIntro` |
+| Home imagery + `alt` keys | `src/lib/media/home-imagery.ts`, `public/media/work/`, `messages/*.json` → `HomeMedia` |
+| Photo-card / gleam CSS | `src/app/globals.css` ("Photo cards"), `src/components/decor/PhotoCardMedia.tsx` |
+| Per-image tone for dimmed grounds | `scripts/compute-image-tone.mjs` → `tone` in `src/lib/media/home-imagery.ts` |
+| Materials + manufacturer links | `src/components/sections/MaterialsMarquee.tsx`, `messages/*.json` → `Materials` |
 | Global site title/description | `messages/*.json` → `Metadata` |
 | Service silo copy + meta (incl. `modenaArea`, `complianceModena`) | `messages/*.json` → `ServiceSilos`, `HomeServiceSilos`; `src/lib/service-silo-metadata.ts`; `src/components/sections/service-silo/ServiceSiloContent.tsx` |
 | Footer silos + “Zone servite” | `src/components/site/Footer.tsx`; `messages/*.json` → `Footer` |
@@ -175,4 +200,4 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 
 ---
 
-*Last updated: September 2026 — static rendering restored; `og:image` fixed; legacy 308s; consent-gated analytics; portfolio flag; `PostalAddress`; silo table corrected. Previously: April 2026 — `areaServed` + portfolio town match: **`src/lib/constants/service-area.ts`** (used by `LocalBusinessJsonLd`); GBP checklist; silo RUE/compliance; portfolio `alt`; footer “Zone servite”; sitemap lastmod; canonical/hreflang.*
+*Last updated: September 2026 (rev. 3) — home copy budget: `BrandEcosystemStrip` merged into `Materials`, `HomeInternalHub` merged into `ProcessSteps`, `HomeLocalIntro` p3/p4 behind a `<details>`; **`FaqSection` now renders every answer into the HTML** (was mounting only the open one) and `/` emits `FAQPage`; home imagery in `public/media/work/` with `HomeMedia` alt keys. Previously: September 2026 — static rendering restored; `og:image` fixed; legacy 308s; consent-gated analytics; portfolio flag; `PostalAddress`; silo table corrected. Previously: April 2026 — `areaServed` + portfolio town match: **`src/lib/constants/service-area.ts`** (used by `LocalBusinessJsonLd`); GBP checklist; silo RUE/compliance; portfolio `alt`; footer “Zone servite”; sitemap lastmod; canonical/hreflang.*

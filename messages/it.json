@@ -59,10 +59,11 @@
   "HomeLocalIntro": {
     "label": "Edilizia a Modena",
     "title": "Impresa edile e servizi edili in provincia",
-    "p1": "K.K Edilizia è un’impresa edile che opera a Modena e in provincia: lavoriamo nell’edilizia residenziale e nelle ristrutturazioni per privati, famiglie e piccole aziende che investono su immobili in città e nei comuni limitrofi. Offriamo servizi edili completi — dal cartongesso al rifacimento tetti — con preventivo gratuito e dettagliato dopo sopralluogo e un solo referente di cantiere.",
-    "p2": "Operiamo in stretta osservanza delle norme vigenti: dove servono titoli edilizi, fanno fede il Regolamento edilizio del Comune di Modena, il Testo unico dell’edilizia e le pratiche (CILA, SCIA o altro) che il vostro geometra o architetto predispone. Noi eseguiamo i lavori in conformità al progetto approvato e aggiorniamo cliente e tecnico su avanzamenti, così privati e attività possono pianificare tempi e budget in modo realistico.",
-    "p3": "Interventi su appartamenti, villette e spazi commerciali nelle aree più richieste del territorio modenese — dal centro storico alle periferie collegate a Sassuolo, Carpi e Formigine. Che si tratti di una ristrutturazione chiavi in mano o di lavori mirati (bagno, tetto, tramezzi in cartongesso), il nostro approccio resta lo stesso: organizzazione del cantiere, fornitori coordinati e materiali scelti per durata e manutenzione nel tempo.",
-    "p4": "Sui materiali ci orientiamo su marchi presenti nei cantieri italiani e riconosciuti nel mondo dell’edilizia: sistemi Mapei e Kerakoll per malte, impermeabilizzazioni, adesivi e finiture; per cartongesso e sistemi a secco spesso integrano soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi. Le linee effettive sono indicate in preventivo con alternative equivalenti, sempre con schede tecniche e tracciabilità coerenti con le norme di posa."
+    "p1": "K.K Edilizia è un’impresa edile che opera a Modena e provincia: ristrutturazioni ed edilizia residenziale per privati, famiglie e piccole aziende.",
+    "p2": "Servizi edili completi — dal cartongesso al rifacimento tetti — con preventivo gratuito dopo sopralluogo e un solo referente di cantiere.",
+    "p3": "Dove servono titoli edilizi fanno fede il Regolamento edilizio del Comune di Modena e il Testo unico dell’edilizia: le pratiche (CILA, SCIA o altro) le predispone il vostro geometra o architetto, mentre noi eseguiamo i lavori in conformità al progetto approvato e aggiorniamo cliente e tecnico sugli avanzamenti.",
+    "p4": "Interventi su appartamenti, villette e spazi commerciali nel territorio modenese — dal centro storico alle aree collegate a Sassuolo, Carpi e Formigine. Sui materiali ci orientiamo su sistemi Mapei e Kerakoll per malte, impermeabilizzazioni e finiture; per cartongesso e sistemi a secco su soluzioni Knauf o equivalenti certificate, in base ad acustica, carichi e ambienti umidi.",
+    "moreLabel": "Territorio, normative e materiali"
   },
   "StatsStrip": {
     "v1": "10+",
@@ -77,7 +78,7 @@
   "Services": {
     "label": "Cosa facciamo",
     "title": "Servizi completi, un solo referente",
-    "intro": "Dalla demolizione alle consegne: pianifichiamo le fasi, gestiamo i fornitori e teniamo aggiornati i clienti su avanzamenti e tempi. Servizi edili completi per chi cerca qualità in zona Modena.",
+    "intro": "Pianifichiamo le fasi, coordiniamo i fornitori e teniamo aggiornato il cliente. Servizi edili completi in zona Modena.",
     "r1t": "Ristrutturazioni",
     "r1d": "Appartamenti e ville, impianti e finiture con coordinamento unico.",
     "r2t": "Edilizia",
@@ -88,19 +89,28 @@
     "r4d": "Pavimenti, tinteggiature e dettagli che definiscono lo stile."
   },
   "ProcessSteps": {
-    "label": "Dopo il sopralluogo",
+    "label": "Dalla richiesta alla consegna",
     "title": "Come procediamo, passo dopo passo",
-    "intro": "Trasparenza sulle fasi successive alla prima visita in cantiere, così sai cosa aspettarti prima di firmare.",
+    "intro": "Quattro passaggi, dal primo contatto alla consegna documentata. I primi due li avvii tu.",
     "s1t": "Richiesta e sopralluogo",
     "s1d": "Raccolta esigenze, ispezione dei locali e prime verifiche tecniche e normative.",
+    "s1Action": "Prenota il sopralluogo",
     "s2t": "Proposta e preventivo",
     "s2d": "Elaborazione di una proposta con voci, materiali indicativi e cronoprogramma.",
+    "s2Action": "Richiedi il preventivo",
     "s3t": "Contratto e avvio",
     "s3d": "Definizione contrattuale, pianificazione del cantiere e ordini ai fornitori.",
     "s4t": "Esecuzione e consegna",
     "s4d": "Lavori con aggiornamenti periodici, collaudi e consegna documentata.",
-    "cta": "Vuoi iniziare da qui?",
-    "ctaLink": "Richiedi un preventivo online"
+    "startLabel": "Modena e provincia",
+    "startTitle": "Da dove iniziare",
+    "startIntro": "Le altre pagine utili prima di decidere.",
+    "linkImpresa": "Impresa edile a Modena",
+    "descImpresa": "Chi siamo, cosa offriamo e domande frequenti.",
+    "linkPortfolio": "Portfolio lavori",
+    "descPortfolio": "Foto e dettagli di cantieri reali in provincia.",
+    "linkContatti": "Contatti",
+    "descContatti": "Telefono, email e modulo messaggi."
   },
   "CostEstimator": {
     "badge": "Strumento",
@@ -129,28 +139,28 @@
   "HomeServiceSilos": {
     "label": "Servizi",
     "title": "Specializzazioni a Modena e provincia",
-    "intro": "Approfondimenti sui servizi più cercati: contenuti dedicati ai motori di ricerca e a chi vuole un referente locale.",
+    "intro": "Approfondimenti sui servizi più cercati a Modena e provincia.",
     "readMore": "Scopri di più",
     "chiaviInManoTitle": "Ristrutturazioni chiavi in mano",
-    "chiaviInManoDesc": "General contractor a Modena: coordinamento completo, pratiche e finiture con un solo referente.",
+    "chiaviInManoDesc": "Coordinamento completo, pratiche e finiture con un solo referente.",
     "bagnoTitle": "Ristrutturazione bagno",
-    "bagnoDesc": "Rifacimenti chiavi in mano, piastrelle, impianti e illuminazione.",
+    "bagnoDesc": "Rifacimenti chiavi in mano, piastrelle, impianti e luci.",
     "cucinaTitle": "Ristrutturazione cucina",
-    "cucinaDesc": "Demolizioni, impianti e rivestimenti: una cucina nuova, funzionale e a norma.",
+    "cucinaDesc": "Demolizioni, impianti e rivestimenti a norma.",
     "elettricoTitle": "Impianti elettrici",
-    "elettricoDesc": "Quadri, prese, domotica e conformità: impianti moderni con materiali BTicino/Vimar.",
+    "elettricoDesc": "Quadri, prese, domotica e conformità con BTicino/Vimar.",
     "idraulicoTitle": "Idraulico e riscaldamento",
-    "idraulicoDesc": "Impianti acqua/gas, caldaie e condizionamento con verifiche e certificazioni.",
+    "idraulicoDesc": "Impianti acqua e gas, caldaie e condizionamento.",
     "murarieTitle": "Opere murarie",
-    "murarieDesc": "Demolizioni controllate, strutture, ripristini e tramezzi per ristrutturazioni solide.",
+    "murarieDesc": "Demolizioni controllate, strutture, ripristini e tramezzi.",
     "cartongessoIsolamentoTitle": "Cartongesso e isolamento",
-    "cartongessoIsolamentoDesc": "Pareti, controsoffitti, cappotto interno e isolamento termo-acustico.",
+    "cartongessoIsolamentoDesc": "Pareti, controsoffitti e isolamento termo-acustico.",
     "cartongessoTitle": "Cartongesso",
     "cartongessoDesc": "Pareti, controsoffitti e velette con finiture pronte per la pittura.",
     "pavimentiRivestimentiTitle": "Pavimenti e rivestimenti",
-    "pavimentiRivestimentiDesc": "Posa piastrelle, parquet e rivestimenti con sistemi Kerakoll/Mapei e finiture curate.",
+    "pavimentiRivestimentiDesc": "Piastrelle, parquet e rivestimenti con sistemi Kerakoll/Mapei.",
     "tettoFacciateTitle": "Tetto e facciate",
-    "tettoFacciateDesc": "Coperture, facciate e ponteggi: interventi completi con sicurezza e tempi chiari.",
+    "tettoFacciateDesc": "Coperture, facciate e ponteggi con tempi chiari.",
     "tettoTitle": "Rifacimento tetto",
     "tettoDesc": "Diagnosi, smaltimento e nuova copertura con garanzie su materiali e posa."
   },
@@ -205,7 +215,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Parla con noi"
+      "ctaSecondary": "Parla con noi",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Rilievo e progetto d'uso",
+          "text": "Misure, posizione degli scarichi, verifica di aerazione e degli spazi di manovra."
+        },
+        {
+          "icon": "trash",
+          "title": "Demolizione e smaltimento",
+          "text": "Rimozione di sanitari, rivestimenti e massetto, con trasporto in discarica autorizzata."
+        },
+        {
+          "icon": "droplets",
+          "title": "Idraulica e scarichi",
+          "text": "Nuove alimentazioni, sifonature, collegamento alle colonne verticali e prova di tenuta."
+        },
+        {
+          "icon": "zap",
+          "title": "Punti luce e prese",
+          "text": "Circuiti dedicati e gradi di protezione IP adeguati alle zone del bagno."
+        },
+        {
+          "icon": "waves",
+          "title": "Impermeabilizzazione",
+          "text": "Guaina su piatto doccia e zone bagnate, con nastri sugli angoli, prima della posa."
+        },
+        {
+          "icon": "grid",
+          "title": "Rivestimenti e sanitari",
+          "text": "Posa di piastrelle e grandi formati, montaggio di sanitari, box doccia e mobile."
+        }
+      ],
+      "gallery": [
+        "Rivestimento a mosaico e grandi formati posati a filo, con fughe calibrate.",
+        "Box doccia, sanitari e pavimento continuo in un bagno completato."
+      ]
     },
     "cartongesso": {
       "metaTitle": "Cartongesso a Modena",
@@ -293,7 +339,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Sopralluogo e rilievo",
+          "text": "Misure, stato di impianti e strutture, vincoli di accesso e di condominio, prima ipotesi di budget."
+        },
+        {
+          "icon": "hardhat",
+          "title": "Coordinamento unico",
+          "text": "Un solo referente per muratori, idraulico, elettricista, cartongessista e posatori."
+        },
+        {
+          "icon": "hammer",
+          "title": "Demolizioni e opere murarie",
+          "text": "Rimozioni selettive, nuovi tramezzi, tracce, ripristini e smaltimento in discarica autorizzata."
+        },
+        {
+          "icon": "wrench",
+          "title": "Impianti idraulici ed elettrici",
+          "text": "Rifacimento o adeguamento delle reti, con dichiarazione di conformità rilasciata dall'installatore."
+        },
+        {
+          "icon": "paint",
+          "title": "Finiture e posa",
+          "text": "Massetti, intonaci, cartongesso, pavimenti, rivestimenti, tinteggiature e serramenti."
+        },
+        {
+          "icon": "file",
+          "title": "Consegna e documentazione",
+          "text": "Pulizia finale, verifica delle lavorazioni e raccolta dei documenti utili a garanzie e detrazioni."
+        }
+      ],
+      "gallery": [
+        "Fase di demolizione: tramezzi rimossi e struttura a vista, prima del rifacimento degli impianti.",
+        "Un ambiente a fine lavori: pavimento posato, tinteggiatura conclusa e cantiere smontato."
+      ]
     },
     "cucina": {
       "metaTitle": "Ristrutturazione cucina a Modena",
@@ -338,7 +420,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Rilievo e layout",
+          "text": "Misure, posizione di scarico, gas e prese, verifica degli ingombri con il fornitore dei mobili."
+        },
+        {
+          "icon": "hammer",
+          "title": "Opere murarie",
+          "text": "Rimozione dei vecchi rivestimenti, eventuali aperture, tracce e ripristini a filo."
+        },
+        {
+          "icon": "droplets",
+          "title": "Scarico e adduzione",
+          "text": "Nuovi allacci per lavello e lavastoviglie, con pendenze corrette e prova di tenuta."
+        },
+        {
+          "icon": "zap",
+          "title": "Circuiti dedicati",
+          "text": "Linee separate per forno, piano a induzione e piccoli elettrodomestici, con protezioni adeguate."
+        },
+        {
+          "icon": "fan",
+          "title": "Aspirazione e ventilazione",
+          "text": "Predisposizione della canna fumaria o del ricircolo, secondo il regolamento condominiale."
+        },
+        {
+          "icon": "layout",
+          "title": "Rivestimenti e finiture",
+          "text": "Paraschizzi, pavimento, tinteggiatura e sigillature, pronti per il montaggio dei mobili."
+        }
+      ],
+      "gallery": [
+        "Paraschizzi in lastra e piano continuo: giunti ridotti al minimo e pulizia semplice.",
+        "Cucina completata dopo il rifacimento di impianti, rivestimenti e illuminazione."
+      ]
     },
     "elettrico": {
       "metaTitle": "Elettricista Modena | Impianti elettrici in ristrutturazione",
@@ -388,7 +506,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Verifica dell'impianto",
+          "text": "Controllo di quadro, sezioni dei cavi, messa a terra e stato delle canalizzazioni."
+        },
+        {
+          "icon": "layout",
+          "title": "Progetto dei punti",
+          "text": "Numero e posizione di prese, punti luce, TV e rete, concordati stanza per stanza."
+        },
+        {
+          "icon": "drill",
+          "title": "Tracce e canalizzazioni",
+          "text": "Esecuzione delle tracce, posa di corrugati, scatole di derivazione e cassette."
+        },
+        {
+          "icon": "zap",
+          "title": "Quadro e protezioni",
+          "text": "Nuovo centralino con differenziali e magnetotermici dimensionati sui carichi reali."
+        },
+        {
+          "icon": "light",
+          "title": "Cablaggio e corpi illuminanti",
+          "text": "Stesura delle linee, montaggio di frutti, placche e apparecchi di illuminazione."
+        },
+        {
+          "icon": "file",
+          "title": "Verifiche e conformità",
+          "text": "Prove strumentali e dichiarazione di conformità rilasciata dall'installatore abilitato."
+        }
+      ],
+      "gallery": [
+        "Quadro in fase di cablaggio: linee separate e protezioni dimensionate sui carichi.",
+        "Scatola di derivazione con connessioni ordinate e morsetti a innesto rapido."
+      ]
     },
     "idraulico": {
       "metaTitle": "Idraulico Modena | Impianti idraulici, acqua e scarichi",
@@ -438,7 +592,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Diagnosi e rilievo",
+          "text": "Individuazione di perdite, verifica di pressione, scarichi e stato delle tubazioni esistenti."
+        },
+        {
+          "icon": "droplets",
+          "title": "Adduzione idrica",
+          "text": "Nuove linee in multistrato o rame, collettori ispezionabili e rubinetti di intercettazione."
+        },
+        {
+          "icon": "waves",
+          "title": "Scarichi e ventilazione",
+          "text": "Rifacimento delle reti di scarico con pendenze corrette e sifonatura a norma."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Riscaldamento",
+          "text": "Radiatori, valvole termostatiche e impianti a pavimento, con collettore e bilanciamento."
+        },
+        {
+          "icon": "gauge",
+          "title": "Caldaia e acqua calda",
+          "text": "Sostituzione o spostamento, scarico fumi e allacci secondo le indicazioni del tecnico."
+        },
+        {
+          "icon": "file",
+          "title": "Prove e collaudo",
+          "text": "Prova in pressione, verifica di tenuta e documentazione utile alla conformità."
+        }
+      ],
+      "gallery": [
+        "Predisposizione degli attacchi a parete, prima della chiusura e della posa.",
+        "Colonne di scarico e adduzione raccolte in un unico cavedio ispezionabile."
+      ]
     },
     "murarie": {
       "metaTitle": "Opere murarie a Modena",
@@ -483,7 +673,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Rilievo e verifiche",
+          "text": "Lettura dello stato di fatto, con il tecnico abilitato per tutto ciò che tocca la struttura."
+        },
+        {
+          "icon": "hammer",
+          "title": "Demolizioni selettive",
+          "text": "Rimozione di tramezzi e massetti, con protezione delle parti da conservare."
+        },
+        {
+          "icon": "brick",
+          "title": "Tramezzi e murature",
+          "text": "Laterizio, blocchi o forati, con architravi e spallette messe a piombo."
+        },
+        {
+          "icon": "drill",
+          "title": "Tracce e ripristini",
+          "text": "Esecuzione delle tracce per gli impianti e ripristino a filo dopo il passaggio."
+        },
+        {
+          "icon": "layers",
+          "title": "Intonaci e massetti",
+          "text": "Rinzaffo, intonaco, rasatura e massetti in quota, pronti per la posa delle finiture."
+        },
+        {
+          "icon": "truck",
+          "title": "Smaltimento e pulizia",
+          "text": "Calo dei materiali, trasporto in discarica autorizzata e riconsegna dell'area pulita."
+        }
+      ],
+      "gallery": [
+        "Posa di un corso di mattoni a piombo, su letto di malta uniforme.",
+        "Stesura della malta e allineamento del blocco successivo."
+      ]
     },
     "cartongessoIsolamento": {
       "metaTitle": "Cartongesso Modena | Pareti, controsoffitti e isolamento",
@@ -533,7 +759,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Rilievo e progetto",
+          "text": "Quote, spessori disponibili, punti di ancoraggio e passaggio degli impianti."
+        },
+        {
+          "icon": "panels",
+          "title": "Orditura metallica",
+          "text": "Guide e montanti a passo corretto, con nastro desolidarizzante a pavimento e a soffitto."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Isolamento termico",
+          "text": "Lana minerale o materiali equivalenti, con spessore scelto sulla base della parete."
+        },
+        {
+          "icon": "wind",
+          "title": "Correzione acustica",
+          "text": "Doppia lastra, giunti sfalsati e sigillature per ridurre il passaggio del rumore."
+        },
+        {
+          "icon": "stack",
+          "title": "Lastre e controsoffitti",
+          "text": "Lastre standard, idrorepellenti o ignifughe secondo l'ambiente; velette e nicchie su disegno."
+        },
+        {
+          "icon": "paint",
+          "title": "Stuccatura e finitura",
+          "text": "Nastratura dei giunti, stuccatura in più mani e carteggiatura, pronte per la tinteggiatura."
+        }
+      ],
+      "gallery": [
+        "Taglio a misura della lastra prima del fissaggio all'orditura metallica.",
+        "Carteggiatura dei giunti su lastra idrorepellente, prima della finitura."
+      ]
     },
     "pavimentiRivestimenti": {
       "metaTitle": "Posa pavimenti e rivestimenti a Modena",
@@ -578,7 +840,43 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Rilievo e scelta dei formati",
+          "text": "Verifica delle quote, dei fuori squadro e del formato adatto all'ambiente."
+        },
+        {
+          "icon": "layers",
+          "title": "Preparazione del supporto",
+          "text": "Massetto, primer, rasatura autolivellante e controllo di planarità e umidità residua."
+        },
+        {
+          "icon": "grid",
+          "title": "Posa a pavimento",
+          "text": "Gres, grandi formati, cotto o parquet, con livellatori e fughe calibrate."
+        },
+        {
+          "icon": "panels",
+          "title": "Rivestimenti a parete",
+          "text": "Bagno, cucina e zone tecniche, con tagli, angolari e profili posati a filo."
+        },
+        {
+          "icon": "droplets",
+          "title": "Impermeabilizzazioni",
+          "text": "Guaine e nastri nelle zone bagnate, eseguiti prima della posa e non dopo."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Fughe e sigillature",
+          "text": "Stuccatura, siliconatura dei giunti elastici e pulizia finale delle superfici."
+        }
+      ],
+      "gallery": [
+        "Collante steso a doppia spalmatura e livellatori, per una posa senza vuoti né dislivelli.",
+        "Pavimento in gres esagonale a posa conclusa, con fughe di larghezza costante."
+      ]
     },
     "tettoFacciate": {
       "metaTitle": "Rifacimento tetto e facciate a Modena",
@@ -623,14 +921,105 @@
         }
       ],
       "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
+      "ctaSecondary": "Contatti",
+      "scope": [
+        {
+          "icon": "clipboard",
+          "title": "Sopralluogo in quota",
+          "text": "Verifica di manto, orditura, gronde e stato dell'intonaco di facciata."
+        },
+        {
+          "icon": "hardhat",
+          "title": "Ponteggio e sicurezza",
+          "text": "Montaggio del ponteggio, linee vita e protezioni, con la documentazione richiesta."
+        },
+        {
+          "icon": "hammer",
+          "title": "Struttura e orditura",
+          "text": "Ripristino o sostituzione di travi e listellatura, con trattamento del legno."
+        },
+        {
+          "icon": "umbrella",
+          "title": "Manto e impermeabilizzazione",
+          "text": "Guaina traspirante, coppi o tegole, converse, scossaline e canali di gronda."
+        },
+        {
+          "icon": "thermometer",
+          "title": "Isolamento della copertura",
+          "text": "Pacchetto isolante sotto manto, per ridurre le dispersioni del sottotetto."
+        },
+        {
+          "icon": "paint",
+          "title": "Facciata e finiture",
+          "text": "Ripristino dell'intonaco, rasatura e tinteggiatura con prodotti per esterni."
+        }
+      ],
+      "gallery": [
+        "Nuova orditura in legno, prima della posa del manto di copertura.",
+        "Ponteggio montato su una facciata, per il ripristino dell'intonaco in quota."
+      ]
     },
     "areaPanelTitle": "Dove interveniamo",
     "compliancePanelTitle": "Pratiche e responsabilità",
     "faqTitle": "Domande frequenti su questo servizio",
     "siblingsTitle": "Altri servizi che seguiamo",
     "closingTitle": "Parliamo del tuo intervento",
-    "closingBody": "Sopralluogo senza impegno a Modena e provincia, poi un preventivo con voci e tempi. Un solo referente dall’inizio alla consegna."
+    "closingBody": "Sopralluogo senza impegno a Modena e provincia, poi un preventivo con voci e tempi. Un solo referente dall’inizio alla consegna.",
+    "chipReferent": "Un solo referente di cantiere",
+    "chipCompliance": "Lavori conformi a quanto autorizzato",
+    "chipArea": "Modena e provincia",
+    "scopeEyebrow": "Cosa comprende",
+    "scopeTitle": "Che cosa include l'intervento",
+    "scopeIntro": "Le lavorazioni che ritrovate nel preventivo, nello stesso ordine in cui si susseguono in cantiere.",
+    "methodEyebrow": "Metodo",
+    "methodTitle": "Come lavoriamo, dal sopralluogo alla consegna",
+    "processEyebrow": "Percorso",
+    "processTitle": "Cinque passaggi, dal primo contatto alla consegna",
+    "process": [
+      {
+        "title": "Sopralluogo",
+        "text": "Veniamo a vedere: misure, stato degli impianti, vincoli di accesso e obiettivi. Senza impegno."
+      },
+      {
+        "title": "Preventivo scritto",
+        "text": "Voci separate per opere, materiali e manodopera, con i tempi indicativi accanto a ogni fase."
+      },
+      {
+        "title": "Pratiche e forniture",
+        "text": "Il tecnico abilitato valuta CILA o SCIA; noi ordiniamo i materiali e fissiamo l'apertura del cantiere."
+      },
+      {
+        "title": "Cantiere",
+        "text": "Protezioni, lavorazioni nell'ordine del cronoprogramma e aggiornamenti sugli snodi critici."
+      },
+      {
+        "title": "Consegna",
+        "text": "Pulizia, verifica delle lavorazioni e documentazione utile a garanzie e detrazioni."
+      }
+    ],
+    "galleryEyebrow": "Lavorazioni",
+    "galleryTitle": "Come si presenta il lavoro",
+    "galleryNote": "Fotografie di riferimento su licenza Pexels, non scatti dei nostri cantieri. Pubblicheremo i nostri quando il portfolio sarà pronto.",
+    "detailEyebrow": "Approfondimento",
+    "detailTitle": "Quartieri, condomini, pratiche e tempi",
+    "zonesEyebrow": "Zone servite",
+    "zonesTitle": "Dove interveniamo, tra Modena e provincia",
+    "zones": [
+      "Modena centro storico",
+      "Buon Pastore",
+      "Crocetta",
+      "Quartiere Musicisti",
+      "Sassuolo",
+      "Carpi",
+      "Formigine",
+      "Castelfranco Emilia",
+      "Vignola",
+      "Spilamberto",
+      "Maranello",
+      "Rubiera"
+    ],
+    "zonesNote": "L'elenco non è esaustivo: se il vostro indirizzo non compare, chiedete lo stesso — valutiamo distanza, accessi e tempi di trasferta prima del sopralluogo.",
+    "siblingsIntro": "Quasi nessun intervento resta dentro una sola voce: un bagno tocca impianti, cartongesso e posa. Se il vostro ne riguarda più di una, partite da qui."
   },
   "FeaturedProjects": {
     "label": "Portfolio",
@@ -643,7 +1032,7 @@
   "FaqSection": {
     "label": "Domande frequenti",
     "title": "Cosa chiedono più spesso i clienti",
-    "intro": "Trasparenza su tempi, modalità e organizzazione del cantiere, più domande su servizi edili a Modena e ricerche locali."
+    "intro": "Permessi, tempi, costi e organizzazione del cantiere a Modena."
   },
   "CtaBanner": {
     "title": "Pronto a iniziare?",
@@ -681,43 +1070,6 @@
     "linkImpresaEdileModena": "Impresa edile Modena (guida locale)",
     "reviewsLink": "Recensioni su Google"
   },
-  "BrandEcosystem": {
-    "label": "Materiali professionali",
-    "title": "Marchi che trovi spesso nei nostri cantieri",
-    "intro": "Non siamo rivenditori ufficiali: in preventivo indichiamo linee e alternative equivalenti certificate. Qui trovi i siti dei produttori per approfondire schede tecniche e gamma prodotti.",
-    "disclaimer": "I marchi citati sono di proprietà dei rispettivi titolari. La scelta dei materiali avviene di progetto in progetto, in base a supporti, norme di posa e budget.",
-    "brands": {
-      "mapei": "Mapei",
-      "kerakoll": "Kerakoll",
-      "knauf": "Knauf Italia",
-      "fassa": "Fassa Bortolo",
-      "bticino": "BTicino",
-      "vimar": "Vimar"
-    }
-  },
-  "HomeInternalHub": {
-    "label": "Modena e provincia",
-    "title": "Pagine utili: edilizia, impianti e cartongesso",
-    "intro": "Guide locali su impresa edile, elettricista, idraulico, cartongesso, ristrutturazioni chiavi in mano, preventivo e portfolio.",
-    "linkImpresa": "Impresa edile a Modena",
-    "descImpresa": "Perché scegliere una ditta edile locale, cosa offriamo e domande frequenti.",
-    "linkChiavi": "Ristrutturazioni chiavi in mano",
-    "descChiavi": "Coordinamento unico: demolizioni, impianti, finiture e consegna organizzata.",
-    "linkElettrico": "Elettricista e impianti elettrici",
-    "descElettrico": "Quadri, prese, illuminazione e conformità a Modena e provincia — con lavori edili coordinati.",
-    "linkIdraulico": "Idraulico e impianti idraulici",
-    "descIdraulico": "Acqua, scarichi, riscaldamento e climatizzazione in ristrutturazione, con preventivo dopo sopralluogo.",
-    "linkCartongesso": "Cartongesso e isolamento",
-    "descCartongesso": "Pareti, controsoffitti, isolamento termo-acustico e cappotto interno.",
-    "linkPreventivo": "Preventivo online",
-    "descPreventivo": "Raccontaci il progetto: ti rispondiamo con i prossimi passi.",
-    "linkPrenota": "Prenota sopralluogo",
-    "descPrenota": "Scegli data e fascia oraria indicative; confermiamo insieme dopo il primo contatto.",
-    "linkPortfolio": "Portfolio lavori",
-    "descPortfolio": "Foto e dettagli di cantieri reali in provincia.",
-    "linkContatti": "Contatti",
-    "descContatti": "Telefono, email e modulo messaggi."
-  },
   "ImpresaEdileModenaPage": {
     "eyebrow": "Modena e provincia",
     "breadcrumbName": "Impresa edile Modena",
@@ -751,6 +1103,38 @@
     "label": "Appuntamenti",
     "title": "Prenota un sopralluogo",
     "intro": "Compila il modulo: riceverai una conferma via email e ti contatteremo per fissare data e ora. Nessun servizio di prenotazione esterno a pagamento.",
+    "trust1": "Preventivo gratuito dopo il sopralluogo",
+    "trust2": "Un solo referente di cantiere",
+    "trust3": "Modena e provincia",
+    "heroCtaForm": "Vai al modulo",
+    "heroCtaCall": "Chiama {phone}",
+    "formLabel": "Richiesta",
+    "formTitle": "Il modulo, in tre passaggi",
+    "stepContact": "I tuoi contatti",
+    "stepWhen": "Quando ti farebbe comodo",
+    "stepDetails": "Dettagli utili",
+    "stepDetailsHint": "Facoltativo, ma ci aiuta ad arrivare preparati: piani, metrature, foto dello stato attuale.",
+    "optional": "facoltativo",
+    "requiredMark": "campo obbligatorio",
+    "submitNote": "Ricevi subito una email di riepilogo. Data e ora restano da confermare insieme.",
+    "nextLabel": "Dopo l’invio",
+    "nextTitle": "Cosa succede dopo",
+    "next1t": "Riepilogo via email",
+    "next1d": "Una conferma con i dati che hai inserito arriva subito nella tua casella.",
+    "next2t": "Ti ricontattiamo",
+    "next2d": "Confermiamo insieme data e ora, oppure proponiamo l’alternativa più vicina.",
+    "next3t": "Sopralluogo e preventivo",
+    "next3d": "Rilievo di misure e stato dei locali. Il preventivo con voci e tempi è gratuito.",
+    "asideContactTitle": "Preferisci parlarne prima?",
+    "asideContactIntro": "Rispondiamo anche al telefono: se il modulo non fa per te, chiama o scrivi.",
+    "asideAreaTitle": "Dove interveniamo",
+    "altLabel": "Altre strade",
+    "altTitle": "Non è ancora il momento di un sopralluogo?",
+    "altIntro": "Si può partire anche da una richiesta scritta: il sopralluogo arriva dopo, quando serve davvero.",
+    "altQuoteTitle": "Richiedi un preventivo online",
+    "altQuoteDesc": "Poche domande sul progetto, poi ti ricontattiamo noi.",
+    "altContactTitle": "Scrivici un messaggio",
+    "altContactDesc": "Telefono, email e modulo per una domanda veloce.",
     "formPrivacy": "I dati sono trattati come da",
     "privacyLink": "privacy policy",
     "fieldName": "Nome e cognome",
@@ -777,9 +1161,7 @@
     "errorConfig": "Invio email non attivo: configura Gmail o Resend sul server.",
     "errName": "Inserisci il nome",
     "errEmail": "Email non valida",
-    "errPhone": "Telefono non valido",
-    "fallbackCta": "Preferisci scriverci?",
-    "fallbackLink": "Vai ai contatti"
+    "errPhone": "Telefono non valido"
   },
   "PortfolioPage": {
     "label": "I nostri lavori",
@@ -840,7 +1222,34 @@
     "hoursValue": "Lun–Ven 8:30–18:30 · Sab su appuntamento",
     "reviewsPrefix": "Recensioni:",
     "reviewsLink": "scheda Google Business",
-    "ctaQuote": "Richiedi preventivo online"
+    "callAction": "Chiama ora",
+    "whatsapp": "WhatsApp",
+    "whatsappValue": "Scrivici in chat",
+    "whatsappAction": "Apri WhatsApp",
+    "whatsappPrefill": "Buongiorno, vorrei informazioni su un intervento.",
+    "emailAction": "Scrivi una email",
+    "formLabel": "Modulo messaggi",
+    "formTitle": "Scrivici",
+    "formIntro": "Racconta l’intervento in poche righe. Se hai foto dei locali o un preventivo da confrontare, allegali: ci aiutano a risponderti nel merito.",
+    "asideLabel": "Recapiti",
+    "asideTitle": "Dettagli utili",
+    "pecHint": "Per comunicazioni ufficiali e fatturazione elettronica.",
+    "area": "Zona servita",
+    "companyLabel": "Dati aziendali",
+    "routesLabel": "Altri percorsi",
+    "routesTitle": "Oppure parti da qui",
+    "routesIntro": "Se sai già cosa ti serve, questi moduli arrivano prima di un messaggio libero.",
+    "routeQuoteTitle": "Preventivo dettagliato",
+    "routeQuoteDesc": "Descrivi l’intervento e allega le foto: rispondiamo con voci, materiali e tempi.",
+    "routeBookingTitle": "Prenota un sopralluogo",
+    "routeBookingDesc": "Scegli giorno e fascia oraria: vediamo i locali prima di preventivare.",
+    "routeEstimateTitle": "Stima costi online",
+    "routeEstimateDesc": "Un ordine di grandezza in pochi passaggi, prima di sentirci.",
+    "routeImpresaTitle": "Impresa edile a Modena",
+    "routeImpresaDesc": "Cosa facciamo, come lavoriamo e le domande più frequenti.",
+    "routeAboutTitle": "Chi siamo",
+    "routeAboutDesc": "Referente unico di cantiere, coperture assicurative e adempimenti.",
+    "townsLabel": "Comuni serviti"
   },
   "PreventivoPage": {
     "metaTitle": "Preventivo",
@@ -853,6 +1262,23 @@
     "eyebrow": "Azienda",
     "title": "Chi siamo",
     "intro": "{brand} nasce dall’incontro tra artigiani specializzati e project management: un unico referente per pianificare il cantiere, coordinare i fornitori e rispettare le tempistiche che promettiamo ai nostri clienti.",
+    "heroBadge": "Modena e provincia",
+    "heroCta": "Richiedi un preventivo",
+    "heroCtaSecondary": "Prenota un sopralluogo",
+    "identityLabel": "Dati d’impresa",
+    "identityLegal": "Ragione sociale",
+    "identityVat": "Partita IVA",
+    "identityRea": "REA",
+    "identityArea": "Area servita",
+    "craftLabel": "Il mestiere",
+    "craftTitle": "Un cantiere, un referente",
+    "craftP1": "Chi viene a fare il sopralluogo è la stessa persona che segue il cantiere fino alla consegna. Una sola voce per le decisioni, per gli imprevisti e per le date: non un centralino che rimbalza la chiamata a un altro reparto.",
+    "craftP2": "Intorno a quel referente lavorano artigiani e imprese specializzate — muratura, impianti, cartongesso, finiture — scelti in base all’intervento e coordinati da noi. Voi parlate con una persona sola: il coordinamento è un problema nostro.",
+    "craftP3": "È un modo di lavorare tarato su interventi di dimensione umana: appartamenti, villette, uffici e piccoli spazi commerciali. Preferiamo dire di no a un lavoro che non riusciremmo a seguire, piuttosto che seguirlo male.",
+    "quote": "Un preventivo è una promessa scritta. Per questo lo dettagliamo voce per voce, con i tempi, prima di aprire il cantiere.",
+    "quoteSource": "Il metodo, in una riga",
+    "pillarsLabel": "Il nostro impegno",
+    "pillarsTitle": "Quattro cose su cui non transigiamo",
     "p1t": "Team multidisciplinare",
     "p1d": "Muratura, impianti, finiture: figure interne e partner certificati per ogni fase del lavoro.",
     "p2t": "Sicurezza e conformità",
@@ -860,20 +1286,30 @@
     "p3t": "Qualità percepita",
     "p3d": "Materiali selezionati e controlli in corso d’opera per un risultato che regge nel tempo.",
     "p4t": "Assicurazione e adempimenti",
-    "p4d": "{insurance} {compliance}",
+    "p4d": "Copertura RC professionale, documentazione di cantiere e DPI per il personale. Le voci per esteso stanno più in basso, senza sigle di comodo.",
+    "territoryLabel": "Territorio",
+    "territoryTitle": "Modena è il nostro cantiere",
+    "territoryP1": "Lavoriamo dove viviamo: Modena città e provincia, con i comuni limitrofi valutati caso per caso. Sassuolo, Carpi, Formigine e le frazioni collegate rientrano nel raggio in cui riusciamo a essere in cantiere il giorno dopo una chiamata.",
+    "territoryP2": "Conoscere il territorio vuol dire conoscere anche il costruito: palazzine degli anni Sessanta, case di corte, appartamenti in centro storico dove ogni intervento passa dal Regolamento edilizio comunale. Le pratiche le firma il vostro tecnico; noi eseguiamo in conformità al progetto approvato e teniamo aggiornati sia voi sia lui.",
+    "territoryLink": "Impresa edile a Modena",
+    "galleryEyebrow": "Dal cantiere alla consegna",
+    "galleryTitle": "Come procede un lavoro",
+    "galleryIntro": "Ogni intervento attraversa le stesse fasi, nello stesso ordine: si apre il cantiere, si mette in sicurezza, si eseguono le opere, si consegna pulito. Cambiano la scala e i tempi, non la sequenza.",
+    "g1": "Apertura del cantiere: protezioni, tracciamenti e punti impianto prima di toccare un muro.",
+    "g2": "Opere murarie: tramezzi, riprese e nuove aperture, con filo e livella su ogni corso.",
+    "g3": "Ponteggio e messa in sicurezza quando l’intervento interessa l’esterno.",
+    "g4": "Facciate e coperture: risanamento di edifici esistenti, spesso in contesti storici.",
+    "g5": "Sottotetti e spazi recuperati: isolamento, cartongesso e impianti sotto traccia.",
+    "g6": "Consegna: pavimenti posati, tinteggiature finite, cantiere sgomberato.",
+    "galleryNote": "Fotografie di riferimento su licenza Pexels, non scatti dei nostri cantieri. Pubblicheremo i nostri quando il portfolio sarà pronto.",
+    "credentialsLabel": "Garanzie",
+    "credentialsTitle": "Coperture, adempimenti e qualificazioni",
+    "insuranceTitle": "Copertura assicurativa",
+    "complianceTitle": "Adempimenti e sicurezza",
     "certificationsTitle": "Certificazioni e qualificazioni",
-    "certificationsHint": "{base} Aggiorna questo testo con categorie SOA, classifiche e scadenze reali quando disponibili.",
-    "galleryEyebrow": "Cantieri e lavori",
-    "galleryTitle": "Immagini di esempio",
-    "galleryIntro": "Sostituisci queste foto stock con scatti dei vostri cantieri (prima / dopo, dettagli) caricando file in <code>public/images/</code> e aggiornando i percorsi in <code>chi-siamo/page.tsx</code>",
-    "galleryFooterNote": "Le immagini sottostanti restano segnaposto finché non carichi foto proprie (vedi CHECKLIST).",
-    "fig1Alt": "Cantiere edile — sostituire con foto propria",
-    "fig2Alt": "Interno ristrutturato — sostituire con foto propria",
-    "fig1Caption": "Esempio: ristrutturazione in corso",
-    "fig2Caption": "Esempio: finiture e spazi abitativi"
+    "p4Link": "Coperture e adempimenti"
   },
   "ContactForm": {
-    "formTitle": "Scrivici",
     "formPrivacyBefore": "Compila il modulo: i dati sono trattati come da",
     "formPrivacyLink": "privacy policy",
     "fieldName": "Nome e cognome",
@@ -912,7 +1348,79 @@
   "Materials": {
     "label": "Materiali e sistemi",
     "title": "Con cosa lavoriamo in cantiere",
-    "intro": "Marchi che usiamo abitualmente per collanti, rasanti, impermeabilizzazioni e sistemi a secco, o equivalenti certificati con pari caratteristiche. La scelta finale viene indicata a voce e nel preventivo, prima dell’inizio dei lavori.",
-    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool"
+    "intro": "Marchi che usiamo abitualmente, o equivalenti certificati con pari caratteristiche. Non siamo rivenditori ufficiali: le linee effettive sono indicate in preventivo.",
+    "items": "Mapei,Kerakoll,Knauf,Fischer,Sika,Rockwool",
+    "disclaimer": "I marchi citati sono di proprietà dei rispettivi titolari."
+  },
+  "HomeMedia": {
+    "altRistrutturazioni": "Soggiorno ristrutturato con parquet e finiture su misura",
+    "altEdilizia": "Facciata di un edificio storico dopo il risanamento",
+    "altProgetto": "Disegni di progetto per una ristrutturazione residenziale",
+    "altFiniture": "Tinteggiatura a rullo di una parete interna",
+    "altChiaviInMano": "Soggiorno consegnato al termine di una ristrutturazione chiavi in mano",
+    "altBagno": "Bagno rivestito in marmo dopo il rifacimento",
+    "altCucina": "Cucina moderna al termine dei lavori",
+    "altElettrico": "Cablaggi elettrici in una scatola di derivazione durante la ristrutturazione",
+    "altIdraulico": "Tubazioni di scarico di un impianto idraulico",
+    "altMurarie": "Parete in muratura a vista dopo le opere murarie",
+    "altCartongesso": "Rasatura dei giunti di una lastra in cartongesso",
+    "altPavimenti": "Posa di piastrelle con spatola dentata e distanziatori",
+    "altTetto": "Posa di tegole in laterizio su una copertura"
+  },
+  "AboutMedia": {
+    "altSkyline": "I tetti del centro storico di Modena con la torre Ghirlandina",
+    "altIntonaco": "Rasatura a spatola di una parete interna durante una ristrutturazione",
+    "altMuratura": "Posa di un mattone pieno su un letto di malta",
+    "altBanco": "Banco da lavoro con utensili, morsetti e appunti di cantiere",
+    "altSicurezza": "Casco di protezione e guanti da lavoro su un cantiere edile",
+    "altLavorazione": "Lavorazione di una tavola di legno al banco, tra i trucioli",
+    "altProgettoTavolo": "Pianta di un appartamento con metro a nastro e penna sul tavolo di lavoro",
+    "altPortici": "Portici di un edificio storico a Modena illuminati dal sole",
+    "altGhirlandina": "La torre Ghirlandina e il Duomo di Modena visti dal basso",
+    "altCantiere": "Stanza in ristrutturazione con teli di protezione, scala e punti impianto a vista",
+    "altPosaMattoni": "Posa di mattoni a filo su un corso di malta",
+    "altPonteggio": "Ponteggio montato sulla facciata di una casa in ristrutturazione",
+    "altFacciata": "Facciata di un edificio storico interamente ponteggiata per il risanamento",
+    "altMansarda": "Sottotetto recuperato con pilastro in mattoni a vista e lucernari",
+    "altConsegna": "Stanza consegnata con parquet posato e pareti tinteggiate",
+    "altDocumenti": "Documentazione di cantiere su una cartellina portablocco"
+  },
+  "ServiceMedia": {
+    "chiaviInManoHero": "Stanza in ristrutturazione con scala, cavalletto e punti impianto a vista",
+    "chiaviInManoAside": "Parete in mattoni a vista con scala e reti metalliche appoggiate durante i lavori",
+    "chiaviInManoA": "Interno con tramezzi demoliti e montanti in legno a vista",
+    "chiaviInManoB": "Stanza vuota a fine lavori, con pavimento in legno e pareti tinteggiate",
+    "bagnoHero": "Bagno completato con doppio lavabo, mobile in legno e vasca",
+    "bagnoAside": "Doccia con parete in pietra e box in cristallo in un bagno rifinito",
+    "bagnoA": "Rivestimento a mosaico e piastrelle effetto legno sopra un mobile da bagno",
+    "bagnoB": "Bagno con box doccia in cristallo, sanitari e pavimento piastrellato",
+    "cucinaHero": "Cucina con isola in marmo, mobili in legno e lampada a sospensione",
+    "cucinaAside": "Dettaglio di un'anta bianca con maniglia dorata",
+    "cucinaA": "Piano e paraschizzi in lastra effetto marmo sopra mobili bassi",
+    "cucinaB": "Cucina completata con forni a colonna e soffitto in legno",
+    "elettricoHero": "Quadro elettrico aperto con interruttori magnetotermici e cavi ordinati",
+    "elettricoAside": "Scatole portafrutto rosse incassate in una parete, con cavi in attesa di collegamento",
+    "elettricoA": "Centralino in fase di cablaggio con morsettiere e conduttori colorati",
+    "elettricoB": "Scatola di derivazione con connessioni realizzate a morsetti",
+    "idraulicoHero": "Collettore di un impianto di riscaldamento a pavimento con circuiti e pompa",
+    "idraulicoAside": "Tubazioni in rame a vista su una parete piastrellata",
+    "idraulicoA": "Attacchi idraulici predisposti su una parete prima della posa del rivestimento",
+    "idraulicoB": "Tubazioni di scarico e adduzione raccolte lungo una parete tecnica",
+    "murarieHero": "Due muri in mattoni visti dal basso, con il cielo tra le pareti",
+    "murarieAside": "Mattoni forati accatastati in cantiere",
+    "murarieA": "Posa di un mattone su un letto di malta con la cazzuola",
+    "murarieB": "Mano guantata che stende la malta su un corso di blocchi",
+    "cartongessoHero": "Controsoffitto in lastre idrorepellenti su orditura metallica",
+    "cartongessoAside": "Posa di un materassino isolante in lana minerale tra i montanti",
+    "cartongessoA": "Taglio di una lastra di cartongesso con cutter e metro",
+    "cartongessoB": "Levigatrice per giunti al lavoro su una parete in lastre idrorepellenti",
+    "pavimentiHero": "Stanza vuota con pavimento in parquet posato e luce naturale",
+    "pavimentiAside": "Doghe in legno di un pavimento appena posato, viste in prospettiva",
+    "pavimentiA": "Posa di una piastrella con collante pettinato e livellatori",
+    "pavimentiB": "Pavimento in gres esagonale posato con fughe regolari",
+    "tettoHero": "Tetto in coppi con abbaino, visto dall'esterno sotto il cielo",
+    "tettoAside": "Colmo di un tetto in coppi vecchi, ripreso da vicino",
+    "tettoA": "Orditura in legno di una nuova copertura, prima della posa del manto",
+    "tettoB": "Ponteggio montato sulla facciata di un edificio residenziale"
   }
 }

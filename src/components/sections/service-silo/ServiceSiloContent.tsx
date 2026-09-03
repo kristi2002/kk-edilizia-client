@@ -2,20 +2,21 @@ import { Link } from "@/i18n/navigation";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { FadeIn } from "@/components/motion/FadeIn";
-import {
-  WatermarkGrid,
-  WatermarkGutter,
-  WatermarkRing,
-  WatermarkWord,
-} from "@/components/decor/Watermark";
+import { WatermarkRing } from "@/components/decor/Watermark";
+import { StatsStrip } from "@/components/sections/StatsStrip";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { localizedPath } from "@/lib/i18n-path";
-import {
-  SERVICE_SILO_ROUTES,
-  serviceSiloPathForKey,
-  type ServiceSiloKey,
-} from "@/lib/service-silos";
-import { ArrowRight, Check, MapPin, ShieldCheck } from "lucide-react";
+import { serviceSiloPathForKey, type ServiceSiloKey } from "@/lib/service-silos";
+import { ArrowRight } from "lucide-react";
+import { ServiceSiloHero } from "./ServiceSiloHero";
+import { ServiceSiloScope, type ScopeItem } from "./ServiceSiloScope";
+import { ServiceSiloIntro } from "./ServiceSiloIntro";
+import { ServiceSiloProcess } from "./ServiceSiloProcess";
+import { ServiceSiloGallery } from "./ServiceSiloGallery";
+import { ServiceSiloDetail, type SiloHeadingBlock } from "./ServiceSiloDetail";
+import { ServiceSiloZones } from "./ServiceSiloZones";
+import { ServiceSiloFaq, type SiloFaq } from "./ServiceSiloFaq";
+import { ServiceSiloSiblings } from "./ServiceSiloSiblings";
 import itMessages from "../../../../messages/it.json";
 import enMessages from "../../../../messages/en.json";
 
@@ -24,23 +25,29 @@ type Props = {
   siloKey: ServiceSiloKey;
 };
 
-type SiloFaq = { q: string; a: string };
-type SiloHeadingBlock = { title: string; body: string; bullets?: string[] };
-
 /**
  * Template for the nine service silos.
  *
- * These are the pages the entire search strategy points at, and they used to render as a
- * single 768px column of grey paragraphs with no structure a visitor could scan: no
- * scope list, no compliance framing beyond a bare paragraph, no breadcrumb, no sibling
- * links, and one CTA pair right at the bottom. The copy is unchanged — it is the same
- * `messages` keys — but it is now laid out as a landing page rather than a document.
+ * These are the pages the entire search strategy points at. They used to render as a
+ * single 768px column of grey paragraphs — no photography anywhere above or below the
+ * fold, no scope list, one CTA pair, and the cross-links to the other eight silos set as
+ * bare text rows.
+ *
+ * The copy is still the same `messages` keys; what is new is everything around it. The
+ * page now runs the home page's own alternation of grounds — dark hero, white scope grid,
+ * paper, sunken process, paper gallery, white long-form, sunken zones, paper FAQ, white
+ * siblings, gold band — over four photographs unique to each silo
+ * (`src/lib/media/service-imagery.ts`), and the long-form prose is split so that the two
+ * paragraphs that answer "how do you work" sit near the top while the four that answer
+ * "what about my condominium, my permits, my street" sit below the process.
+ *
+ * `StatsStrip` is reused rather than reimplemented, exactly as `/chi-siamo` does: the
+ * figures come from one namespace so no page can drift from the home page.
  */
 export async function ServiceSiloContent({ locale, siloKey }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("ServiceSilos");
   const tNav = await getTranslations("Nav");
-  const tFooter = await getTranslations("Footer");
   const bundle = locale === "en" ? enMessages : itMessages;
 
   const silo = bundle.ServiceSilos?.[siloKey] as
@@ -48,52 +55,39 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         eyebrow?: string;
         h1?: string;
         lead?: string;
-        body1?: string;
-        body2?: string;
-        body3?: string;
-        body4?: string;
-        body5?: string;
-        body6?: string;
         ctaPrimary?: string;
         ctaSecondary?: string;
+        scope?: ScopeItem[];
+        gallery?: string[];
         headings?: SiloHeadingBlock[];
         faqs?: SiloFaq[];
       })
     | undefined;
 
-  const faqLd =
-    Array.isArray(silo?.faqs) && silo!.faqs!.length > 0
-      ? silo!.faqs!.map((f) => ({ question: f.q, answer: f.a }))
-      : [];
-
   const h1 = silo?.h1 ?? t(`${siloKey}.h1`);
+  const eyebrow = silo?.eyebrow ?? t(`${siloKey}.eyebrow`);
+  const ctaPrimary = silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`);
+  const ctaSecondary = silo?.ctaSecondary ?? t(`${siloKey}.ctaSecondary`);
   const path = serviceSiloPathForKey(siloKey);
 
+  /** Six paragraphs, read off the bundle so a missing key falls back to `t()`. */
   const bodies = (
     ["body1", "body2", "body3", "body4", "body5", "body6"] as const
   ).map((key) => {
     const v = silo?.[key];
-    return typeof v === "string" && v.trim().length > 0
-      ? v
-      : t(`${siloKey}.${key}`);
+    return typeof v === "string" && v.trim().length > 0 ? v : t(`${siloKey}.${key}`);
   });
 
-  const siloLabels: Record<ServiceSiloKey, string> = {
-    chiaviInMano: tFooter("linkChiaviInMano"),
-    bagno: tFooter("linkBagno"),
-    cucina: tFooter("linkCucina"),
-    elettrico: tFooter("linkElettrico"),
-    idraulico: tFooter("linkIdraulico"),
-    murarie: tFooter("linkMurarie"),
-    cartongessoIsolamento: tFooter("linkCartongessoIsolamento"),
-    pavimentiRivestimenti: tFooter("linkPavimentiRivestimenti"),
-    tettoFacciate: tFooter("linkTettoFacciate"),
-  };
-  const siblings = SERVICE_SILO_ROUTES.filter((r) => r.key !== siloKey);
+  const scope = Array.isArray(silo?.scope) ? silo!.scope! : [];
+  const gallery = Array.isArray(silo?.gallery) ? silo!.gallery! : [];
+  const headings = Array.isArray(silo?.headings) ? silo!.headings! : [];
+  const faqs = Array.isArray(silo?.faqs) ? silo!.faqs! : [];
 
   return (
     <>
-      <FaqPageJsonLd items={faqLd} />
+      <FaqPageJsonLd
+        items={faqs.map((f) => ({ question: f.q, answer: f.a }))}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: tNav("home"), path: localizedPath(locale, "/") },
@@ -102,204 +96,44 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
       />
 
       <main className="flex flex-1 flex-col">
-        {/* ---------- Hero ---------- */}
-        <section className="relative overflow-hidden bg-raised px-4 py-20 sm:px-6">
-          <WatermarkGrid />
-          <WatermarkRing position="top-right" />
-          <WatermarkGutter>K.K EDILIZIA — MODENA E PROVINCIA</WatermarkGutter>
-
-          <div className="relative mx-auto max-w-3xl">
-            <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-                {silo?.eyebrow ?? t(`${siloKey}.eyebrow`)}
-              </p>
-              <h1 className="mt-3 text-balance font-serif text-4xl text-ink-1 md:text-5xl">
-                {h1}
-              </h1>
-              <p className="mt-6 text-lg leading-relaxed text-ink-2">
-                {silo?.lead ?? t(`${siloKey}.lead`)}
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.08}>
-              {/* CTAs moved above the fold: they used to sit only after ~2.000 words. */}
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  href="/preventivo"
-                  className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep"
-                >
-                  {silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`)}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-                <Link
-                  href="/contatti"
-                  className="inline-flex items-center justify-center rounded-full border border-line-2 px-8 py-3.5 text-sm font-semibold text-ink-1 transition hover:border-accent/50 hover:text-accent-ink"
-                >
-                  {silo?.ctaSecondary ?? t(`${siloKey}.ctaSecondary`)}
-                </Link>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* ---------- Area + compliance, as two labelled panels ---------- */}
-        <section className="rule-gold border-b border-line bg-sunken px-4 py-14 sm:px-6">
-          <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-2">
-            <FadeIn>
-              <div className="h-full rounded-2xl border border-accent/25 bg-accent/[0.07] p-6">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-ink">
-                  <MapPin className="h-4 w-4" aria-hidden />
-                  {t("areaPanelTitle")}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ink-2">
-                  {t("modenaArea")}
-                </p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.06}>
-              <div className="h-full rounded-2xl border border-line bg-raised p-6">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink-3">
-                  <ShieldCheck className="h-4 w-4 text-accent-ink" aria-hidden />
-                  {t("compliancePanelTitle")}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ink-3">
-                  {t("complianceModena")}
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* ---------- Body copy ---------- */}
-        <section className="relative overflow-hidden bg-page px-4 py-20 sm:px-6">
-          <WatermarkWord>MODENA</WatermarkWord>
-          <article className="relative mx-auto max-w-3xl">
-            <FadeIn>
-              <div className="space-y-5 text-base leading-relaxed text-ink-2">
-                {bodies.map((text, i) => (
-                  <p key={i}>{text}</p>
-                ))}
-              </div>
-            </FadeIn>
-
-            {Array.isArray(silo?.headings) && silo!.headings.length > 0 ? (
-              <div className="mt-16 space-y-10">
-                {silo!.headings.map((h, idx) => (
-                  <FadeIn key={`${idx}-${h.title}`} delay={0.04}>
-                    <div className="border-l-2 border-accent/30 pl-6">
-                      <h2 className="font-serif text-2xl text-ink-1">
-                        {h.title}
-                      </h2>
-                      <p className="mt-3 text-base leading-relaxed text-ink-2">
-                        {h.body}
-                      </p>
-                      {Array.isArray(h.bullets) && h.bullets.length > 0 ? (
-                        <ul className="mt-5 space-y-2.5">
-                          {h.bullets.map((b) => (
-                            <li
-                              key={b}
-                              className="flex gap-3 text-sm leading-relaxed text-ink-3"
-                            >
-                              <Check
-                                className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink"
-                                aria-hidden
-                              />
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-                  </FadeIn>
-                ))}
-              </div>
-            ) : null}
-          </article>
-        </section>
-
-        {/* ---------- FAQ ---------- */}
-        {Array.isArray(silo?.faqs) && silo!.faqs.length > 0 ? (
-          <section className="rule-gold bg-sunken px-4 py-20 sm:px-6">
-            <div className="mx-auto max-w-3xl">
-              <FadeIn>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-                  FAQ
-                </p>
-                <h2 className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl">
-                  {t("faqTitle")}
-                </h2>
-              </FadeIn>
-              <dl className="mt-9 space-y-3">
-                {silo!.faqs.map((f, i) => (
-                  <FadeIn key={f.q} delay={i * 0.04}>
-                    <div className="rounded-2xl border border-line bg-raised p-6">
-                      <dt className="font-semibold text-ink-1">{f.q}</dt>
-                      <dd className="mt-2 text-sm leading-relaxed text-ink-3">
-                        {f.a}
-                      </dd>
-                    </div>
-                  </FadeIn>
-                ))}
-              </dl>
-            </div>
-          </section>
-        ) : null}
-
-        {/* ---------- Sibling services: spreads link equity across the silo set ---------- */}
-        <section className="rule-gold relative overflow-hidden bg-page px-4 py-20 sm:px-6">
-          <WatermarkRing position="bottom-left" />
-          <div className="relative mx-auto max-w-5xl">
-            <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-                {tNav("services")}
-              </p>
-              <h2 className="mt-3 font-serif text-2xl text-ink-1 sm:text-3xl">
-                {t("siblingsTitle")}
-              </h2>
-            </FadeIn>
-            <ul className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {siblings.map((r, i) => (
-                <FadeIn key={r.path} delay={i * 0.03}>
-                  <Link
-                    href={r.path}
-                    className="group flex h-full items-start justify-between gap-3 rounded-xl border border-line bg-raised p-4 transition hover:border-accent/35 hover:bg-raised-2"
-                  >
-                    <span className="text-sm font-medium text-ink-2 group-hover:text-ink-1">
-                      {siloLabels[r.key]}
-                    </span>
-                    <ArrowRight
-                      className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink opacity-60 transition group-hover:opacity-100"
-                      aria-hidden
-                    />
-                  </Link>
-                </FadeIn>
-              ))}
-            </ul>
-          </div>
-        </section>
+        <ServiceSiloHero
+          siloKey={siloKey}
+          eyebrow={eyebrow}
+          h1={h1}
+          lead={silo?.lead ?? t(`${siloKey}.lead`)}
+          ctaPrimary={ctaPrimary}
+          ctaSecondary={ctaSecondary}
+        />
+        <StatsStrip />
+        <ServiceSiloScope items={scope} />
+        <ServiceSiloIntro siloKey={siloKey} bodies={bodies.slice(0, 2)} />
+        <ServiceSiloProcess />
+        <ServiceSiloGallery siloKey={siloKey} captions={gallery} />
+        <ServiceSiloDetail bodies={bodies.slice(2)} headings={headings} />
+        <ServiceSiloZones />
+        <ServiceSiloFaq items={faqs} eyebrow="FAQ" title={t("faqTitle")} />
+        <ServiceSiloSiblings siloKey={siloKey} />
 
         {/* ---------- Closing CTA ---------- */}
-        <section className="on-band relative overflow-hidden bg-[linear-gradient(120deg,#6b511d_0%,#75591f_55%,#806322_100%)] px-4 py-20 sm:px-6">
+        <section className="on-band relative overflow-hidden bg-[linear-gradient(120deg,#6b511d_0%,#75591f_55%,#806322_100%)] px-4 py-24 sm:px-6">
           <WatermarkRing position="bottom-left" />
           <div className="relative mx-auto max-w-3xl text-center">
             <FadeIn>
               <h2 className="text-balance font-serif text-3xl text-ink-1 sm:text-4xl">
                 {t("closingTitle")}
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-ink-2">
-                {t("closingBody")}
-              </p>
+              <p className="mx-auto mt-4 max-w-xl text-ink-2">{t("closingBody")}</p>
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/preventivo"
                   className="sweep inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#6b511d] shadow-lg shadow-black/15 transition hover:-translate-y-0.5 hover:shadow-xl"
                 >
-                  {silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`)}
+                  {ctaPrimary}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
                   href="/prenota"
-                  className="inline-flex items-center justify-center rounded-full border border-line-2 px-8 py-3.5 text-sm font-semibold text-ink-1 transition hover:border-accent/50 hover:text-accent-ink"
+                  className="inline-flex items-center justify-center rounded-full border border-line-2 px-8 py-3.5 text-sm font-semibold text-ink-1 transition hover:border-accent/50 hover:bg-raised"
                 >
                   {tNav("booking")}
                 </Link>

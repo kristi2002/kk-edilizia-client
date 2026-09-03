@@ -3,8 +3,8 @@ import dynamicImport from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
 import { HomeLocalIntro } from "@/components/sections/HomeLocalIntro";
-import { HomeInternalHub } from "@/components/sections/HomeInternalHub";
-import { BrandEcosystemStrip } from "@/components/seo/BrandEcosystemStrip";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { faqByLocale } from "@/lib/data/faq";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { MaterialsMarquee } from "@/components/sections/MaterialsMarquee";
@@ -70,26 +70,42 @@ export default async function Home({ params }: HomeParams) {
   /** Required for static rendering; its absence here is why the layout carried force-dynamic. */
   setRequestLocale(locale);
 
+  /**
+   * FAQPage for `/`. The block was already on the page but emitted no schema — only the
+   * silos and `/impresa-edile-modena` did — so the sixteen questions here were invisible
+   * as structured data. It mirrors the rendered accordion exactly, which is what Google
+   * requires; `FaqSection` now ships every answer in the HTML rather than mounting only
+   * the open one, so the two genuinely match.
+   */
+  const faqItems = faqByLocale[locale === "en" ? "en" : "it"] ?? faqByLocale.it;
+
   /*
    * Section order alternates grounds (deep → base → warm → base …) so the page reads as
    * a sequence rather than one 13.000px block. The reviews block that used to sit before
    * the FAQ was removed: its own copy described the testimonials as demonstrative.
+   * `BrandEcosystemStrip` is gone too — it repeated the Materials caveat in different
+   * words, and its outbound manufacturer links moved into `MaterialsMarquee`. So is
+   * `HomeInternalHub`: its "Da dove iniziare" cards retold the process the section above
+   * it had just walked through, and it now closes `ProcessSteps` as an index.
    */
   return (
-    <main className="flex flex-1 flex-col">
-      <Hero />
-      <StatsStrip />
-      <HomeLocalIntro />
-      <Services />
-      <MaterialsMarquee />
-      <HomeServiceSilos />
-      <ProcessSteps />
-      <HomeInternalHub />
-      <BrandEcosystemStrip />
-      {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
-      {/* <FeaturedProjects projects={projects} projectTypes={projectTypes} /> */}
-      <FaqSection />
-      <CtaBanner />
-    </main>
+    <>
+      <FaqPageJsonLd
+        items={faqItems.map((item) => ({ question: item.q, answer: item.a }))}
+      />
+      <main className="flex flex-1 flex-col">
+        <Hero />
+        <StatsStrip />
+        <HomeLocalIntro />
+        <Services />
+        <MaterialsMarquee />
+        <HomeServiceSilos />
+        <ProcessSteps />
+        {isCostEstimateEnabled() ? <HomeStimaTeaser /> : null}
+        {/* <FeaturedProjects projects={projects} projectTypes={projectTypes} /> */}
+        <FaqSection />
+        <CtaBanner />
+      </main>
+    </>
   );
 }

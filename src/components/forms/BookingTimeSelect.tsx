@@ -10,6 +10,10 @@ type Props = {
   slots: readonly string[];
   placeholder: string;
   id?: string;
+  /** Error state, for the trigger's outline. */
+  invalid?: boolean;
+  /** Id of the error paragraph, so the trigger announces the message. */
+  describedBy?: string;
 };
 
 /**
@@ -22,6 +26,8 @@ export function BookingTimeSelect({
   slots,
   placeholder,
   id,
+  invalid = false,
+  describedBy,
 }: Props) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -63,7 +69,14 @@ export function BookingTimeSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}
-        className="mt-1.5 flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-control-line bg-raised text-left text-sm text-ink-1 transition focus-within:border-accent focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227]"
+        // No aria-invalid: the trigger is a button, and that role does not take it.
+        // The error paragraph is wired through aria-describedby instead.
+        aria-describedby={describedBy}
+        className={`flex min-h-[46px] w-full items-stretch overflow-hidden rounded-xl border bg-page text-left text-sm text-ink-1 transition focus:outline-none focus-within:bg-raised focus-within:ring-1 ${
+          invalid
+            ? "border-red-600 focus-within:border-red-600 focus-within:ring-red-600"
+            : "border-control-line focus-within:border-accent focus-within:ring-accent"
+        }`}
         onClick={() => setOpen((o) => !o)}
       >
         <span
@@ -88,7 +101,7 @@ export function BookingTimeSelect({
         <ul
           id={listId}
           role="listbox"
-          className="absolute bottom-full left-0 right-0 z-30 mb-1.5 max-h-[min(11rem,40vh)] overflow-y-auto overscroll-contain rounded-xl border border-line bg-page py-1 shadow-[0_-8px_32px_rgba(0,0,0,0.55)] [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent]"
+          className="absolute bottom-full left-0 right-0 z-30 mb-2 max-h-[min(11rem,40vh)] overflow-y-auto overscroll-contain rounded-xl border border-line bg-raised py-1 shadow-[0_-24px_50px_-20px_rgba(20,23,26,0.45)] [scrollbar-color:rgba(20,23,26,0.25)_transparent] [scrollbar-width:thin]"
         >
           {slots.map((slot) => {
             const selected = value === slot;

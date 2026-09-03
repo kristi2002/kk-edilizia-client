@@ -11,7 +11,7 @@ import {
 import { HoneypotField } from "@/components/forms/HoneypotField";
 import { useLocale, useTranslations } from "next-intl";
 import { firstServerFieldError } from "@/lib/form-api-response";
-import { Loader2, Send } from "lucide-react";
+import { Check, Loader2, Send } from "lucide-react";
 import {
   FormAttachmentPicker,
   type AttachmentItem,
@@ -135,9 +135,19 @@ export function ContactForm() {
         t("whatsappPrefill"),
       )}`;
     return (
-      <div className="rounded-3xl border border-accent/30 bg-accent/10 px-6 py-10 text-center">
-        <p className="font-medium text-ink-1">{t("successTitle")}</p>
-        <p className="mt-2 text-sm text-ink-3">{t("successBody")}</p>
+      <div className="rounded-3xl border border-accent/30 bg-accent/10 px-6 py-12 text-center">
+        <span
+          aria-hidden="true"
+          className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-accent/40 bg-accent/15 text-accent-ink"
+        >
+          <Check className="h-7 w-7" />
+        </span>
+        <p className="mt-6 font-serif text-2xl text-ink-1">
+          {t("successTitle")}
+        </p>
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-3">
+          {t("successBody")}
+        </p>
         {waHref ? (
           <p className="mt-4 text-sm text-ink-4">
             {t("successWhatsappIntro")}{" "}
@@ -163,9 +173,8 @@ export function ContactForm() {
   }
 
   return (
-    <div className="relative z-10 rounded-3xl border border-line bg-raised p-6 sm:p-8">
-      <h2 className="font-serif text-xl text-ink-1">{t("formTitle")}</h2>
-      <p className="mt-2 text-sm text-ink-4">
+    <div className="relative z-10 rounded-3xl border border-line bg-raised p-6 shadow-xl shadow-black/5 sm:p-8">
+      <p className="text-sm leading-relaxed text-ink-4">
         {t("formPrivacyBefore")}{" "}
         <Link href="/privacy" className="text-accent-ink hover:underline">
           {t("formPrivacyLink")}
@@ -175,27 +184,33 @@ export function ContactForm() {
       {/* Estensioni (password manager, ecc.) possono iniettare fdprocessedid sui campi; suppressHydrationWarning evita falsi avvisi. */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="relative mt-6 space-y-4"
+        className="relative mt-7 space-y-5"
         suppressHydrationWarning
       >
         <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <div>
-          <label htmlFor="contact-name" className="text-sm text-ink-4">
+          <label
+            htmlFor="contact-name"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-4"
+          >
             {t("fieldName")}
           </label>
           <input
             id="contact-name"
-            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised-2 px-4 py-3 text-ink-1 transition focus:border-accent focus:bg-raised focus:outline-none focus:ring-2 focus:ring-accent/40"
             suppressHydrationWarning
             {...register("name")}
             autoComplete="name"
           />
           {errors.name && (
-            <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
+            <p className="mt-1 text-sm text-red-700">{errors.name.message}</p>
           )}
         </div>
         <div>
-          <label htmlFor="contact-email" className="text-sm text-ink-4">
+          <label
+            htmlFor="contact-email"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-4"
+          >
             {t("fieldEmail")}
           </label>
           <input
@@ -203,44 +218,50 @@ export function ContactForm() {
             type="email"
             inputMode="email"
             autoCapitalize="none"
-            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised-2 px-4 py-3 text-ink-1 transition focus:border-accent focus:bg-raised focus:outline-none focus:ring-2 focus:ring-accent/40"
             suppressHydrationWarning
             {...register("email")}
             autoComplete="email"
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-red-700">{errors.email.message}</p>
           )}
         </div>
         <div>
-          <label htmlFor="contact-phone" className="text-sm text-ink-4">
+          <label
+            htmlFor="contact-phone"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-4"
+          >
             {t("fieldPhone")}
           </label>
           <input
             id="contact-phone"
             type="tel"
             inputMode="tel"
-            className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            className="mt-2 w-full rounded-xl border border-control-line bg-raised-2 px-4 py-3 text-ink-1 transition focus:border-accent focus:bg-raised focus:outline-none focus:ring-2 focus:ring-accent/40"
             suppressHydrationWarning
             {...register("phone")}
             autoComplete="tel"
           />
         </div>
         <div>
-          <label htmlFor="contact-message" className="text-sm text-ink-4">
+          <label
+            htmlFor="contact-message"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-4"
+          >
             {t("fieldMessage")}
           </label>
           <textarea
             id="contact-message"
             rows={5}
-            className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised-2 px-4 py-3 text-ink-1 transition focus:border-accent focus:bg-raised focus:outline-none focus:ring-2 focus:ring-accent/40"
             placeholder={t("messagePlaceholder")}
             suppressHydrationWarning
             {...register("message")}
             autoComplete="off"
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-400">
+            <p className="mt-1 text-sm text-red-700">
               {errors.message.message}
             </p>
           )}
@@ -248,7 +269,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="contact-attachments"
-            className="text-sm text-ink-4"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-4"
           >
             {t("attachmentsLabel")}
           </label>
@@ -269,18 +290,18 @@ export function ContactForm() {
           />
         </div>
         {errors._gotcha && (
-          <p className="text-sm text-red-400" role="alert">
+          <p className="text-sm text-red-700" role="alert">
             {errors._gotcha.message}
           </p>
         )}
         {submitError && (
-          <p className="text-sm text-red-400">{submitError}</p>
+          <p className="text-sm text-red-700">{submitError}</p>
         )}
         <button
           type="submit"
           disabled={isSubmitting}
           suppressHydrationWarning
-          className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="sweep inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-sm font-semibold text-on-accent transition hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? (
             <Loader2 className="h-4 w-4 animate-spin" />

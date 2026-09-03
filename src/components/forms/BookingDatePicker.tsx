@@ -15,6 +15,10 @@ type Props = {
   placeholder: string;
   id?: string;
   locale: string;
+  /** Error state, for the trigger's outline. */
+  invalid?: boolean;
+  /** Id of the error paragraph, so the trigger announces the message. */
+  describedBy?: string;
 };
 
 function parseYmd(s: string): Date | undefined {
@@ -31,6 +35,8 @@ export function BookingDatePicker({
   placeholder,
   id,
   locale,
+  invalid = false,
+  describedBy,
 }: Props) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -78,7 +84,14 @@ export function BookingDatePicker({
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={calendarId}
-        className="flex w-full min-h-[46px] items-stretch overflow-hidden rounded-xl border border-control-line bg-raised text-left text-sm text-ink-1 transition focus-within:border-accent focus-within:outline-none focus-within:ring-1 focus-within:ring-[#c9a227] mt-1.5"
+        // No aria-invalid: the trigger is a button, and that role does not take it.
+        // The error paragraph is wired through aria-describedby instead.
+        aria-describedby={describedBy}
+        className={`flex min-h-[46px] w-full items-stretch overflow-hidden rounded-xl border bg-page text-left text-sm text-ink-1 transition focus:outline-none focus-within:bg-raised focus-within:ring-1 ${
+          invalid
+            ? "border-red-600 focus-within:border-red-600 focus-within:ring-red-600"
+            : "border-control-line focus-within:border-accent focus-within:ring-accent"
+        }`}
         onClick={() => setOpen((o) => !o)}
       >
         <span
@@ -99,7 +112,7 @@ export function BookingDatePicker({
       {open ? (
         <div
           id={calendarId}
-          className="booking-date-popover absolute left-0 right-0 top-full z-30 mt-1.5 rounded-xl border border-line bg-page p-3 shadow-[0_8px_32px_rgba(0,0,0,0.55)]"
+          className="booking-date-popover absolute left-0 right-0 top-full z-30 mt-2 rounded-xl border border-line bg-raised p-3 shadow-[0_24px_50px_-20px_rgba(20,23,26,0.45)]"
           onMouseDown={(e) => e.preventDefault()}
         >
           <DayPicker
