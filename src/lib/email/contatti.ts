@@ -6,38 +6,26 @@ import { withRetry } from "@/lib/with-retry";
 import { getGmailCredentials, hasGmailEnv, hasResendEnv } from "./env";
 import { logResendError } from "./logResendError";
 import {
+  attachmentsLine,
+  detailTable,
+  escapeHtml,
+  getEmailBrand,
+  heading,
+  italicNote,
+  noteBlock,
+  paragraph,
+  renderEmailShell,
+  textFooter,
+  withLocale,
+  type EmailBrand,
+} from "./layout";
+import {
   getEnglishDaytimeGreeting,
   getItalianDaytimeGreeting,
 } from "./time-greeting";
 
 const SUBJECT_CUSTOMER_IT = "Messaggio ricevuto – K.K Edilizia";
 const SUBJECT_CUSTOMER_EN = "Message received – K.K Edilizia";
-
-/** Stili inline (compatibili con la maggior parte dei client email). */
-const C = {
-  brand: "#b8860b",
-  brandLight: "#c9a22722",
-  text: "#1a1a1a",
-  muted: "#5c5c5c",
-  border: "#e8e8e6",
-  bg: "#f0f0ee",
-  card: "#ffffff",
-} as const;
-
-function escapeHtml(s: string) {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function rowHtml(label: string, value: string): string {
-  return `<tr>
-  <td style="padding:12px 16px;border-bottom:1px solid ${C.border};color:${C.muted};font-size:12px;text-transform:uppercase;letter-spacing:0.06em;width:34%;vertical-align:top;">${label}</td>
-  <td style="padding:12px 16px;border-bottom:1px solid ${C.border};color:${C.text};font-size:15px;vertical-align:top;">${value}</td>
-</tr>`;
-}
 
 /**
  * Destinatario per copia ufficio: esplicita in env, altrimenti l’account Gmail usato per l’invio.
@@ -52,138 +40,116 @@ export function getContattiOfficeNotifyEmail(): string | undefined {
 }
 
 /** Email al cliente: breve ringraziamento professionale (senza ripetere tutto il modulo). */
-function buildContattiCustomerSimpleHtml(data: ContattiInput): string {
+function buildContattiCustomerSimpleHtml(
+  data: ContattiInput,
+  brand: EmailBrand,
+): string {
   const first = escapeHtml(data.name.split(" ")[0] || data.name);
   const en = data.locale === "en";
-  const enGreet = escapeHtml(getEnglishDaytimeGreeting());
-  const itGreet = getItalianDaytimeGreeting();
   if (en) {
-    return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
-<body style="margin:0;background:${C.bg};font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:${C.bg};padding:32px 16px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:${C.card};border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-        <tr><td style="height:4px;background:linear-gradient(90deg,${C.brand},#ddb92e);"></td></tr>
-        <tr><td style="padding:32px 28px 28px;">
-          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${C.brand};">Thank you</p>
-          <h1 style="margin:10px 0 0;font-size:22px;font-weight:700;color:${C.text};line-height:1.3;">${enGreet}, ${first}</h1>
-          <p style="margin:16px 0 0;font-size:15px;line-height:1.65;color:${C.muted};">Thank you for contacting K.K Edilizia. We have received your message and will get back to you shortly.</p>
-        </td></tr>
-        <tr><td style="padding:0 28px 28px;border-top:1px solid ${C.border};">
-          <p style="margin:0;font-size:13px;color:${C.muted};line-height:1.5;">Kind regards,<br><strong style="color:${C.text};">K.K Edilizia</strong></p>
-        </td></tr>
-      </table>
-      <p style="margin:20px 0 0;font-size:11px;color:#888;max-width:560px;">This is an automated confirmation.</p>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+    return renderEmailShell({
+      brand,
+      locale: "en",
+      preheader: "We have received your message and will get back to you shortly.",
+      body: [
+        heading(`${getEnglishDaytimeGreeting()}, ${first}`),
+        paragraph(
+          `Thank you for contacting <strong>${escapeHtml(brand.name)}</strong>. We have received your message through the website contact form and will get back to you shortly.`,
+        ),
+        paragraph(
+          "If you would like to add details or documents in the meantime, simply reply to this email.",
+        ),
+        italicNote("This is an automated confirmation."),
+      ].join("\n"),
+    });
   }
-  return `<!DOCTYPE html>
-<html lang="it">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
-<body style="margin:0;background:${C.bg};font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:${C.bg};padding:32px 16px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:${C.card};border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-        <tr><td style="height:4px;background:linear-gradient(90deg,${C.brand},#ddb92e);"></td></tr>
-        <tr><td style="padding:32px 28px 28px;">
-          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${C.brand};">Grazie</p>
-          <h1 style="margin:10px 0 0;font-size:22px;font-weight:700;color:${C.text};line-height:1.3;">${escapeHtml(itGreet)}, ${first}</h1>
-          <p style="margin:16px 0 0;font-size:15px;line-height:1.65;color:${C.muted};">Abbiamo ricevuto il suo messaggio. Le risponderemo al più presto.</p>
-        </td></tr>
-        <tr><td style="padding:0 28px 28px;border-top:1px solid ${C.border};">
-          <p style="margin:0;font-size:13px;color:${C.muted};line-height:1.5;">Cordiali saluti,<br><strong style="color:${C.text};">K.K Edilizia</strong></p>
-        </td></tr>
-      </table>
-      <p style="margin:20px 0 0;font-size:11px;color:#888;max-width:560px;">Email automatica di conferma.</p>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+  return renderEmailShell({
+    brand,
+    locale: "it",
+    preheader: "Abbiamo ricevuto il suo messaggio e le risponderemo al più presto.",
+    body: [
+      heading(`${getItalianDaytimeGreeting()}, ${first}`),
+      paragraph(
+        `Grazie per averci scritto. Abbiamo ricevuto il suo messaggio dal modulo <strong>Contatti</strong> del sito e le risponderemo al più presto.`,
+      ),
+      paragraph(
+        "Se nel frattempo desidera aggiungere dettagli o documenti, può rispondere direttamente a questa email.",
+      ),
+      italicNote("Email automatica di conferma."),
+    ].join("\n"),
+  });
 }
 
-function buildContattiCustomerSimpleText(data: ContattiInput): string {
+function buildContattiCustomerSimpleText(
+  data: ContattiInput,
+  brand: EmailBrand,
+): string {
   const en = data.locale === "en";
   const hi = data.name.split(" ")[0] || data.name;
   if (en) {
     const greet = getEnglishDaytimeGreeting();
     return [
-      "K.K Edilizia",
+      brand.name,
       "",
       `${greet} ${hi},`,
       "",
       "Thank you for contacting us. We have received your message and will get back to you shortly.",
       "",
       "Kind regards,",
-      "K.K Edilizia",
+      brand.name,
+      ...textFooter(brand),
     ].join("\n");
   }
   return [
-    "K.K Edilizia",
+    brand.name,
     "",
     `${getItalianDaytimeGreeting()} ${hi},`,
     "",
     "Abbiamo ricevuto il suo messaggio e le risponderemo al più presto.",
     "",
     "Cordiali saluti,",
-    "K.K Edilizia",
+    brand.name,
+    ...textFooter(brand),
   ].join("\n");
 }
 
 function buildContattiOfficeHtml(
   data: ContattiInput,
   attachments: EmailAttachment[],
+  brand: EmailBrand,
 ): string {
   const phone = data.phone?.trim() || "—";
-  const attRow =
-    attachments.length > 0
-      ? `<tr><td style="padding:0 28px 20px;">
-          <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${C.muted};">Allegati</p>
-          <p style="margin:0;font-size:14px;color:${C.text};">${attachments.length} file: ${escapeHtml(attachments.map((a) => a.filename).join(", "))}</p>
-        </td></tr>`
-      : "";
-  return `<!DOCTYPE html>
-<html lang="it">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
-<body style="margin:0;background:${C.bg};font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:${C.bg};padding:32px 16px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:${C.card};border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-        <tr><td style="height:4px;background:${C.brand};"></td></tr>
-        <tr><td style="padding:28px 28px 8px;">
-          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${C.brand};">Notifica ufficio</p>
-          <h1 style="margin:10px 0 0;font-size:20px;font-weight:700;color:${C.text};line-height:1.25;">Nuovo contatto dal sito web</h1>
-          <p style="margin:12px 0 0;font-size:14px;color:${C.muted};">Modulo <strong>Contatti</strong> — inoltra o rispondi al cliente usando «Rispondi».</p>
-        </td></tr>
-        <tr><td style="padding:8px 28px 20px;">
-          <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${C.muted};">Anagrafica</p>
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid ${C.border};border-radius:12px;overflow:hidden;">
-            ${rowHtml("Nome", escapeHtml(data.name))}
-            ${rowHtml("Email", escapeHtml(data.email))}
-            ${rowHtml("Telefono", escapeHtml(phone))}
-          </table>
-        </td></tr>
-        <tr><td style="padding:0 28px 24px;">
-          <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${C.muted};">Testo inviato</p>
-          <div style="background:${C.brandLight};border-left:4px solid ${C.brand};border-radius:0 10px 10px 0;padding:16px 18px;font-size:15px;line-height:1.55;color:${C.text};white-space:pre-wrap;">${escapeHtml(data.message)}</div>
-        </td></tr>
-        ${attRow}
-        <tr><td style="padding:0 28px 28px;background:#fafaf9;border-top:1px solid ${C.border};">
-          <p style="margin:0;font-size:12px;line-height:1.55;color:#777;"><strong style="color:${C.text};">Risposta rapida:</strong> usa Rispondi — il destinatario sarà <strong>${escapeHtml(data.email)}</strong> (Reply-To già impostato).</p>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+  return renderEmailShell({
+    brand,
+    locale: "it",
+    preheader: `Contatti — ${data.name} · ${data.email}`,
+    body: [
+      heading("Nuovo messaggio dal sito"),
+      paragraph(
+        "È arrivata una nuova richiesta dal modulo <strong>Contatti</strong> del sito. Ecco i dettagli:",
+      ),
+      `<div style="height:22px;line-height:22px;font-size:0;">&nbsp;</div>`,
+      detailTable([
+        { label: "Nome", value: escapeHtml(data.name) },
+        { label: "Telefono", value: escapeHtml(phone), emphasis: true },
+        { label: "Email", value: escapeHtml(data.email), emphasis: true },
+      ]),
+      noteBlock("Messaggio", data.message),
+      attachmentsLine(
+        "Documenti allegati:",
+        attachments.map((a) => a.filename),
+      ),
+      italicNote(
+        "Puoi rispondere direttamente a questa email: la risposta arriverà al cliente.",
+      ),
+    ].join("\n"),
+  });
 }
 
 function buildContattiOfficeText(
   data: ContattiInput,
   attachments: EmailAttachment[],
+  brand: EmailBrand,
 ): string {
   const phone = data.phone?.trim() || "—";
   const attLines =
@@ -207,6 +173,7 @@ function buildContattiOfficeText(
     ...attLines,
     "",
     `Rispondi a questo messaggio per scrivere a: ${data.email}`,
+    ...textFooter(brand),
   ].join("\n");
 }
 
@@ -216,14 +183,15 @@ async function sendOfficeCopyGmail(
   office: string,
   data: ContattiInput,
   attachments: EmailAttachment[],
+  brand: EmailBrand,
 ) {
   try {
     await transporter.sendMail({
       from: fromLine,
       to: office,
       subject: `[Sito] Nuovo contatto: ${data.name}${attachments.length ? ` (${attachments.length} allegati)` : ""}`,
-      text: buildContattiOfficeText(data, attachments),
-      html: buildContattiOfficeHtml(data, attachments),
+      text: buildContattiOfficeText(data, attachments, brand),
+      html: buildContattiOfficeHtml(data, attachments, brand),
       replyTo: data.email,
       attachments:
         attachments.length > 0
@@ -246,10 +214,12 @@ async function sendViaGmail(data: ContattiInput, attachments: EmailAttachment[])
   const creds = getGmailCredentials();
   if (!creds) throw new Error("EMAIL_NOT_CONFIGURED");
   const { user, pass } = creds;
-  const fromName = process.env.GMAIL_FROM_NAME?.trim() || "K.K Edilizia";
+  const officeBrand = await getEmailBrand("it");
+  const fromName = process.env.GMAIL_FROM_NAME?.trim() || officeBrand.name;
   const fromLine = `"${fromName.replace(/"/g, "")}" <${user}>`;
   const office = getContattiOfficeNotifyEmail();
   const en = data.locale === "en";
+  const customerBrand = en ? withLocale(officeBrand, "en") : officeBrand;
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -262,13 +232,20 @@ async function sendViaGmail(data: ContattiInput, attachments: EmailAttachment[])
     from: fromLine,
     to: data.email,
     subject: en ? SUBJECT_CUSTOMER_EN : SUBJECT_CUSTOMER_IT,
-    text: buildContattiCustomerSimpleText(data),
-    html: buildContattiCustomerSimpleHtml(data),
+    text: buildContattiCustomerSimpleText(data, customerBrand),
+    html: buildContattiCustomerSimpleHtml(data, customerBrand),
     replyTo: data.email,
   });
 
   if (office) {
-    await sendOfficeCopyGmail(transporter, fromLine, office, data, attachments);
+    await sendOfficeCopyGmail(
+      transporter,
+      fromLine,
+      office,
+      data,
+      attachments,
+      officeBrand,
+    );
   }
 }
 
@@ -277,14 +254,16 @@ async function sendViaResend(data: ContattiInput, attachments: EmailAttachment[]
   const from = process.env.RESEND_FROM_EMAIL!.trim();
   const office = getContattiOfficeNotifyEmail();
   const en = data.locale === "en";
+  const officeBrand = await getEmailBrand("it");
+  const customerBrand = en ? withLocale(officeBrand, "en") : officeBrand;
 
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
     from,
     to: data.email,
     subject: en ? SUBJECT_CUSTOMER_EN : SUBJECT_CUSTOMER_IT,
-    html: buildContattiCustomerSimpleHtml(data),
-    text: buildContattiCustomerSimpleText(data),
+    html: buildContattiCustomerSimpleHtml(data, customerBrand),
+    text: buildContattiCustomerSimpleText(data, customerBrand),
     replyTo: data.email,
   });
 
@@ -299,8 +278,8 @@ async function sendViaResend(data: ContattiInput, attachments: EmailAttachment[]
         from,
         to: office,
         subject: `[Sito] Nuovo contatto: ${data.name}${attachments.length ? ` (${attachments.length} allegati)` : ""}`,
-        html: buildContattiOfficeHtml(data, attachments),
-        text: buildContattiOfficeText(data, attachments),
+        html: buildContattiOfficeHtml(data, attachments, officeBrand),
+        text: buildContattiOfficeText(data, attachments, officeBrand),
         replyTo: data.email,
         attachments:
           attachments.length > 0
