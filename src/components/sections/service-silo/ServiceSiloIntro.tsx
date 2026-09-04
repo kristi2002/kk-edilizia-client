@@ -79,14 +79,14 @@ export async function ServiceSiloIntro({ siloKey, bodies }: Props) {
           <div className="relative lg:sticky lg:top-28">
             <span
               aria-hidden="true"
-              className="absolute -bottom-4 -right-4 hidden rounded-2xl border border-accent/40 sm:block sm:inset-y-6 sm:left-6"
+              className="absolute inset-0 hidden translate-x-4 translate-y-4 rounded-2xl border border-accent/40 sm:block"
             />
             <div className="photo-card relative aspect-[4/5] overflow-hidden rounded-2xl border border-line">
               <Image
                 src={image.src}
                 alt={tMedia(image.alt)}
                 fill
-                quality={76}
+                quality={72}
                 sizes="(min-width: 1024px) 420px, (min-width: 640px) 60vw, 100vw"
                 className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.04]"
               />

@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
 import { HomeLocalIntro } from "@/components/sections/HomeLocalIntro";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
-import { faqByLocale } from "@/lib/data/faq";
+import { visibleFaqByLocale } from "@/lib/data/faq";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { MaterialsMarquee } from "@/components/sections/MaterialsMarquee";
@@ -72,12 +72,14 @@ export default async function Home({ params }: HomeParams) {
 
   /**
    * FAQPage for `/`. The block was already on the page but emitted no schema — only the
-   * silos and `/impresa-edile-modena` did — so the sixteen questions here were invisible
-   * as structured data. It mirrors the rendered accordion exactly, which is what Google
-   * requires; `FaqSection` now ships every answer in the HTML rather than mounting only
-   * the open one, so the two genuinely match.
+   * silos and `/impresa-edile-modena` did — so the questions here were invisible as
+   * structured data. It mirrors the rendered accordion exactly, which is what Google
+   * requires: both read `visibleFaqByLocale`, so an entry flagged `hidden` leaves the
+   * schema at the same time it leaves the page, and `FaqSection` ships every answer it
+   * does render into the HTML rather than mounting only the open one.
    */
-  const faqItems = faqByLocale[locale === "en" ? "en" : "it"] ?? faqByLocale.it;
+  const faqItems =
+    visibleFaqByLocale[locale === "en" ? "en" : "it"] ?? visibleFaqByLocale.it;
 
   /*
    * Section order alternates grounds (deep → base → warm → base …) so the page reads as

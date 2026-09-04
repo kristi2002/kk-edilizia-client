@@ -37,6 +37,9 @@ export async function LocalBusinessJsonLd() {
 
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
+    /** Stable identity so `ServiceJsonLd` can point `provider` here by reference
+        instead of publishing a second copy of the same business. */
+    "@id": `${origin}/#business`,
     "@type": ["HomeAndConstructionBusiness", "GeneralContractor"],
     name: site.brand,
     legalName: site.legalName,

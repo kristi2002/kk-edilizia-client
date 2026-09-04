@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { faqByLocale } from "@/lib/data/faq";
+import { visibleFaqByLocale } from "@/lib/data/faq";
 import { getPortfolioDataSource } from "@/lib/data/projects-store";
 import { getSite, getSiteUrl } from "@/lib/data/site-store";
 import { PLACEHOLDER_PUBLIC_SITE_URL } from "@/lib/site";
@@ -75,7 +75,7 @@ export default async function AdminDashboardPage() {
           </div>
         </dl>
         <p className="mt-6 text-sm text-ink-4">
-          FAQ in progetto: {faqByLocale.it.length} voci IT, {faqByLocale.en.length} EN — vedi
+          FAQ in progetto: {visibleFaqByLocale.it.length} voci IT, {visibleFaqByLocale.en.length} EN — vedi
           sezione &quot;Info &amp; FAQ&quot;.
         </p>
       </section>

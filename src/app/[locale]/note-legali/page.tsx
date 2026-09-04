@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSite } from "@/lib/data/site-store";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -20,9 +22,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NoteLegaliPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tNav = await getTranslations("Nav");
+  const tCrumb = await getTranslations("Footer");
   const site = await getSite();
   return (
     <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
+      {/* Breadcrumbs: the silos and the portfolio already emit these. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: tNav("home"), path: localizedPath(locale, "/") },
+          { name: tCrumb("legalLink"), path: localizedPath(locale, "/note-legali") },
+        ]}
+      />
       <article className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
           Legal

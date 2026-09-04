@@ -8,6 +8,8 @@ import { ContactAside } from "@/components/contatti/ContactAside";
 import { ContactRoutes } from "@/components/contatti/ContactRoutes";
 import { getSite } from "@/lib/data/site-store";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -34,11 +36,20 @@ export async function generateMetadata({
 export default async function ContattiPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tNav = await getTranslations("Nav");
+  const tCrumb = tNav;
   const t = await getTranslations("ContactsPage");
   const site = await getSite();
 
   return (
     <main className="flex flex-1 flex-col">
+      {/* Breadcrumbs: the silos and the portfolio already emit these. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: tNav("home"), path: localizedPath(locale, "/") },
+          { name: tCrumb("contacts"), path: localizedPath(locale, "/contatti") },
+        ]}
+      />
       <ContactHero site={site} />
 
       <section className="rule-gold relative overflow-hidden border-b border-line bg-page px-4 py-20 sm:px-6 md:py-24">

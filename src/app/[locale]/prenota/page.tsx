@@ -19,10 +19,12 @@ import {
   WatermarkGutter,
   WatermarkRing,
 } from "@/components/decor/Watermark";
-import { HOME_IMAGERY } from "@/lib/media/home-imagery";
+import { BOOKING_IMAGERY } from "@/lib/media/booking-imagery";
 import { getSite } from "@/lib/data/site-store";
 import { PrenotaForm } from "./PrenotaForm";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -59,6 +61,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PrenotaPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tNav = await getTranslations("Nav");
+  const tCrumb = tNav;
   const t = await getTranslations("Booking");
   /** Labels for the contact rows already exist on `/contatti`; no reason to fork them. */
   const tContacts = await getTranslations("ContactsPage");
@@ -89,11 +93,18 @@ export default async function PrenotaPage({ params }: Props) {
 
   return (
     <main className="flex flex-1 flex-col">
+      {/* Breadcrumbs: the silos and the portfolio already emit these. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: tNav("home"), path: localizedPath(locale, "/") },
+          { name: tCrumb("booking"), path: localizedPath(locale, "/prenota") },
+        ]}
+      />
       {/* ── The promise ─────────────────────────────────────────────────── */}
       <section className="on-dark relative overflow-hidden bg-inverse px-4 py-20 sm:px-6 lg:py-24">
         <div aria-hidden="true" className="absolute inset-0">
           <Image
-            src={HOME_IMAGERY.progetto.src}
+            src={BOOKING_IMAGERY.sopralluogo.src}
             alt=""
             fill
             priority
@@ -101,7 +112,7 @@ export default async function PrenotaPage({ params }: Props) {
             sizes="100vw"
             className="object-cover object-center opacity-30 [filter:grayscale(0.5)_sepia(0.3)_saturate(0.9)_brightness(0.8)]"
           />
-          {/* Clears to solid ink across the copy and lets the drawing show at the edge. */}
+          {/* Clears to solid ink across the copy and lets the survey show at the edge. */}
           <span className="absolute inset-0 bg-[linear-gradient(105deg,rgba(20,23,26,0.97)_0%,rgba(20,23,26,0.93)_42%,rgba(20,23,26,0.66)_100%)]" />
           <span className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_22%,rgba(201,162,39,0.18),transparent_58%)]" />
         </div>

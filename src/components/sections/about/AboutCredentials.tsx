@@ -69,10 +69,7 @@ export async function AboutCredentials({ site }: { site: SiteData }) {
         <FadeIn delay={0.08} className="lg:col-span-7">
           <dl className="divide-y divide-line border-y border-line">
             {entries.map((entry) => (
-              <div
-                key={entry.title}
-                className="flex gap-5 py-7 first:pt-0 last:pb-0"
-              >
+              <div key={entry.title} className="flex gap-5 py-7">
                 <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent-ink">
                   <entry.icon className="h-5 w-5" aria-hidden />
                 </span>

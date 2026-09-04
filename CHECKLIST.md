@@ -4,6 +4,18 @@ Segna le voci man mano che le completi. I riferimenti ai file sono relativi alla
 
 **Aggiornamento codice (settembre 2026):** rimediati i problemi emersi dalla perizia tecnica — rendering statico ripristinato, `og:image`, redirect 301/308 legacy, consenso cookie effettivo, sessione admin con scadenza, contrasto WCAG AA, favicon (da 8,1 MB a 5 kB), menu Servizi, template silo ridisegnato. **Rimosso** il blocco recensioni dimostrative dalla home.
 
+**Aggiornamento codice (4 settembre 2026 — perizia SEO/UX):** ventuno rilievi chiusi.
+Sintesi: `/en/preventivo` era in italiano (modulo tradotto, schema di validazione ora
+localizzato); `<html lang>` era `it` anche su `/en` (root layout diviso tra `[locale]` e
+`admin`); l'hero e ventisei sezioni erano invisibili finché non partiva un'animazione
+JavaScript (reveal ora in CSS); Session Replay di Sentry registrava con PII **prima** del
+consenso; nessun header di sicurezza (aggiunti, CSP in report-only); `Service` JSON-LD sui
+nove silos e `BreadcrumbList` sulle sei pagine che ne erano prive; `hreflang` nella
+sitemap; meta description rientrate nei 155 caratteri; `/impresa-edile-modena` non compete
+più con la home sulla stessa query; i silos hanno ora una gerarchia hub/spoke invece di
+link uniformi. Aggiunto **`.env.example`** (§2), che questo documento citava senza che il
+file esistesse.
+
 **Restano a carico tuo:** i **media** (foto portfolio, chi siamo, tour 360°, panorami, video hero) e i **dati verificabili** elencati sotto.
 
 ---
@@ -97,7 +109,12 @@ La pagina è stata rifatta (settembre 2026): non è più una colonna di testo co
 
 ## 8. `src/app/[locale]/contatti/page.tsx`
 
-- Mappa: **`ContactMap`** usa indirizzo da `getSite()` + embed Google (`NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL` opzionale).
+- **Nessuna mappa.** Questa voce descriveva un componente `ContactMap` e una variabile
+  `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL` che non esistono nel codice: la pagina ha hero,
+  modulo, aside con i recapiti e le tre rotte alternative.
+- [ ] Se vuoi la mappa, serve prima l'**indirizzo** (§1): senza `streetAddress` non c'è
+  nulla da mostrare. Un embed di Google Maps richiede anche `frame-src` per
+  `https://www.google.com` nella CSP in `next.config.ts`.
 
 ---
 

@@ -139,7 +139,7 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 
 ## 6. Brand, crawl, and sharing assets
 
-- **Favicon / brand images** — All generated from **`assets/brand/logo-master.png`** by **`npm run generate:favicon`** (`scripts/generate-favicon.mjs`, **sharp** + **png-to-ico**), wired into `prebuild`: `favicon.ico` (16+32), `icon-192.png`, `icon-512.png`, `apple-icon.png`, and **`logo-mark.png`** (256px, the mark rendered in the header and footer). No **`next.config`** rewrite (direct static files).
+- **Favicon / brand images** — All generated from **`assets/brand/logo-master.png`** by **`npm run generate:brand`** (`scripts/generate-brand-assets.mjs`, **sharp** + **png-to-ico**), wired into `prebuild`: `favicon.ico` (16+32), `icon-192.png`, `icon-512.png`, `apple-icon.png`, **`logo-mark.png`** (256px, the flat mark rendered in the header and footer) and **`media/logo/albedo.webp` + `media/logo/normal.webp`** (the maps for the WebGL mark). The master is a flattened render on cream, so every derivative is keyed off that background first. No **`next.config`** rewrite (direct static files).
 - **`opengraph-image.tsx`** — Exports **`alt`**, **`size`**, **`width`**, **`height`**, **`contentType`** (`image/png`, 1200×630). The route is referenced **explicitly** from **`withLocaleAlternates`** (`openGraph.images` / `twitter.images`): nested `[locale]` segments did not inherit the file convention, and the proxy matcher was rewriting `/opengraph-image` → `/it/opengraph-image` (404), so **no page emitted an `og:image` at all**. Both are fixed — see the matcher exclusions in `src/proxy.ts`.
 - **`manifest.ts`** — icons reference **`/icon-192.png`** and **`/icon-512.png`**, generated from `assets/brand/logo-master.png`. The master (2048², ~8 MB) is deliberately outside `public/`; it used to be served directly as the favicon and apple-touch-icon on every request.
 
@@ -193,7 +193,7 @@ Listing page meta: **`PortfolioPage.metaTitle` / `metaDescription`**.
 | Robots | `src/app/robots.ts` |
 | LocalBusiness JSON-LD | `src/components/seo/LocalBusinessJsonLd.tsx` |
 | Breadcrumbs JSON-LD | `src/components/seo/BreadcrumbJsonLd.tsx` |
-| Favicon / OG image | `src/app/layout.tsx`, `src/app/opengraph-image.tsx`, `src/app/manifest.ts`, `public/favicon.ico`, `public/logo.png`, `scripts/generate-favicon.mjs` |
+| Favicon / OG image | `src/app/layout.tsx`, `src/app/opengraph-image.tsx`, `src/app/manifest.ts`, `public/favicon.ico`, `public/logo.png`, `scripts/generate-brand-assets.mjs` |
 | Locale routing | `src/i18n/routing.ts`, `src/lib/i18n-path.ts` |
 | Site URL / Redis | `src/lib/data/site-store.ts`, `src/lib/validate-site-payload.ts` |
 | Portfolio `updatedAt` (Zod) | `src/lib/validate-projects-payload.ts`, `src/lib/data/projects.ts` (`Project` type) |

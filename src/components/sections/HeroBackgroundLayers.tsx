@@ -1,8 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useState, useSyncExternalStore } from "react";
 import { useReducedMotion } from "framer-motion";
+import type { HeroVideoSources } from "@/lib/media/hero-media";
+import heroPoster from "../../../public/media/hero-poster.jpg";
 
 /**
  * Hero backdrop.
@@ -28,21 +30,25 @@ import { useReducedMotion } from "framer-motion";
  * To swap the media, replace the files in `public/media/` keeping these constraints:
  *   hero-poster.jpg   the still (must be the video's own first frame)
  *   hero.webm/.mp4    8-12s silent loop, 1280x720, webm under ~2.5 MB
- * Setting either field back to null restores the CSS-only <DesignedGround /> below.
+ * Setting POSTER or the `video` prop back to null restores the CSS-only
+ * <DesignedGround /> below.
+ *
+ * Both are fingerprinted by content so a swap actually reaches browsers that already
+ * hold the previous file — the poster by importing it, which makes the bundler emit
+ * `/_next/static/media/hero-poster.<contenthash>.jpg`, and the video through
+ * `heroVideoSources()`. See `@/lib/media/hero-media` for why the two differ.
  *
  * The poster stays mounted underneath so it — not the video — remains the LCP
  * candidate, and the video fades in only once it is genuinely playing, so there is no
  * black frame between the two.
  */
-const HERO_MEDIA = {
-  poster: "/media/hero-poster.jpg" as string | null,
-  video: { webm: "/media/hero.webm", mp4: "/media/hero.mp4" } as {
-    webm: string;
-    mp4: string;
-  } | null,
-};
+const POSTER: StaticImageData | null = heroPoster;
 
-export function HeroBackgroundLayers() {
+export function HeroBackgroundLayers({
+  video,
+}: {
+  video: HeroVideoSources | null;
+}) {
   const reduceMotion = useReducedMotion();
   const [playing, setPlaying] = useState(false);
   /** Reading a browser API, not deriving state — so no effect and no cascading render. */
@@ -54,14 +60,13 @@ export function HeroBackgroundLayers() {
     () => false,
   );
 
-  const showVideo =
-    HERO_MEDIA.video && HERO_MEDIA.poster && allowVideo && !reduceMotion;
+  const showVideo = video && POSTER && allowVideo && !reduceMotion;
 
   return (
     <>
-      {HERO_MEDIA.poster ? (
+      {POSTER ? (
         <Image
-          src={HERO_MEDIA.poster}
+          src={POSTER}
           alt=""
           fill
           priority
@@ -81,15 +86,15 @@ export function HeroBackgroundLayers() {
           loop
           playsInline
           preload="none"
-          poster={HERO_MEDIA.poster ?? undefined}
+          poster={POSTER?.src}
           aria-hidden="true"
           onPlaying={() => setPlaying(true)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             playing ? "opacity-55" : "opacity-0"
           }`}
         >
-          <source src={HERO_MEDIA.video!.webm} type="video/webm" />
-          <source src={HERO_MEDIA.video!.mp4} type="video/mp4" />
+          <source src={video.webm} type="video/webm" />
+          <source src={video.mp4} type="video/mp4" />
         </video>
       ) : null}
 

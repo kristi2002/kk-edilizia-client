@@ -58,7 +58,7 @@ GTM / GA4 vengono caricati **solo dopo consenso esplicito** (`src/components/seo
 
 ## Immagini di brand
 
-Il master del logo sta in **`assets/brand/logo-master.png`** (fuori da `public/`). `npm run generate:favicon` — eseguito da `prebuild` — genera `favicon.ico`, `icon-192.png`, `icon-512.png`, `apple-icon.png` e `logo-mark.png`. Non mettere il master in `public/`: veniva servito come favicon a ogni richiesta.
+Il master del logo sta in **`assets/brand/logo-master.png`** (fuori da `public/`). `npm run generate:brand` — eseguito da `prebuild` — ritaglia il fondo crema del master e genera `favicon.ico`, `icon-192.png`, `icon-512.png`, `apple-icon.png`, `logo-mark.png` e le due mappe WebGL in `public/media/logo/`. Non mettere il master in `public/`: veniva servito come favicon a ogni richiesta.
 
 Dettaglio e valori di esempio sono documentati in **`.env.example`**.
 

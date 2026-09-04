@@ -15,12 +15,19 @@ export async function AboutQuoteBand() {
 
   return (
     <section className="rule-gold on-dark relative isolate overflow-hidden bg-inverse px-4 py-24 sm:px-6">
+      {/*
+        `quality` has to be one of `images.qualities` in next.config.ts — 75, 72 or 70.
+        This was 65, which the optimiser refuses outright ("q" parameter of 65 is not
+        allowed), so the band rendered as flat ink with no photograph behind it. 70 is
+        the floor of that list, and the value `AboutHero` already uses for its own
+        full-bleed ground.
+      */}
       <Image
         src={image.src}
         alt=""
         aria-hidden="true"
         fill
-        quality={65}
+        quality={70}
         loading="lazy"
         sizes="100vw"
         className="-z-10 object-cover opacity-80"

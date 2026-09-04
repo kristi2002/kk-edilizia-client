@@ -4,6 +4,8 @@ import { getPreventivoFormOptions } from "@/lib/data/preventivo-options-store";
 import { PreventivoForm } from "./PreventivoForm";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { localizedPath } from "@/lib/i18n-path";
 import enMessages from "../../../../messages/en.json";
 import itMessages from "../../../../messages/it.json";
 
@@ -26,11 +28,20 @@ export async function generateMetadata({
 export default async function PreventivoPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tNav = await getTranslations("Nav");
+  const tCrumb = tNav;
   const t = await getTranslations("PreventivoPage");
   const preventivoOptions = await getPreventivoFormOptions();
 
   return (
     <main className="flex flex-1 flex-col bg-page px-4 py-20 sm:px-6">
+      {/* Breadcrumbs: the silos and the portfolio already emit these. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: tNav("home"), path: localizedPath(locale, "/") },
+          { name: tCrumb("quote"), path: localizedPath(locale, "/preventivo") },
+        ]}
+      />
       <div className="mx-auto w-full max-w-2xl">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">

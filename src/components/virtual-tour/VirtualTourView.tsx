@@ -7,6 +7,14 @@ import { extractPanoramaUrlsFromPannellumConfig } from "@/lib/virtual-tour/extra
 import { preloadPanoramaImages } from "@/lib/virtual-tour/preload-panoramas";
 import "./virtual-tour-shell.css";
 
+/**
+ * Pannellum is vendored, not installed: `public/virtual-tour/pannellum/` holds a copy of
+ * the upstream 2.5.7 build (mpetroff/pannellum), and the viewer is read off
+ * `window.pannellum` after the script tag below loads it. The npm package was in
+ * `package.json` as well and imported by nothing — it has been removed. To update, drop
+ * newer `pannellum.js` / `pannellum.css` into that folder and bump the version noted
+ * here; the files carry their own version banner on line 1.
+ */
 const PANORAMA_CSS = "/virtual-tour/pannellum/pannellum.css";
 
 declare global {

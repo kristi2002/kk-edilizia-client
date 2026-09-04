@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WatermarkRing } from "@/components/decor/Watermark";
 import { StatsStrip } from "@/components/sections/StatsStrip";
@@ -55,6 +56,7 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
         eyebrow?: string;
         h1?: string;
         lead?: string;
+        metaDescription?: string;
         ctaPrimary?: string;
         ctaSecondary?: string;
         scope?: ScopeItem[];
@@ -69,6 +71,8 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
   const ctaPrimary = silo?.ctaPrimary ?? t(`${siloKey}.ctaPrimary`);
   const ctaSecondary = silo?.ctaSecondary ?? t(`${siloKey}.ctaSecondary`);
   const path = serviceSiloPathForKey(siloKey);
+  const metaDescription =
+    silo?.metaDescription ?? t(`${siloKey}.metaDescription`);
 
   /** Six paragraphs, read off the bundle so a missing key falls back to `t()`. */
   const bodies = (
@@ -93,6 +97,14 @@ export async function ServiceSiloContent({ locale, siloKey }: Props) {
           { name: tNav("home"), path: localizedPath(locale, "/") },
           { name: h1, path: localizedPath(locale, path) },
         ]}
+      />
+      {/* The type that ties this page to the business offering it. */}
+      <ServiceJsonLd
+        name={h1}
+        description={metaDescription}
+        path={localizedPath(locale, path)}
+        serviceType={eyebrow}
+        offers={scope.map((item) => item.title)}
       />
 
       <main className="flex flex-1 flex-col">

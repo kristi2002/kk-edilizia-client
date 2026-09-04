@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getSite } from "@/lib/data/site-store";
 import { withLocaleAlternates } from "@/lib/seo-metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { localizedPath } from "@/lib/i18n-path";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { AboutHero } from "@/components/sections/about/AboutHero";
@@ -45,10 +47,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ChiSiamoPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tNav = await getTranslations("Nav");
+  const tCrumb = tNav;
   const site = await getSite();
 
   return (
     <main className="flex flex-1 flex-col">
+      {/* Breadcrumbs: the silos and the portfolio already emit these. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: tNav("home"), path: localizedPath(locale, "/") },
+          { name: tCrumb("about"), path: localizedPath(locale, "/chi-siamo") },
+        ]}
+      />
       <AboutHero site={site} locale={locale} />
       <StatsStrip />
       <AboutManifesto />

@@ -1,28 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Hammer, Home, Building2, Paintbrush } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WatermarkWord } from "@/components/decor/Watermark";
 import { PhotoCardMedia } from "@/components/decor/PhotoCardMedia";
 import { HOME_IMAGERY } from "@/lib/media/home-imagery";
-
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVar = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 /**
  * The photographs here are grounds, not content: they sit at 15% behind a scrim and
@@ -54,17 +37,17 @@ export function Services() {
           <p className="mt-4 max-w-2xl text-ink-3">{t("intro")}</p>
         </FadeIn>
 
-        <motion.ul
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {items.map((it) => (
-            <motion.li
+        {/*
+          These were framer-motion variants, which put an inline `opacity: 0` into the
+          server-rendered card markup — four cards' worth of copy that only appeared if
+          the animation library got a frame. `FadeIn` carries the same stagger and leaves
+          the resting state visible.
+        */}
+        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it, i) => (
+            <FadeIn
               key={it.title}
-              variants={itemVar}
+              delay={i * 0.1}
               className="photo-card group flex min-h-[15rem] flex-col justify-end rounded-2xl border border-line p-6 transition hover:border-accent/40"
             >
               <PhotoCardMedia image={it.image} alt="" />
@@ -77,9 +60,9 @@ export function Services() {
               </div>
               <h3 className="font-serif text-xl text-ink-1">{it.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-3">{it.text}</p>
-            </motion.li>
+            </FadeIn>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   );

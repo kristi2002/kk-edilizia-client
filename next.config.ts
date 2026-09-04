@@ -33,11 +33,72 @@ const LEGACY_SILO_REDIRECTS: { from: string; to: string }[] = [
   { from: "/rifacimento-tetto", to: "/rifacimento-tetto-facciate" },
 ];
 
+/**
+ * Security response headers.
+ *
+ * Nothing set any: no CSP, no HSTS, no `Referrer-Policy`, no `Permissions-Policy`, and
+ * `X-Powered-By: Next.js` on every response. These are the ones that cost nothing to
+ * send and are hard to add later.
+ *
+ * The CSP ships as **report-only** on purpose. Two things on this site need explicit
+ * allowances and would break silently if enforced before they are verified against a
+ * production build: the Consent Mode v2 defaults, which are an inline `<script>` that
+ * must run before any tag (so `'unsafe-inline'` is not optional here), and Sentry's
+ * `/monitoring` tunnel. Next's own framework bootstrap also emits inline scripts. Watch
+ * the violation reports on a real deployment, then rename the header to
+ * `Content-Security-Policy`.
+ */
+const CSP_REPORT_ONLY = [
+  "default-src 'self'",
+  /** Consent snippet + Next bootstrap are inline; GTM/GA4 load only after consent. */
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com data:",
+  /** `blob:` covers the OG image route; Vercel Blob serves uploaded portfolio media. */
+  "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://www.google-analytics.com https://www.googletagmanager.com",
+  "media-src 'self'",
+  "connect-src 'self' https://*.ingest.de.sentry.io https://www.google-analytics.com https://www.googletagmanager.com",
+  /** Nothing on the site embeds a third-party frame today. */
+  "frame-src 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "DENY" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  { key: "Content-Security-Policy-Report-Only", value: CSP_REPORT_ONLY },
+];
+
 const nextConfig: NextConfig = {
   /** Multiple lockfiles exist above this repo; pin the root so build traces are correct. */
   outputFileTracingRoot: path.join(process.cwd()),
   experimental: {
     optimizePackageImports: ["framer-motion"],
+    /**
+     * Required by `src/app/global-not-found.tsx`. The public site and `/admin` now have
+     * separate root layouts (so `<html lang>` can be the real locale), which means no
+     * single layout sits above an unmatched URL — this is the flag that lets one file
+     * render its own document for that case.
+     */
+    globalNotFound: true,
+  },
+  /** Do not advertise the framework and version on every response. */
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
   },
   async redirects() {
     return LEGACY_SILO_REDIRECTS.flatMap(({ from, to }) => [

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { HeroBackgroundLayers } from "./HeroBackgroundLayers";
 import { HeroClient } from "./HeroClient";
 import { AREA_SERVED_CITY_NAMES } from "@/lib/constants/service-area";
+import { heroVideoSources } from "@/lib/media/hero-media";
 
 export async function Hero() {
   const t = await getTranslations("Hero");
@@ -28,7 +29,8 @@ export async function Hero() {
         { value: tStats("v4"), label: t("statCommitment") },
       ]}
     >
-      <HeroBackgroundLayers />
+      {/* Hashed here rather than in the client component: the fingerprint is a disk read. */}
+      <HeroBackgroundLayers video={heroVideoSources()} />
     </HeroClient>
   );
 }

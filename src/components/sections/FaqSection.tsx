@@ -3,15 +3,15 @@
 import { useId, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
-import { faqByLocale } from "@/lib/data/faq";
+import { visibleFaqByLocale } from "@/lib/data/faq";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 /**
  * Accordion.
  *
  * Every answer is rendered into the HTML and collapsed with CSS. It previously mounted
- * only the open panel (`{isOpen && <motion.div>}`), so the served markup carried sixteen
- * questions and exactly one answer — roughly 680 words of CILA/SCIA, bonus and Modena
+ * only the open panel (`{isOpen && <motion.div>}`), so the served markup carried every
+ * question and exactly one answer — hundreds of words of CILA/SCIA, bonus and Modena
  * copy that no crawler could ever see, and that the page's own FAQPage schema is
  * supposed to mirror.
  *
@@ -24,7 +24,8 @@ import { FadeIn } from "@/components/motion/FadeIn";
 export function FaqSection() {
   const t = useTranslations("FaqSection");
   const locale = useLocale();
-  const faqItems = faqByLocale[locale === "en" ? "en" : "it"] ?? faqByLocale.it;
+  const faqItems =
+    visibleFaqByLocale[locale === "en" ? "en" : "it"] ?? visibleFaqByLocale.it;
   const [open, setOpen] = useState<number | null>(0);
   const baseId = useId();
 

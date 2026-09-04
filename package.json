@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "npm run generate:favicon",
+    "prebuild": "npm run generate:brand",
     "dev": "next dev --webpack",
     "dev:turbo": "next dev --turbopack",
     "build": "next build --webpack",
@@ -11,11 +11,12 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "generate:favicon": "node scripts/generate-favicon.mjs"
+    "generate:brand": "node scripts/generate-brand-assets.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@next/third-parties": "^16.2.2",
+    "@react-three/fiber": "^9.7.0",
     "@sentry/nextjs": "^10.47.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",
@@ -26,13 +27,13 @@
     "next": "16.2.2",
     "next-intl": "^4.9.0",
     "nodemailer": "^8.0.4",
-    "pannellum": "^2.5.7",
     "react": "19.2.4",
     "react-compare-slider": "^4.0.0",
     "react-day-picker": "^9.14.0",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.72.0",
     "resend": "^6.10.0",
+    "three": "^0.180.0",
     "zod": "^4.3.6"
   },
   "browserslist": {
@@ -58,6 +59,7 @@
     "@types/nodemailer": "^7.0.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "png-to-ico": "^3.0.1",

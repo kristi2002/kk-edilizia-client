@@ -40,14 +40,14 @@ export async function ServiceSiloGallery({ siloKey, captions }: Props) {
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 sm:gap-8">
           {frames.map((image, i) => (
-            <FadeIn key={image.src} delay={i * 0.08}>
+            <FadeIn key={image.pexels} delay={i * 0.08}>
               <figure className={i === 1 ? "sm:mt-14" : undefined}>
                 <div className="photo-card group relative aspect-[3/2] overflow-hidden rounded-2xl border border-line">
                   <Image
                     src={image.src}
                     alt={tMedia(image.alt)}
                     fill
-                    quality={74}
+                    quality={72}
                     sizes="(min-width: 640px) 46vw, 100vw"
                     className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   />

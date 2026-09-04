@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HoneypotField } from "@/components/forms/HoneypotField";
+import { FieldError, RequiredMark } from "@/components/forms/FieldError";
 import {
   createPrenotaRequestSchema,
   type PrenotaRequest,
@@ -75,32 +76,6 @@ function StepLegend({
       </span>
       <span className="font-serif text-lg text-ink-1">{children}</span>
     </legend>
-  );
-}
-
-/** Asterisk for sighted readers, a word for everyone else. */
-function RequiredMark({ label }: { label: string }) {
-  return (
-    <>
-      <span aria-hidden="true" className="text-accent-ink">
-        {" *"}
-      </span>
-      <span className="sr-only">{` (${label})`}</span>
-    </>
-  );
-}
-
-function FieldError({ id, message }: { id: string; message?: string }) {
-  if (!message) return null;
-  return (
-    <p
-      id={id}
-      role="alert"
-      className="mt-1.5 flex items-start gap-1.5 text-sm text-red-700"
-    >
-      <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
-      {message}
-    </p>
   );
 }
 

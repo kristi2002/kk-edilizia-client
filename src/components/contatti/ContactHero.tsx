@@ -1,8 +1,10 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { ArrowUpRight, Clock, Mail, Phone } from "lucide-react";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { WatermarkGutter } from "@/components/decor/Watermark";
+import { WatermarkGrid, WatermarkGutter, WatermarkRing } from "@/components/decor/Watermark";
 import { WhatsAppGlyph } from "@/components/site/WhatsAppGlyph";
+import { CONTACT_IMAGERY } from "@/lib/media/contact-imagery";
 import type { SiteData } from "@/lib/site";
 
 /**
@@ -16,13 +18,13 @@ import type { SiteData } from "@/lib/site";
  * a *detail* rather than a channel (PEC, hours, area, company data) moved to the aside
  * beside the form.
  *
- * The ground is drawn rather than photographed. Every picture in the repo already
- * belongs to a page — the home set, the nine service silos, and `/chi-siamo`, whose
- * manifest states outright that nothing in it is reused, so a visitor never meets the
- * same photograph twice. Rather than break that, this band uses the CSS device the hero
- * falls back to when its video is unavailable (see `DesignedGround` in
- * `HeroBackgroundLayers`): the measured grid, two pools of warm light and an oversized
- * ring. It also leaves the h1 as the LCP element, with nothing to download first.
+ * The ground was drawn rather than photographed while every picture in the repo still
+ * belonged to another page. `contact-imagery.ts` adds a set of one for it — a plan
+ * on a table being marked up, hands only — so the band now carries the same photographic
+ * treatment as the silo heroes: a real `next/image` with `priority` under the two scrims
+ * from `ServiceSiloHero`, the linear pass keeping the left column dark enough for AA body
+ * copy and the radial pass lifting the right side so it still reads as a picture. `alt`
+ * is empty because it is a ground, not content — the heading beside it says what this is.
  */
 
 /** Digits only — `wa.me` rejects spaces and a leading `+`. */
@@ -68,15 +70,53 @@ export async function ContactHero({ site }: { site: SiteData }) {
   ];
 
   return (
-    <section className="on-dark relative overflow-hidden bg-inverse px-4 pb-20 pt-16 sm:px-6 md:pb-24 md:pt-20">
-      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <span className="wm-grid" />
-        {/* Two pools of raking light, warm at the top right and cooler where the tiles sit. */}
-        <span className="absolute -right-32 -top-40 h-[36rem] w-[36rem] rounded-full bg-accent/12 blur-3xl" />
-        <span className="absolute -bottom-56 -left-24 h-[28rem] w-[28rem] rounded-full bg-accent-deep/10 blur-3xl" />
-        <span className="wm-ring -right-40 -top-32 hidden sm:block" />
-        <span className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-inverse to-transparent" />
+    <section className="on-dark relative isolate overflow-hidden bg-inverse px-4 pb-20 pt-16 sm:px-6 md:pb-24 md:pt-20">
+      {/*
+        Not `fill` across the whole band. On a phone the tiles stack, the section grows to
+        roughly 1000px, and a 2:1 picture covering that is a 375px-wide slice of its own
+        middle — an unreadable abstract. So the photograph is a band across the top there
+        and the full ground from `sm` up, where the tiles sit in a row and the section is
+        back to something near its own ratio.
+      */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 -z-20 h-[46%] [mask-image:linear-gradient(to_bottom,black_55%,transparent)] sm:h-full sm:[mask-image:none]"
+      >
+        <Image
+          src={CONTACT_IMAGERY.pianta.src}
+          alt=""
+          fill
+          priority
+          quality={72}
+          sizes="100vw"
+          className="object-cover object-[62%_45%] sm:object-center"
+        />
       </div>
+      {/*
+        Two scrims, as on the silo heroes, but the first turns with the layout: sideways
+        on a phone would put the copy over the 0.95 end and the picture over nothing, so
+        below `sm` it runs top-to-bottom instead — open across the middle where the plan
+        is, closing again under the tiles.
+      */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(12,14,16,0.93)_0%,rgba(12,14,16,0.82)_22%,rgba(12,14,16,0.87)_40%,rgba(12,14,16,0.98)_56%)] sm:bg-[linear-gradient(100deg,rgba(12,14,16,0.95)_0%,rgba(12,14,16,0.88)_38%,rgba(12,14,16,0.62)_66%,rgba(12,14,16,0.5)_100%)]"
+      />
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_88%_18%,rgba(201,162,39,0.16),transparent_46%)]"
+      />
+      {/*
+        A third pass the silo heroes do not need: the tiles sit low and wide, and the
+        photograph is at its brightest exactly there, so the row would otherwise fight
+        the plan behind it. It doubles as the blend into the paper band below.
+      */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 hidden h-2/3 bg-gradient-to-t from-inverse via-inverse/70 to-transparent sm:block"
+      />
+      <WatermarkGrid />
+      <WatermarkRing position="top-right" />
 
       <WatermarkGutter>K.K EDILIZIA — MODENA E PROVINCIA</WatermarkGutter>
 

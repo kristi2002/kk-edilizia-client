@@ -3,7 +3,6 @@
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/data/projects";
 import { getProjectLocalized } from "@/lib/data/projects";
@@ -46,12 +45,9 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
           {featured.map((p, i) => {
             const loc = getProjectLocalized(p, locale, projectTypes);
             return (
-              <motion.article
+              <FadeIn
                 key={p.slug}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.55, delay: i * 0.08 }}
+                delay={i * 0.08}
                 className="group relative overflow-hidden rounded-2xl"
               >
                 <Link href={`/portfolio/${p.slug}`} className="block">
@@ -82,7 +78,7 @@ export function FeaturedProjects({ projects, projectTypes }: Props) {
                     </div>
                   </div>
                 </Link>
-              </motion.article>
+              </FadeIn>
             );
           })}
         </div>

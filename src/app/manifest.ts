@@ -20,7 +20,11 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     ],
     start_url: "/",
     display: "standalone",
-    background_color: "#080808",
+    /**
+     * `--page`, not the near-black this carried from the old dark palette — the splash
+     * screen was flashing #080808 before a paper-white site.
+     */
+    background_color: "#f3f1eb",
     theme_color: "#c9a227",
     lang: "it",
   };

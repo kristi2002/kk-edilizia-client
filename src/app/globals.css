@@ -500,3 +500,63 @@ body {
     display: none;
   }
 }
+
+/*
+ * Entrance animations that do not depend on JavaScript.
+ *
+ * The hero used framer-motion's `initial={{ opacity: 0 }}`, which puts an inline
+ * `opacity:0` into the *server-rendered* HTML that only the animation library can clear.
+ * Measured on a hydrated page whose `requestAnimationFrame` never fired: the headline,
+ * the subtitle and both calls to action were all present in the DOM at `opacity: 0`, so
+ * the home page rendered as a dark photograph with no words on it. The `<noscript>`
+ * override in the root layout did not help — JavaScript was running, it just never got
+ * a frame.
+ *
+ * A CSS animation cannot fail that way. `both` fill-mode holds the `from` state during
+ * the delay and the `to` state afterwards, and if animations are unavailable or the OS
+ * asks for reduced motion, no rule ever sets opacity and the content is simply visible.
+ */
+@keyframes kk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise-from, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: kk-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/*
+ * Scroll reveals. The resting state is visible: `FadeIn` only sets `data-fade="out"`
+ * after it has mounted *and* established that the element is below the fold, so markup
+ * that never hydrates — and elements already on screen at hydration — stay readable,
+ * and nothing flashes.
+ */
+[data-fade] {
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-fade="out"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+  [data-fade] {
+    transition: none;
+  }
+  [data-fade="out"] {
+    opacity: 1;
+    transform: none;
+  }
+}

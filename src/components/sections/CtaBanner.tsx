@@ -2,8 +2,8 @@
 
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
 import { WatermarkRing } from "@/components/decor/Watermark";
+import { FadeIn } from "@/components/motion/FadeIn";
 
 /**
  * Closing band. On a light page this is the one saturated surface: a gold-brown
@@ -17,13 +17,7 @@ export function CtaBanner() {
     <section className="on-band relative overflow-hidden bg-[linear-gradient(120deg,#6b511d_0%,#75591f_55%,#806322_100%)] px-4 py-24 sm:px-6">
       <WatermarkRing position="top-right" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative mx-auto max-w-3xl text-center"
-      >
+      <FadeIn className="relative mx-auto max-w-3xl text-center">
         <h2 className="text-balance font-serif text-3xl text-ink-1 sm:text-4xl md:text-5xl">
           {t("title")}
         </h2>
@@ -42,7 +36,7 @@ export function CtaBanner() {
             {t("ctaSecondary")}
           </Link>
         </div>
-      </motion.div>
+      </FadeIn>
     </section>
   );
 }

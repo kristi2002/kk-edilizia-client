@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return withLocaleAlternates(locale, PATH, {
     title: meta.impresaEdileModenaTitle,
     description: meta.impresaEdileModenaDescription,
-    keywords: meta.impresaEdileModenaKeywords,
+    /**
+     * No `keywords`: this was the one page emitting `<meta name="keywords">`, which
+     * Google ignores and which `service-silo-metadata.ts` already documents the site as
+     * deliberately not outputting. The list stays in `messages` as editorial notes.
+     */
     openGraph: {
       title: meta.impresaEdileModenaTitle,
       description: meta.impresaEdileModenaDescription,

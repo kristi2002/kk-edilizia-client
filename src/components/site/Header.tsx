@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { LogoMark } from "@/components/brand/LogoMark";
 import { isCostEstimateEnabled } from "@/lib/features";
 import { SERVICE_SILO_ROUTES, type ServiceSiloKey } from "@/lib/service-silos";
 
@@ -124,16 +124,9 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-page/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5">
+        <Link href="/" className="flex min-w-0 items-center gap-3">
           {/* The brand mark existed only as an 8 MB favicon; it now appears on screen. */}
-          <Image
-            src="/logo-mark.png"
-            alt=""
-            width={32}
-            height={32}
-            priority
-            className="h-8 w-8 shrink-0 object-contain"
-          />
+          <LogoMark size={44} priority />
           <span className="flex min-w-0 items-baseline gap-2">
             <span className="font-serif text-xl tracking-tight text-ink-1 sm:text-2xl">
               K.K
@@ -185,6 +178,9 @@ export function Header() {
                       <li key={route.path}>
                         <Link
                           href={route.path}
+                          aria-current={
+                            pathname.startsWith(route.path) ? "page" : undefined
+                          }
                           className="block rounded-lg px-3 py-2 text-sm text-ink-2 transition hover:bg-raised-2 hover:text-ink-1"
                         >
                           {siloLabels[route.key]}
@@ -245,6 +241,7 @@ export function Header() {
                   key={l.labelKey}
                   href={l.href}
                   onClick={closeAll}
+                  aria-current={isActive(l.href) ? "page" : undefined}
                   className={`rounded-lg px-3 py-3 text-base ${
                     isActive(l.href)
                       ? "bg-accent/15 text-ink-1"
@@ -263,6 +260,9 @@ export function Header() {
                   key={route.path}
                   href={route.path}
                   onClick={closeAll}
+                  aria-current={
+                    pathname.startsWith(route.path) ? "page" : undefined
+                  }
                   className={`rounded-lg px-3 py-2.5 text-sm ${
                     pathname.startsWith(route.path)
                       ? "bg-accent/15 text-ink-1"
@@ -300,6 +300,8 @@ function NavLink({
   return (
     <Link
       href={href}
+      /** The active item was signalled by colour alone. */
+      aria-current={active ? "page" : undefined}
       className={`relative z-0 rounded-full px-2.5 py-2 text-sm font-medium transition-colors ${
         active ? "text-ink-1" : "text-ink-3 hover:text-ink-1"
       }`}

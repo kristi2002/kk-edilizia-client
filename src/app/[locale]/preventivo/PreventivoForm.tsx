@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { HoneypotField } from "@/components/forms/HoneypotField";
+import { FieldError, RequiredMark } from "@/components/forms/FieldError";
 import {
-  preventivoRequestSchema,
-  step1Schema,
-  step2Schema,
+  createPreventivoRequestSchema,
+  createPreventivoStepSchemas,
   type PreventivoRequest,
 } from "@/lib/validations/preventivo";
 import { useLocale, useTranslations } from "next-intl";
@@ -20,18 +20,53 @@ type Props = {
   initialOptions: PreventivoFormOptions;
 };
 
+const TOTAL_STEPS = 3;
+
+/** Shared field chrome, red-bordered while a field is in error. */
+const FIELD =
+  "mt-2 w-full rounded-xl border bg-raised px-4 py-3 text-ink-1 transition placeholder:text-ink-4 focus:outline-none focus:ring-1";
+const FIELD_OK = "border-control-line focus:border-accent focus:ring-accent";
+const FIELD_BAD = "border-red-600 focus:border-red-600 focus:ring-red-600";
+
+function fieldClass(hasError: boolean) {
+  return `${FIELD} ${hasError ? FIELD_BAD : FIELD_OK}`;
+}
+
+/**
+ * The quote form.
+ *
+ * Every string here used to be an Italian literal, so `/en/preventivo` served an
+ * Italian form on the page every call to action points at — while `ContactForm` and
+ * `PrenotaForm` were both fully translated. The copy now lives in the `PreventivoForm`
+ * namespace, and the resolver comes from `createPreventivoRequestSchema(locale)` so
+ * validation messages follow the page rather than staying Italian.
+ *
+ * The accessibility work mirrors `PrenotaForm`, which had already been through this
+ * pass: errors are wired through `aria-invalid` / `aria-describedby` and rendered by the
+ * shared `FieldError` (`role="alert"`, `text-red-700`); the two option lists are real
+ * `<fieldset>`s with a `<legend>`, so their headings are the groups' accessible names
+ * instead of loose paragraphs; and advancing a step moves focus to the new heading and
+ * announces the position, which nothing signalled before.
+ */
 export function PreventivoForm({ initialOptions }: Props) {
   const locale = useLocale();
+  const loc = locale === "en" ? "en" : "it";
   const workTypes = initialOptions.workTypes;
   const budgets = initialOptions.budgets;
   const timelines = initialOptions.timelines;
 
   const optLabel = (o: { labelIt: string; labelEn: string }) =>
-    locale === "en" ? o.labelEn : o.labelIt;
+    loc === "en" ? o.labelEn : o.labelIt;
+  const t = useTranslations("PreventivoForm");
   const tForm = useTranslations("FormErrors");
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  /** Focus target for each step, so advancing does not strand a keyboard user. */
+  const stepHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  const schema = useMemo(() => createPreventivoRequestSchema(loc), [loc]);
+  const stepSchemas = useMemo(() => createPreventivoStepSchemas(loc), [loc]);
 
   const {
     control,
@@ -42,46 +77,52 @@ export function PreventivoForm({ initialOptions }: Props) {
     setError,
     getValues,
   } = useForm<PreventivoRequest>({
-      resolver: zodResolver(preventivoRequestSchema),
-      defaultValues: {
-        workType: "",
-        sqm: "",
-        budget: "",
-        timeline: "",
-        name: "",
-        email: "",
-        phone: "",
-        notes: "",
-        _gotcha: "",
-      },
-    });
+    resolver: zodResolver(schema),
+    defaultValues: {
+      workType: "",
+      sqm: "",
+      budget: "",
+      timeline: "",
+      name: "",
+      email: "",
+      phone: "",
+      notes: "",
+      _gotcha: "",
+    },
+  });
+  const errors = formState.errors;
   const workType = useWatch({ control, name: "workType" });
   const budget = useWatch({ control, name: "budget" });
   const timeline = useWatch({ control, name: "timeline" });
 
-  const totalSteps = 3;
+  function goToStep(next: number) {
+    setStep(next);
+    setSubmitError(null);
+    /** After the panel swap, put the caret on the new heading. */
+    requestAnimationFrame(() => stepHeadingRef.current?.focus());
+  }
 
   async function validateAndNext() {
     setSubmitError(null);
     const values = getValues();
-    const schema = step === 0 ? step1Schema : step === 1 ? step2Schema : null;
-    if (!schema) return;
+    const schemaForStep =
+      step === 0 ? stepSchemas.step1 : step === 1 ? stepSchemas.step2 : null;
+    if (!schemaForStep) return;
 
-    const r = schema.safeParse(
+    const r = schemaForStep.safeParse(
       step === 0
         ? { workType: values.workType, sqm: values.sqm }
-        : { budget: values.budget, timeline: values.timeline }
+        : { budget: values.budget, timeline: values.timeline },
     );
     if (!r.success) {
       const fieldErrors = r.error.flatten().fieldErrors;
       Object.entries(fieldErrors).forEach(([key, msgs]) => {
         const first = Array.isArray(msgs) ? msgs[0] : undefined;
-        if (first)
-          setError(key as keyof PreventivoRequest, { message: first });
+        if (first) setError(key as keyof PreventivoRequest, { message: first });
       });
       return;
     }
-    setStep((s) => s + 1);
+    goToStep(step + 1);
   }
 
   async function onSubmit(data: PreventivoRequest) {
@@ -90,10 +131,7 @@ export function PreventivoForm({ initialOptions }: Props) {
       const res = await fetch("/api/preventivo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          locale: locale === "en" ? "en" : "it",
-        }),
+        body: JSON.stringify({ ...data, locale: loc }),
       });
       const json = (await res.json()) as {
         ok?: boolean;
@@ -123,32 +161,39 @@ export function PreventivoForm({ initialOptions }: Props) {
       }
       setDone(true);
     } catch {
-      setSubmitError("Errore di rete. Controlla la connessione.");
+      setSubmitError(t("networkError"));
     }
   }
 
   if (done) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
+      <div
+        role="status"
         className="rounded-3xl border border-accent/30 bg-accent/10 px-8 py-16 text-center"
       >
-        <CheckCircle2 className="mx-auto h-14 w-14 text-accent-ink" />
+        <CheckCircle2 className="mx-auto h-14 w-14 text-accent-ink" aria-hidden />
         <h2 className="mt-6 font-serif text-2xl text-ink-1">
-          Richiesta inviata
+          {t("successTitle")}
         </h2>
-        <p className="mt-3 text-ink-3">
-          Ti contatteremo entro 1–2 giorni lavorativi con i prossimi passi.
-        </p>
-      </motion.div>
+        <p className="mt-3 text-ink-3">{t("successBody")}</p>
+      </div>
     );
   }
 
+  const stepLabel = t("stepOf", { step: step + 1, total: TOTAL_STEPS });
+
   return (
     <div className="rounded-3xl border border-line bg-raised p-6 sm:p-10">
-      <div className="mb-10 flex gap-2">
-        {Array.from({ length: totalSteps }).map((_, i) => (
+      <div
+        className="mb-10 flex gap-2"
+        role="progressbar"
+        aria-valuemin={1}
+        aria-valuemax={TOTAL_STEPS}
+        aria-valuenow={step + 1}
+        aria-valuetext={stepLabel}
+        aria-label={t("progressLabel")}
+      >
+        {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
           <div
             key={i}
             className="h-1 flex-1 overflow-hidden rounded-full bg-raised-2"
@@ -163,6 +208,11 @@ export function PreventivoForm({ initialOptions }: Props) {
         ))}
       </div>
 
+      {/* Announces "Passo 2 di 3" when the panel swaps; the panels themselves animate. */}
+      <p className="sr-only" aria-live="polite">
+        {stepLabel}
+      </p>
+
       <form onSubmit={handleSubmit(onSubmit)} className="relative">
         <HoneypotField register={register} setValue={setValue} name="_gotcha" />
         <AnimatePresence mode="wait">
@@ -175,46 +225,74 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
-                Passo 1 di 3
+              <p
+                aria-hidden="true"
+                className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink"
+              >
+                {stepLabel}
               </p>
-              <h2 className="font-serif text-2xl text-ink-1">
-                Che tipo di intervento ti serve?
+              <h2
+                ref={stepHeadingRef}
+                tabIndex={-1}
+                className="font-serif text-2xl text-ink-1 outline-none"
+              >
+                {t("step1Title")}
               </h2>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {workTypes.map((w) => (
-                  <label
-                    key={w.value}
-                    className={`flex cursor-pointer items-center rounded-xl border px-4 py-3 text-sm transition ${
-                      workType === w.value
-                        ? "border-accent bg-accent/10 text-ink-1"
-                        : "border-line text-ink-3 hover:border-line-2"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      value={w.value}
-                      className="sr-only"
-                      {...register("workType")}
-                    />
-                    {optLabel(w)}
-                  </label>
-                ))}
-              </div>
-              {formState.errors.workType && (
-                <p className="text-sm text-red-400">
-                  {formState.errors.workType.message}
-                </p>
-              )}
+              <fieldset
+                className="min-w-0 border-0 p-0"
+                aria-invalid={errors.workType ? true : undefined}
+                aria-describedby={
+                  errors.workType ? "preventivo-worktype-error" : undefined
+                }
+              >
+                <legend className="sr-only">{t("step1Title")}</legend>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {workTypes.map((w) => (
+                    <label
+                      key={w.value}
+                      className={`flex cursor-pointer items-center rounded-xl border px-4 py-3 text-sm transition ${
+                        workType === w.value
+                          ? "border-accent bg-accent/10 text-ink-1"
+                          : "border-line text-ink-3 hover:border-line-2"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        value={w.value}
+                        className="sr-only"
+                        {...register("workType")}
+                      />
+                      {optLabel(w)}
+                    </label>
+                  ))}
+                </div>
+                <FieldError
+                  id="preventivo-worktype-error"
+                  message={errors.workType?.message}
+                />
+              </fieldset>
               <div>
-                <label className="text-sm text-ink-4">
-                  Metri quadri (opzionale)
+                <label
+                  htmlFor="preventivo-sqm"
+                  className="text-sm text-ink-4"
+                >
+                  {t("fieldSqm")}
                 </label>
                 <input
+                  id="preventivo-sqm"
                   type="text"
-                  placeholder="es. 85"
-                  className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 placeholder:text-ink-4 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                  inputMode="numeric"
+                  placeholder={t("sqmPlaceholder")}
+                  className={fieldClass(Boolean(errors.sqm))}
+                  aria-invalid={errors.sqm ? true : undefined}
+                  aria-describedby={
+                    errors.sqm ? "preventivo-sqm-error" : undefined
+                  }
                   {...register("sqm")}
+                />
+                <FieldError
+                  id="preventivo-sqm-error"
+                  message={errors.sqm?.message}
                 />
               </div>
             </motion.div>
@@ -229,14 +307,29 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
-                Passo 2 di 3
+              <p
+                aria-hidden="true"
+                className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink"
+              >
+                {stepLabel}
               </p>
-              <h2 className="font-serif text-2xl text-ink-1">
-                Budget e tempistiche
+              <h2
+                ref={stepHeadingRef}
+                tabIndex={-1}
+                className="font-serif text-2xl text-ink-1 outline-none"
+              >
+                {t("step2Title")}
               </h2>
-              <div>
-                <p className="text-sm text-ink-4">Fascia di investimento</p>
+              <fieldset
+                className="min-w-0 border-0 p-0"
+                aria-invalid={errors.budget ? true : undefined}
+                aria-describedby={
+                  errors.budget ? "preventivo-budget-error" : undefined
+                }
+              >
+                <legend className="text-sm text-ink-4">
+                  {t("groupBudget")}
+                </legend>
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
                   {budgets.map((b) => (
                     <label
@@ -257,40 +350,46 @@ export function PreventivoForm({ initialOptions }: Props) {
                     </label>
                   ))}
                 </div>
-                {formState.errors.budget && (
-                  <p className="mt-2 text-sm text-red-400">
-                    {formState.errors.budget.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <p className="text-sm text-ink-4">Quando vorresti iniziare?</p>
+                <FieldError
+                  id="preventivo-budget-error"
+                  message={errors.budget?.message}
+                />
+              </fieldset>
+              <fieldset
+                className="min-w-0 border-0 p-0"
+                aria-invalid={errors.timeline ? true : undefined}
+                aria-describedby={
+                  errors.timeline ? "preventivo-timeline-error" : undefined
+                }
+              >
+                <legend className="text-sm text-ink-4">
+                  {t("groupTimeline")}
+                </legend>
                 <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                  {timelines.map((t) => (
+                  {timelines.map((tl) => (
                     <label
-                      key={t.value}
+                      key={tl.value}
                       className={`flex cursor-pointer rounded-xl border px-4 py-3 text-sm transition ${
-                        timeline === t.value
+                        timeline === tl.value
                           ? "border-accent bg-accent/10 text-ink-1"
                           : "border-line text-ink-3 hover:border-line-2"
                       }`}
                     >
                       <input
                         type="radio"
-                        value={t.value}
+                        value={tl.value}
                         className="sr-only"
                         {...register("timeline")}
                       />
-                      {optLabel(t)}
+                      {optLabel(tl)}
                     </label>
                   ))}
                 </div>
-                {formState.errors.timeline && (
-                  <p className="mt-2 text-sm text-red-400">
-                    {formState.errors.timeline.message}
-                  </p>
-                )}
-              </div>
+                <FieldError
+                  id="preventivo-timeline-error"
+                  message={errors.timeline?.message}
+                />
+              </fieldset>
             </motion.div>
           )}
 
@@ -303,75 +402,116 @@ export function PreventivoForm({ initialOptions }: Props) {
               transition={{ duration: 0.3 }}
               className="space-y-5"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink">
-                Passo 3 di 3
+              <p
+                aria-hidden="true"
+                className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-ink"
+              >
+                {stepLabel}
               </p>
-              <h2 className="font-serif text-2xl text-ink-1">I tuoi contatti</h2>
+              <h2
+                ref={stepHeadingRef}
+                tabIndex={-1}
+                className="font-serif text-2xl text-ink-1 outline-none"
+              >
+                {t("step3Title")}
+              </h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
-                  <label htmlFor="preventivo-name" className="text-sm text-ink-4">
-                    Nome e cognome
+                  <label
+                    htmlFor="preventivo-name"
+                    className="text-sm text-ink-4"
+                  >
+                    {t("fieldName")}
+                    <RequiredMark label={t("requiredMark")} />
                   </label>
                   <input
                     id="preventivo-name"
-                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                    {...register("name")}
+                    className={fieldClass(Boolean(errors.name))}
                     autoComplete="name"
+                    aria-invalid={errors.name ? true : undefined}
+                    aria-describedby={
+                      errors.name ? "preventivo-name-error" : undefined
+                    }
+                    {...register("name")}
                   />
-                  {formState.errors.name && (
-                    <p className="mt-1 text-sm text-red-400">
-                      {formState.errors.name.message}
-                    </p>
-                  )}
+                  <FieldError
+                    id="preventivo-name-error"
+                    message={errors.name?.message}
+                  />
                 </div>
                 <div>
-                  <label htmlFor="preventivo-email" className="text-sm text-ink-4">
-                    Email
+                  <label
+                    htmlFor="preventivo-email"
+                    className="text-sm text-ink-4"
+                  >
+                    {t("fieldEmail")}
+                    <RequiredMark label={t("requiredMark")} />
                   </label>
                   <input
                     id="preventivo-email"
                     type="email"
                     inputMode="email"
                     autoCapitalize="none"
-                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                    {...register("email")}
                     autoComplete="email"
+                    className={fieldClass(Boolean(errors.email))}
+                    aria-invalid={errors.email ? true : undefined}
+                    aria-describedby={
+                      errors.email ? "preventivo-email-error" : undefined
+                    }
+                    {...register("email")}
                   />
-                  {formState.errors.email && (
-                    <p className="mt-1 text-sm text-red-400">
-                      {formState.errors.email.message}
-                    </p>
-                  )}
+                  <FieldError
+                    id="preventivo-email-error"
+                    message={errors.email?.message}
+                  />
                 </div>
                 <div>
-                  <label htmlFor="preventivo-phone" className="text-sm text-ink-4">
-                    Telefono
+                  <label
+                    htmlFor="preventivo-phone"
+                    className="text-sm text-ink-4"
+                  >
+                    {t("fieldPhone")}
+                    <RequiredMark label={t("requiredMark")} />
                   </label>
                   <input
                     id="preventivo-phone"
                     type="tel"
                     inputMode="tel"
-                    className="mt-2 w-full rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                    {...register("phone")}
                     autoComplete="tel"
+                    className={fieldClass(Boolean(errors.phone))}
+                    aria-invalid={errors.phone ? true : undefined}
+                    aria-describedby={
+                      errors.phone ? "preventivo-phone-error" : undefined
+                    }
+                    {...register("phone")}
                   />
-                  {formState.errors.phone && (
-                    <p className="mt-1 text-sm text-red-400">
-                      {formState.errors.phone.message}
-                    </p>
-                  )}
+                  <FieldError
+                    id="preventivo-phone-error"
+                    message={errors.phone?.message}
+                  />
                 </div>
                 <div className="sm:col-span-2">
-                  <label htmlFor="preventivo-notes" className="text-sm text-ink-4">
-                    Note aggiuntive (opzionale)
+                  <label
+                    htmlFor="preventivo-notes"
+                    className="text-sm text-ink-4"
+                  >
+                    {t("fieldNotes")}
                   </label>
                   <textarea
                     id="preventivo-notes"
                     rows={4}
-                    className="mt-2 w-full resize-none rounded-xl border border-control-line bg-raised px-4 py-3 text-ink-1 placeholder:text-ink-4 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                    placeholder="Esigenze particolari, vincoli, note utili…"
-                    {...register("notes")}
+                    className={`${fieldClass(Boolean(errors.notes))} resize-none`}
+                    placeholder={t("notesPlaceholder")}
                     autoComplete="off"
+                    aria-invalid={errors.notes ? true : undefined}
+                    aria-describedby={
+                      errors.notes ? "preventivo-notes-error" : undefined
+                    }
+                    {...register("notes")}
+                  />
+                  <FieldError
+                    id="preventivo-notes-error"
+                    message={errors.notes?.message}
                   />
                 </div>
               </div>
@@ -380,31 +520,30 @@ export function PreventivoForm({ initialOptions }: Props) {
         </AnimatePresence>
 
         {submitError && (
-          <p className="mt-6 text-sm text-red-400">{submitError}</p>
+          <p role="alert" className="mt-6 text-sm text-red-700">
+            {submitError}
+          </p>
         )}
 
         <div className="mt-10 flex flex-wrap justify-between gap-4">
           {step > 0 ? (
             <button
               type="button"
-              onClick={() => {
-                setStep((s) => s - 1);
-                setSubmitError(null);
-              }}
+              onClick={() => goToStep(step - 1)}
               className="rounded-full border border-line-2 px-6 py-3 text-sm font-medium text-ink-1 hover:bg-raised-2"
             >
-              Indietro
+              {t("back")}
             </button>
           ) : (
             <span />
           )}
-          {step < 2 ? (
+          {step < TOTAL_STEPS - 1 ? (
             <button
               type="button"
               onClick={validateAndNext}
               className="ml-auto rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent hover:bg-accent-deep"
             >
-              Avanti
+              {t("next")}
             </button>
           ) : (
             <button
@@ -413,9 +552,9 @@ export function PreventivoForm({ initialOptions }: Props) {
               className="ml-auto inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-semibold text-on-accent hover:bg-accent-deep disabled:opacity-60"
             >
               {formState.isSubmitting && (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
               )}
-              Invia richiesta
+              {t("submit")}
             </button>
           )}
         </div>

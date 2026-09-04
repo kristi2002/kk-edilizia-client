@@ -118,7 +118,7 @@ export async function ServiceSiloScope({ items }: { items: ScopeItem[] }) {
             return (
               <li key={item.title}>
                 <FadeIn delay={i * 0.05}>
-                  <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-raised-2 p-6 transition hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10">
+                  <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-page p-6 transition hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10">
                     <span
                       aria-hidden="true"
                       className="absolute inset-x-0 top-0 h-[3px] w-0 bg-gradient-to-r from-accent to-accent-deep transition-all duration-500 group-hover:w-full"

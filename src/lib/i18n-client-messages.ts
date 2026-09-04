@@ -22,6 +22,7 @@ export const CLIENT_MESSAGE_NAMESPACES = [
   "Footer",
   "FormErrors",
   "Nav",
+  "PreventivoForm",
   "Services",
   "VirtualTour",
 ] as const;

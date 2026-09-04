@@ -1,4 +1,11 @@
-export type FaqItem = { q: string; a: string };
+/**
+ * `hidden` keeps an entry in the file but off the site. The three flagged questions
+ * answer things about search engines — what this site covers, whether Google reviews
+ * should match, what "vicino a me" means — rather than about the work, so they read as
+ * filler to a visitor. The copy stays here because it is the kind of thing that gets
+ * asked back for; flip the flag to bring one back.
+ */
+export type FaqItem = { q: string; a: string; hidden?: boolean };
 
 export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
   it: [
@@ -45,14 +52,17 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     {
       q: "Cercate «edilizia Modena» o «servizi edili»: cosa offre questo sito?",
       a: "Qui trovate informazioni su ristrutturazioni, cartongesso, rifacimento tetti e lavori chiavi in mano, con sede a Modena e interventi in provincia. Le pagine dedicate ai servizi approfondiscono materiali, fasi di cantiere e zone coperte; il portfolio mostra esempi reali. Il preventivo dettagliato arriva dopo sopralluogo, con voci e tempi chiari.",
+      hidden: true,
     },
     {
       q: "Le recensioni sulla scheda Google Business e sul sito devono coincidere?",
       a: "La scheda Google Business Profile è il punto di riferimento pubblico per recensioni e indirizzo. Se riportate sul sito estratti di recensioni, usate testi già visibili su Google o citazioni autorizzate dal cliente, senza inventare valutazioni. Coerenza tra sito e scheda Google aiuta la fiducia e le ricerche locali; non copiate contenuti da piattaforme senza permesso.",
+      hidden: true,
     },
     {
       q: "Cosa significa «edilizia vicino a me» nei risultati di ricerca?",
       a: "Le ricerche locali e le mappe combinano distanza dalla vostra posizione, segnali della scheda Google Business (orari, recensioni, categoria), coerenza di indirizzo e contenuti del sito. Un sito chiaro sulle zone servite e sui servizi edili aiuta, ma il posizionamento locale dipende da molti fattori: non esiste una posizione garantita per tutti.",
+      hidden: true,
     },
     {
       q: "Quali servizi edili svolgete a Modena e in provincia?",
@@ -111,14 +121,17 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
     {
       q: "What will I find here if I search for building work or contractors in Modena?",
       a: "Renovations, drywall, roof replacement and turnkey projects, based in Modena with work across the province. Dedicated pages explain materials, site phases and areas covered; the portfolio shows real jobs. A detailed quote follows a site visit with clear line items and timing.",
+      hidden: true,
     },
     {
       q: "Should Google Business reviews match what you show on the website?",
       a: "Your Google Business Profile is the public source for reviews and key business info. If you quote reviews on the site, use wording already visible on Google or text the client authorised—do not fabricate ratings. Consistency between the site and Google helps trust and local search; do not copy content from third-party platforms without permission.",
+      hidden: true,
     },
     {
       q: "What does “construction near me” mean in search results?",
       a: "Local search and maps combine distance, Google Business Profile signals (hours, reviews, category) and website content. A clear site helps, but local ranking depends on many factors—no position is guaranteed for everyone.",
+      hidden: true,
     },
     {
       q: "What construction services do you provide in Modena and the province?",
@@ -133,4 +146,14 @@ export const faqByLocale: Record<"it" | "en", FaqItem[]> = {
       a: "Yes: invoices, work timeline and site records your accountant can use for reporting, aligned with rules for the tax year when payments fall. For rates, caps and specific requirements (including any 2026 bonus regime), always rely on a qualified tax adviser and official sources.",
     },
   ],
+};
+
+/**
+ * What the site actually renders. Both the accordion and the page's FAQPage schema read
+ * from here so the structured data keeps mirroring the visible questions — a hidden entry
+ * left in the JSON-LD would be schema Google can't find on the page.
+ */
+export const visibleFaqByLocale: Record<"it" | "en", FaqItem[]> = {
+  it: faqByLocale.it.filter((item) => !item.hidden),
+  en: faqByLocale.en.filter((item) => !item.hidden),
 };

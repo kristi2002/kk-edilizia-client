@@ -1,4 +1,4 @@
-import { faqByLocale } from "@/lib/data/faq";
+import { visibleFaqByLocale } from "@/lib/data/faq";
 import { AdminLogoutButton } from "../../AdminLogoutButton";
 import { AdminSection } from "../../AdminSection";
 
@@ -23,9 +23,9 @@ export default function AdminInfoPage() {
         <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6 text-base text-ink-3">
           <p>
             Oggi ci sono{" "}
-            <strong className="text-ink-2">{faqByLocale.it.length}</strong> voci in
+            <strong className="text-ink-2">{visibleFaqByLocale.it.length}</strong> voci in
             italiano e{" "}
-            <strong className="text-ink-2">{faqByLocale.en.length}</strong> in inglese.
+            <strong className="text-ink-2">{visibleFaqByLocale.en.length}</strong> in inglese.
           </p>
           <p className="mt-3">
             Per cambiarle serve intervenire sul codice o chiedere allo sviluppatore — così non

@@ -32,6 +32,22 @@ function staticSegments(): string[] {
   ];
 }
 
+/**
+ * `xhtml:link` alternates for one logical page.
+ *
+ * The sitemap listed the Italian and English URLs as thirty-four unrelated entries: the
+ * page `<head>` carried a correct hreflang triple, but nothing in the sitemap said the
+ * two were the same document in two languages, which is the pairing Google prefers to
+ * read from here.
+ */
+function alternatesFor(base: string, seg: string): Record<string, string> {
+  const abs = (locale: string) => {
+    const path = localizedPath(locale, seg);
+    return path === "/" ? base : `${base}${path}`;
+  };
+  return { it: abs("it"), en: abs("en"), "x-default": abs("it") };
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (await getSiteUrl()).replace(/\/$/, "");
   /** With the portfolio flag off these pages are noindex, so they stay out of the sitemap. */
@@ -65,6 +81,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             : seg === "/impresa-edile-modena"
               ? 0.9
               : 0.8,
+        alternates: { languages: alternatesFor(base, seg === "" ? "/" : seg) },
       });
     }
 
@@ -76,6 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: pMod,
         changeFrequency: "monthly",
         priority: 0.7,
+        alternates: { languages: alternatesFor(base, `/portfolio/${p.slug}`) },
       });
       if (p.virtualTour.scenes.length > 0) {
         const vtPath = localizedPath(
@@ -87,6 +105,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           lastModified: pMod,
           changeFrequency: "monthly",
           priority: 0.65,
+          alternates: {
+            languages: alternatesFor(
+              base,
+              `/portfolio/${p.slug}/virtual-tour`,
+            ),
+          },
         });
       }
     }

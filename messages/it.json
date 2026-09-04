@@ -1,12 +1,12 @@
 {
   "Metadata": {
     "siteTitle": "K.K Edilizia Modena | Impresa edile e servizi edili in provincia",
-    "siteDescription": "Impresa edile e servizi edili a Modena: ristrutturazioni chiavi in mano, cartongesso, impianti e tetti per privati e aziende. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine e provincia. Materiali professionali (Mapei, Kerakoll e equivalenti certificati).",
+    "siteDescription": "Impresa edile a Modena: ristrutturazioni chiavi in mano, cartongesso, impianti e tetti per privati e aziende. Preventivo gratuito dopo sopralluogo.",
     "homeAbsoluteTitle": "Impresa edile Modena | Ristrutturazioni chiavi in mano — K.K Edilizia",
-    "homeAbsoluteDescription": "Impresa edile e servizi edili a Modena e provincia: ristrutturazioni chiavi in mano, elettricista e impianti elettrici, idraulico, cartongesso, opere murarie e finiture. Preventivo gratuito dopo sopralluogo. Un solo referente. Sassuolo, Carpi, Formigine, Castelfranco Emilia e altri comuni.",
+    "homeAbsoluteDescription": "Impresa edile a Modena e provincia: ristrutturazioni chiavi in mano, impianti, cartongesso e finiture con un solo referente. Preventivo dopo sopralluogo.",
     "homeKeywords": "impresa edile Modena, servizi edili Modena, ditta edile Modena, lavori edili Modena, ristrutturazioni Modena, ristrutturazioni chiavi in mano, elettricista Modena, impianti elettrici Modena, idraulico Modena, impianti idraulici Modena, cartongesso Modena, cartongesso e isolamento, opere murarie Modena, rifacimento bagno Modena, general contractor Modena, preventivo gratuito, Sassuolo, Carpi, Formigine, Castelfranco Emilia, Vignola",
-    "impresaEdileModenaTitle": "Impresa edile Modena | Servizi edili e ristrutturazioni chiavi in mano",
-    "impresaEdileModenaDescription": "Impresa edile e servizi edili a Modena e provincia: ditta di costruzioni per ristrutturazioni chiavi in mano, impianti e finiture. Preventivo gratuito dopo sopralluogo. Sassuolo, Carpi, Formigine, Spilamberto e altri comuni.",
+    "impresaEdileModenaTitle": "Lavori edili a Modena: comuni serviti, tempi e preventivo",
+    "impresaEdileModenaDescription": "Guida ai lavori edili a Modena e provincia: cosa comprende un intervento, in quali comuni operiamo, tempi indicativi e come arrivare al preventivo.",
     "impresaEdileModenaKeywords": [
       "impresa edile Modena",
       "servizi edili Modena",
@@ -17,7 +17,7 @@
       "preventivo edile Modena"
     ],
     "contactsTitle": "Contatti",
-    "contactsDescription": "Telefono, email, PEC e orari. Impresa edile per ristrutturazioni in provincia (Sassuolo, Carpi, Formigine). Modulo messaggi, prenotazione sopralluogo e preventivo online.",
+    "contactsDescription": "Telefono, email, PEC e orari. Impresa edile a Modena e provincia: modulo messaggi, prenotazione sopralluogo e preventivo online.",
     "aboutTitle": "Chi siamo",
     "aboutDescription": "Impresa edile a Modena: team, qualità e cantieri organizzati. Ristrutturazioni e costruzioni in provincia.",
     "noteLegaliTitle": "Note legali",
@@ -253,51 +253,9 @@
         "Box doccia, sanitari e pavimento continuo in un bagno completato."
       ]
     },
-    "cartongesso": {
-      "metaTitle": "Cartongesso a Modena",
-      "metaDescription": "Cartongesso chiavi in mano a Modena e provincia: pareti, controsoffitti e velette con finiture professionali. Preventivo gratuito dopo sopralluogo.",
-      "metaKeywords": [
-        "cartongesso modena",
-        "controsoffitto cartongesso",
-        "pareti cartongesso",
-        "impresa edile modena"
-      ],
-      "eyebrow": "Sistemi a secco",
-      "h1": "Cartongesso e sistemi a secco a Modena",
-      "lead": "Realizziamo pareti, controsoffitti e velette con struttura metallica e lastre, per rinnovare spazi senza i tempi lunghi di essiccazione dell’intonaco tradizionale — con finiture pronte per tinteggiatura e design coerente con il resto dell’abitazione.",
-      "body1": "Un intervento in cartongesso a Modena parte da obiettivi e sopralluogo: ridefinire stanze, creare controsoffitti con luci integrate o ricavare vani tecnici. Definiamo tracciati impianti e quote; se servono modifiche sostanziali alla distribuzione, il vostro tecnico valuta CILA o SCIA. Avviato il cantiere, montiamo struttura metallica e lastre con sequenza logica (pareti, tracce, chiusure, rete e rasatura), così elettricisti e idraulici collaudano prima delle finiture.",
-      "body2": "Per materiali e finiture di giunto ci orientiamo su prodotti professionali: sistemi Mapei e Kerakoll (o equivalenti certificati) per stucchi, fondi e trattamenti che riducono crepe e micro-movimenti prima della pittura. Scegliamo tipologie di lastra in base ad acustica, umidità (bagno/lavanderia) e carichi; il risultato è una superficie pronta per tinteggiatura di qualità e coerente con il resto dell’abitazione.",
-      "body3": "Eseguiamo lavori lungo Via Emilia e Viale Amendola, nel Quartiere Musicisti, a Buon Pastore e Crocetta, dove palazzine e traffico richiedono pianificazione di scarichi e orari. Operiamo anche verso Sassuolo, Carpi, Formigine e Castelfranco Emilia: ovunque adattiamo logistica (cortili, scale, ascensori) e protezione dei percorsi comuni, in sintonia con condomini e negozi al piano terra.",
-      "body4": "Nei soggiorni e nelle zone giorno il controsoffitto ospita LED, faretti o canali luminosi senza sacrificare troppo l’altezza. In attività vicino al centro storico rispettiamo orari di apertura e passi carrabili. Documentiamo tracce e centri luce per evitare errori in fase di cablaggio e per semplificare eventuali sopralluoghi degli enti.",
-      "body5": "In condominio rispettiamo carichi, forature dei solai e silenzi orari; allineamento con amministratore e vicini su rumore e polvere. Se la nuova distribuzione richiede verifiche strutturali, resta il tecnico abilitato a firmare le pratiche: noi forniamo misure, foto e cronoprogramma cantiere coerenti con quanto dichiarato.",
-      "body6": "Il preventivo riporta metri lineari, superfici di lastra, tipi di sistema e manodopera; i tempi dipendono da complessità (curve, doppie lastre, bagni). Dopo l’incarico, un referente unico segue il cantiere fino alla mano di pittura, con aggiornamenti su snodi e consegna documentata per eventuali agevolazioni fiscali che il vostro commercialista gestisce lato dichiarazioni.",
-      "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
-    },
-    "tetto": {
-      "metaTitle": "Rifacimento tetto a Modena",
-      "metaDescription": "Rifacimento tetto chiavi in mano a Modena e provincia: diagnosi, impermeabilizzazione e isolamento con sistemi professionali. Preventivo gratuito dopo sopralluogo.",
-      "metaKeywords": [
-        "rifacimento tetto modena",
-        "impermeabilizzazione tetto",
-        "coperture edili",
-        "riparazione tetto"
-      ],
-      "eyebrow": "Coperture",
-      "h1": "Rifacimento tetto e coperture a Modena",
-      "lead": "Affrontiamo infiltrazioni, usura delle tegole e ponti termici con interventi strutturati: sopralluogo in copertura, proposta di lavori, stratificazione impermeabile e isolamento coerenti con il clima della pianura modenese e con le norme vigenti.",
-      "body1": "Il processo per un tetto a Modena inizia dalla diagnosi: ispezione in copertura, stato del sotto-tetto e segni all’interno (infiltrazioni, muffe). In base all’entità dell’intervento, il tecnico può predisporre SCIA, CILA o altro titolo: noi allineiamo demolizione del vecchio manto, impermeabilizzazione e finiture al progetto approvato, con cronoprogramma che considera stagione e sicurezza in copertura.",
-      "body2": "Sui materiali utilizziamo stratificazioni e membrane di marchi come Mapei e Kerakoll (o equivalenti certificati), con giunzioni e plinti eseguiti a regola d’arte su camini, lucernari e attraversamenti. Completiamo con isolamento e, dove serve, ventilazione del sotto-tetto per limitare condensa e ponti termici — segnali che Google e i clienti associano a coperture professionali e durature.",
-      "body3": "Interveniamo su edifici lungo Via Emilia e Viale Amendola, nel Quartiere Musicisti, a Buon Pastore e Crocetta, oltre che in provincia (Sassuolo, Carpi, Formigine, Castelfranco Emilia). In città coordiniamo accessi, occupazione suolo pubblico e orari di lavoro con Comune e condomini; in collina valutiamo vento, neve e ancoraggi. Ogni contesto ha la sua logistica: cassoni, ponteggi, gru leggere o lavori manuali programmati.",
-      "body4": "Grondaie, pluviali, lucernari e linee vita entrano nel computo economico e nei tempi: una copertura regge solo se il perimetro è progettato in blocco. Su tetti condominiali supportiamo amministratori e assemblee con sintesi su priorità, urgenze e fasi di cantiere, rispettando le decisioni collegate alle quote millesimali.",
-      "body5": "Le pratiche edilizie (permessi, comunicazioni) spettano al tecnico abilitato in funzione di volumetrie e intervento. Vi diamo supporto operativo: rilievi, foto, relazioni di lavorazione eseguita e coerenza tra cantiere e documentazione presentata. Così sopralluoghi e collaudi non trovano scostamenti rispetto a quanto dichiarato.",
-      "body6": "Il preventivo elenca stratificazioni, quantità, manodopera, tempi stimati e garanzie sui materiali forniti. Durata e complessità dipendono da falde, altezze, ponteggi e meteo. Un solo referente K.K Edilizia accompagna l’opera fino alla consegna e alle verifiche di tenuta, con documentazione utile anche a eventuali agevolazioni fiscali che il commercialista gestisce sulle dichiarazioni dei clienti.",
-      "ctaPrimary": "Richiedi preventivo",
-      "ctaSecondary": "Contatti"
-    },
     "chiaviInMano": {
       "metaTitle": "Ristrutturazioni chiavi in mano a Modena",
-      "metaDescription": "Ristrutturazioni chiavi in mano a Modena e provincia: impresa edile e general contractor per appartamenti, ville e locali commerciali. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Ristrutturazioni chiavi in mano a Modena e provincia per appartamenti, ville e locali commerciali, con un solo referente. Preventivo dopo sopralluogo.",
       "metaKeywords": [
         "ristrutturazioni chiavi in mano modena",
         "general contractor modena",
@@ -379,7 +337,7 @@
     },
     "cucina": {
       "metaTitle": "Ristrutturazione cucina a Modena",
-      "metaDescription": "Ristrutturazione cucina chiavi in mano a Modena e provincia: demolizioni, impianti e rivestimenti con un unico referente. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Ristrutturazione cucina chiavi in mano a Modena e provincia: demolizioni, impianti e rivestimenti con un unico referente. Preventivo dopo sopralluogo.",
       "metaKeywords": [
         "ristrutturazione cucina modena",
         "rifacimento cucina",
@@ -460,7 +418,7 @@
     },
     "elettrico": {
       "metaTitle": "Elettricista Modena | Impianti elettrici in ristrutturazione",
-      "metaDescription": "Elettricista e impianti elettrici a Modena e provincia: quadri, prese, illuminazione, domotica e conformità. Coordinamento con lavori edili. BTicino, Vimar o equivalenti. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Elettricista e impianti elettrici a Modena e provincia: quadri, prese, illuminazione, domotica e conformità. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
         "elettricista modena",
         "impianti elettrici modena",
@@ -546,7 +504,7 @@
     },
     "idraulico": {
       "metaTitle": "Idraulico Modena | Impianti idraulici, acqua e scarichi",
-      "metaDescription": "Idraulico a Modena e provincia: impianti idraulici, tubature, scarichi, riscaldamento e condizionamento in ristrutturazione. Coordinamento con murature e finiture. Kerakoll/Mapei dove serve. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Idraulico a Modena e provincia: impianti idraulici, scarichi, riscaldamento e condizionamento in ristrutturazione. Preventivo dopo sopralluogo.",
       "metaKeywords": [
         "idraulico modena",
         "idraulici modena",
@@ -632,7 +590,7 @@
     },
     "murarie": {
       "metaTitle": "Opere murarie a Modena",
-      "metaDescription": "Opere murarie chiavi in mano a Modena e provincia: demolizioni, ripristini e interventi strutturali per ristrutturazioni. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Opere murarie a Modena e provincia: demolizioni, ripristini e interventi strutturali per ristrutturazioni. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
         "opere murarie modena",
         "demolizioni modena",
@@ -713,7 +671,7 @@
     },
     "cartongessoIsolamento": {
       "metaTitle": "Cartongesso Modena | Pareti, controsoffitti e isolamento",
-      "metaDescription": "Cartongesso e isolamento a Modena e provincia: pareti in cartongesso, controsoffitti, isolamento termico e acustico, cappotto interno. Sistemi Knauf e finiture Mapei/Kerakoll dove indicato. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Cartongesso e isolamento a Modena e provincia: pareti, controsoffitti, isolamento termico e acustico, cappotto interno. Preventivo dopo sopralluogo.",
       "metaKeywords": [
         "cartongesso modena",
         "cartongesso isolamento modena",
@@ -799,7 +757,7 @@
     },
     "pavimentiRivestimenti": {
       "metaTitle": "Posa pavimenti e rivestimenti a Modena",
-      "metaDescription": "Posa pavimenti e rivestimenti chiavi in mano a Modena e provincia: piastrelle, parquet e rivestimenti con sistemi Kerakoll/Mapei. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Posa pavimenti e rivestimenti a Modena e provincia: piastrelle, parquet e rivestimenti con sistemi certificati. Preventivo gratuito dopo sopralluogo.",
       "metaKeywords": [
         "posa pavimenti modena",
         "posa piastrelle modena",
@@ -880,7 +838,7 @@
     },
     "tettoFacciate": {
       "metaTitle": "Rifacimento tetto e facciate a Modena",
-      "metaDescription": "Rifacimento tetto e facciate chiavi in mano a Modena e provincia: coperture, facciate e ponteggi con sicurezza e conformità. Preventivo gratuito dopo sopralluogo.",
+      "metaDescription": "Rifacimento tetto e facciate a Modena e provincia: coperture, facciate e ponteggi in sicurezza e conformità. Preventivo dopo sopralluogo.",
       "metaKeywords": [
         "rifacimento tetto facciate modena",
         "rifacimento facciata modena",
@@ -1019,7 +977,11 @@
       "Rubiera"
     ],
     "zonesNote": "L'elenco non è esaustivo: se il vostro indirizzo non compare, chiedete lo stesso — valutiamo distanza, accessi e tempi di trasferta prima del sopralluogo.",
-    "siblingsIntro": "Quasi nessun intervento resta dentro una sola voce: un bagno tocca impianti, cartongesso e posa. Se il vostro ne riguarda più di una, partite da qui."
+    "siblingsIntro": "Quasi nessun intervento resta dentro una sola voce: un bagno tocca impianti, cartongesso e posa. Se il vostro ne riguarda più di una, partite da qui.",
+    "partOfLabel": "Fa parte di",
+    "partOfCta": "Vai al servizio completo",
+    "relatedTitle": "Lavorazioni che incontrano questo intervento",
+    "relatedIntro": "Le voci che compaiono più spesso nello stesso cantiere. Le seguiamo noi, con lo stesso referente."
   },
   "FeaturedProjects": {
     "label": "Portfolio",
@@ -1046,7 +1008,6 @@
     "contacts": "Contatti",
     "zonesTitle": "Zone servite",
     "zonesIntro": "Servizi edili con pagine dedicate (Modena e provincia):",
-    "quick": "Link rapidi",
     "linkChiaviInMano": "Ristrutturazioni chiavi in mano",
     "linkBagno": "Ristrutturazione bagno",
     "linkCucina": "Ristrutturazione cucina",
@@ -1066,14 +1027,12 @@
     "craftMark": "Ristrutturazioni ed edilizia · Modena",
     "privacyLink": "Privacy policy",
     "legalLink": "Note legali",
-    "howWeWork": "Come lavoriamo",
-    "linkImpresaEdileModena": "Impresa edile Modena (guida locale)",
     "reviewsLink": "Recensioni su Google"
   },
   "ImpresaEdileModenaPage": {
     "eyebrow": "Modena e provincia",
-    "breadcrumbName": "Impresa edile Modena",
-    "title": "Impresa edile a Modena: servizi edili, dove operiamo e preventivo",
+    "breadcrumbName": "Lavori edili a Modena",
+    "title": "Lavori edili a Modena: come lavoriamo, dove interveniamo e con quali tempi",
     "intro": "Se cerchi un’impresa edile o servizi edili a Modena e in provincia, qui trovi cosa facciamo (ristrutturazioni chiavi in mano e lavori mirati), dove interveniamo e come ottenere un preventivo gratuito dopo sopralluogo.",
     "p1": "K.K Edilizia è una ditta edile attiva su Modena e sui comuni della provincia (inclusi Sassuolo, Carpi, Formigine, Spilamberto, Maranello e Vignola). Offriamo servizi edili completi: ristrutturazioni chiavi in mano, interventi mirati (bagno, cucina, cartongesso, pavimenti, tetto e facciate) e coordinamento di impianti con un solo referente di cantiere.",
     "p2": "Lavoriamo in conformità a progetto e titoli edilizi quando richiesti (CILA, SCIA o altro, come da geometra o architetto). Il preventivo dettagliato arriva dopo sopralluogo: è gratuito e non vincolante fino alla firma di un accordo scritto.",
@@ -1085,7 +1044,7 @@
     "internalPrenota": "Prenota sopralluogo",
     "internalPortfolio": "Vedi i lavori",
     "faqLabel": "Domande frequenti",
-    "faqTitle": "Domande frequenti su impresa edile e servizi edili a Modena",
+    "faqTitle": "Domande frequenti sui lavori edili a Modena e provincia",
     "q1": "Quanto costa una ristrutturazione a Modena?",
     "a1": "Dipende da metratura, stato dei luoghi, finiture e impianti. Dopo sopralluogo prepariamo un preventivo con voci e tempi: la stima online, se presente, è solo orientativa.",
     "q2": "Fate solo Modena città o anche la provincia?",
@@ -1422,5 +1381,28 @@
     "tettoAside": "Colmo di un tetto in coppi vecchi, ripreso da vicino",
     "tettoA": "Orditura in legno di una nuova copertura, prima della posa del manto",
     "tettoB": "Ponteggio montato sulla facciata di un edificio residenziale"
+  },
+  "PreventivoForm": {
+    "progressLabel": "Avanzamento modulo",
+    "stepOf": "Passo {step} di {total}",
+    "requiredMark": "obbligatorio",
+    "step1Title": "Che tipo di intervento ti serve?",
+    "fieldSqm": "Metri quadri (opzionale)",
+    "sqmPlaceholder": "es. 85",
+    "step2Title": "Budget e tempistiche",
+    "groupBudget": "Fascia di investimento",
+    "groupTimeline": "Quando vorresti iniziare?",
+    "step3Title": "I tuoi contatti",
+    "fieldName": "Nome e cognome",
+    "fieldEmail": "Email",
+    "fieldPhone": "Telefono",
+    "fieldNotes": "Note aggiuntive (opzionale)",
+    "notesPlaceholder": "Esigenze particolari, vincoli, note utili…",
+    "back": "Indietro",
+    "next": "Avanti",
+    "submit": "Invia richiesta",
+    "successTitle": "Richiesta inviata",
+    "successBody": "Ti contatteremo entro 1–2 giorni lavorativi con i prossimi passi.",
+    "networkError": "Errore di rete. Controlla la connessione."
   }
 }
