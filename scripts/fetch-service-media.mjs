@@ -44,7 +44,14 @@ const SETS = {
 
 /** role → [width, height, position]. */
 const ROLES = [
-  ["hero", 2000, 1000, "entropy"],
+  /**
+   * 1600 wide, not 2000. `deviceSizes` in `next.config.ts` tops out at 1920 and the
+   * hero band is roughly 600px tall full-bleed, so `object-cover` crops the height away
+   * — the extra 400px of width was never rendered and only made every transform bigger
+   * on both ends. Changing this means re-running the script; the committed files are
+   * already at 1600.
+   */
+  ["hero", 1600, 800, "entropy"],
   ["aside", 1000, 1250, "attention"],
   ["a", 1200, 800, "attention"],
   ["b", 1200, 800, "attention"],

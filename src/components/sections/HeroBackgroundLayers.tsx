@@ -41,6 +41,13 @@ import heroPoster from "../../../public/media/hero-poster.jpg";
  * The poster stays mounted underneath so it — not the video — remains the LCP
  * candidate, and the video fades in only once it is genuinely playing, so there is no
  * black frame between the two.
+ *
+ * The `<video>` deliberately carries no `poster` attribute. A browser fetches one
+ * regardless of `preload="none"`, and it would fetch the raw static import — the 43 KB
+ * JPEG, not the ~20 KB AVIF the `<Image>` above is already serving from the same file.
+ * Since the video sits at `opacity-0` until it plays, that second copy is never once on
+ * screen: it was 43 KB of pure duplication on the LCP path. The `<Image>` underneath is
+ * the poster.
  */
 const POSTER: StaticImageData | null = heroPoster;
 
@@ -71,7 +78,8 @@ export function HeroBackgroundLayers({
           fill
           priority
           fetchPriority="high"
-          quality={72}
+          quality={60}
+          placeholder="blur"
           className="object-cover opacity-55"
           sizes="100vw"
         />
@@ -86,7 +94,6 @@ export function HeroBackgroundLayers({
           loop
           playsInline
           preload="none"
-          poster={POSTER?.src}
           aria-hidden="true"
           onPlaying={() => setPlaying(true)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${

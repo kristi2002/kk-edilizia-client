@@ -50,7 +50,8 @@ export async function AboutHero({
         alt={tMedia(image.alt)}
         fill
         priority
-        quality={70}
+        quality={60}
+        placeholder="blur"
         sizes="100vw"
         className="-z-10 object-cover object-top"
       />

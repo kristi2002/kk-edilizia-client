@@ -4,6 +4,14 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Component, type ReactNode, useEffect, useRef, useState } from "react";
 import { OVERSCAN } from "./logo-mark-frame";
+/**
+ * Imported, not written as `src="/logo-mark.png"`. The bare path is a stable URL, so a
+ * replaced crest never reaches a browser that already holds the old one — and with
+ * `images.minimumCacheTTL` now set to a year, the optimizer would hold it that long too.
+ * The import makes the bundler emit `logo-mark.<contenthash>.png`, so the URL moves when
+ * the bytes do.
+ */
+import logoMark from "../../../public/logo-mark.png";
 
 /**
  * The brand crest. Ships as the flat PNG and upgrades itself, in place, to the WebGL
@@ -121,7 +129,7 @@ export function LogoMark({
       style={{ width: size, height: size }}
     >
       <Image
-        src="/logo-mark.png"
+        src={logoMark}
         alt=""
         width={size}
         height={size}

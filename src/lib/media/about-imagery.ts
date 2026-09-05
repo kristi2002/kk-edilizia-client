@@ -40,7 +40,7 @@ import utensili from "../../../public/media/about/utensili.jpg";
  * text: it is crawlable copy and has to exist in both locales.
  */
 export const ABOUT_IMAGERY = {
-  /** Hero ground, 16:9. Modena rooftops with the Ghirlandina — the only wide file here. */
+  /** Hero ground, 16:9 (1600x900). Modena rooftops with the Ghirlandina — the only wide file here. */
   modenaSkyline: {
     src: modenaSkyline,
     pexels: 29201587,

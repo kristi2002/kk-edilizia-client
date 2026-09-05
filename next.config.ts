@@ -116,8 +116,48 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    /**
+     * AVIF first is worth it here. Next encodes it at `quality - 20` with `effort: 3`,
+     * which on this photography lands ~23% under WebP for a comparable encode time
+     * (six heroes: 478 KB AVIF vs 621 KB WebP, ~200ms each) — not the usual "AVIF is
+     * slow" tradeoff, because the effort dial is already low.
+     */
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 72, 70],
+    /**
+     * 60 is for the full-bleed hero grounds. Every one of them sits under a scrim that
+     * is near-opaque where the type runs (`/prenota` also renders its own at
+     * `opacity-30` through a grayscale/sepia filter), so the difference between 72 and
+     * 60 is invisible while the file is ~38% smaller — 116 KB → 72 KB at 1920 for
+     * `tetto-hero`. Anything shown at full strength stays at 72.
+     */
+    qualities: [75, 72, 70, 60],
+    /**
+     * Default runs to 2048 and 3840. No source on the site is wider than 1600, and
+     * `withoutEnlargement` means both of those clamp to the same bytes as 1920 while
+     * occupying two more cache entries each — a straight loss, since a cold entry is
+     * the expensive case (see `minimumCacheTTL`). Capping here puts retina desktops on
+     * the 1920 entry, which is the one most likely to already be warm.
+     */
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    /**
+     * A year, against Next's 4-hour default.
+     *
+     * At 4 hours every hero variant is re-transformed on the first request after each
+     * window closes — a cold serverless invocation, a fetch of the source, and an
+     * encode, all before the first byte reaches the browser. On a site with this much
+     * traffic that cold path is what most visitors get, and it is the actual reason a
+     * hero "takes a while": latency, not payload.
+     *
+     * Safe because every URL the optimizer sees is already content-addressed. Static
+     * imports are emitted as `tetto-hero.<contenthash>.jpg`, so replacing a file
+     * changes the URL; uploads go through `put(..., { addRandomSuffix: true })`, so
+     * each one is unique. The single exception was `/logo-mark.png`, passed as a bare
+     * string — it is a static import now, for exactly this reason. Keep it that way:
+     * any `next/image` `src` that is a literal path under `public/` is a stale-cache
+     * bug waiting for the next asset swap. `@/lib/media/hero-media` documents the same
+     * hazard for the video, which cannot take this route.
+     */
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",

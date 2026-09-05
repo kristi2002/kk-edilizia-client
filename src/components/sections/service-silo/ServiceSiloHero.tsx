@@ -54,7 +54,8 @@ export async function ServiceSiloHero({
         alt=""
         fill
         priority
-        quality={72}
+        quality={60}
+        placeholder="blur"
         sizes="100vw"
         className="-z-20 object-cover"
       />

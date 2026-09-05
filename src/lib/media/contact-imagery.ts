@@ -16,7 +16,7 @@ import piantaHero from "../../../public/media/contatti/pianta-hero.jpg";
  * works at the firm. What it does claim is the thing this page exists for — a plan on a
  * table being marked up together, which is what a first phone call turns into.
  *
- * 2:1 (2000x1000), matching the silo and booking heroes because it is used the same way:
+ * 2:1 (1600x800), matching the silo and booking heroes because it is used the same way:
  * full-bleed behind the dark band. Cut from a 2400x1600 original, a 1200px band taken
  * 300px down so the marked-up plan and both pairs of hands stay in frame. A replacement
  * has to keep the ratio or the band letterboxes.

@@ -49,7 +49,7 @@ import type { ServiceSiloKey } from "@/lib/service-silos";
  *
  * Four frames per silo, and the crop of each is load-bearing:
  *
- * - `hero`   2:1  (2000x1000) — full-bleed behind the dark hero band.
+ * - `hero`   2:1  (1600x800)  — full-bleed behind the dark hero band.
  * - `aside`  4:5  (1000x1250) — the vertical that runs beside the opening copy.
  * - `a`, `b` 3:2  (1200x800)  — the gallery pair, shown at full strength with captions.
  *

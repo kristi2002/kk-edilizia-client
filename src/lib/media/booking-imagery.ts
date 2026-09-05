@@ -14,7 +14,7 @@ import sopralluogoHero from "../../../public/media/booking/sopralluogo-hero.jpg"
  * Same licence and rules as the other sets — Pexels (free commercial use, no
  * attribution), craft and materials rather than models, no identifiable faces.
  *
- * `hero` is 2:1 (2000x1000), matching the service-silo heroes, because it is used the
+ * `hero` is 2:1 (1600x800), matching the service-silo heroes, because it is used the
  * same way: full-bleed behind the dark band. Replacements must keep the ratio or the
  * layout letterboxes.
  *

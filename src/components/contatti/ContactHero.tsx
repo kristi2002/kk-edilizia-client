@@ -87,7 +87,8 @@ export async function ContactHero({ site }: { site: SiteData }) {
           alt=""
           fill
           priority
-          quality={72}
+          quality={60}
+          placeholder="blur"
           sizes="100vw"
           className="object-cover object-[62%_45%] sm:object-center"
         />

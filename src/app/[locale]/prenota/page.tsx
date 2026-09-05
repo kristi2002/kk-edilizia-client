@@ -108,7 +108,8 @@ export default async function PrenotaPage({ params }: Props) {
             alt=""
             fill
             priority
-            quality={72}
+            quality={60}
+            placeholder="blur"
             sizes="100vw"
             className="object-cover object-center opacity-30 [filter:grayscale(0.5)_sepia(0.3)_saturate(0.9)_brightness(0.8)]"
           />
